@@ -1,0 +1,46 @@
+//typography
+$font-stack: "Ubuntu", sans-serif;
+$font-stack-condensed: "Ubuntu Condensed";
+
+//colors
+
+$white: hsl(0, 0%, 100%);
+$black: hsl(0, 0%, 0%);
+$grey-highlight: hsl(0, 0%, 92%);
+$grey: hsl(0, 0%, 85%);
+$grey-solid: rgb(145, 145, 145);
+$grey-dark: hsl(0, 0%, 28%);
+$blue-dark: hsl(246, 68%, 15%);
+$blue: hsl(205, 84%, 40%);
+$blue-highlight: hsl(197, 76%, 51%);
+$red: hsl(0, 100%, 74%);
+$red-dark: hsl(354, 71%, 58%);
+$white-pearl: hsl(210, 8%, 95%);
+$green: hsl(108, 81%, 39%);
+
+//elements colors
+$alert: $red-dark;
+$alert-highlight: $red;
+$body-color: $grey-highlight;
+$body-color-dark: $grey-dark;
+$button-icon-color: $white;
+$button-color: $blue;
+$button-color-highlight: $blue-highlight;
+$errors: $red;
+$interaction-color: $blue;
+$interaction-color-highlight: $blue-highlight;
+$interaction-text-color: $white;
+$label:$grey-solid;
+$message-success: $green;
+$message-info: $blue;
+$message-error: $red-dark;
+$modul-header-color: $grey;
+$modul-color: $white;
+$spinner-color: $blue-highlight;
+$sidebar-menu-color: $blue-dark;
+$sidebar-menu-text-color: $white;
+$sidebar-submenu-color: $blue;
+
+
+//style
+$text-border: 2px 0 0 #fff, -2px 0 0 #fff, 0 2px 0 #fff, 0 -2px 0 #fff, 1px 1px #fff, -1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff;

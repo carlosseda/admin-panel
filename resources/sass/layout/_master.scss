@@ -1,0 +1,53 @@
+
+body{
+    background-color: $body-color;
+}
+
+.overlay{
+    background-color: #000000;
+    display: none;
+    position: fixed;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 2;
+
+    &.active{
+        cursor: pointer;
+        display: block;
+        opacity: 0.5;
+    }
+}
+
+.wrapper {
+    display: flex;
+    width: 100%;
+    align-items: stretch;
+    perspective: 1500px;
+}
+
+.main-content{
+    padding: 1% 2% 0 2%;
+    width: 100%;
+
+    @include respond-to('lg') {
+        padding: 0.5% 2% 0 2%;
+    }
+
+    &.active{
+        width: 97%;
+    }
+
+    .two-columns{
+        display: flex;
+        flex-wrap: nowrap;
+        overflow-x: auto; 
+        -webkit-overflow-scrolling: touch;
+        -ms-overflow-style: -ms-autohiding-scrollbar;
+    }
+
+    .two-columns::-webkit-scrollbar {
+        display: none; 
+    }
+}

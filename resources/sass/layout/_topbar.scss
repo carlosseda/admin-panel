@@ -1,0 +1,61 @@
+.topbar{
+	display: flex;
+
+	.topbar-title{
+		h4{
+			margin: 0.3em 0 0.5em;
+			font-size: 2em;
+		}
+	}
+
+    #create-button{
+		display: inline-block;
+        border-radius: 50%;
+        cursor: pointer;
+        margin: 0.4em 2em;
+		transition-delay: .15s;
+
+        svg {
+			background: $button-color;		
+            border-radius: 50%;		
+            box-shadow: 0 4px 6px 0 rgba(0, 0, 0, 0.2), 0 2px 1px 0 rgba(0, 0, 0, 0.19);
+			height: 2.5em;
+            width: 2.5em;
+			transform: rotate(270deg);
+		}
+			
+		circle {
+			stroke-width: 1;
+			stroke: $button-color;
+			fill: none;
+			stroke-dasharray: 95;
+			stroke-dashoffset: 190;
+			transition: all .6s ease;
+			stroke-linecap: round;
+		}
+
+		#plus {
+			transform-origin: 50% 50%;
+			transition: all .8s ease;
+
+			path {
+				stroke-width: 2;
+				stroke: $white;
+				fill: $button-icon-color;
+				stroke-linecap: round;
+				stroke-linejoin: round;
+			}
+		}
+
+		&.active {
+			circle{
+				stroke-dasharray: 95;
+				stroke-dashoffset: 285;
+			}
+			#plus {
+				stroke: $white;
+				transform: rotate(45deg);
+			}
+		}
+    }
+}

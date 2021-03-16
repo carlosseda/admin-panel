@@ -1,0 +1,246 @@
+.table{
+    transition: all 0.3s cubic-bezier(0.945, 0.020, 0.270, 0.665);
+    transform-origin: right;
+    flex: 0 0 100%;
+
+    &.minimize{
+        flex: 0 0 37%;
+    }
+
+    &.hide{
+        flex: 0 0 0;
+        visibility: hidden;
+        width: 0;
+    }
+
+    &.reorder{
+
+        .mdl-data-table tbody tr{
+            cursor: move;
+        }
+
+        .table-button.table-order-button{
+            display: block;
+        }
+
+        .table-button.table-remove-button{
+            display: none;
+        }
+
+        .table-button.table-edit-button{
+            display: none;
+        }
+
+        .table-button.table-view-button{
+            display: none;
+        }
+    }
+
+    .filters-container{
+        background-color: $modul-header-color;
+        display: flex;
+        justify-content: space-between;
+        height: 3em;
+
+        .filters-container-first-group{
+
+            display: flex;
+            justify-content: space-between;
+
+            .search-button{
+                cursor: pointer;
+                height: 2.5em;
+                margin: 0.2em 0.5em;
+                width: 2.5em;
+    
+                &.active{
+                    fill: $interaction-color;
+                }
+
+                .search-button-icon{
+                    fill: $interaction-color;
+                }
+            }
+    
+            .search-container{
+
+                display: flex;
+                justify-content: space-between;
+    
+                .search{
+                    background-color: transparent;
+                    border: 0;
+                    border-bottom: 0px solid $interaction-color;
+                    color: $interaction-color;
+                    font-weight: 600;
+                    margin-top: 0.7em;
+                    transition: all 0.8s cubic-bezier(0.810, -0.330, 0.345, 1.375);
+                    width: 0%;
+        
+                    &.active{
+                        border-bottom: 1px solid $interaction-color;
+                        width: 100%;
+                    }
+                }
+    
+                .search:focus{
+                    outline: none;
+                }
+            }
+        }
+
+        .filters-container-second-group{
+
+            display: flex;
+            justify-content: space-between;
+
+            .filter-buttons{
+                margin: 0.2em;
+                padding: 0;
+
+                .filter-button{
+                    float: right;
+                    height: 2.5em;
+                    fill: $interaction-color;
+                    margin: 0 1em;
+                    width: 2.5em; 
+                }
+        
+                .filter-button:hover{
+                    cursor: pointer;
+                    fill: $interaction-color;
+                }
+            }
+
+            .subfilter-select-container{
+                .filter-select{
+                    border: none;
+                    color: $interaction-color;
+                    font-weight: 600;
+                    margin: 0.5em;
+                    padding: .2em .5em .5rem .5em;
+                }
+            }
+        }
+    }
+
+    .dt-rowReorder-moving{
+        opacity:0;
+    }
+
+    .mdl-data-table{
+        border: transparent;
+        width: 100% !important;
+    }
+    
+    .mdl-data-table tbody tr:hover{
+        background-color: $white;
+    }
+
+    .mdl-button{
+        font-weight: 600;
+        font-family: $font-stack;
+    }
+    
+    .mdl-button--raised.mdl-button--colored {
+        background-color: $interaction-color;
+        border-color: $interaction-color;
+        color: $interaction-text-color;
+        margin: 0 2%;
+    }
+    
+    .mdl-button--raised.mdl-button--colored:hover {
+        background-color: $interaction-color-highlight;
+        border-color: $interaction-color-highlight;
+    }
+
+    .mdl-data-table tbody tr{
+        background-color: hsl(0, 0%, 100%);
+        height: 3em;
+    }
+
+    .mdl-data-table td, .mdl-data-table th{
+        box-sizing: content-box;
+        height: 3em;
+        padding-top: 1em;
+        text-align: left;
+    }
+
+    .mdl-data-table td{
+        max-width: 5em;
+        text-overflow: ellipsis;
+        overflow: hidden;
+    }
+
+    .mdl-data-table th:hover{
+        cursor: pointer;
+    }
+
+    .mdl-data-table td, .table .mdl-data-table th{
+        padding: 0 0 0 1.5em;
+    }
+
+    .mdl-data-table td:first-of-type, .mdl-data-table th:first-of-type{
+        padding-left: 1.7em;
+    }
+
+    .table-button{
+        float: right;
+        margin: 0 1em;
+        height: 1.7em;
+        width: 1.7em;
+
+        .table-button-icon{
+            fill: hsl(0, 0%, 40%);
+        }
+
+        &.order-table-button{
+            display: none;
+        }
+    }
+    
+    .table-button:hover{
+        cursor: pointer;
+
+        .table-button-icon{
+            fill: $interaction-color;
+        }
+    }
+
+    .bottom{
+        display: flex;
+        margin-top: 1em;
+
+        .pagination{
+
+            .mdl-button{
+                color: $interaction-color;
+                padding: 0;
+                padding-right: 1em;
+            }
+    
+            .mdl-button[disabled][disabled]{
+                color: rgba(0,0,0,.26);
+            }
+    
+            .mdl-button:hover{
+                background-color: transparent;
+            }
+        }    
+
+        .dataTables_info{
+            font-family: $font-stack;
+            font-weight: 600;
+            padding: 0.5em 2em;
+        }
+    }
+
+    &.minimize .bottom{
+        display: block;
+
+        .dataTables_info{
+            padding: 0.5em 0;
+        }
+    }
+}
+
