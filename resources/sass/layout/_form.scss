@@ -1,18 +1,8 @@
 .form {
 
-    display: none;
     padding-bottom: 2em;
-    flex: 0 0 61%;
-    transition: all 0.3s cubic-bezier(0.945, 0.020, 0.270, 0.665);
-
-    &.expand{
-        flex: 0 0 100%;
-    }
-
-    &.active{
-        display: block;
-        margin-left: auto;
-    }
+    flex: 0 0 100%;
+    margin-left: auto;
 
     .form-content{
         padding: 2em;
@@ -133,7 +123,7 @@
             -moz-appearance : none;
         }
 
-        .form-control {
+        input, textarea {
             border: 1px solid rgb(255, 255, 255);
             border-bottom: 1px solid $grey;
             border-radius: 0.25em;
