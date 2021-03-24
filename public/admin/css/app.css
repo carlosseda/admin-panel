@@ -518,7 +518,7 @@ body {
 }
 
 .main-content {
-  padding: 1% 2% 0 2%;
+  height: 100vh;
   width: 100%;
 }
 @media (min-width: 1920px) {
@@ -531,6 +531,7 @@ body {
 }
 .main-content .two-columns {
   display: flex;
+  justify-content: space-between;
   flex-wrap: nowrap;
   overflow-x: auto;
   -webkit-overflow-scrolling: touch;
@@ -727,203 +728,54 @@ body {
 }
 
 .table {
-  transition: all 0.3s cubic-bezier(0.945, 0.02, 0.27, 0.665);
-  transform-origin: right;
-  flex: 0 0 100%;
-}
-.table.minimize {
-  flex: 0 0 37%;
-}
-.table.hide {
-  flex: 0 0 0;
-  visibility: hidden;
-  width: 0;
-}
-.table.reorder .mdl-data-table tbody tr {
-  cursor: move;
-}
-.table.reorder .table-button.table-order-button {
-  display: block;
-}
-.table.reorder .table-button.table-remove-button {
-  display: none;
-}
-.table.reorder .table-button.table-edit-button {
-  display: none;
-}
-.table.reorder .table-button.table-view-button {
-  display: none;
-}
-.table .filters-container {
-  background-color: #d9d9d9;
-  display: flex;
-  justify-content: space-between;
-  height: 3em;
-}
-.table .filters-container .filters-container-first-group {
-  display: flex;
-  justify-content: space-between;
-}
-.table .filters-container .filters-container-first-group .search-button {
-  cursor: pointer;
-  height: 2.5em;
-  margin: 0.2em 0.5em;
-  width: 2.5em;
-}
-.table .filters-container .filters-container-first-group .search-button.active {
-  fill: #1074bc;
-}
-.table .filters-container .filters-container-first-group .search-button .search-button-icon {
-  fill: #1074bc;
-}
-.table .filters-container .filters-container-first-group .search-container {
-  display: flex;
-  justify-content: space-between;
-}
-.table .filters-container .filters-container-first-group .search-container .search {
-  background-color: transparent;
-  border: 0;
-  border-bottom: 0px solid #1074bc;
-  color: #1074bc;
-  font-weight: 600;
-  margin-top: 0.7em;
-  transition: all 0.8s cubic-bezier(0.81, -0.33, 0.345, 1.375);
-  width: 0%;
-}
-.table .filters-container .filters-container-first-group .search-container .search.active {
-  border-bottom: 1px solid #1074bc;
-  width: 100%;
-}
-.table .filters-container .filters-container-first-group .search-container .search:focus {
-  outline: none;
-}
-.table .filters-container .filters-container-second-group {
-  display: flex;
-  justify-content: space-between;
-}
-.table .filters-container .filters-container-second-group .filter-buttons {
-  margin: 0.2em;
-  padding: 0;
-}
-.table .filters-container .filters-container-second-group .filter-buttons .filter-button {
-  float: right;
-  height: 2.5em;
-  fill: #1074bc;
-  margin: 0 1em;
-  width: 2.5em;
-}
-.table .filters-container .filters-container-second-group .filter-buttons .filter-button:hover {
-  cursor: pointer;
-  fill: #1074bc;
-}
-.table .filters-container .filters-container-second-group .subfilter-select-container .filter-select {
-  border: none;
-  color: #1074bc;
-  font-weight: 600;
-  margin: 0.5em;
-  padding: 0.2em 0.5em 0.5rem 0.5em;
-}
-.table .dt-rowReorder-moving {
-  opacity: 0;
-}
-.table .mdl-data-table {
-  border: transparent;
-  width: 100% !important;
-}
-.table .mdl-data-table tbody tr:hover {
-  background-color: white;
-}
-.table .mdl-button {
-  font-weight: 600;
-  font-family: "Ubuntu", sans-serif;
-}
-.table .mdl-button--raised.mdl-button--colored {
-  background-color: #1074bc;
-  border-color: #1074bc;
-  color: white;
-  margin: 0 2%;
-}
-.table .mdl-button--raised.mdl-button--colored:hover {
-  background-color: #23abe1;
-  border-color: #23abe1;
-}
-.table .mdl-data-table tbody tr {
-  background-color: white;
-  height: 3em;
-}
-.table .mdl-data-table td, .table .mdl-data-table th {
-  box-sizing: content-box;
-  height: 3em;
-  padding-top: 1em;
-  text-align: left;
-}
-.table .mdl-data-table td {
-  max-width: 5em;
-  text-overflow: ellipsis;
-  overflow: hidden;
-}
-.table .mdl-data-table th:hover {
-  cursor: pointer;
-}
-.table .mdl-data-table td, .table .table .mdl-data-table th {
-  padding: 0 0 0 1.5em;
-}
-.table .mdl-data-table td:first-of-type, .table .mdl-data-table th:first-of-type {
-  padding-left: 1.7em;
-}
-.table .table-button {
-  float: right;
-  margin: 0 1em;
-  height: 1.7em;
-  width: 1.7em;
-}
-.table .table-button .table-button-icon {
-  fill: #666666;
-}
-.table .table-button.order-table-button {
-  display: none;
-}
-.table .table-button:hover {
-  cursor: pointer;
-}
-.table .table-button:hover .table-button-icon {
-  fill: #1074bc;
-}
-.table .bottom {
-  display: flex;
-  margin-top: 1em;
-}
-.table .bottom .pagination .mdl-button {
-  color: #1074bc;
-  padding: 0;
-  padding-right: 1em;
-}
-.table .bottom .pagination .mdl-button[disabled][disabled] {
-  color: rgba(0, 0, 0, 0.26);
-}
-.table .bottom .pagination .mdl-button:hover {
-  background-color: transparent;
-}
-.table .bottom .dataTables_info {
-  font-family: "Ubuntu", sans-serif;
-  font-weight: 600;
-  padding: 0.5em 2em;
-}
-.table.minimize .bottom {
-  display: block;
-}
-.table.minimize .bottom .dataTables_info {
-  padding: 0.5em 0;
+  padding: 1em;
+  width: 50%;
 }
 
-body {
-  background: linear-gradient(to right, #fafffd, #dddddd);
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+td, th {
+  border: 0.1em solid #dddddd;
+  max-width: 5em;
+  padding: 0.5em;
+  overflow: hidden;
+  text-align: center;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+th {
+  color: #ff5100;
+}
+
+tr td:last-child {
+  width: 15%;
+  white-space: nowrap;
+}
+
+.table-icons {
+  width: 40%;
+}
+.table-icons path {
+  fill: gray;
+}
+.table-icons path:hover {
+  cursor: pointer;
+  fill: #ff5100;
+}
+
+tr:nth-child(even) {
+  background-color: #dddddd;
 }
 
 .form {
   background-color: rgba(114, 201, 223, 0.5);
-  margin: 5% auto;
-  padding: 2em;
+  height: 80vh;
+  padding: 10vh 5%;
   width: 40%;
 }
 
@@ -979,8 +831,9 @@ body {
 }
 
 .form-input input, .form-input textarea {
-  border: 0.1em solid #ffffff;
+  border: 0.1em solid white;
   border-radius: 0.3em;
+  color: black;
   font-family: "Ubuntu", sans-serif;
   padding: 0.2em;
   width: 100%;
@@ -1007,9 +860,10 @@ body {
 }
 
 .form-submit button {
-  border: 0.1em solid gray;
+  border: 0.2em solid gray;
   border-radius: 0.3em;
   background-color: #ffffff;
+  color: black;
   font-family: "Ubuntu", sans-serif;
   font-weight: 600;
   font-size: 1.3em;
@@ -1018,7 +872,9 @@ body {
 }
 
 .form-submit button:hover {
-  border: 0.1em solid #ff5100;
+  border: 0.2em solid #ff5100;
+  background-color: 0.1em solid #ff5100;
+  color: black;
 }
 
 .portfolio .pagination {

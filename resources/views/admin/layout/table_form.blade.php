@@ -2,12 +2,8 @@
 
 @section('content')
 
-    <div class="topbar-container">
-        @include('admin.layout.partials.topbar', ['crud_permissions' => $crud_permissions])
-    </div>
-
     <div class="two-columns">
-        <div class="table toggle-table">
+        <div class="table">
             @yield('table')
         </div>
 

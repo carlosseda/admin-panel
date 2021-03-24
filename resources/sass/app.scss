@@ -8,7 +8,8 @@
 @import "layout/master";
 @import "layout/topbar";
 @import "layout/sidebar";
-@import "layout/table";
+// @import "layout/table";
+@import "layout/table-example";
 // @import "layout/form";
 @import "layout/form-example";
 @import "layout/portfolio";
@@ -25,7 +26,11 @@
 @import "components/menu-nestable";
 @import "components/tabs";
 
+// // Fonts
+// @import url('https://fonts.googleapis.com/css?family=Nunito');
 
+// // Variables
+// @import 'variables';
 
-
-
+// // Bootstrap
+// @import '~bootstrap/scss/bootstrap';

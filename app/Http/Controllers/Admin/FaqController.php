@@ -63,20 +63,22 @@ class FaqController extends Controller
 
     public function store(FaqRequest $request)
     {            
-
-        $faq = Faq::updateOrCreate([
+        $faq = $this->faq->updateOrCreate([
             'id' => request('id')],[
             'title' => request('title'),
             'description' => request('description'),
             'active' => 1,
         ]);
 
-        // $view = View::make('admin.faqs.index')->with('faq', $faq)->renderSections();        
+        $view = View::make('admin.faqs.index')
+        ->with('faq', $faq)
+        ->renderSections();        
 
-        // return response()->json([
-        //     'table' => $sections['table'],
-        //     'form' => $sections['form'],
-        // ]);
+        return response()->json([
+            'table' => $view['table'],
+            'form' => $view['form'],
+            'id' => $faq->id,
+        ]);
     }
 
     public function show(Faq $faq)
