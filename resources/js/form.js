@@ -33,14 +33,12 @@ sendButton.addEventListener("click", () => {
 
             try {
                 let response = await axios.post(url, data).then(response => {
-                    console.log(response.data.form)
+                    form.innerHTML = response.data.form;
                     console.log('2');
                 });
-
-                console.log('3');
                  
-            } catch (err) {
-                console.error(err);
+            } catch (error) {
+                console.error(error);
             }
         };
 

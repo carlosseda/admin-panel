@@ -105,13 +105,14 @@
             {{ csrf_field() }}
 
             <input autocomplete="false" name="hidden" type="text" style="display:none;">
+            {{-- <input type="hidden" name="id" value="{{isset($faq->id) ? $faq->id : ''}}"> --}}
 
             <div class="form-group">
                 <div class="form-label">
                     <label for="title" class="label">Título</label>
                 </div>
                 <div class="form-input">
-                    <input type="text" name="title" value="" class="input"  />
+                    <input type="text" name="title" value="{{isset($faq->title) ? $faq->title : ''}}" class="input"  />
                 </div>
             </div>
             <div class="form-group">
@@ -119,7 +120,7 @@
                     <label for="description">Descripción</label>
                 </div>
                 <div class="form-input">
-                    <textarea name="description" value="" class="input"></textarea>
+                    <textarea name="description" value="{{isset($faq->description) ? $faq->description : ''}}" class="input"></textarea>
                 </div>
             </div>
         </form>

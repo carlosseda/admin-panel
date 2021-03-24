@@ -5078,21 +5078,20 @@ sendButton.addEventListener("click", function () {
 
               case 3:
                 response = _context.sent;
-                console.log('3');
-                _context.next = 10;
+                _context.next = 9;
                 break;
 
-              case 7:
-                _context.prev = 7;
+              case 6:
+                _context.prev = 6;
                 _context.t0 = _context["catch"](0);
                 console.error(_context.t0);
 
-              case 10:
+              case 9:
               case "end":
                 return _context.stop();
             }
           }
-        }, _callee, null, [[0, 7]]);
+        }, _callee, null, [[0, 6]]);
       }));
 
       return function sendPostRequest() {
