@@ -5059,7 +5059,8 @@ inputs.forEach(function (input) {
 });
 sendButton.addEventListener("click", function () {
   forms.forEach(function (form) {
-    var data = new FormData(document.getElementById(form.id));
+    var formId = document.getElementById(form.getAttribute("id"));
+    var data = new FormData(formId);
     var url = form.action;
 
     var sendPostRequest = /*#__PURE__*/function () {
@@ -5072,7 +5073,7 @@ sendButton.addEventListener("click", function () {
                 _context.prev = 0;
                 _context.next = 3;
                 return axios.post(url, data).then(function (response) {
-                  console.log(response.data.form);
+                  form.id.value = response.data.id;
                   console.log('2');
                 });
 

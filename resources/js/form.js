@@ -26,14 +26,15 @@ sendButton.addEventListener("click", () => {
 
     forms.forEach(form => { 
         
-        let data = new FormData(document.getElementById(form.id));
+        let formId = document.getElementById(form.getAttribute("id"));
+        let data = new FormData(formId);
         let url = form.action;
 
         let sendPostRequest = async () => {
 
             try {
                 let response = await axios.post(url, data).then(response => {
-                    form.innerHTML = response.data.form;
+                    form.id.value = response.data.id;
                     console.log('2');
                 });
                  

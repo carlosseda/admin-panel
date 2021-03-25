@@ -105,7 +105,7 @@
             {{ csrf_field() }}
 
             <input autocomplete="false" name="hidden" type="text" style="display:none;">
-            {{-- <input type="hidden" name="id" value="{{isset($faq->id) ? $faq->id : ''}}"> --}}
+            <input type="hidden" name="id" value="{{isset($faq->id) ? $faq->id : ''}}">
 
             <div class="form-group">
                 <div class="form-label">

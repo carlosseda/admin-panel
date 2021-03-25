@@ -38,9 +38,6 @@ class FaqController extends Controller
 
     public function indexJson()
     {
-        if (! Auth::guard('web')->user()->canAtLeast(['faqs'])){
-            return Auth::guard('web')->user()->redirectPermittedSection();
-        }
 
         $query = $this->faq
         ->with('category')
@@ -83,10 +80,7 @@ class FaqController extends Controller
 
     public function show(Faq $faq)
     {
-        if (! Auth::guard('web')->user()->canAtLeast(['faqs','edit'])){
-            return Auth::guard('web')->user()->redirectPermittedSection();
-        }
-      
+     
         $this->locale->setParent(slug_helper($faq->category->name));
         $locale = $this->locale->show($faq->id);
 
@@ -108,9 +102,6 @@ class FaqController extends Controller
 
     public function destroy(Faq $faq)
     {
-        if (! Auth::guard('web')->user()->canAtLeast(['faqs','remove'])){
-            return Auth::guard('web')->user()->redirectPermittedSection();
-        }
 
         $faq->delete();
         $this->locale->setParent(slug_helper($faq->category->name));
