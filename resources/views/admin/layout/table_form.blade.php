@@ -3,7 +3,7 @@
 @section('content')
 
     <div class="two-columns">
-        <div class="table">
+        <div class="table" id="table">
             @yield('table')
         </div>
 

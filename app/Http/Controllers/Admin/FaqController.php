@@ -21,7 +21,9 @@ class FaqController extends Controller
     public function index()
     {
 
-        $view = View::make('admin.faqs.index')->with('faq', $this->faq);
+        $view = View::make('admin.faqs.index')
+                ->with('faq', $this->faq)
+                ->with('faqs', $this->faq->get());
 
         if(request()->ajax()) {
 
@@ -34,16 +36,6 @@ class FaqController extends Controller
         }
 
         return $view;
-    }
-
-    public function indexJson()
-    {
-
-        $query = $this->faq
-        ->with('category')
-        ->select('t_faq.*');
-
-        return $this->datatables->of($query)->toJson();   
     }
 
     public function create()
@@ -68,6 +60,7 @@ class FaqController extends Controller
         ]);
 
         $view = View::make('admin.faqs.index')
+        ->with('faqs', $this->faq->get())
         ->with('faq', $faq)
         ->renderSections();        
 
@@ -119,19 +112,5 @@ class FaqController extends Controller
             'form' => $view['form'],
             'message' => $message,
         ]);
-    }
-
-    public function reorderTable(Request $request)
-    {
-        $order = request('order');
-
-        if (is_array($order)) {
-            
-            foreach ($order as $index => $tableItem) {
-                $item = $this->faq->findOrFail($tableItem);
-                $item->order = $index + 1;
-                $item->save();
-            }
-        }
     }
 }
