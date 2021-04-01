@@ -1,0 +1,42 @@
+/*====================
+======Typography======
+======================*/
+
+h1, h2, h3, h4 {
+    font-family: $font-stack;
+}
+
+h5, h6 {
+    font-family: $font-stack-condensed;
+}
+
+a, td, p, button{
+    font-family: $font-stack;
+}
+
+h2 {
+    font-size: 3em;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+h4 {
+    font-weight: 600;
+    text-decoration: none;
+}
+
+a {
+    -webkit-transition: 300ms;
+    -moz-transition: 300ms;
+    -o-transition: 300ms;
+    transition: 300ms;
+    font-weight: 600;
+    text-decoration: none;
+
+    &:hover, &:focus {
+        outline: none;
+        text-decoration: none;
+        outline-offset: 0;
+    }
+}
+

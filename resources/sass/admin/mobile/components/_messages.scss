@@ -1,0 +1,129 @@
+.messages-container{
+
+    position: fixed;
+    top: 1em;
+	right: 2em;
+	width: 30%;
+	z-index: 3;
+	
+	&.show{
+		@include translateYInScreen(0, 0.5s);
+	}
+
+	.message {
+		display: none;
+		text-align:left;
+		padding: 0.5em 0;
+		background-color:hsl(0, 0%, 100%);
+		border-radius: 4px;
+		max-width: 100%;
+		top: 0px;
+		position:relative;
+		box-shadow: 1px 7px 14px -5px rgba(0,0,0,0.2);
+
+		&.success.active{
+			display: block;
+		}
+
+		&.info.active{
+			display: block;
+		}
+
+		&.error.active{
+			display: block;
+		}
+
+		&.reorder.active{
+			display: block;
+		}
+
+		&:before {
+			content: '';
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 4px;
+			height: 100%;
+			border-top-left-radius: 4px;
+			border-bottom-left-radius: 4px;
+    	}
+
+		&.success .message-icon{
+			background-color: $message-success;
+		}
+		  
+		&.success:before{
+			background-color: $message-success;
+		}
+
+		&.info .message-icon{
+			background-color: $message-info;
+		}
+		  
+		&.info:before{
+			background-color: $message-info;
+		}
+
+		&.reorder .message-icon{
+			background-color: $message-info;
+		}
+		  
+		&.reorder:before{
+			background-color: $message-info;
+		}
+
+		&.error .message-icon{
+			background-color: $message-error;
+		}
+		  
+		&.error:before{
+			background-color: $message-error;
+		}
+
+		.message-icon{
+			border-radius: 50%;
+			display: inline-block;
+			height: 1em;
+			left: 1.5em;
+			padding: 7px;
+			position: absolute;
+			top: 50%;
+			transform: translateY(-50%);
+			width: 1em;
+
+			svg{
+				fill:#fff;
+			}
+		}
+
+		.message-content{
+
+			padding: 0 4em;
+			
+			.message-type {
+				color: hsl(0, 0%, 24%);
+				font-weight: 700;
+				margin-top: 0;
+				margin-bottom: 0;
+			}
+	
+			.message-description {
+				font-size: 0.9em;
+				margin-top: 0;
+				margin-bottom: 0;
+				color: hsl(0, 0%, 53%);
+			}
+		}
+
+		.message-close {
+			cursor: pointer;
+			fill: hsl(0, 0%, 24%);
+			height: 1.5em;
+			position: absolute;
+			right: 1.5em;
+			top: 50%;
+			transform: translateY(-50%);
+			width: 1em;
+		}
+	}
+}

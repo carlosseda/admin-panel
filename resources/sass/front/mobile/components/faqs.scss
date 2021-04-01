@@ -1,0 +1,68 @@
+.faqs{
+    
+    margin: 0 auto;
+    width: 100%;
+
+    .faq{
+
+        width: 100%;
+
+        .faq-title-container{
+
+            border-bottom: 0.2em solid $white;
+            display: flex;
+            height: max-content;
+            width: 100%;
+
+            .faq-title{
+                margin: 0 0.5em;
+                width: 90%;
+            }
+
+            .faq-title h3{
+                color: $white;
+                font-weight: 400;
+            }
+
+            .faq-plus-button {
+                cursor: pointer;
+                margin: 1em;
+                @include plusMinus(1.5em, 0.2em, $white);
+            }
+        }
+
+        .faq-title-container:hover{
+            background-color: $blue-dark;
+        }
+
+        .faq-description{
+
+            background-color: $white;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s;
+            width: 100%;
+
+            p{
+                color: $black;
+                font-weight: 200;
+                margin: 1em;
+            }
+        }
+    }
+
+    .faq.active{
+        
+        .faq-title-container{
+            background-color: $blue-dark;
+        }
+
+        .faq-description{
+            max-height: 200vh;
+        }
+    }
+    
+}
+
+
+

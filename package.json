@@ -27,7 +27,16 @@
     "dependencies": {
         "@popperjs/core": "^2.9.1",
         "bootstrap-vue": "^2.21.2",
+        "laravel-vue-datatable": "^0.6.0",
+        "moment": "^2.29.1",
+        "popper": "^1.0.1",
         "portal-vue": "^2.1.7",
+        "sweetalert2": "^10.15.6",
+        "vform": "^1.0.1",
+        "vue-progressbar": "^0.7.5",
+        "vue-router": "^3.5.1",
+        "vuejs-datatable": "^2.0.0-alpha.7",
+        "watch": "^1.0.2",
         "webpack": "^5.27.2"
     }
 }

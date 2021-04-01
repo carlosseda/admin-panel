@@ -2,6 +2,8 @@
 
 @section('table')
 
+    {{-- <datatable-component></datatable-component> --}}
+
     <table>
         <tr>
             <th>Id</th>
@@ -12,30 +14,34 @@
             </th>
         </tr>
 
-        @foreach($faqs as $faq)
+        @foreach($faqs as $faq_element)
             <tr>
-                <td>{{$faq->id}}</td>
-                <td>{{$faq->title}}</td>
-                <td>{{$faq->description}}</td>
-                <td> 
-                    <svg class="table-icons" viewBox="0 0 24 24">
-                        <path fill="currentColor" d="M20.71,7.04C21.1,6.65 21.1,6 20.71,5.63L18.37,3.29C18,2.9 17.35,2.9 16.96,3.29L15.12,5.12L18.87,8.87M3,17.25V21H6.75L17.81,9.93L14.06,6.18L3,17.25Z" />
-                    </svg>
-                    <svg class="table-icons" viewBox="0 0 24 24">
-                        <path fill="currentColor" d="M19,4H15.5L14.5,3H9.5L8.5,4H5V6H19M6,19A2,2 0 0,0 8,21H16A2,2 0 0,0 18,19V7H6V19Z" />
-                    </svg>
+                <td>{{$faq_element->id}}</td>
+                <td>{{$faq_element->title}}</td>
+                <td>{{$faq_element->description}}</td>
+                <td class="table-icons-container">
+                    <div class="table-icons edit-button" data-url="{{route('faqs_show', ['faq' => $faq_element->id])}}">
+                        <svg viewBox="0 0 24 24">
+                            <path fill="currentColor" d="M20.71,7.04C21.1,6.65 21.1,6 20.71,5.63L18.37,3.29C18,2.9 17.35,2.9 16.96,3.29L15.12,5.12L18.87,8.87M3,17.25V21H6.75L17.81,9.93L14.06,6.18L3,17.25Z" />
+                        </svg>
+                    </div> 
+                   
+                    <div class="table-icons delete-button" data-url="{{route('faqs_destroy', ['faq' => $faq_element->id])}}">
+                        <svg class="table-icons" viewBox="0 0 24 24">
+                            <path fill="currentColor" d="M19,4H15.5L14.5,3H9.5L8.5,4H5V6H19M6,19A2,2 0 0,0 8,21H16A2,2 0 0,0 18,19V7H6V19Z" />
+                        </svg>
+                    </div>
                 </td>
             </tr>
         @endforeach
+        
     </table>
 
 @endsection
 
 @section('form')
 
-    <div class="form-error" >
-        <p id="error-message"></p>
-    </div>
+    @include('admin.components.errors')
 
     <div class="form-container">
         <form class="admin-form" id="faqs-form" action="{{route("faqs_store")}}" autocomplete="off">
@@ -58,7 +64,7 @@
                     <label for="description">Descripción</label>
                 </div>
                 <div class="form-input">
-                    <textarea name="description" value="{{isset($faq->description) ? $faq->description : ''}}" class="input"></textarea>
+                    <textarea name="description" class="input">{{isset($faq->description) ? $faq->description : ''}}</textarea>
                 </div>
             </div>
         </form>

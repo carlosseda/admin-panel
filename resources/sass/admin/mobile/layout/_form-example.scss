@@ -1,0 +1,102 @@
+.form{
+	background-color: rgba(114, 201, 223, 0.5);
+	height: 80vh;
+	padding: 10vh 5%;
+	width: 40%;
+}
+
+.form-error{
+	opacity: 0;
+	transition: opacity 0.5s;
+	width: 100%;
+}
+
+.form-error.active{
+	opacity: 1;
+}
+
+.form-error p{
+	color: hsl(0, 100%, 50%);
+}
+
+.form-container{
+	width: 100%;
+}
+
+.form-group{
+	margin-bottom: 2em;
+	width: 100%;
+}
+
+.form-label{
+	margin-bottom: 1em;
+	width: 100%;
+}
+
+.form-label label{
+	color: hsl(0, 0%, 50%);
+	font-family: $font-stack;
+	font-weight: 600;
+	font-size: 1.3em;
+}
+
+.form-label label{
+	color: hsl(0, 0%, 50%);
+	font-family: $font-stack;
+	font-weight: 600;
+	font-size: 1.3em;
+	transition: color 0.5s;
+}
+
+.form-label label.active{
+	color: hsl(19, 100%, 50%);
+}
+
+.form-input{
+	width: 100%;
+}
+
+.form-input input, .form-input textarea{
+	border: 0.1em solid hsl(0, 0%, 100%);
+	border-radius: 0.3em;
+	color: hsl(0, 0%, 0%);
+	font-family: $font-stack;
+	padding: 0.2em;
+	width: 100%;
+}
+
+.form-input input:focus, .form-input textarea:focus{
+	outline: none;
+}
+
+.form-input textarea{
+	height: 20vh;
+}
+
+.form-footer{
+	display: flex;
+	justify-content: flex-end;
+}
+
+.form-submit {
+	margin-top: 1em;
+    width: max-content;
+}
+
+.form-submit button{
+	border: 0.2em solid hsl(0, 0%, 50%);
+	border-radius: 0.3em;
+	background-color: #ffffff;
+	color: hsl(0, 0%, 0%);
+	font-family: $font-stack;
+	font-weight: 600;
+	font-size:  1.3em;
+	padding: 0.2em;
+	transition: border 0.3s;
+}
+
+.form-submit button:hover{
+	border: 0.2em solid hsl(19, 100%, 50%);
+	background-color: 0.1em solid hsl(19, 100%, 50%);
+	color: hsl(0, 0%, 0%);
+}

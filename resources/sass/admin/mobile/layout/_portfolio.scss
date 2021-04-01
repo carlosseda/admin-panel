@@ -1,0 +1,151 @@
+.portfolio{
+
+    .pagination{
+        display: flex;
+        margin: 0;
+        padding-left: 0;
+        list-style: none;
+        border-radius: .25em;
+
+        .page-item.active .page-link {
+            z-index: 1;
+            color: #fff;
+            background-color: #007bff;
+            border-color: none;
+        }
+
+        .page-link {
+            position: relative;
+            display: block;
+            padding: .55em .75em;
+            margin-top: 1px;
+            line-height: 1.25;
+            color: #007bff;
+            background-color: #fff;
+            border: none;
+        }
+
+        .page-link:not(:disabled):not(.disabled) {
+            cursor: pointer;
+        }
+    }
+
+    .portfolio-container{
+        display: flex;
+        flex-wrap: wrap;
+        padding: 2em 0;
+        width: 100%;
+
+
+        .preview-upload-documents{
+
+            flex: 0 0 20%;
+            height: 10em;
+            margin: 0.5em 0;
+            overflow: hidden;
+            perspective: 1000;
+
+            &:hover .flipper,
+            &.hover .flipper {
+                transform: rotateY(180deg);
+            }
+
+            .flipper {
+                height: 50%;
+                transition: 0.6s;
+                transform-style: preserve-3d;
+                position: relative;
+
+                .front, .back {
+                    backface-visibility: hidden;
+                    height: 8em;
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                }
+
+                .front {
+                    text-align: center;
+
+                    svg{
+                        height: 50%;
+                        width: 50%;
+
+                        path{
+                            fill: $grey-dark;
+                        }
+                    }
+                }
+
+                .back {
+                    transform: rotateY(180deg);
+
+                    .preview-upload-documents-buttons{
+                        display: flex;
+                        justify-content: space-around;
+                        margin-top: 1em;
+                    }
+
+                    svg{
+                        cursor: pointer;
+                        height: 2em;
+                        width: 2em;
+
+                        path{
+                            fill: $grey-dark;
+                        }
+
+                        &:hover{
+                            path{
+                                fill: $interaction-color;
+                            } 
+                        }
+                    }
+                }
+            }
+
+            .preview-upload-documents-title{
+
+                margin-top: 0.5em;
+                text-align: center;
+
+                p{
+                    font-size: 1em;
+                }
+            }
+        }
+    }
+}
+
+.table.minimize{
+
+    .single-media{
+        flex: 1 0 25%; 
+        height: 10vh;
+        max-width: 17%;
+        padding: 0;
+
+        .media-input{
+
+            .media-title{
+                padding: 0.5em;
+
+                p{
+                    display: none;
+                }
+            }
+        }
+
+        .document-icon{
+            top: 0.5em;
+            left: 1.5em;
+            position: absolute;
+
+            svg{
+                height: 4em;
+                width: 4em;
+            }
+        }
+    }
+}

@@ -1,0 +1,108 @@
+.custom-tab-container{
+
+    margin-bottom: 1em;
+
+    .nav-tabs{
+        background-color: $modul-header-color;
+        border: none;
+    }
+    
+    .nav-tabs .nav-link:hover{
+        border-color: transparent;
+    }
+    .nav-tabs .nav-item{
+        margin: 0;
+    }
+    
+    .nav-tabs .nav-link {
+        border: none;
+    }
+
+    .nav-tabs .nav-link.active{
+        background-color: $interaction-color;
+        height: 3em;
+    }
+    
+    .nav-tabs span{
+        font-weight: 400;
+    }
+    
+    .nav-tabs a[aria-expanded="false"] span{
+        color: $interaction-color;
+    }
+    
+    .nav-tabs a[aria-expanded="true"] span{
+        color: $interaction-text-color;
+    }
+    
+    .nav-tabs a[aria-selected="false"] span{
+        color: $interaction-color;
+    }
+    
+    .nav-tabs a[aria-selected="true"] span{
+        color: $interaction-text-color;
+    }
+
+    .nav {
+        display: -ms-flexbox;
+        display: flex;
+        -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+        padding-left: 0;
+        margin-bottom: 0;
+        list-style: none;
+    }
+    
+    .nav-tabs{
+        border: none;
+        margin: 0;
+    }
+    
+    .nav-tabs .nav-link:hover{
+        border-color: transparent;
+    }
+    
+    .nav-tabs .nav-item{
+        margin: 0;
+    }
+    
+    .nav-tabs .nav-link {
+        border: none;
+    }
+
+    .nav-tabs .nav-link.active{
+        background-color: $interaction-color;
+        height: 2em;
+    }
+    
+    .nav-tabs span{
+        font-weight: 400;
+    }
+    
+    .nav-tabs a[aria-expanded="false"] span{
+        color: $interaction-color;
+    }
+    
+    .nav-tabs a[aria-expanded="true"] span{
+        color: $interaction-text-color;
+    }
+    
+    .nav-tabs a[aria-selected="false"] span{
+        color: $interaction-color;
+    }
+    
+    .nav-tabs a[aria-selected="true"] span{
+        color: $interaction-text-color;
+    }
+
+    .nav-tabs .nav-link {
+        background-color: $modul-header-color;
+        border-top-left-radius: .25rem;
+        border-top-right-radius: .25rem;
+    }
+
+    .nav-link {
+        display: block;
+        padding: .5rem 1rem;
+    }
+}

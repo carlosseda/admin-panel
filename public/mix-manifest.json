@@ -1,4 +1,10 @@
 {
-    "/admin/js/app.js": "/admin/js/app.js?id=8e248dd312d9a7582a19",
-    "/admin/css/app.css": "/admin/css/app.css?id=26ec7be8bf3b18379a2c"
+    "/admin/desktop/js/app.js": "/admin/desktop/js/app.js?id=15a647fec419b8641601",
+    "/admin/mobile/js/app.js": "/admin/mobile/js/app.js?id=57b492fc21449724a955",
+    "/front/desktop/js/app.js": "/front/desktop/js/app.js?id=9623d41ebda19a1da0a3",
+    "/front/mobile/js/app.js": "/front/mobile/js/app.js?id=d66477499247b3a8f52f",
+    "/front/mobile/css/app.css": "/front/mobile/css/app.css?id=89c79271939d0cb2ea29",
+    "/front/desktop/css/app.css": "/front/desktop/css/app.css?id=07023b9a41d2b51ec004",
+    "/admin/mobile/css/app.css": "/admin/mobile/css/app.css?id=22b9556179b5b91ff2e9",
+    "/admin/desktop/css/app.css": "/admin/desktop/css/app.css?id=22b9556179b5b91ff2e9"
 }

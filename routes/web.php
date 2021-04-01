@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::group(['prefix' => 'admin'], function () {
 
-    // Route::get('/faqs/json', 'App\Http\Controllers\Admin\FaqController@indexJson')->name('faqs_json');
+    Route::get('/faqs/json', 'App\Http\Controllers\Admin\FaqController@indexJson')->name('faqs_json');
     Route::resource('faqs', 'App\Http\Controllers\Admin\FaqController', [
         'names' => [
             'index' => 'faqs',
@@ -26,3 +26,6 @@ Route::group(['prefix' => 'admin'], function () {
         ]
     ]);
 });
+
+Route::get('/faqs', 'App\Http\Controllers\Front\FaqController@index')->name('faqs_front');
+
