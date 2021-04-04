@@ -1,6 +1,8 @@
 require('../../bootstrap');
-require('./table');
-require('./form');
+require('./crudTable');
+require('./ckeditor');
+
+
 // 
 // import Vue from 'vue/dist/vue';
 

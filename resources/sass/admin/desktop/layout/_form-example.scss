@@ -56,17 +56,23 @@
 	width: 100%;
 }
 
-.form-input input, .form-input textarea{
+.form-input input, 
+.form-input textarea,
+.form-input select {
 	border: 0.1em solid hsl(0, 0%, 100%);
 	border-radius: 0.3em;
 	color: hsl(0, 0%, 0%);
 	font-family: $font-stack;
-	padding: 0.2em;
+	padding: 0.2em 0;
 	width: 100%;
 }
 
 .form-input input:focus, .form-input textarea:focus{
 	outline: none;
+}
+
+.form-input .ck-editor__editable_inline {
+    min-height: 15vh;
 }
 
 .form-input textarea{

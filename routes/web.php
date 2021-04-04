@@ -15,16 +15,31 @@ use Illuminate\Support\Facades\Route;
 
 Route::group(['prefix' => 'admin'], function () {
 
-    Route::get('/faqs/json', 'App\Http\Controllers\Admin\FaqController@indexJson')->name('faqs_json');
+    Route::resource('faqs/categorias', 'App\Http\Controllers\Admin\FaqCategoryController', [
+        'parameters' => [
+            'categorias' => 'faq_category', 
+        ],
+        'names' => [
+            'index' => 'faqs_categories',
+            'create' => 'faqs_categories_create',
+            'edit' => 'faqs_categories_edit',
+            'store' => 'faqs_categories_store',
+            'destroy' => 'faqs_categories_destroy',
+            'show' => 'faqs_categories_show',
+        ]
+    ]);
+    
     Route::resource('faqs', 'App\Http\Controllers\Admin\FaqController', [
         'names' => [
             'index' => 'faqs',
             'create' => 'faqs_create',
+            'edit' => 'faqs_edit',
             'store' => 'faqs_store',
             'destroy' => 'faqs_destroy',
             'show' => 'faqs_show',
         ]
     ]);
+
 });
 
 Route::get('/faqs', 'App\Http\Controllers\Front\FaqController@index')->name('faqs_front');

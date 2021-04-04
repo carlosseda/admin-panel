@@ -168,6 +168,9 @@ return [
 
         Jenssegers\Agent\AgentServiceProvider::class,
 
+        // Custom View Composers 
+        App\Providers\ViewComposerServiceProvider::class,
+
         /*
          * Application Service Providers...
          */
@@ -177,7 +180,6 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         App\Providers\AgentServiceProvider::class,
-
     ],
 
     /*

@@ -522,6 +522,11 @@ a:hover, a:focus {
   height: 10vh;
   width: 100%;
 }
+@media (min-width: 1920px) {
+  .faqs .faq .faq-title-container {
+    height: 6vh;
+  }
+}
 .faqs .faq .faq-title-container .faq-title {
   margin: 0 1em;
   width: 90%;
