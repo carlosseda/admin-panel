@@ -1,7 +1,10 @@
+import {renderCkeditor} from './ckeditor';
+
 const table = document.getElementById("table");
 const form = document.getElementById("form");
+const closeErrorsButton = document.getElementById("close-errors-button");
 
-let renderForm = () => {
+export let renderForm = () => {
 
     let forms = document.querySelectorAll(".admin-form");
     let labels = document.querySelectorAll('.label-highlight');
@@ -71,10 +74,11 @@ let renderForm = () => {
             sendPostRequest();
         });
     });
+    
+    renderCkeditor();
 };
 
-
-let renderTable = () => {
+export let renderTable = () => {
 
     let editButtons = document.querySelectorAll(".edit-button");
     let deleteButtons = document.querySelectorAll(".delete-button");

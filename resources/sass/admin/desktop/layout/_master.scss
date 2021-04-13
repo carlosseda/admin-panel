@@ -21,27 +21,21 @@ body{
 }
 
 .wrapper {
-    display: flex;
     width: 100%;
     align-items: stretch;
     perspective: 1500px;
 }
 
 .main-content{
-    height: 100vh;
+
+    top: 15vh;
+    height: 80vh;
     width: 100%;
-
-    @include respond-to('lg') {
-        padding: 0.5% 2% 0 2%;
-    }
-
-    &.active{
-        width: 97%;
-    }
+    position: relative;
 
     .two-columns{
         display: flex;
-        justify-content: space-between;
+        justify-content: space-evenly;
         flex-wrap: nowrap;
         overflow-x: auto; 
         -webkit-overflow-scrolling: touch;

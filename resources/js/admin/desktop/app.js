@@ -1,7 +1,7 @@
 require('../../bootstrap');
 require('./crudTable');
 require('./ckeditor');
-
+require('./topbarMenu.js');
 
 // 
 // import Vue from 'vue/dist/vue';

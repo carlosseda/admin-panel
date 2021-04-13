@@ -1,21 +1,26 @@
-<nav class="topbar">
-    <div class="topbar-title">
-        <h4>@lang('admin/'.$route.'.parent_section')</h4>
+<nav class="topbar" id="topbar">
+    <div class="topbar-left">
+        <div class="topbar-title">
+            <h4 id="section-title">@lang('admin/'.$route.'.parent_section')</h4>
+        </div>
     </div>
 
-    @if(in_array('create', $crud_permissions))
-        @canatleast(['create'])
-            <div class="toggle-table" id="create-button" url="{{route($route .'_create')}}">
-                <svg viewBox="0 0 32 32">
-                    <circle cx="16" cy="16" r="15"></circle>
-                    <g id="plus">
-                        <path d="M16,11 L16,21"></path>
-                        <path d="M11,16 L21,16"></path>
-                    </g>
-                </svg>
-            </div>
-        @endcanatleast
-    @endif
+    <div class="topbar-center">
+        <div class="topbar-menu">
+            <ul>
+            <li class="menu-item" data-url="{{route('faqs')}}">Faqs</li>
+                <li class="menu-item"  data-url="{{route('faqs_categories')}}">Categorías Faqs</li>
+            </ul>
+        </div>
+    </div>
 
-    @include('admin.components.messages')
+    <div class="topbar-right">
+        <div class="topbar-menu-button">
+            <button type="button" id="topbar-collapse-button">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </div>
 </nav>

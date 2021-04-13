@@ -1,80 +1,109 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta http-equiv="x-ua-compatible" content="ie=edge">
+@php
+    $route = 'users';
+@endphp
 
-  <title>Vue js App</title>
-  <meta name="csrf-token" content="{{ csrf_token() }}">
-  <link rel="stylesheet" href="{{ mix('css/app.css') }}">
-</head>
+@extends('admin.layout.table_form')
 
-<body class="hold-transition sidebar-mini">
-<div class="wrapper" id="app">
+@section('table')
 
-  <aside class="main-sidebar sidebar-dark-primary elevation-4">
-    <div class="sidebar">
-      <nav class="mt-2">
-        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-     
-            <li class="nav-item">
-            <router-link to="/dashboard" class="nav-link">
-                <i class="nav-icon fas fa-tachometer-alt blue"></i>
-                <p>
-                Dashboard
+    <table>
+        <tr>
+            <th>Id</th>
+            <th>Nombre</th>
+            <th>Email</th>
+            <th></th>
+        </tr>
 
-                </p>
-            </router-link>
-            </li>
+        @foreach($users as $user_element)
+            <tr>
+                <td>{{$user_element->id}}</td>
+                <td>{{$user_element->name}}</td>
+                <td>{{$user_element->email}}</td>
+                <td class="table-icons-container">
+                    <div class="table-icons edit-button" data-url="{{route('users_edit', ['user' => $user_element->id])}}">
+                        <svg viewBox="0 0 24 24">
+                            <path fill="currentColor" d="M20.71,7.04C21.1,6.65 21.1,6 20.71,5.63L18.37,3.29C18,2.9 17.35,2.9 16.96,3.29L15.12,5.12L18.87,8.87M3,17.25V21H6.75L17.81,9.93L14.06,6.18L3,17.25Z" />
+                        </svg>
+                    </div> 
+                   
+                    <div class="table-icons delete-button" data-url="{{route('users_destroy', ['user' => $user_element->id])}}">
+                        <svg class="table-icons" viewBox="0 0 24 24">
+                            <path fill="currentColor" d="M19,4H15.5L14.5,3H9.5L8.5,4H5V6H19M6,19A2,2 0 0,0 8,21H16A2,2 0 0,0 18,19V7H6V19Z" />
+                        </svg>
+                    </div>
+                </td>
+            </tr>
+        @endforeach
+        
+    </table>
 
-          <li class="nav-item has-treeview">
-            <a href="#" class="nav-link">
-              <i class="nav-icon fa fa-cog green"></i>
-              <p>
-                Management
-                <i class="right fa fa-angle-left"></i>
-              </p>
-            </a>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <router-link to="/users" class="nav-link">
-                  <i class="fas fa-users nav-icon"></i>
-                  <p>Users</p>
-                </router-link>
-              </li>
+@endsection
 
-            </ul>
-          </li>
-     
-          <li class="nav-item">
-                <router-link to="/profile" class="nav-link">
-                    <i class="nav-icon fas fa-user orange"></i>
-                    <p>
-                        Profile
-                    </p>
-                </router-link>
-         </li>
+@section('form')
 
-        </ul>
-      </nav>
+    <div class="form-container">
+        <form class="admin-form" id="users-form" action="{{route("users_store")}}" autocomplete="off">
+            
+            {{ csrf_field() }}
+
+            <input autocomplete="false" name="hidden" type="text" style="display:none;">
+            <input type="hidden" name="id" value="{{isset($user->id) ? $user->id : ''}}">
+            
+            <div class="two-columns">
+                <div class="form-group">
+                    <div class="form-label">
+                        <label for="name" class="label-highlight">Nombre</label>
+                    </div>
+                    <div class="form-input">
+                        <input type="text" name="name" value="{{isset($user->name) ? $user->name : ''}}" class="input-highlight"  />
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="form-label">
+                        <label for="email" class="label-highlight">Email</label>
+                    </div>
+                    <div class="form-input">
+                        <input type="email" name="email" value="{{isset($user->email) ? $user->email : ''}}" class="input-highlight"  />
+                    </div>
+                </div>
+            </div>
+
+            <div class="two-columns">
+                <div class="form-group">
+                    <div class="form-label">
+                        <label for="password" class="label-highlight">Contraseña</label>
+                    </div>
+                    <div class="form-input">
+                        <input type="password" name="password" value="" class="input-highlight"  />
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="form-label">
+                        <label for="password_confirmation" class="label-highlight">Confirma la contraseña</label>
+                    </div>
+                    <div class="form-input">
+                        <input type="password" name="password_confirmation" value="" class="input-highlight"  />
+                    </div>
+                </div>
+            </div>
+        </form>
     </div>
-  </aside>
-
-  <div class="content-wrapper">
-    <div class="content">
-      <div class="container-fluid">
-
-        <router-view></router-view>
-
-        <vue-progress-bar></vue-progress-bar>
-
-      </div>
+    
+    <div class="form-footer">        
+        <div class="form-submit">
+            <button id="send-button">Guardar</button>
+        </div>
     </div>
-  </div>
 
-</div>
+@endsection
 
-<script src="{{ mix('js/app.js') }}"></script>
-</body>
-</html> 
+
+
+
+
+
+    
+
+

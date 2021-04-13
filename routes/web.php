@@ -15,6 +15,20 @@ use Illuminate\Support\Facades\Route;
 
 Route::group(['prefix' => 'admin'], function () {
 
+    Route::resource('usuarios', 'App\Http\Controllers\Admin\UserController', [
+        'parameters' => [
+            'usuarios' => 'user', 
+        ],
+        'names' => [
+            'index' => 'users_categories',
+            'create' => 'users_create',
+            'edit' => 'users_edit',
+            'store' => 'users_store',
+            'destroy' => 'users_destroy',
+            'show' => 'users_show',
+        ]
+    ]);
+
     Route::resource('faqs/categorias', 'App\Http\Controllers\Admin\FaqCategoryController', [
         'parameters' => [
             'categorias' => 'faq_category', 
@@ -28,7 +42,7 @@ Route::group(['prefix' => 'admin'], function () {
             'show' => 'faqs_categories_show',
         ]
     ]);
-    
+
     Route::resource('faqs', 'App\Http\Controllers\Admin\FaqController', [
         'names' => [
             'index' => 'faqs',
@@ -41,6 +55,9 @@ Route::group(['prefix' => 'admin'], function () {
     ]);
 
 });
+
+Route::get('/login', 'App\Http\Controllers\Front\LoginController@index')->name('front_login');
+Route::post('/login', 'App\Http\Controllers\Front\LoginController@login')->name('front_login_submit');
 
 Route::get('/faqs', 'App\Http\Controllers\Front\FaqController@index')->name('faqs_front');
 

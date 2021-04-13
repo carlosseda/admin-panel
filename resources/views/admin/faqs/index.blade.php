@@ -1,3 +1,7 @@
+@php
+    $route = 'faqs';
+@endphp
+
 @extends('admin.layout.table_form')
 
 @section('table')
@@ -5,11 +9,9 @@
     <table>
         <tr>
             <th>Id</th>
-            <th>Título</th>
+            <th>Nombre</th>
             <th>Categoría</th>
-            <th>
-               
-            </th>
+            <th></th>
         </tr>
 
         @foreach($faqs as $faq_element)
@@ -39,8 +41,6 @@
 
 @section('form')
 
-    @include('admin.components.errors')
-
     <div class="form-container">
         <form class="admin-form" id="faqs-form" action="{{route("faqs_store")}}" autocomplete="off">
             
@@ -67,7 +67,7 @@
 
             <div class="form-group">
                 <div class="form-label">
-                    <label for="title" class="label-highlight">Nombre</label>
+                    <label for="name" class="label-highlight">Nombre</label>
                 </div>
                 <div class="form-input">
                     <input type="text" name="name" value="{{isset($faq->name) ? $faq->name : ''}}"  class="input-highlight"  />
@@ -87,7 +87,7 @@
     
     <div class="form-footer">        
         <div class="form-submit">
-            <button id="send-button">Enviar</button>
+            <button id="send-button">Guardar</button>
         </div>
     </div>
 

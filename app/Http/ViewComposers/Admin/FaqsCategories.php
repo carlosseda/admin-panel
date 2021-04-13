@@ -3,15 +3,15 @@
 namespace App\Http\ViewComposers\Admin;
 
 use Illuminate\View\View;
-use App\Models\DB\FaqCategory as FaqCategory;
+use App\Models\DB\FaqCategory;
 
 class FaqsCategories
 {
-    public $categories;
+    public $faqs_categories;
 
     public function __construct()
     {
-        $this->faqs_categories = FaqCategory::orderBy('name', 'asc')->get();
+        $this->faqs_categories = FaqCategory::where('active', 1)->orderBy('name', 'asc')->get();
     }
 
     public function compose(View $view)

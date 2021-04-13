@@ -5,19 +5,20 @@
 }
 
 .error-container.active{
+
     background-color: $errors;
     border-radius: 0.2em;
-    display: block;
+    display: flex;
+    justify-content: space-between;
     margin-bottom: 2em;
     opacity: 1;
     padding: 0 2em;
     position: relative;
 
     .close-errors-button{
+
         cursor: pointer;
-        position: absolute;
-        top: 1em;
-        right: 1em;
+        margin: auto 0;
 
         svg{
             height: 2em;
@@ -30,9 +31,8 @@
     }
 
     .errors{
-        padding: 1em 0.5em;
 
-        li{
+        ul li{
             color: $white;
             font-family: $font-stack;
             padding: 0.1em 0;

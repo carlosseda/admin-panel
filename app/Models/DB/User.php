@@ -1,3 +1,5 @@
+<?php
+
 namespace App\Models\DB;
 
 use Illuminate\Contracts\Auth\MustVerifyEmail;

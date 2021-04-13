@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers\Admin;
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\View;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\FaqRequest;
-use App\Models\DB\Faq;
+use App\Models\DB\Faq; 
 
 class FaqController extends Controller
 {
@@ -14,12 +15,14 @@ class FaqController extends Controller
 
     function __construct(Faq $faq)
     {
+        $this->middleware('auth');
+
         $this->faq = $faq;
     }
 
     public function index()
     {
-
+        
         $view = View::make('admin.faqs.index')
                 ->with('faq', $this->faq)
                 ->with('faqs', $this->faq->where('active', 1)->get());
@@ -51,6 +54,7 @@ class FaqController extends Controller
 
     public function store(FaqRequest $request)
     {            
+        
         $faq = $this->faq->updateOrCreate([
             'id' => request('id')],[
             'name' => request('name'),
