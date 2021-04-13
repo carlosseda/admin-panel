@@ -19,7 +19,6 @@ class CreateTFaqs extends Migration
             $table->boolean('active')->default(false);
             $table->unsignedInteger('category_id');
             $table->integer('order')->default(0);
-            $table->foreign('category_id')->references('id')->on('t_faqs_categories')->onUpdate('cascade');
             $table->timestamps();
         });
     }

@@ -14,8 +14,9 @@ class CreateTLogins extends Migration
     public function up()
     {
         Schema::create('t_logins', function (Blueprint $table) {
-            $table->id();
-            $table->string('email', 255);
+            $table->increments('id');
+            $table->unsignedInteger('user_id');
+            $table->string('action');
             $table->timestamps();
         });
     }

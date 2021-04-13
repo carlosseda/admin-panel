@@ -8,7 +8,8 @@
     <div class="topbar-center">
         <div class="topbar-menu">
             <ul>
-            <li class="menu-item" data-url="{{route('faqs')}}">Faqs</li>
+                <li class="menu-item" data-url="{{route('users')}}">Usuarios</li>
+                <li class="menu-item" data-url="{{route('faqs')}}">Faqs</li>
                 <li class="menu-item"  data-url="{{route('faqs_categories')}}">Categorías Faqs</li>
             </ul>
         </div>

@@ -44,7 +44,8 @@ class LoginController extends Controller
 
                 $this->login->updateOrCreate([
                     'id' => request('id')],[
-                    'email' => request('email')
+                    'user_id' =>  Auth::id(),
+                    'action' => 'login'
                 ]);
 
                 return $this->sendLoginResponse($request);
@@ -63,6 +64,13 @@ class LoginController extends Controller
     {
         Auth::guard('web')->logout();
         $request->session()->invalidate();
+
+        $this->login->updateOrCreate([
+            'id' => request('id')],[
+            'user_id' =>  Auth::id(),
+            'action' => 'logout'
+        ]);
+
         return redirect('/');
     }
 }

@@ -20,7 +20,7 @@ Route::group(['prefix' => 'admin'], function () {
             'usuarios' => 'user', 
         ],
         'names' => [
-            'index' => 'users_categories',
+            'index' => 'users',
             'create' => 'users_create',
             'edit' => 'users_edit',
             'store' => 'users_store',
