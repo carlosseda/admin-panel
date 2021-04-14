@@ -15,17 +15,17 @@ use Illuminate\Support\Facades\Route;
 
 Route::group(['prefix' => 'admin'], function () {
 
-    Route::resource('clientes', 'App\Http\Controllers\Admin\CostumerController', [
+    Route::resource('clientes', 'App\Http\Controllers\Admin\CustomerController', [
         'parameters' => [
-            'clientes' => 'costumer', 
+            'clientes' => 'customer', 
         ],
         'names' => [
-            'index' => 'costumers',
-            'create' => 'costumers_create',
-            'edit' => 'costumers_edit',
-            'store' => 'costumers_store',
-            'destroy' => 'costumers_destroy',
-            'show' => 'costumers_show',
+            'index' => 'customers',
+            'create' => 'customers_create',
+            'edit' => 'customers_edit',
+            'store' => 'customers_store',
+            'destroy' => 'customers_destroy',
+            'show' => 'customers_show',
         ]
     ]);
 
