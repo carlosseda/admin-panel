@@ -35,27 +35,3 @@ plusButtons.forEach(plusButton => {
     
 });
 
-
-// const observer = new MutationObserver((mutations) => { 
-
-//     mutations.forEach((mutation) => {
-
-//         if (mutation.attributeName === 'class') {
-
-//             const currentState = mutation.target.classList.contains('active');
-            
-//             if (prevState !== currentState) {
-//                 prevState = currentState;
-//                 console.log(`'is-busy' class ${currentState ? 'added' : 'removed'}`);
-//             }
-//         }
-//     });
-// });
-
-// var config = { 
-//     attributes: true,
-//     attributeOldValue: true,
-//     attributeFilter: ["class"]
-// }
-
-// observer.observe(element, config);

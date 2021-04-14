@@ -15,6 +15,20 @@ use Illuminate\Support\Facades\Route;
 
 Route::group(['prefix' => 'admin'], function () {
 
+    Route::resource('clientes', 'App\Http\Controllers\Admin\CostumerController', [
+        'parameters' => [
+            'clientes' => 'costumer', 
+        ],
+        'names' => [
+            'index' => 'costumers',
+            'create' => 'costumers_create',
+            'edit' => 'costumers_edit',
+            'store' => 'costumers_store',
+            'destroy' => 'costumers_destroy',
+            'show' => 'costumers_show',
+        ]
+    ]);
+
     Route::resource('usuarios', 'App\Http\Controllers\Admin\UserController', [
         'parameters' => [
             'usuarios' => 'user', 
@@ -55,6 +69,8 @@ Route::group(['prefix' => 'admin'], function () {
     ]);
 
 });
+
+Route::post('/fingerprint', 'App\Http\Controllers\Front\FingerprintController@store')->name('front_fingerprint');
 
 Route::get('/login', 'App\Http\Controllers\Front\LoginController@index')->name('front_login');
 Route::post('/login', 'App\Http\Controllers\Front\LoginController@login')->name('front_login_submit');

@@ -26,8 +26,10 @@
     },
     "dependencies": {
         "@ckeditor/ckeditor5-build-classic": "^27.0.0",
+        "@fingerprintjs/fingerprintjs-pro": "^3.3.0",
         "@popperjs/core": "^2.9.1",
         "ckeditor5": "^27.0.0",
+        "clientjs": "^0.1.11",
         "laravel-vue-datatable": "^0.6.0",
         "moment": "^2.29.1",
         "popper": "^1.0.1",
