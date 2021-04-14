@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateTCostumer extends Migration
+class CreateTCustomer extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateTCostumer extends Migration
      */
     public function up()
     {
-        Schema::create('t_costumers', function (Blueprint $table) {
+        Schema::create('t_customers', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
             $table->string('surname');

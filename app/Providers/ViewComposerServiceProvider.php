@@ -31,7 +31,7 @@ class ViewComposerServiceProvider extends ServiceProvider
         );
 
         view()->composer([
-            'admin.costumers.index'],
+            'admin.customers.index'],
             'App\Http\ViewComposers\Admin\Countries'
         );
     }

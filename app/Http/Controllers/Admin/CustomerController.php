@@ -6,26 +6,26 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\View;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Admin\CostumerRequest;
-use App\Models\DB\Costumer; 
+use App\Http\Requests\Admin\CustomerRequest;
+use App\Models\DB\Customer; 
 
-class CostumerController extends Controller
+class CustomerController extends Controller
 {
-    protected $costumer;
+    protected $customer;
 
-    function __construct(Costumer $costumer)
+    function __construct(Customer $customer)
     {
         $this->middleware('auth');
 
-        $this->costumer = $costumer;
+        $this->customer = $customer;
     }
 
     public function index()
     {
         
-        $view = View::make('admin.costumers.index')
-                ->with('costumer', $this->costumer)
-                ->with('costumers', $this->costumer->where('active', 1)->get());
+        $view = View::make('admin.customers.index')
+                ->with('customer', $this->customer)
+                ->with('customers', $this->customer->where('active', 1)->get());
 
         if(request()->ajax()) {
             
@@ -43,8 +43,8 @@ class CostumerController extends Controller
     public function create()
     {
 
-        $view = View::make('admin.costumers.index')
-        ->with('costumer', $this->costumer)
+        $view = View::make('admin.customers.index')
+        ->with('customer', $this->customer)
         ->renderSections();
 
         return response()->json([
@@ -52,10 +52,10 @@ class CostumerController extends Controller
         ]);
     }
 
-    public function store(CostumerRequest $request)
+    public function store(CustomerRequest $request)
     {            
         
-        $costumer = $this->costumer->updateOrCreate([
+        $customer = $this->customer->updateOrCreate([
             'id' => request('id')],[
             'name' => request('name'),
             'surname' => request('surname'),
@@ -68,23 +68,23 @@ class CostumerController extends Controller
             'active' => 1,
         ]);
 
-        $view = View::make('admin.costumers.index')
-        ->with('costumers', $this->costumer->where('active', 1)->get())
-        ->with('costumer', $costumer)
+        $view = View::make('admin.customers.index')
+        ->with('customers', $this->customer->where('active', 1)->get())
+        ->with('customer', $customer)
         ->renderSections();        
 
         return response()->json([
             'table' => $view['table'],
             'form' => $view['form'],
-            'id' => $costumer->id,
+            'id' => $customer->id,
         ]);
     }
 
-    public function edit(Costumer $costumer)
+    public function edit(Customer $customer)
     {
-        $view = View::make('admin.costumers.index')
-        ->with('costumer', $costumer)
-        ->with('costumers', $this->costumer->where('active', 1)->get());   
+        $view = View::make('admin.customers.index')
+        ->with('customer', $customer)
+        ->with('customers', $this->customer->where('active', 1)->get());   
         
         if(request()->ajax()) {
 
@@ -98,18 +98,18 @@ class CostumerController extends Controller
         return $view;
     }
 
-    public function show(Costumer $costumer){
+    public function show(Customer $customer){
 
     }
 
-    public function destroy(Costumer $costumer)
+    public function destroy(Customer $customer)
     {
-        $costumer->active = 0;
-        $costumer->save();
+        $customer->active = 0;
+        $customer->save();
 
-        $view = View::make('admin.costumers.index')
-            ->with('costumer', $this->costumer)
-            ->with('costumers', $this->costumer->where('active', 1)->get())
+        $view = View::make('admin.customers.index')
+            ->with('customer', $this->customer)
+            ->with('customers', $this->customer->where('active', 1)->get())
             ->renderSections();
         
         return response()->json([
