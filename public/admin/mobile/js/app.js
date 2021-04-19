@@ -1882,16 +1882,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "showForm": () => (/* binding */ showForm),
 /* harmony export */   "showTable": () => (/* binding */ showTable)
 /* harmony export */ });
-/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
-/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _filterTable__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./filterTable */ "./resources/js/admin/mobile/filterTable.js");
-/* harmony import */ var _crudTable__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./crudTable */ "./resources/js/admin/mobile/crudTable.js");
-
-
-function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
-
-function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
-
+/* harmony import */ var _filterTable__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./filterTable */ "./resources/js/admin/mobile/filterTable.js");
+/* harmony import */ var _crudTable__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./crudTable */ "./resources/js/admin/mobile/crudTable.js");
 
 
 var bottombarItems = document.querySelectorAll('.bottombar-item');
@@ -1917,48 +1909,12 @@ bottombarItems.forEach(function (bottombarItem) {
 var showForm = function showForm() {
   form.classList.add('active');
   table.classList.remove('active');
-  (0,_filterTable__WEBPACK_IMPORTED_MODULE_1__.hideFilterTable)();
+  (0,_filterTable__WEBPACK_IMPORTED_MODULE_0__.hideFilterTable)();
 };
 var showTable = function showTable(url) {
-  var sendShowRequest = /*#__PURE__*/function () {
-    var _ref = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
-      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
-        while (1) {
-          switch (_context.prev = _context.next) {
-            case 0:
-              _context.prev = 0;
-              _context.next = 3;
-              return axios.get(url).then(function (response) {
-                table.innerHTML = response.data.table;
-                (0,_crudTable__WEBPACK_IMPORTED_MODULE_2__.renderTable)();
-              });
-
-            case 3:
-              _context.next = 8;
-              break;
-
-            case 5:
-              _context.prev = 5;
-              _context.t0 = _context["catch"](0);
-              console.error(_context.t0);
-
-            case 8:
-            case "end":
-              return _context.stop();
-          }
-        }
-      }, _callee, null, [[0, 5]]);
-    }));
-
-    return function sendShowRequest() {
-      return _ref.apply(this, arguments);
-    };
-  }();
-
-  sendShowRequest();
   table.classList.add('active');
   form.classList.remove('active');
-  (0,_filterTable__WEBPACK_IMPORTED_MODULE_1__.showFilterTable)();
+  (0,_filterTable__WEBPACK_IMPORTED_MODULE_0__.showFilterTable)();
 };
 
 /***/ }),
@@ -2010,14 +1966,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "renderForm": () => (/* binding */ renderForm),
 /* harmony export */   "renderTable": () => (/* binding */ renderTable),
+/* harmony export */   "deleteElement": () => (/* binding */ deleteElement),
 /* harmony export */   "editElement": () => (/* binding */ editElement)
 /* harmony export */ });
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _ckeditor__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ckeditor */ "./resources/js/admin/mobile/ckeditor.js");
 /* harmony import */ var _swipe__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./swipe */ "./resources/js/admin/mobile/swipe.js");
-/* harmony import */ var _filterTable__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./filterTable */ "./resources/js/admin/mobile/filterTable.js");
-/* harmony import */ var _bottombarMenu__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./bottombarMenu */ "./resources/js/admin/mobile/bottombarMenu.js");
+/* harmony import */ var _bottombarMenu__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./bottombarMenu */ "./resources/js/admin/mobile/bottombarMenu.js");
 
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
@@ -2035,7 +1991,6 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
-
 
 
 
@@ -2131,88 +2086,51 @@ var renderForm = function renderForm() {
   (0,_ckeditor__WEBPACK_IMPORTED_MODULE_1__.renderCkeditor)();
 };
 var renderTable = function renderTable() {
-  var deleteButtons = document.querySelectorAll(".delete-button");
   var swipeRevealItemElements = document.querySelectorAll('.swipe-element');
-  deleteButtons.forEach(function (deleteButton) {
-    deleteButton.addEventListener("click", function () {
-      var url = deleteButton.dataset.url;
-
-      var sendDeleteRequest = /*#__PURE__*/function () {
-        var _ref4 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2() {
-          return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee2$(_context2) {
-            while (1) {
-              switch (_context2.prev = _context2.next) {
-                case 0:
-                  _context2.prev = 0;
-                  _context2.next = 3;
-                  return axios["delete"](url).then(function (response) {
-                    table.innerHTML = response.data.table;
-                    renderTable();
-                  });
-
-                case 3:
-                  _context2.next = 8;
-                  break;
-
-                case 5:
-                  _context2.prev = 5;
-                  _context2.t0 = _context2["catch"](0);
-                  console.error(_context2.t0);
-
-                case 8:
-                case "end":
-                  return _context2.stop();
-              }
-            }
-          }, _callee2, null, [[0, 5]]);
-        }));
-
-        return function sendDeleteRequest() {
-          return _ref4.apply(this, arguments);
-        };
-      }();
-
-      sendDeleteRequest();
-    });
-  });
   swipeRevealItemElements.forEach(function (swipeRevealItemElement) {
     new _swipe__WEBPACK_IMPORTED_MODULE_2__.swipeRevealItem(swipeRevealItemElement);
   });
 };
+var deleteElement = function deleteElement(url) {
+  var modalDelete = document.getElementById('modal-delete');
+  var deleteConfirm = document.getElementById('delete-confirm');
+  deleteConfirm.dataset.url = url;
+  modalDelete.classList.add('open');
+};
 var editElement = function editElement(url) {
   var sendEditRequest = /*#__PURE__*/function () {
-    var _ref5 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee3() {
-      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee3$(_context3) {
+    var _ref4 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2() {
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee2$(_context2) {
         while (1) {
-          switch (_context3.prev = _context3.next) {
+          switch (_context2.prev = _context2.next) {
             case 0:
-              _context3.prev = 0;
-              _context3.next = 3;
+              (0,_bottombarMenu__WEBPACK_IMPORTED_MODULE_3__.showForm)();
+              _context2.prev = 1;
+              _context2.next = 4;
               return axios.get(url).then(function (response) {
                 form.innerHTML = response.data.form;
-                (0,_bottombarMenu__WEBPACK_IMPORTED_MODULE_4__.showForm)();
                 renderForm();
               });
 
-            case 3:
-              _context3.next = 8;
+            case 4:
+              _context2.next = 9;
               break;
 
-            case 5:
-              _context3.prev = 5;
-              _context3.t0 = _context3["catch"](0);
-              console.error(_context3.t0);
+            case 6:
+              _context2.prev = 6;
+              _context2.t0 = _context2["catch"](1);
+              console.error(_context2.t0);
 
-            case 8:
+            case 9:
             case "end":
-              return _context3.stop();
+              return _context2.stop();
           }
         }
-      }, _callee3, null, [[0, 5]]);
+      }, _callee2, null, [[1, 6]]);
     }));
 
     return function sendEditRequest() {
-      return _ref5.apply(this, arguments);
+      return _ref4.apply(this, arguments);
     };
   }();
 
@@ -2316,6 +2234,74 @@ renderFilterTable();
 
 /***/ }),
 
+/***/ "./resources/js/admin/mobile/modalDelete.js":
+/*!**************************************************!*\
+  !*** ./resources/js/admin/mobile/modalDelete.js ***!
+  \**************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _crudTable__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./crudTable */ "./resources/js/admin/mobile/crudTable.js");
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+
+var modalDelete = document.getElementById('modal-delete');
+var deleteConfirm = document.getElementById('delete-confirm');
+var deleteCancel = document.getElementById('delete-cancel');
+deleteCancel.addEventListener("click", function () {
+  modalDelete.classList.remove('open');
+});
+deleteConfirm.addEventListener("click", function () {
+  var url = deleteConfirm.dataset.url;
+
+  var sendDeleteRequest = /*#__PURE__*/function () {
+    var _ref = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
+        while (1) {
+          switch (_context.prev = _context.next) {
+            case 0:
+              _context.prev = 0;
+              _context.next = 3;
+              return axios["delete"](url).then(function (response) {
+                table.innerHTML = response.data.table;
+                modalDelete.classList.remove('open');
+                (0,_crudTable__WEBPACK_IMPORTED_MODULE_1__.renderTable)();
+              });
+
+            case 3:
+              _context.next = 8;
+              break;
+
+            case 5:
+              _context.prev = 5;
+              _context.t0 = _context["catch"](0);
+              console.error(_context.t0);
+
+            case 8:
+            case "end":
+              return _context.stop();
+          }
+        }
+      }, _callee, null, [[0, 5]]);
+    }));
+
+    return function sendDeleteRequest() {
+      return _ref.apply(this, arguments);
+    };
+  }();
+
+  sendDeleteRequest();
+});
+
+/***/ }),
+
 /***/ "./resources/js/admin/mobile/swipe.js":
 /*!********************************************!*\
   !*** ./resources/js/admin/mobile/swipe.js ***!
@@ -2335,8 +2321,6 @@ function swipeRevealItem(element) {
   var STATE_DEFAULT = 1;
   var STATE_LEFT_SIDE = 2;
   var STATE_RIGHT_SIDE = 3;
-  var leftSwipes = document.querySelectorAll('.left-swipe');
-  var rightSwipes = document.querySelectorAll('.right-swipe');
   var swipeFrontElement = element.querySelector('.swipe-front');
   var rafPending = false;
   var initialTouchPos = null;
@@ -2448,19 +2432,16 @@ function swipeRevealItem(element) {
 
       case STATE_LEFT_SIDE:
         currentXPosition = -(itemWidth - handleSize);
+        (0,_crudTable__WEBPACK_IMPORTED_MODULE_0__.deleteElement)(element.querySelector('.left-swipe').dataset.url);
         break;
 
       case STATE_RIGHT_SIDE:
         currentXPosition = itemWidth - handleSize;
+        (0,_crudTable__WEBPACK_IMPORTED_MODULE_0__.editElement)(element.querySelector('.right-swipe').dataset.url);
         break;
     }
 
-    if (currentXPosition > 1) {
-      (0,_crudTable__WEBPACK_IMPORTED_MODULE_0__.editElement)(element.querySelector('.right-swipe').dataset.url);
-    } else if (currentXPosition < -1) {
-      console.log(element.querySelector('.left-swipe').dataset.url);
-    }
-
+    currentXPosition = 0;
     transformStyle = 'translateX(' + currentXPosition + 'px)';
     swipeFrontElement.style.msTransform = transformStyle;
     swipeFrontElement.style.MozTransform = transformStyle;
@@ -20923,6 +20904,8 @@ __webpack_require__(/*! ./topbarMenu */ "./resources/js/admin/mobile/topbarMenu.
 __webpack_require__(/*! ./bottombarMenu */ "./resources/js/admin/mobile/bottombarMenu.js");
 
 __webpack_require__(/*! ./filterTable */ "./resources/js/admin/mobile/filterTable.js");
+
+__webpack_require__(/*! ./modalDelete */ "./resources/js/admin/mobile/modalDelete.js");
 })();
 
 /******/ })()

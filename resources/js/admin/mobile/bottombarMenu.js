@@ -35,21 +35,6 @@ export let showForm = () => {
 
 export let showTable = (url) => {
 
-    let sendShowRequest = async () => {
-
-        try {
-            await axios.get(url).then(response => {
-                table.innerHTML = response.data.table;
-                renderTable();
-            });
-            
-        } catch (error) {
-            console.error(error);
-        }
-    };
-
-    sendShowRequest();
-
     table.classList.add('active');
     form.classList.remove('active');
     showFilterTable();

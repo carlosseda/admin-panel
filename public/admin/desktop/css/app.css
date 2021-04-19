@@ -1044,7 +1044,6 @@ body {
 
 .modal-delete {
   background-color: white;
-  height: 25vh;
   transform: translateY(-200%);
   position: fixed;
   left: 0;
@@ -1060,58 +1059,31 @@ body {
   top: 30%;
   transform: translateY(0);
 }
-.modal-delete .modal-header {
+.modal-delete .modal-delete-header {
   background-color: #d9d9d9;
   border-bottom: 1px solid #e9ecef;
   padding: 0.5em 1em;
-}
-.modal-delete .modal-header .modal-header-title {
   text-align: center;
 }
-.modal-delete .modal-header .modal-header-title h4 {
+.modal-delete .modal-delete-header h4 {
   font-size: 1.2em;
   margin: 0;
 }
-.modal-delete .modal-header .close-modal-button {
-  cursor: pointer;
-  position: absolute;
-  right: 1em;
-}
-.modal-delete .modal-header .close-modal-button svg {
-  height: 2em;
-  width: 2em;
-}
-.modal-delete .modal-header .close-modal-button svg path {
-  fill: black;
-}
-.modal-delete .modal-body {
-  padding: 3em;
-}
-.modal-delete .modal-body .modal-body-buttons {
+.modal-delete .modal-delete-footer {
   display: flex;
-  justify-content: space-around;
 }
-.modal-delete .modal-body .modal-body-buttons .btn-alert {
-  background-color: #e04857;
-  border-color: #e04857;
-  border-radius: 0.25rem;
-  cursor: pointer;
+.modal-delete .modal-delete-footer .modal-delete-option {
   color: white;
-  font-size: 1.2em;
-  font-weight: 400;
-  line-height: 1.5;
-  padding: 0.5em 2em;
+  cursor: pointer;
+  font-weight: 600;
   text-align: center;
-  -webkit-user-select: none;
-     -moz-user-select: none;
-      -ms-user-select: none;
-          user-select: none;
-  vertical-align: middle;
-  white-space: nowrap;
-  width: 100%;
+  width: 50%;
 }
-.modal-delete .modal-body .modal-body-buttons .btn-alert:hover {
-  background-color: #ff7a7a;
+.modal-delete .modal-delete-footer .modal-delete-option#delete-cancel {
+  background-color: #02a8b1;
+}
+.modal-delete .modal-delete-footer .modal-delete-option#delete-confirm {
+  background-color: #d74242;
 }
 
 .modal-menu-item {

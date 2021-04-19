@@ -1,7 +1,6 @@
 import {renderCkeditor} from './ckeditor';
 import {swipeRevealItem} from './swipe';
-import {renderFilterTable} from './filterTable';
-import { showForm } from './bottombarMenu';
+import {showForm} from './bottombarMenu';
 
 const table = document.getElementById("table");
 const form = document.getElementById("form");
@@ -85,32 +84,7 @@ export let renderForm = () => {
 
 export let renderTable = () => {
 
-    let deleteButtons = document.querySelectorAll(".delete-button");
     let swipeRevealItemElements = document.querySelectorAll('.swipe-element');
-
-    deleteButtons.forEach(deleteButton => {
-
-        deleteButton.addEventListener("click", () => {
-
-            let url = deleteButton.dataset.url;
-
-            let sendDeleteRequest = async () => {
-
-                try {
-                    await axios.delete(url).then(response => {
-                        table.innerHTML = response.data.table;
-                        renderTable();
-                    });
-                    
-                } catch (error) {
-                    console.error(error);
-                }
-            };
-
-            sendDeleteRequest();
-        });
-    });
-
 
     swipeRevealItemElements.forEach(swipeRevealItemElement => {
 
@@ -119,15 +93,24 @@ export let renderTable = () => {
     });
 }; 
 
+export let deleteElement = (url) => {
+
+    let modalDelete = document.getElementById('modal-delete');
+    let deleteConfirm = document.getElementById('delete-confirm');
+
+    deleteConfirm.dataset.url = url;
+    modalDelete.classList.add('open');
+}
+
 export let editElement = (url) => {
     
-
     let sendEditRequest = async () => {
+
+        showForm();
 
         try {
             await axios.get(url).then(response => {
                 form.innerHTML = response.data.form;
-                showForm();
                 renderForm();
             });
             

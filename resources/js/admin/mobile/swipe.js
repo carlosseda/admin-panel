@@ -1,4 +1,4 @@
-import {editElement} from './crudTable';
+import {deleteElement, editElement} from './crudTable';
 
 export function swipeRevealItem (element){
 
@@ -132,22 +132,19 @@ export function swipeRevealItem (element){
             case STATE_DEFAULT:
                 currentXPosition = 0;
                 break;
+
             case STATE_LEFT_SIDE:
                 currentXPosition = -(itemWidth - handleSize);
+                deleteElement(element.querySelector('.left-swipe').dataset.url);
                 break;
+
             case STATE_RIGHT_SIDE:
                 currentXPosition = itemWidth - handleSize;
+                editElement(element.querySelector('.right-swipe').dataset.url);          
                 break;
         }
 
-        if(currentXPosition > 1){
-
-            editElement(element.querySelector('.right-swipe').dataset.url);          
-
-        }else if(currentXPosition < -1){
-            
-            console.log(element.querySelector('.left-swipe').dataset.url);
-        }
+        currentXPosition = 0;
 
         transformStyle = 'translateX('+currentXPosition+'px)';
 
