@@ -8,8 +8,6 @@ export function swipeRevealItem (element){
     let STATE_LEFT_SIDE = 2;
     let STATE_RIGHT_SIDE = 3;
 
-    let leftSwipes = document.querySelectorAll('.left-swipe');
-    let rightSwipes = document.querySelectorAll('.right-swipe');
     let swipeFrontElement = element.querySelector('.swipe-front');
 
     let rafPending = false;
