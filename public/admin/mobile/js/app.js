@@ -2456,17 +2456,9 @@ function swipeRevealItem(element) {
     }
 
     if (currentXPosition > 1) {
-      rightSwipes.forEach(function (rightSwipe) {
-        if (rightSwipe.dataset.swipe == swipeFrontElement.dataset.swipe) {
-          (0,_crudTable__WEBPACK_IMPORTED_MODULE_0__.editElement)(rightSwipe.dataset.url);
-        }
-      });
+      (0,_crudTable__WEBPACK_IMPORTED_MODULE_0__.editElement)(element.querySelector('.right-swipe').dataset.url);
     } else if (currentXPosition < -1) {
-      leftSwipes.forEach(function (leftSwipe) {
-        if (leftSwipe.dataset.swipe == swipeFrontElement.dataset.swipe) {
-          console.log(leftSwipe.dataset.url);
-        }
-      });
+      console.log(element.querySelector('.left-swipe').dataset.url);
     }
 
     transformStyle = 'translateX(' + currentXPosition + 'px)';
@@ -2507,11 +2499,7 @@ function swipeRevealItem(element) {
         swipeActive.removeAttribute('id');
       }
 
-      leftSwipes.forEach(function (leftSwipe) {
-        if (leftSwipe.dataset.swipe == swipeFrontElement.dataset.swipe) {
-          leftSwipe.id = 'swipe-active';
-        }
-      });
+      element.querySelector('.left-swipe').id = 'swipe-active';
       leftSwipeVisible = 1;
       rightSwipeVisible = 0;
     } else if (Math.sign(differenceInX) == -1 && rightSwipeVisible == 0) {
@@ -2521,11 +2509,7 @@ function swipeRevealItem(element) {
         _swipeActive.removeAttribute('id');
       }
 
-      rightSwipes.forEach(function (rightSwipe) {
-        if (rightSwipe.dataset.swipe == swipeFrontElement.dataset.swipe) {
-          rightSwipe.id = 'swipe-active';
-        }
-      });
+      element.querySelector('.right-swipe').id = 'swipe-active';
       leftSwipeVisible = 0;
       rightSwipeVisible = 1;
     }

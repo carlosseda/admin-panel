@@ -144,23 +144,11 @@ export function swipeRevealItem (element){
 
         if(currentXPosition > 1){
 
-
-            rightSwipes.forEach(rightSwipe => {
-
-                if(rightSwipe.dataset.swipe == swipeFrontElement.dataset.swipe){
-                    editElement(rightSwipe.dataset.url);
-                }
-            });
-          
+            editElement(element.querySelector('.right-swipe').dataset.url);          
 
         }else if(currentXPosition < -1){
             
-            leftSwipes.forEach(leftSwipe => {
-
-                if(leftSwipe.dataset.swipe == swipeFrontElement.dataset.swipe){
-                    console.log(leftSwipe.dataset.url);
-                }
-            });
+            console.log(element.querySelector('.left-swipe').dataset.url);
         }
 
         transformStyle = 'translateX('+currentXPosition+'px)';
@@ -206,12 +194,7 @@ export function swipeRevealItem (element){
                 swipeActive.removeAttribute('id');
             }
 
-            leftSwipes.forEach(leftSwipe => {
-
-                if(leftSwipe.dataset.swipe == swipeFrontElement.dataset.swipe){
-                    leftSwipe.id = 'swipe-active';
-                }
-            });
+            element.querySelector('.left-swipe').id = 'swipe-active';
 
             leftSwipeVisible = 1;
             rightSwipeVisible = 0;
@@ -224,12 +207,7 @@ export function swipeRevealItem (element){
                 swipeActive.removeAttribute('id');
             }
 
-            rightSwipes.forEach(rightSwipe => {
-
-                if(rightSwipe.dataset.swipe == swipeFrontElement.dataset.swipe){
-                    rightSwipe.id = 'swipe-active';
-                }
-            });
+            element.querySelector('.right-swipe').id = 'swipe-active';
 
             leftSwipeVisible = 0;
             rightSwipeVisible = 1;
