@@ -49,48 +49,60 @@
             <input autocomplete="false" name="hidden" type="text" style="display:none;">
             <input type="hidden" name="id" value="{{isset($user->id) ? $user->id : ''}}">
             
-            <div class="two-columns">
-                <div class="form-group">
-                    <div class="form-label">
-                        <label for="name" class="label-highlight">Nombre</label>
-                    </div>
-                    <div class="form-input">
-                        <input type="text" name="name" value="{{isset($user->name) ? $user->name : ''}}" class="input-highlight"  />
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <div class="form-label">
-                        <label for="email" class="label-highlight">Email</label>
-                    </div>
-                    <div class="form-input">
-                        <input type="email" name="email" value="{{isset($user->email) ? $user->email : ''}}" class="input-highlight"  />
-                    </div>
-                </div>
+            <div class="tabs-container-menu">
+                <ul>
+                    <li class="tab-item tab-active" data-tab="contenido">
+                        Contenido
+                    </li>    
+                </ul>
             </div>
 
-            <div class="two-columns">
-                <div class="form-group">
-                    <div class="form-label">
-                        <label for="password" class="label-highlight">Contraseña</label>
+            <div class="tab-panel tab-active" data-tab="contenido">
+
+                <div class="two-columns">
+                    <div class="form-group">
+                        <div class="form-label">
+                            <label for="name" class="label-highlight">Nombre</label>
+                        </div>
+                        <div class="form-input">
+                            <input type="text" name="name" value="{{isset($user->name) ? $user->name : ''}}" class="input-highlight"  />
+                        </div>
                     </div>
-                    <div class="form-input">
-                        <input type="password" name="password" value="" class="input-highlight"  />
+
+                    <div class="form-group">
+                        <div class="form-label">
+                            <label for="email" class="label-highlight">Email</label>
+                        </div>
+                        <div class="form-input">
+                            <input type="email" name="email" value="{{isset($user->email) ? $user->email : ''}}" class="input-highlight"  />
+                        </div>
                     </div>
                 </div>
 
-                <div class="form-group">
-                    <div class="form-label">
-                        <label for="password_confirmation" class="label-highlight">Confirma la contraseña</label>
+                <div class="two-columns">
+                    <div class="form-group">
+                        <div class="form-label">
+                            <label for="password" class="label-highlight">Contraseña</label>
+                        </div>
+                        <div class="form-input">
+                            <input type="password" name="password" value="" class="input-highlight"  />
+                        </div>
                     </div>
-                    <div class="form-input">
-                        <input type="password" name="password_confirmation" value="" class="input-highlight"  />
+
+                    <div class="form-group">
+                        <div class="form-label">
+                            <label for="password_confirmation" class="label-highlight">Confirma la contraseña</label>
+                        </div>
+                        <div class="form-input">
+                            <input type="password" name="password_confirmation" value="" class="input-highlight"  />
+                        </div>
                     </div>
                 </div>
+
             </div>
         </form>
     </div>
-    
+
     <div class="form-footer">        
         <div class="form-submit">
             <button id="send-button">Guardar</button>

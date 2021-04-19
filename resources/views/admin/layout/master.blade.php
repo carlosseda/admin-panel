@@ -15,12 +15,20 @@
     <body>
         <div class="wrapper" id="app">
 
-            @include('admin.components.messages')
+            {{-- @include('admin.components.messages') --}}
             @include('admin.layout.partials.topbar')
+
+            @if(isset($filters))
+                @include('admin.components.table_filters', $filters)
+            @endif
 
             <div class="main-content">
                 @yield('content')
             </div>
+
+            @if($agent->isMobile())
+                @include('admin.layout.partials.bottombar')
+            @endif
         </div>      
 
         @include("admin.layout.partials.js")

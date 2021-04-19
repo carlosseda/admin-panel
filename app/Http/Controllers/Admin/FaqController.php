@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\FaqRequest;
 use App\Models\DB\Faq; 
+use Debugbar;
 
 class FaqController extends Controller
 {
@@ -85,6 +86,7 @@ class FaqController extends Controller
             $sections = $view->renderSections(); 
     
             return response()->json([
+                'table' => $sections['table'],
                 'form' => $sections['form'],
             ]); 
         }
@@ -94,6 +96,7 @@ class FaqController extends Controller
 
     public function show(Faq $faq){
 
+     
     }
 
     public function destroy(Faq $faq)
@@ -109,6 +112,41 @@ class FaqController extends Controller
         return response()->json([
             'table' => $view['table'],
             'form' => $view['form']
+        ]);
+    }
+
+    public function filter(Request $request){
+
+        $query = $this->faq->query();
+
+        $query->when(request('category_id'), function ($q, $category_id) {
+
+            if($category_id == 'all'){
+                return $q;
+            }
+            else {
+                return $q->where('category_id', $category_id);
+            }
+        });
+
+        $query->when(request('search'), function ($q, $search) {
+
+            if($search == null){
+                return $q;
+            }
+            else {
+                return $q->where('name', 'like', "%$search%");
+            }
+        });
+        
+        $faqs = $query->where('active', 1)->get();
+
+        $view = View::make('admin.faqs.index')
+            ->with('faqs', $faqs)
+            ->renderSections();
+
+        return response()->json([
+            'table' => $view['table'],
         ]);
     }
 }

@@ -7,13 +7,12 @@
 @import "../base/typography";
 @import "layout/master";
 @import "layout/topbar";
-@import "layout/sidebar";
-// @import "layout/table";
-@import "layout/table-example";
-// @import "layout/form";
-@import "layout/form-example";
+@import "layout/bottombar";
+@import "layout/table";
+@import "layout/form";
 @import "layout/portfolio";
 @import "layout/locale";
+@import "components/table-filter";
 @import "components/errors";
 @import "components/modal-delete";
 @import "components/form-menu-item";

@@ -39,6 +39,14 @@
 
 @section('form')
 
+    <div class="tabs-container-menu">
+        <ul>
+            <li class="tab-item tab-active" data-tab="contenido">
+                Contenido
+            </li>    
+        </ul>
+    </div>
+    
     <div class="form-container">
         <form class="admin-form" id="customers-form" action="{{route("customers_store")}}" autocomplete="off">
             
@@ -47,91 +55,94 @@
             <input autocomplete="false" name="hidden" type="text" style="display:none;">
             <input type="hidden" name="id" value="{{isset($customer->id) ? $customer->id : ''}}">
 
-            <div class="two-columns">
-                <div class="form-group">
-                    <div class="form-label">
-                        <label for="name" class="label-highlight">Nombre</label>
+            <div class="tab-panel tab-active" data-tab="contenido">
+
+                <div class="two-columns">
+                    <div class="form-group">
+                        <div class="form-label">
+                            <label for="name" class="label-highlight">Nombre</label>
+                        </div>
+                        <div class="form-input">
+                            <input type="text" name="name" value="{{isset($customer->name) ? $customer->name : ''}}" class="input-highlight"  />
+                        </div>
                     </div>
-                    <div class="form-input">
-                        <input type="text" name="name" value="{{isset($customer->name) ? $customer->name : ''}}" class="input-highlight"  />
+
+                    <div class="form-group">
+                        <div class="form-label">
+                            <label for="surname" class="label-highlight">Apellidos</label>
+                        </div>
+                        <div class="form-input">
+                            <input type="text" name="surname" value="{{isset($customer->surname) ? $customer->surname : ''}}" class="input-highlight"  />
+                        </div>
                     </div>
                 </div>
 
-                <div class="form-group">
-                    <div class="form-label">
-                        <label for="surname" class="label-highlight">Apellidos</label>
+                <div class="two-columns">
+                    <div class="form-group">
+                        <div class="form-label">
+                            <label for="telephone" class="label-highlight">Teléfono</label>
+                        </div>
+                        <div class="form-input">
+                            <input type="text" name="telephone" value="{{isset($customer->telephone) ? $customer->telephone : ''}}" class="input-highlight"  />
+                        </div>
                     </div>
-                    <div class="form-input">
-                        <input type="text" name="surname" value="{{isset($customer->surname) ? $customer->surname : ''}}" class="input-highlight"  />
+
+                    <div class="form-group">
+                        <div class="form-label">
+                            <label for="email" class="label-highlight">Email</label>
+                        </div>
+                        <div class="form-input">
+                            <input type="email" name="email" value="{{isset($customer->email) ? $customer->email : ''}}" class="input-highlight"  />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="two-columns">
+                    <div class="form-group">
+                        <div class="form-label">
+                            <label for="country_id" class="label-highlight">País</label>
+                        </div>
+                        <div class="form-input">
+                            <select name="country_id" class="input-highlight">
+                                <option></option>
+                                @foreach ($countries as $country)
+                                    <option value="{{$country->id}}" {{$customer->country_id == $country->id ? "selected" : ""}}>{{$country->name}}</option>
+                                @endforeach
+                            </select>       
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="form-label">
+                            <label for="city" class="label-highlight">Ciudad</label>
+                        </div>
+                        <div class="form-input">
+                            <input type="text" name="city" value="{{isset($customer->city) ? $customer->city : ''}}" class="input-highlight" />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="two-columns">
+                    <div class="form-group">
+                        <div class="form-label">
+                            <label for="postcode" class="label-highlight">Código Postal</label>
+                        </div>
+                        <div class="form-input">
+                            <input type="text" name="postcode" value="{{isset($customer->postcode) ? $customer->postcode : ''}}" class="input-highlight" />
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="form-label">
+                            <label for="address" class="label-highlight">Dirección</label>
+                        </div>
+                        <div class="form-input">
+                            <input type="text" name="address" value="{{isset($customer->address) ? $customer->address : ''}}" class="input-highlight" />
+                        </div>
                     </div>
                 </div>
             </div>
 
-            <div class="two-columns">
-                <div class="form-group">
-                    <div class="form-label">
-                        <label for="telephone" class="label-highlight">Teléfono</label>
-                    </div>
-                    <div class="form-input">
-                        <input type="text" name="telephone" value="{{isset($customer->telephone) ? $customer->telephone : ''}}" class="input-highlight"  />
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <div class="form-label">
-                        <label for="email" class="label-highlight">Email</label>
-                    </div>
-                    <div class="form-input">
-                        <input type="email" name="email" value="{{isset($customer->email) ? $customer->email : ''}}" class="input-highlight"  />
-                    </div>
-                </div>
-            </div>
-
-            <div class="two-columns">
-                <div class="form-group">
-                    <div class="form-label">
-                        <label for="country_id" class="label-highlight">País</label>
-                    </div>
-                    <div class="form-input">
-                        <select name="country_id" class="input-highlight">
-                            <option></option>
-                            @foreach ($countries as $country)
-                                <option value="{{$country->id}}" {{$customer->country_id == $country->id ? "selected" : ""}}>{{$country->name}}</option>
-                            @endforeach
-                        </select>       
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <div class="form-label">
-                        <label for="city" class="label-highlight">Ciudad</label>
-                    </div>
-                    <div class="form-input">
-                        <input type="text" name="city" value="{{isset($customer->city) ? $customer->city : ''}}" class="input-highlight" />
-                    </div>
-                </div>
-            </div>
-
-            <div class="two-columns">
-                <div class="form-group">
-                    <div class="form-label">
-                        <label for="postcode" class="label-highlight">Código Postal</label>
-                    </div>
-                    <div class="form-input">
-                        <input type="text" name="postcode" value="{{isset($customer->postcode) ? $customer->postcode : ''}}" class="input-highlight" />
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <div class="form-label">
-                        <label for="address" class="label-highlight">Dirección</label>
-                    </div>
-                    <div class="form-input">
-                        <input type="text" name="address" value="{{isset($customer->address) ? $customer->address : ''}}" class="input-highlight" />
-                    </div>
-                </div>
-            </div>
-            
         </form>
     </div>
     

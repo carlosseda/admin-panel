@@ -1,14 +1,12 @@
 .topbar{
 
 	background-image: linear-gradient(to right, #253786 0%, #02A8B0 50%, #253786 100%) !important;
-	display: flex;
 	height: 100vh;
-	justify-content: space-between;
 	position: fixed;
 	top: -90vh;
 	transition: top 0.5s;
 	width: 100%;
-	z-index: 1002;
+	z-index: 1005;
 
 	&.active{
 
@@ -24,33 +22,11 @@
 		}
 	}
 
-	.topbar-left{
-
-		display: flex;
-		margin-left: 3%;
-		margin-top: auto;
-		width: 30%;
-
-		.topbar-title{
-
-			h4{
-				color: hsl(0, 0%, 100%);
-				font-size: 2em;
-				margin-bottom: 2.5vh;
-
-				@include respond-to('lg'){
-					font-size: 2.5em;
-					margin-bottom: 2.5vh;
-				}
-			}
-		}
-	}
-
 	.topbar-center{
 
-		height: max-content;
-		margin: auto;
+		height: 88vh;
 		opacity: 0;
+		width: 100%;
 
 		.topbar-menu ul li{
 			color: hsl(0, 0%, 100%);
@@ -61,74 +37,102 @@
 		}
 	}
 
-	.topbar-right{
+	.topbar-visible{
 
 		display: flex;
-		justify-content: flex-end;
-		margin-right: 3%;
-		margin-top: auto;
-		width: 5%;
+		justify-content: space-between;
+		height: 10vh;
+		width: 100%;
 
-		.topbar-menu-button{
+		.topbar-left{
 
-			margin-bottom: 1vh;
-			width: 100%;
-
-			@include respond-to('lg'){
-				margin-bottom: 1.5vh;
-			}
+			display: flex;
+			margin-left: 3%;
+			width: max-content;
 	
-			#topbar-collapse-button {
-				border: 0;
-				background: transparent;
-				cursor: pointer;
-				margin-top: 0;
-				width: 100%;
-			}
-
-			#topbar-collapse-button.active{
-				margin-bottom: 45vh;
-			}
-		
-			#topbar-collapse-button:focus {
-				outline:0;
-			}
-		
-			#topbar-collapse-button span {
-				background: $white;
-				display: block;
-				height: 5px;
-				margin: 0 auto;
-				transition: all 0.6s cubic-bezier(0.810, -0.330, 0.345, 1.375);
-				width: 100%;
-
-				@include respond-to('lg'){
-					height: 0.5em;
-					width: 80%;
+			.topbar-title{
+	
+				h4{
+					color: hsl(0, 0%, 100%);
+					font-size: 2em;
+					margin: 0.2em 0;
+					
+					@include respond-to('lg'){
+						font-size: 3.5em;
+					}
 				}
 			}
-		
-			#topbar-collapse-button.active span:first-of-type {
-
-				transform: rotate(45deg) translate(1.1em, 1.1em);
-
-				@include respond-to('lg'){
-					transform: rotate(45deg) translate(1.4em, 1.4em);
-				}
-			}
-		
-			#topbar-collapse-button.active span:nth-of-type(2) {
-				opacity: 0;
-			}
-		
-			#topbar-collapse-button.active span:last-of-type {
-				transform: rotate(-45deg) translate(1px, -1px);
-			}
+		}
 	
-			#topbar-collapse-button span {
-				opacity: 1;
-				margin: 0.5em auto;
-				transform: none;
+		.topbar-right{
+	
+			display: flex;
+			justify-content: flex-end;
+			margin-right: 3%;
+			width: 5%;
+	
+			.topbar-menu-button{
+	
+				position: fixed;
+				width: 5%;
+				top: 0.5vh;
+	
+				#topbar-collapse-button {
+					border: 0;
+					background: transparent;
+					cursor: pointer;
+					margin-top: 0;
+					width: 100%;
+
+					@include respond-to('lg'){
+						margin-top: 2vh;
+					}
+				}
+	
+				#topbar-collapse-button.active{
+					margin-bottom: 45vh;
+				}
+			
+				#topbar-collapse-button:focus {
+					outline:0;
+				}
+			
+				#topbar-collapse-button span {
+					background: $white;
+					display: block;
+					height: 5px;
+					margin: 0 auto;
+					transition: all 0.6s cubic-bezier(0.810, -0.330, 0.345, 1.375);
+					width: 100%;
+	
+					@include respond-to('lg'){
+						height: 0.5em;
+						width: 80%;
+					}
+				}
+			
+				#topbar-collapse-button.active span:first-of-type {
+	
+					transform: rotate(45deg) translate(1.1em, 1.1em);
+	
+					@include respond-to('lg'){
+						transform: rotate(45deg) translate(1.4em, 1.4em);
+					}
+				}
+			
+				#topbar-collapse-button.active span:nth-of-type(2) {
+					opacity: 0;
+				}
+			
+				#topbar-collapse-button.active span:last-of-type {
+					transform: rotate(-45deg) translate(1px, -1px);
+				}
+		
+				#topbar-collapse-button span {
+					opacity: 1;
+					margin: 0.5em auto;
+					transform: none;
+				}
 			}
 		}
 	}

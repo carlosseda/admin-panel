@@ -1,19 +1,81 @@
-<div class="filters-container">
+<div class="table-filter" id="table-filter">
+    <div class="table-filter-container">
+        <form class="filter-form" id="filter-form" action="{{route("faqs_filter")}}" autocomplete="off">             
 
-    <div class="filters-container-first-group">
-        <div class="search-container">
-            <div class="search-button-container">
-                <svg xmlns="http://www.w3.org/2000/svg" class="filter-button search-button" viewBox="0 0 24 24">
-                    <path class="search-button-icon" d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/>
-                    <path d="M0 0h24v24H0z" fill="none"/>
-                </svg>
-            </div>
+            {{ csrf_field() }}
+
+
+            @foreach ($filters as $key => $items)
             
-            <div class="search-input-container">
-                <input type="text" class="search" value="">
-            </div>
+                @if($key == 'parent')
+                    <div class="one-column">
+                        <div class="form-group">
+                            <div class="form-label">
+                                <label for="category_id" class="label-highlight">Filtrar por</label>
+                            </div>
+                            <div class="form-input">
+                                <select name="category_id" data-placeholder="Seleccione una categoría" class="input-highlight">
+                                    <option value="all"}}>Todas</option>
+                                    @foreach($items as $item)
+                                        <option value="{{$item->id}}"}}>{{ $item->name }}</option>
+                                    @endforeach
+                                </select>    
+                            </div>
+                        </div>
+                    </div>    
+                @endif
+
+                @if($key == 'category')
+                    <div class="one-column">
+                        <div class="form-group">
+                            <div class="form-label">
+                                <label for="category_id" class="label-highlight">Filtrar por categoría</label>
+                            </div>
+                            <div class="form-input">
+                                <select name="category_id" data-placeholder="Seleccione una categoría" class="input-highlight">
+                                    <option value="all"}}>Todas</option>
+                                    @foreach($items as $item)
+                                        <option value="{{$item->id}}"}}>{{ $item->name }}</option>
+                                    @endforeach
+                                </select>    
+                            </div>
+                        </div>
+                    </div>    
+                @endif
+
+                @if($key == 'search')
+                    <div class="one-column">
+                        <div class="form-group">
+                            <div class="form-label">
+                                <label for="search" class="label-highlight">Buscar palabra</label>
+                            </div>
+                            <div class="form-input">
+                                <input type="text" name="search" class="input-highlight" value="">
+                            </div>
+                        </div>
+                    </div>    
+                @endif
+
+            @endforeach
+                 
+        </form>
+    </div>
+    <div class="table-filter-buttons">
+        <div class="table-filter-button open-filter button-active" id="open-filter">
+            <svg viewBox="0 0 24 24">
+                <path d="M11 11L16.76 3.62A1 1 0 0 0 16.59 2.22A1 1 0 0 0 16 2H2A1 1 0 0 0 1.38 2.22A1 1 0 0 0 1.21 3.62L7 11V16.87A1 1 0 0 0 7.29 17.7L9.29 19.7A1 1 0 0 0 10.7 19.7A1 1 0 0 0 11 18.87V11M13 16L18 21L23 16Z" />
+            </svg>
+        </div>
+        <div class="table-filter-button apply-filter" id="apply-filter">
+            <svg viewBox="0 0 24 24">
+                <path d="M12 12V19.88C12.04 20.18 11.94 20.5 11.71 20.71C11.32 21.1 10.69 21.1 10.3 20.71L8.29 18.7C8.06 18.47 7.96 18.16 8 17.87V12H7.97L2.21 4.62C1.87 4.19 1.95 3.56 2.38 3.22C2.57 3.08 2.78 3 3 3H17C17.22 3 17.43 3.08 17.62 3.22C18.05 3.56 18.13 4.19 17.79 4.62L12.03 12H12M15 17H18V14H20V17H23V19H20V22H18V19H15V17Z" />
+            </svg>
         </div>
     </div>
+</div>
+
+{{-- <div class="filters-container">
+
     
     <div class="filters-container-second-group">
         <div class="filter-buttons">
@@ -49,7 +111,7 @@
                 <select 
                     id="subfilter" 
                     class="filter-select form-control primary-select-related">
-                        <option name="todas">Todas</option>
+                        <option value="todas">Todas</option>
                         @foreach($subfilter as $subfilter_input)
                             <option value="{{$subfilter_input->id}}" name='{{$subfilter_input->name}}'>{{$subfilter_input->name}}</option>
                         @endforeach
@@ -59,4 +121,4 @@
         
     </div>
 
-</div>
+</div> --}}

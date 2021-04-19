@@ -4,36 +4,7 @@ img {
     max-width: 100%;
 }
 
-.btn-main {
-    background-color: $button-color;
-    border-color: $button-color;
-    border-radius: 50%;
-    color: $button-color;
-    height: 3em;
-    margin: 0 2%;
-}
-
-.btn-main:hover{
-    background-color: $button-color-highlight;
-    border-color: $button-color-highlight;
-}
-
 .hidden{
     display: none;
 }
 
-.hidden-xs{
-    display: none;
-}
-
-.hidden-sm{
-    display: none;
-}
-
-.hidden-md{
-    display: none;
-}
-
-.hidden-lg{
-    display: none;
-}

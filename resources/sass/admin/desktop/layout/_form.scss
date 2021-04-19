@@ -1,6 +1,8 @@
 .form{
-	
-	width: 45%;
+
+	background-color: rgb(255, 255, 255);
+	height: max-content;
+	width: 65%;
 
 	.one-column{
 
@@ -84,8 +86,9 @@
 .form-input input, 
 .form-input textarea,
 .form-input select {
-	border: 0.1em solid hsl(0, 0%, 100%);
-	border-radius: 0.3em;
+    background-color: hsl(0, 0%, 100%);
+	border: none;
+	border-bottom: 1px solid hsl(0, 0%, 73%);
 	color: hsl(0, 0%, 0%);
 	font-family: $font-stack;
 	padding: 0.2em 0;
@@ -111,6 +114,7 @@
 
 .form-submit {
 	margin-top: 1em;
+	padding: 0 2em;
     width: max-content;
 }
 

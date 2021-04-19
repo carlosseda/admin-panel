@@ -1,61 +1,134 @@
 .topbar{
-	display: flex;
 
-	.topbar-title{
-		h4{
-			margin: 0.3em 0 0.5em;
-			font-size: 2em;
+	background-image: linear-gradient(to right, #253786 0%, #02A8B0 50%, #253786 100%) !important;
+	height: 100vh;
+	position: fixed;
+	top: -90vh;
+	transition: top 0.5s;
+	width: 100%;
+	z-index: 1005;
+
+	&.active{
+
+		top: 0;
+		 
+		.topbar-left{
+			opacity: 0;
+			width: 0;
+		}
+
+		.topbar-center{
+			opacity: 1;
 		}
 	}
 
-    #create-button{
-		display: inline-block;
-        border-radius: 50%;
-        cursor: pointer;
-        margin: 0.4em 2em;
-		transition-delay: .15s;
+	.topbar-center{
 
-        svg {
-			background: $button-color;		
-            border-radius: 50%;		
-            box-shadow: 0 4px 6px 0 rgba(0, 0, 0, 0.2), 0 2px 1px 0 rgba(0, 0, 0, 0.19);
-			height: 2.5em;
-            width: 2.5em;
-			transform: rotate(270deg);
+		height: 88vh;
+		opacity: 0;
+		width: 100%;
+
+		.topbar-menu ul li{
+			color: hsl(0, 0%, 100%);
+			cursor: pointer;
+			font-size: 2em;
+			font-weight: 600;
+			padding: 0.5em;
 		}
+	}
+
+	.topbar-visible{
+
+		display: flex;
+		justify-content: space-between;
+		height: 10vh;
+		width: 100%;
+
+		.topbar-left{
+
+			display: flex;
+			margin-left: 3%;
+			width: max-content;
+	
+			.topbar-title{
+	
+				h4{
+					color: hsl(0, 0%, 100%);
+					font-size: 1.5em;
+					margin: 0.4em 0;
+				}
+			}
+		}
+	
+	
+		.topbar-right{
+	
+			display: flex;
+			justify-content: flex-end;
+			margin-right: 5%;
+			width: 15%;
+	
+			.topbar-menu-button{
+	
+				position: fixed;
+				width: 15%;
+				top: 0.5vh;
+	
+				#topbar-collapse-button {
+					border: 0;
+					background: transparent;
+					cursor: pointer;
+					margin-top: 0;
+					width: 100%;
+				}
+	
+				#topbar-collapse-button.active{
+					margin-bottom: 45vh;
+				}
 			
-		circle {
-			stroke-width: 1;
-			stroke: $button-color;
-			fill: none;
-			stroke-dasharray: 95;
-			stroke-dashoffset: 190;
-			transition: all .6s ease;
-			stroke-linecap: round;
-		}
-
-		#plus {
-			transform-origin: 50% 50%;
-			transition: all .8s ease;
-
-			path {
-				stroke-width: 2;
-				stroke: $white;
-				fill: $button-icon-color;
-				stroke-linecap: round;
-				stroke-linejoin: round;
+				#topbar-collapse-button:focus {
+					outline:0;
+				}
+			
+				#topbar-collapse-button span {
+					background: $white;
+					display: block;
+					height: 5px;
+					margin: 0 auto;
+					transition: all 0.6s cubic-bezier(0.810, -0.330, 0.345, 1.375);
+					width: 100%;
+	
+					@include respond-to('lg'){
+						height: 0.5em;
+						width: 80%;
+					}
+				}
+			
+				#topbar-collapse-button.active span:first-of-type {
+	
+					transform: rotate(45deg) translate(1.1em, 1.1em);
+	
+					@include respond-to('lg'){
+						transform: rotate(45deg) translate(1.4em, 1.4em);
+					}
+				}
+			
+				#topbar-collapse-button.active span:nth-of-type(2) {
+					opacity: 0;
+				}
+			
+				#topbar-collapse-button.active span:last-of-type {
+					transform: rotate(-45deg) translate(1px, -1px);
+				}
+		
+				#topbar-collapse-button span {
+					opacity: 1;
+					margin: 0.5em auto;
+					transform: none;
+				}
 			}
 		}
+	}
 
-		&.active {
-			circle{
-				stroke-dasharray: 95;
-				stroke-dashoffset: 285;
-			}
-			#plus {
-				stroke: $white;
-				transform: rotate(45deg);
-			}
-		}
-    }
+	
 }

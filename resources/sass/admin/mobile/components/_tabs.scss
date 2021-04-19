@@ -1,210 +1,160 @@
-.nav-tabs-container{
+.tabs{
+    background-color: hsl(0, 0%, 84%);
+}
 
-    background-color: $modul-header-color;
+.tabs-container{
+    background-color: hsl(0, 0%, 84%);
     display: flex;
     justify-content: space-between;
+}
 
-    &.locale-container{
-        margin-top: 1em;
-    }
+.tabs-container-menu{
 
-    .nav-tabs-container-menu{
+    width: 100%;
 
-        .nav {
-            border: none;
-            display: -ms-flexbox;
-            display: flex;
-            -ms-flex-wrap: wrap;
-            flex-wrap: wrap;
-            height: 100%;
-            padding-left: 0;
-            margin: 0;
-            list-style: none;
-
-            .nav-item{
-                margin: 0;
-
-                .nav-link{
-                    background-color: $modul-header-color;
-                    border: none;
-                    display: block;
-                    height: 100%;
-
-                    span{
-                        color: $interaction-color;
-                        display: block;
-                        font-weight: 600;
-                        padding: .5em 1em;
-                    }
-                }
-
-                .nav-link.active{
-                    background-color: $interaction-color;
-
-                    span {
-                        color: $interaction-text-color;
-
-                    }
-                }
-
-                .nav-link:hover{
-                    border-color: transparent;
-                }
-            }
-        }
-    }
-
-    .nav-tabs-container-buttons{
-
+    ul{
+        background-color: hsl(0, 0%, 84%);
         display: flex;
+        margin: 0;
+        padding: 0;
+    }
 
-        .crud-buttons-container{
+    li{
+        color: hsl(183, 98%, 35%);
+        cursor: pointer;
+        padding: 1em 0.5em;
+        text-align: center;
+    }
 
-            margin-top: 0.2em;
-            padding: 0 0.5em;
-    
-            button{
-                background-color: transparent;
-                border: none;
-            }
-    
-            .crud-buttons{
+    li.tab-active{
+        background-color: hsl(183, 98%, 35%) ;
+        color: $white;
+    }
+}
 
-                outline: none;
-        
-                svg{
-                    width: 2.4em; 
-                    height: 2.4em;
-                    
-                    .store-button-icon, .reset-button-icon{
-                        fill: $interaction-color;
-                    }
-                }
-            }
+.tabs-container-buttons{
+
+    display: flex;
+
+    .crud-buttons-container{
+
+        margin-top: 0.2em;
+        padding: 0 0.5em;
+
+        button{
+            background-color: transparent;
+            border: none;
         }
 
-        .featured-container{
+        .crud-buttons{
 
-            margin-top: 0.2em;
-            padding: 0 0.5em;
-
-            input{
-                display: none;
-            }
-
+            outline: none;
+    
             svg{
-                cursor: pointer;
-                height: 2.4em;
                 width: 2.4em; 
+                height: 2.4em;
                 
-                path{
-                    fill: $grey-dark;
+                .store-button-icon{
+                    fill: hsl(0, 0%, 50%);
                 }
 
-                &.active path{
-                    fill: $interaction-color;
+                .store-button-icon:hover{
+                    fill: hsl(19, 100%, 50%);
                 }
             }
         }
+    }
 
-        .switch-container{
+    .switch-container{
 
-            margin: 0.5em;
-            position: relative;
-                
-            .onoffswitch {
-                width: 4.6em;
-                -webkit-user-select: none;
-                -moz-user-select: none;
-                -ms-user-select: none;
-            }
-
-            .onoffswitch-checkbox {
-                display: none;
-            }
-
-            .onoffswitch-label {
-                display: block;
-                overflow: hidden;
-                cursor: pointer;
-                border-radius: 0.4em;
-            }
-
-            .onoffswitch-inner {
-                display: block;
-                width: 200%;
-                margin-left: -100%;
-                transition: margin 0.3s ease-in 0s;
-            }
-
-            .onoffswitch-inner:before,
-            .onoffswitch-inner:after {
-                box-sizing: border-box;
-                color: $white;
-                display: block;
-                float: left;
-                font-family: $font-stack;
-                font-size: 14px;
-                font-weight: 600;
-                height: 2em;
-                line-height: 2em;
-                padding: 0;
-                width: 50%;
-            }
-
-            .onoffswitch-inner:before {
-                background-color: $white;
-                color: $interaction-color;
-                content: "ON";
-                padding-left: 10px;
-
-            }
-
-            .onoffswitch-inner:after {
-                background-color: $white;
-                color: $grey-dark;
-                content: "OFF";
-                padding-right: 10px;
-                text-align: right;
-            }
-
-            .onoffswitch-switch {
-                background: $grey-dark;
-                border: 2px solid white;
-                border-radius: 0.4em;
-                bottom: 0;
-                display: block;
-                height: 1.6em;
-                position: absolute;
-                top: 1px;
-                transition: all 0.3s ease-in 0s;
-                right: 40px;
-                width: 1.6em;
-            }
+        margin: 0.5em;
+        position: relative;
             
-            .onoffswitch-checkbox:checked + .onoffswitch-label .onoffswitch-inner {
-                margin-left: 0;
-            }
-            .onoffswitch-checkbox:checked + .onoffswitch-label .onoffswitch-switch {
-                right: 0px;
-                background-color: $interaction-color;
-            }
+        .onoffswitch {
+            width: 4.6em;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+        }
+
+        .onoffswitch-checkbox {
+            display: none;
+        }
+
+        .onoffswitch-label {
+            display: block;
+            overflow: hidden;
+            cursor: pointer;
+            border-radius: 0.4em;
+        }
+
+        .onoffswitch-inner {
+            display: block;
+            width: 200%;
+            margin-left: -100%;
+            transition: margin 0.3s ease-in 0s;
+        }
+
+        .onoffswitch-inner:before,
+        .onoffswitch-inner:after {
+            box-sizing: border-box;
+            color: $white;
+            display: block;
+            float: left;
+            font-family: $font-stack;
+            font-size: 14px;
+            font-weight: 600;
+            height: 2em;
+            line-height: 2em;
+            padding: 0;
+            width: 50%;
+        }
+
+        .onoffswitch-inner:before {
+            background-color: $white;
+            color: $interaction-color;
+            content: "ON";
+            padding-left: 10px;
+
+        }
+
+        .onoffswitch-inner:after {
+            background-color: $white;
+            color: $grey-dark;
+            content: "OFF";
+            padding-right: 10px;
+            text-align: right;
+        }
+
+        .onoffswitch-switch {
+            background: $grey-dark;
+            border: 2px solid white;
+            border-radius: 0.4em;
+            bottom: 0;
+            display: block;
+            height: 1.6em;
+            position: absolute;
+            top: 1px;
+            transition: all 0.3s ease-in 0s;
+            right: 40px;
+            width: 1.6em;
+        }
+        
+        .onoffswitch-checkbox:checked + .onoffswitch-label .onoffswitch-inner {
+            margin-left: 0;
+        }
+        .onoffswitch-checkbox:checked + .onoffswitch-label .onoffswitch-switch {
+            right: 0px;
+            background-color: $interaction-color;
         }
     }
 }
 
-.tab-content{
-    background-color: $modul-color;
+.tab-panel{
+    display: none;
+}
 
-    & > .tab-pane {
-        display: none;
-    }
-
-    & > .active {
-        display: block;
-    }
-
-    &.content-locale{
-        padding: 2em 0;
-    }
+.tab-panel.tab-active{
+    display: block;
+    padding: 2em;
 }

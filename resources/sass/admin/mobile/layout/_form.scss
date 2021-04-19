@@ -1,16 +1,15 @@
-.form {
+.form{
 
-    padding-bottom: 2em;
-    flex: 0 0 100%;
-    margin-left: auto;
+	background-color: rgb(255, 255, 255);
+	display: none;
+	min-height: 80vh;
+	width: 100%;
 
-    .form-content{
-        padding: 2em;
-    }
+	&.active{
+		display: block;
+	}
 
-    .one-column{
-
-        margin-bottom: 2em;
+	.one-column{
 
         .form-group{
             width: 100%;
@@ -20,7 +19,6 @@
     .two-columns{
         display: flex;
         justify-content: space-between;
-        margin-bottom: 2em;
 
         .form-group{
             width: 47%;
@@ -30,7 +28,6 @@
     .three-columns{
         display: flex;
         justify-content: space-between;
-        margin-bottom: 2em;
 
         .form-group{
             width: 32%;
@@ -40,784 +37,113 @@
     .four-columns{
         display: flex;
         justify-content: space-between;
-        margin-bottom: 2em;
 
         .form-group{
             width: 23%;
         }
     }
+}
+
+.form-error{
+	opacity: 0;
+	transition: opacity 0.5s;
+	width: 100%;
+}
+
+.form-error.active{
+	opacity: 1;
+}
+
+.form-error p{
+	color: hsl(0, 100%, 50%);
+}
+
+.form-container{
+	width: 100%;
+}
+
+.form-group{
+	margin-bottom: 1em;
+	width: 100%;
+}
+
+.form-label{
+	margin-bottom: 0.5em;
+	width: 100%;
+}
+
+.form-label label{
+	color: hsl(0, 0%, 50%);
+	font-family: $font-stack;
+	font-weight: 600;
+	font-size: 1em;
+	transition: color 0.5s;
+}
+
+.form-label label.active{
+	color: hsl(19, 100%, 50%);
+}
+
+.form-input{
+	width: 100%;
+}
+
+.form-input input, 
+.form-input textarea,
+.form-input select {
+    background-color: hsl(0, 0%, 100%);
+	border: none;
+	border-bottom: 1px solid hsl(0, 0%, 73%);
+	color: hsl(0, 0%, 0%);
+	font-family: $font-stack;
+	padding: 0.2em 0;
+	width: 100%;
+}
+
+.form-input input:focus, .form-input textarea:focus{
+	outline: none;
+}
+
+.form-input .ck-editor__editable_inline {
+    min-height: 15vh;
+}
+
+.form-input textarea{
+	height: 20vh;
+}
+
+.form-footer{
+	display: flex;
+	justify-content: flex-end;
+}
+
+.form-submit {
+	margin-top: 1em;
+	padding: 0 2em;
+    width: max-content;
+}
+
+.form-submit button{
+
+	background-image: linear-gradient(to right, #253786 0%, #02A8B0 50%, #253786 100%);
+	border-radius: 1em;
+    border: none;
+    color: white;
+    font-size: 1.2em;
+	font-weight: 400;
+	letter-spacing: 0;
+	line-height: 0px;
+	min-width: 20%;
+	padding: 1em 2em;
+	transition: 0.5s;
+	text-decoration: none;
+    background-size: 200% auto;
+}
+
+.form-submit button:hover{
+    background-size: 100% auto;
+}
 
-    .five-columns{
-        display: flex;
-        justify-content: space-between;
-        margin-bottom: 2em;
-
-        .form-group{
-            width: 18%;
-        }
-    }
-   
-    .form-group {
-        background-color: $modul-color;
-        margin-bottom: 0.5em;
-
-        &.grouped{
-            .input-container .grouped-item{
-                margin-bottom: 1em;
-            }
-        }
-
-        .select-display-option{
-
-            display: none;
-        
-            &.visible{
-                display: inherit;
-            }
-        }
-
-        .select-related{
-
-            display: none;
-        
-            &.visible{
-                display: grid;
-            }
-        }
-
-        .label-container{
-            margin-bottom: 0.5em;
-            width: 100%;
-
-            label {
-                font-weight: 600;
-                font-size: 0.9em;
-                color: $label;
-            }
-            
-            label.alert-error{
-                color: $errors;
-            }
-        }
-
-        .input-container{
-            margin-bottom: 0.5em;
-            width: 100%;
-
-            .alert-error{
-                border-bottom-color: $errors;
-            }
-        }
-
-        input[type=checkbox]{
-            cursor: pointer;
-            height: 1.2em;
-            margin: 2em 0.5em 0 0.5em;
-            vertical-align: bottom;
-            width: 1.2em;
-        }
-
-        select{    
-            padding: 1px 0px;
-            -webkit-appearance: none;
-            -moz-appearance : none;
-        }
-
-        input, textarea {
-            border: 1px solid rgb(255, 255, 255);
-            border-bottom: 1px solid $grey;
-            border-radius: 0.25em;
-            box-sizing: border-box;
-            color: rgb(73, 80, 87);
-            display: block;
-            font-size: 1em;
-            font-weight: 600;
-            line-height: 1.5;
-            width: 100%;
-            outline: none;
-            transition: border-color 0.15s ease-in-out 0s, box-shadow 0.15s ease-in-out 0s;
-        }
-
-        .modal-button{
-            background-color: $interaction-color;
-            border: 0;
-            border-radius: 0.5em;
-            cursor: pointer;
-            margin-top: 1em;
-            padding: 0.5em 1em;
-            width: 100%;
-
-            .button-text{
-                color: $interaction-text-color;
-                margin: 0 0.5em;
-                text-align: center;
-
-                svg {
-                    height: 2.5em;
-                    width: 2.5em;
-
-                    #plus path {
-                        stroke-width: 2;
-                        stroke: $white;
-                        fill: $button-icon-color;
-                    }
-                }      
-            }
-        }
-
-        .clone-input{
-            display: none;
-        }
-
-        .clone-input-button{
-
-            background-color: $interaction-color;
-            cursor: pointer;
-            display: flex;
-            height: 2em;
-            margin-bottom: 1em;
-            padding: 0.5em 2.5em;
-            position: relative;
-            width: auto;
-           
-
-            .clone-input-button-icon{
-
-                width: 20%;
-
-                svg{
-
-                    height: 100%;
-                    width: 100%;
-    
-                    path{
-                        fill: $white;
-                    }
-                }
-            }
-
-            .clone-input-button-title{
-
-                margin: 0.3em 1em;
-                width: 80%;
-
-                span{
-                    color: $white;
-                    font-weight: 600;
-                }
-            }
-        }
-
-        .delete-clone-input-button{
-
-            margin-left: auto;
-            width: max-content;
-
-            svg{
-                cursor: pointer;
-                height: 2em;
-                width: 2em;
-            }
-        }
-
-        .upload-document-button{
-
-            background-color: $interaction-color;
-            display: flex;
-            height: 2em;
-            margin-bottom: 1em;
-            padding: 0.5em 2.5em;
-            position: relative;
-            width: 40%;
-            
-            input[type=file] {
-                cursor: pointer;
-                position: absolute;
-                left: 0;
-                top: 0;
-                opacity: 0;
-                width: 100%;
-                height: 100%;
-            }
-
-            .upload-document-button-icon{
-
-                width: 20%;
-
-                svg{
-
-                    height: 100%;
-                    width: 100%;
-    
-                    path{
-                        fill: $white;
-                    }
-                }
-            }
-
-            .upload-document-button-title{
-
-                margin: 0.3em 1em;
-                width: 80%;
-
-                span{
-                    color: $white;
-                    font-weight: 600;
-                }
-            }
-        }
-
-        .preview-upload-document{
-            display: none;
-        }
-        
-        .documents-container{
-
-            display: flex;
-            flex-wrap: wrap;
-            margin: 2em 0;
-            width: 100%;
-
-            .preview-upload-documents{
-                flex: 0 0 20%;
-                height: 8em;
-                margin: 0.5em 0;
-                overflow: hidden;
-                perspective: 1000;
-
-                &:hover .flipper,
-                &.hover .flipper {
-                    transform: rotateY(180deg);
-                }
-
-                .flipper {
-                    height: 50%;
-                    transition: 0.6s;
-                    transform-style: preserve-3d;
-                    position: relative;
-
-                    .front, .back {
-                        backface-visibility: hidden;
-                        height: 8em;
-                        position: absolute;
-                        top: 0;
-                        left: 0;
-                        width: 100%;
-                    }
-
-                    .front {
-                        text-align: center;
-
-                        svg{
-                            height: 50%;
-                            width: 50%;
-
-                            path{
-                                fill: $grey-dark;
-                            }
-                        }
-                    }
-
-                    .back {
-                        transform: rotateY(180deg);
-
-                        .preview-upload-documents-buttons{
-                            display: flex;
-                            justify-content: space-around;
-                            margin-top: 1em;
-                        }
-
-                        svg{
-                            cursor: pointer;
-                            height: 2em;
-                            width: 2em;
-
-                            path{
-                                fill: $grey-dark;
-                            }
-
-                            &:hover{
-                                path{
-                                    fill: $interaction-color;
-                                } 
-                            }
-                        }
-                    }
-                }
-
-                .preview-upload-documents-title{
-
-                    margin-top: 0.5em;
-                    text-align: center;
-
-                    p{
-                        font-size: 1em;
-                    }
-                }
-            }
-
-            input[type=file] {
-                cursor: pointer;
-                position: absolute;
-                opacity: 0;
-                width: 0;
-                height: 0;
-            }
-        }
-
-        .upload-image-button{
-
-            background-color: $interaction-color;
-            display: flex;
-            height: 2em;
-            margin-bottom: 1em;
-            padding: 0.5em 2.5em;
-            position: relative;
-            width: auto;
-            
-            input[type=file] {
-                cursor: pointer;
-                position: absolute;
-                left: 0;
-                top: 0;
-                opacity: 0;
-                width: 100%;
-                height: 100%;
-            }
-
-            .upload-image-button-icon{
-
-                width: 20%;
-
-                svg{
-
-                    height: 100%;
-                    width: 100%;
-    
-                    path{
-                        fill: $white;
-                    }
-                }
-            }
-
-            .upload-image-button-title{
-
-                margin: 0.3em 1em;
-                width: 80%;
-
-                span{
-                    color: $white;
-                    font-weight: 600;
-                }
-            }
-        }
-
-        .upload-video-button{
-
-            background-color: $interaction-color;
-            display: flex;
-            height: 2em;
-            margin-bottom: 1em;
-            padding: 0.5em 2.5em;
-            position: relative;
-            width: auto;
-            
-            input[type=file] {
-                cursor: pointer;
-                position: absolute;
-                left: 0;
-                top: 0;
-                opacity: 0;
-                width: 100%;
-                height: 100%;
-            }
-
-            .upload-video-button-icon{
-
-                width: 5%;
-
-                svg{
-
-                    height: 100%;
-                    width: 100%;
-    
-                    path{
-                        fill: $white;
-                    }
-                }
-            }
-
-            .upload-video-button-title{
-
-                margin: 0.3em 1em;
-                width: 80%;
-
-                span{
-                    color: $white;
-                    font-weight: 600;
-                }
-            }
-        }
-
-        .preview-upload-video{
-            display: none;
-        }
-
-        .preview-upload-videos{
-
-            width: 100%;
-
-            .preview-upload-videos-buttons{
-
-                background-color: $grey;
-                padding: 0.2em 0;
-                width: 100%;
-
-                .preview-upload-videos-buttons-delete{
-
-                    margin-left: auto;
-                    width: max-content;
-
-                    svg{
-                        cursor: pointer;
-                        height: 2em;
-                        width: 2em;
-    
-                        path{
-                            fill: $grey-dark;
-                        }
-    
-                        &:hover{
-                            path{
-                                fill: $interaction-color;
-                            } 
-                        }
-                    }
-                }
-            }
-
-            video{
-                width: 100%;
-            }
-
-            input[type=file] {
-                cursor: pointer;
-                position: absolute;
-                opacity: 0;
-                width: 0;
-                height: 0;
-            }
-        }
-
-        .preview-upload-collection-image{
-            display: none;
-        }
-
-        .collection-images-container{
-
-            display: flex;
-            flex-wrap: wrap;
-            width: 100%;
-
-            .preview-upload-collection-images{
-                flex: 0 0 33.3333%;
-                height: 6em;
-                overflow: hidden;
-                perspective: 1000;
-
-                &:hover .flipper,
-                &.hover .flipper {
-                    transform: rotateY(180deg);
-                }
-
-                .flipper {
-                    transition: 0.6s;
-                    transform-style: preserve-3d;
-                    position: relative;
-
-                    .front, .back {
-                        backface-visibility: hidden;
-                        height: 6em;
-                        position: absolute;
-                        top: 0;
-                        left: 0;
-                        width: 100%;
-                    }
-
-                    .front {
-                        z-index: 2;
-
-                        img{
-                            height: 100%;
-                            width: 100%;
-                        }
-                    }
-
-                    .back {
-                        background: $grey;
-                        transform: rotateY(180deg);
-
-                        .preview-upload-images-buttons{
-                            display: flex;
-                            justify-content: space-around;
-                            margin-top: 2em;
-                        }
-
-                        svg{
-                            cursor: pointer;
-                            height: 2em;
-                            width: 2em;
-
-                            path{
-                                fill: $grey-dark;
-                            }
-
-                            &:hover{
-                                path{
-                                    fill: $interaction-color;
-                                } 
-                            }
-                        }
-                    }
-                }
-            }
-
-            input[type=file] {
-                cursor: pointer;
-                position: absolute;
-                opacity: 0;
-                width: 0;
-                height: 0;
-            }
-        }
-
-        .preview-upload-single-image{
-            display: none;
-        }
-
-        .single-images-container{
-
-            width: 100%;
-
-            .preview-upload-single-images{
-               
-                height: 18em;
-                overflow: hidden;
-                perspective: 1000;
-                width: 100%;
-
-                &:hover .flipper,
-                &.hover .flipper {
-                    transform: rotateY(180deg);
-                }
-
-                .flipper {
-                    transition: 0.6s;
-                    transform-style: preserve-3d;
-                    position: relative;
-
-                    .front, .back {
-                        backface-visibility: hidden;
-                        height: 18em;
-                        position: absolute;
-                        top: 0;
-                        left: 0;
-                        width: 100%;
-                    }
-
-                    .front {
-                        z-index: 2;
-
-                        img{
-                            height: 100%;
-                            width: 100%;
-                        }
-                    }
-
-                    .back {
-                        background: $grey;
-                        transform: rotateY(180deg);
-
-                        .preview-upload-images-buttons{
-                            display: flex;
-                            justify-content: space-around;
-                            margin-top: 6em;
-                        }
-
-                        svg{
-                            cursor: pointer;
-                            height: 3em;
-                            width: 3em;
-
-                            path{
-                                fill: $grey-dark;
-                            }
-
-                            &:hover{
-                                path{
-                                    fill: $interaction-color;
-                                } 
-                            }
-                        }
-                    }
-                }
-            }
-
-            input[type=file] {
-                cursor: pointer;
-                position: absolute;
-                opacity: 0;
-                width: 0;
-                height: 0;
-            }
-        }
-
-        .preview-upload-gltf{
-            display: none;
-        }
-
-        .gltf-container{
-
-            width: 100%;
-
-            .preview-upload-gltfs{
-               
-                height: 18em;
-                overflow: hidden;
-                perspective: 1000;
-                width: 100%;
-
-                &:hover .flipper,
-                &.hover .flipper {
-                    transform: rotateY(180deg);
-                }
-
-                .flipper {
-                    transition: 0.6s;
-                    transform-style: preserve-3d;
-                    position: relative;
-
-                    .front, .back {
-                        backface-visibility: hidden;
-                        height: 18em;
-                        position: absolute;
-                        top: 0;
-                        left: 0;
-                        width: 100%;
-                    }
-
-                    .front {
-                        z-index: 2;
-
-                        model-viewer{
-                            height: 100%;
-                            width: 100%;
-                        }
-                    }
-
-                    .back {
-                        background: $grey;
-                        transform: rotateY(180deg);
-
-                        .preview-upload-gltf-buttons{
-                            display: flex;
-                            justify-content: space-around;
-                            margin-top: 6em;
-                        }
-
-                        svg{
-                            cursor: pointer;
-                            height: 3em;
-                            width: 3em;
-
-                            path{
-                                fill: $grey-dark;
-                            }
-
-                            &:hover{
-                                path{
-                                    fill: $interaction-color;
-                                } 
-                            }
-                        }
-                    }
-                }
-            }
-
-            input[type=file] {
-                cursor: pointer;
-                position: absolute;
-                opacity: 0;
-                width: 0;
-                height: 0;
-            }
-        }
-    }
-
-    .multiple-checkbox-container {
-
-        .multiple-checkbox-element {
-
-            margin-top: 1em;
-            opacity: 0;
-            position: absolute;
-            transform: translateX(-300%);
-            transition:opacity 1s linear;
-    
-            &.active{
-    
-                opacity: 1;
-                position: relative;
-                transform: translateX(0%);
-                overflow: hidden;
-                border-radius: 2px;
-                transition: 300ms;
-                -webkit-transition: 300ms;
-                -ms-transition: 300ms;
-                
-                input, label  {
-                    width: 100%;
-                    float: left;
-                    position: relative;
-                }
-                
-                input {
-                    display: none;
-                }
-        
-                label {
-                    background-color:$body-color;
-                    cursor: pointer;
-                    font-weight: 400;
-                    color: $body-color-dark;
-                    text-align: center;
-                    z-index: 3;
-                    transition: 300ms;
-                    -webkit-transition: 300ms;
-                    -ms-transition: 300ms;
-                    height: 34px;
-                    line-height: 34px;
-                }
-
-                svg{
-                    fill: $body-color-dark;
-                    margin: 0 1em;
-                }
-            }
-
-            &.active:hover{
-                svg{
-                    fill: $interaction-color;
-                }
-            }
-        }
-    }
-
-    .mdl-data-table{
-        width: 100%;
-    }
-
-    .mdl-data-table td, .mdl-data-table th{
-        text-align: left;
-    }
+.form-submit button:focus {
+	outline: 0;
 }

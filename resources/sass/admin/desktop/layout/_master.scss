@@ -1,6 +1,5 @@
-
 body{
-    background-color: $body-color;
+    background-color: hsl(0, 0%, 95%);
 }
 
 .overlay{
@@ -22,27 +21,22 @@ body{
 
 .wrapper {
     width: 100%;
-    align-items: stretch;
-    perspective: 1500px;
 }
 
 .main-content{
 
-    top: 15vh;
+    display: flex;
+    flex-wrap: nowrap;
     height: 80vh;
-    width: 100%;
+    justify-content: space-between;
+    margin: 0 3%;
+    overflow-x: auto; 
     position: relative;
+    top: 20vh;
+    -webkit-overflow-scrolling: touch;
+    -ms-overflow-style: -ms-autohiding-scrollbar;
 
-    .two-columns{
-        display: flex;
-        justify-content: space-evenly;
-        flex-wrap: nowrap;
-        overflow-x: auto; 
-        -webkit-overflow-scrolling: touch;
-        -ms-overflow-style: -ms-autohiding-scrollbar;
-    }
-
-    .two-columns::-webkit-scrollbar {
+    &::-webkit-scrollbar {
         display: none; 
     }
 }

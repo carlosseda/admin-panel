@@ -1,0 +1,66 @@
+.table-filter{
+
+    height: max-content;
+    position: relative;
+    top: 10vh;
+    width: 100%;
+    z-index: 1003;
+
+    &.filter-active{
+
+        .table-filter-container{
+            max-height: 70vh;
+        }
+    }
+
+    .table-filter-container{
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.5s;
+        width: 100%;
+
+        form{
+            padding: 1em;
+        }
+    }
+
+    .table-filter-buttons{
+        width: 100%;
+    }
+
+    .table-filter-buttons .table-filter-button{
+
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.5s;
+        width: 100%;
+        text-align: center;
+
+        &.button-active{
+            max-height: 10vh;
+        }
+
+        &.open-filter{
+            background-color: hsl(0, 0%, 69%);
+        }
+
+        &.apply-filter{
+            background-color: hsl(160, 51%, 33%);
+        }
+
+        &.remove-filter{
+            background-color: hsl(0, 65%, 55%);
+        }
+
+        svg{
+            height: 1.5em;
+            padding: 0.5em;
+            width: 1.5em;
+
+            path{
+                fill: hsl(0, 0%, 100%);
+            }
+        }
+    }
+}
+    

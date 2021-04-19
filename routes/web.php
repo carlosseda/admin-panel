@@ -57,6 +57,7 @@ Route::group(['prefix' => 'admin'], function () {
         ]
     ]);
 
+    Route::post('/faqs/filter', 'App\Http\Controllers\Admin\FaqController@filter')->name('faqs_filter');
     Route::resource('faqs', 'App\Http\Controllers\Admin\FaqController', [
         'names' => [
             'index' => 'faqs',

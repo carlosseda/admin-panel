@@ -1,9 +1,4 @@
 <nav class="topbar" id="topbar">
-    <div class="topbar-left">
-        <div class="topbar-title">
-            <h4 id="section-title">@lang('admin/'.$route.'.parent_section')</h4>
-        </div>
-    </div>
 
     <div class="topbar-center">
         <div class="topbar-menu">
@@ -16,13 +11,21 @@
         </div>
     </div>
 
-    <div class="topbar-right">
-        <div class="topbar-menu-button">
-            <button type="button" id="topbar-collapse-button">
-                <span></span>
-                <span></span>
-                <span></span>
-            </button>
+    <div class="topbar-visible">
+        <div class="topbar-left">
+            <div class="topbar-title">
+                <h4 id="section-title">@lang('admin/'.$route.'.parent_section')</h4>
+            </div>
+        </div>
+    
+        <div class="topbar-right">
+            <div class="topbar-menu-button">
+                <button type="button" id="topbar-collapse-button">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
         </div>
     </div>
 </nav>

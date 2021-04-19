@@ -47,12 +47,22 @@
             <input autocomplete="false" name="hidden" type="text" style="display:none;">
             <input type="hidden" name="id" value="{{isset($faq_category->id) ? $faq_category->id : ''}}">
             
-            <div class="form-group">
-                <div class="form-label">
-                    <label for="name" class="label-highlight">Nombre</label>
-                </div>
-                <div class="form-input">
-                    <input type="text" name="name" value="{{isset($faq_category->name) ? $faq_category->name : ''}}" class="input-highlight"  />
+            <div class="tabs-container-menu">
+                <ul>
+                    <li class="tab-item tab-active" data-tab="contenido">
+                        Contenido
+                    </li> 
+                </ul>
+            </div>
+
+            <div class="tab-panel tab-active" data-tab="contenido">
+                <div class="form-group">
+                    <div class="form-label">
+                        <label for="name" class="label-highlight">Nombre</label>
+                    </div>
+                    <div class="form-input">
+                        <input type="text" name="name" value="{{isset($faq_category->name) ? $faq_category->name : ''}}" class="input-highlight"  />
+                    </div>
                 </div>
             </div>
         </form>
