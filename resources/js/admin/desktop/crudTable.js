@@ -2,7 +2,6 @@ import {renderCkeditor} from './ckeditor';
 
 const table = document.getElementById("table");
 const form = document.getElementById("form");
-const closeErrorsButton = document.getElementById("close-errors-button");
 
 export let renderForm = () => {
 
@@ -10,6 +9,7 @@ export let renderForm = () => {
     let labels = document.querySelectorAll('.label-highlight');
     let inputs = document.querySelectorAll('.input-highlight');
     let storeButton = document.getElementById("store-button");
+    let closeErrorsButton = document.getElementById("close-errors-button");
 
     inputs.forEach(input => {
 
@@ -87,6 +87,7 @@ export let renderTable = () => {
     let modalDelete = document.getElementById('modal-delete');
     let deleteConfirm = document.getElementById('delete-confirm');
     let deleteCancel = document.getElementById('delete-cancel');
+    let paginationButtons = document.querySelectorAll('.table-pagination-button');
 
     editButtons.forEach(editButton => {
 
@@ -144,6 +145,30 @@ export let renderTable = () => {
         };
 
         sendDeleteRequest();
+    });
+
+    paginationButtons.forEach(paginationButton => {
+
+        paginationButton.addEventListener("click", () => {
+
+            let url = paginationButton.dataset.page;
+
+            let sendPaginationRequest = async () => {
+
+                try {
+                    await axios.get(url).then(response => {
+                        table.innerHTML = response.data.table;
+                        renderTable();
+                    });
+                    
+                } catch (error) {
+                    console.error(error);
+                }
+            };
+
+            sendPaginationRequest();
+            
+        });
     });
 };
 

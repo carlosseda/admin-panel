@@ -2162,3 +2162,11 @@ body {
 .table-filter .table-filter-buttons .table-filter-button svg path {
   fill: white;
 }
+
+.table-pagination .table-pagination-info {
+  display: flex;
+  justify-content: space-between;
+}
+.table-pagination .table-pagination-buttons .table-pagination-button {
+  cursor: pointer;
+}

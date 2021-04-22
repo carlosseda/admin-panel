@@ -26,7 +26,7 @@ class FaqController extends Controller
         
         $view = View::make('admin.faqs.index')
                 ->with('faq', $this->faq)
-                ->with('faqs', $this->faq->where('active', 1)->get());
+                ->with('faqs', $this->faq->where('active', 1)->paginate(1));
 
         if(request()->ajax()) {
             
@@ -64,7 +64,7 @@ class FaqController extends Controller
         ]);
 
         $view = View::make('admin.faqs.index')
-        ->with('faqs', $this->faq->where('active', 1)->get())
+        ->with('faqs', $this->faq->where('active', 1)->paginate(1))
         ->with('faq', $faq)
         ->renderSections();        
 
@@ -106,7 +106,7 @@ class FaqController extends Controller
 
         $view = View::make('admin.faqs.index')
             ->with('faq', $this->faq)
-            ->with('faqs', $this->faq->where('active', 1)->get())
+            ->with('faqs', $this->faq->where('active', 1)->paginate(1))
             ->renderSections();
         
         return response()->json([
@@ -165,7 +165,7 @@ class FaqController extends Controller
         });
         
         $faqs = $query->join('t_faqs_categories', 't_faqs.category_id', '=', 't_faqs_categories.id')
-        ->where('t_faqs.active', 1)->get();
+        ->where('t_faqs.active', 1)->paginate(1);
 
         $view = View::make('admin.faqs.index')
             ->with('faqs', $faqs)

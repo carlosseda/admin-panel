@@ -1,0 +1,24 @@
+.table-pagination{
+
+    .table-pagination-info{
+
+        display: flex;
+        justify-content: space-between;
+
+        .table-pagination-total{
+
+        }
+
+        .table-pagination-pages{}
+    }
+
+    .table-pagination-buttons{
+        
+        .table-pagination-button{
+
+            cursor: pointer;
+
+        }
+    }
+}
+ 
