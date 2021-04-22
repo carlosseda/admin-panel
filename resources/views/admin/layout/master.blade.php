@@ -20,7 +20,11 @@
             @include('admin.layout.partials.topbar')
 
             @if(isset($filters))
-                @include('admin.components.table_filters', $filters)
+                @include('admin.components.table_filters', [
+                    'route' => $route, 
+                    'filters' => $filters, 
+                    'order' => $order
+                ])
             @endif
 
             <div class="main-content">

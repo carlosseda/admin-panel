@@ -136,11 +136,13 @@ export function swipeRevealItem (element){
             case STATE_LEFT_SIDE:
                 currentXPosition = -(itemWidth - handleSize);
                 deleteElement(element.querySelector('.left-swipe').dataset.url);
+                newState = STATE_DEFAULT;
                 break;
 
             case STATE_RIGHT_SIDE:
                 currentXPosition = itemWidth - handleSize;
                 editElement(element.querySelector('.right-swipe').dataset.url);          
+                newState = STATE_DEFAULT;
                 break;
         }
 

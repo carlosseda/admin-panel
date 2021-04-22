@@ -124,7 +124,7 @@ class FaqController extends Controller
             if($category_id == 'all'){
                 return $q;
             }
-            else {
+            else{
                 return $q->where('category_id', $category_id);
             }
         });
@@ -135,11 +135,37 @@ class FaqController extends Controller
                 return $q;
             }
             else {
-                return $q->where('name', 'like', "%$search%");
+                return $q->where('t_faqs.name', 'like', "%$search%");
+            }   
+        });
+
+        $query->when(request('created_at_from'), function ($q, $created_at_from) {
+
+            if($created_at_from == null){
+                return $q;
             }
+            else {
+                $q->whereDate('t_faqs.created_at', '>=', $created_at_from);
+            }   
+        });
+
+        $query->when(request('created_at_since'), function ($q, $created_at_since) {
+
+            if($created_at_since == null){
+                return $q;
+            }
+            else {
+                $q->whereDate('t_faqs.created_at', '<=', $created_at_since);
+            }   
+        });
+
+        $query->when(request('order'), function ($q, $order) use ($request) {
+
+            $q->orderBy($order, $request->direction);
         });
         
-        $faqs = $query->where('active', 1)->get();
+        $faqs = $query->join('t_faqs_categories', 't_faqs.category_id', '=', 't_faqs_categories.id')
+        ->where('t_faqs.active', 1)->get();
 
         $view = View::make('admin.faqs.index')
             ->with('faqs', $faqs)

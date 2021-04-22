@@ -5,6 +5,39 @@ img {
 }
 
 .hidden{
-    display: none;
+    opacity: 0;
 }
 
+.one-column{
+
+    .form-group{
+        width: 100%;
+    }
+}
+
+.two-columns{
+    display: flex;
+    justify-content: space-between;
+
+    .form-group{
+        width: 47%;
+    }
+}
+
+.three-columns{
+    display: flex;
+    justify-content: space-between;
+
+    .form-group{
+        width: 32%;
+    }
+}
+
+.four-columns{
+    display: flex;
+    justify-content: space-between;
+
+    .form-group{
+        width: 23%;
+    }
+}

@@ -3,40 +3,6 @@
 	background-color: rgb(255, 255, 255);
 	height: max-content;
 	width: 65%;
-
-	.one-column{
-
-        .form-group{
-            width: 100%;
-        }
-    }
-
-    .two-columns{
-        display: flex;
-        justify-content: space-between;
-
-        .form-group{
-            width: 47%;
-        }
-    }
-
-    .three-columns{
-        display: flex;
-        justify-content: space-between;
-
-        .form-group{
-            width: 32%;
-        }
-    }
-
-    .four-columns{
-        display: flex;
-        justify-content: space-between;
-
-        .form-group{
-            width: 23%;
-        }
-    }
 }
 
 .form-error{

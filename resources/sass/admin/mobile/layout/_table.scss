@@ -1,5 +1,5 @@
 .table{
-    height: max-content;
+    height: 70vh;
     width: 100%;
     display: none;
 
@@ -8,17 +8,21 @@
     }
 }
 
+.table-container{
+    height: 70vh;
+}
+
 .table-row {
     background-color: rgb(255, 255, 255);
     border-bottom: 1px solid hsl(0, 0%, 73%);
     border-top: 1px solid hsl(0, 0%, 73%);
-    min-height: 10vh;
+    min-height: 15vh;
     position: relative;    
 }
 
 .table-field-container{
     background-color: white;
-    min-height: 10vh;
+    min-height: 15vh;
     position: absolute;
     -ms-touch-action: none;
     touch-action: none;
@@ -54,7 +58,7 @@
     .table-icons{
 
         display: none;
-        min-height: 10vh;
+        min-height: 15vh;
 
         svg{
             height: 1.5em;

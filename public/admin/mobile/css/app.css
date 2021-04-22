@@ -4,7 +4,35 @@ img {
 }
 
 .hidden {
-  display: none;
+  opacity: 0;
+}
+
+.one-column .form-group {
+  width: 100%;
+}
+
+.two-columns {
+  display: flex;
+  justify-content: space-between;
+}
+.two-columns .form-group {
+  width: 47%;
+}
+
+.three-columns {
+  display: flex;
+  justify-content: space-between;
+}
+.three-columns .form-group {
+  width: 32%;
+}
+
+.four-columns {
+  display: flex;
+  justify-content: space-between;
+}
+.four-columns .form-group {
+  width: 23%;
 }
 
 /*! normalize.css v3.0.3 | MIT License | github.com/necolas/normalize.css */
@@ -627,9 +655,7 @@ body {
 }
 
 .table {
-  height: -webkit-max-content;
-  height: -moz-max-content;
-  height: max-content;
+  height: 70vh;
   width: 100%;
   display: none;
 }
@@ -637,17 +663,21 @@ body {
   display: block;
 }
 
+.table-container {
+  height: 70vh;
+}
+
 .table-row {
   background-color: white;
   border-bottom: 1px solid #bababa;
   border-top: 1px solid #bababa;
-  min-height: 10vh;
+  min-height: 15vh;
   position: relative;
 }
 
 .table-field-container {
   background-color: white;
-  min-height: 10vh;
+  min-height: 15vh;
   position: absolute;
   touch-action: none;
   width: 100%;
@@ -677,7 +707,7 @@ body {
 }
 .table-icons-container .table-icons {
   display: none;
-  min-height: 10vh;
+  min-height: 15vh;
 }
 .table-icons-container .table-icons svg {
   height: 1.5em;

@@ -1,6 +1,7 @@
 @php
     $route = 'faqs';
-    $filters = ['category' => $faqs_categories, 'search' => true]; 
+    $filters = ['category' => $faqs_categories, 'search' => true, 'created_at' => true ]; 
+    $order = ['fecha de creación' => 't_faqs.created_at', 'nombre' => 't_faqs.name', 'categoría' => 't_faqs_categories.name'];
 @endphp
 
 @extends('admin.layout.table_form')
@@ -13,6 +14,7 @@
                 <div class="table-field-container swipe-front">
                     <div class="table-field"><p><span>Nombre:</span> {{$faq_element->name}}</p></div>
                     <div class="table-field"><p><span>Categoría:</span> {{$faq_element->category->name}}</p></div>
+                    <div class="table-field"><p><span>Creado el:</span> {{ Carbon\Carbon::parse($faq_element->created_at)->format('d-m-Y') }}</p></div>
                 </div>
 
                 <div class="table-icons-container swipe-back">

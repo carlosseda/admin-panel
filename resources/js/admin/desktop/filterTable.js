@@ -6,39 +6,42 @@ const filterForm = document.getElementById("filter-form");
 
 export let renderFilterTable = () => {
 
-    let openFilter = document.getElementById("open-filter");
-    let applyFilter = document.getElementById("apply-filter");
+    if(filterForm != null){
 
-    openFilter.addEventListener( 'click', () => {
-        openFilter.classList.remove('button-active');
-        tableFilter.classList.add('filter-active')
-        applyFilter.classList.add('button-active');
-    });
+        let openFilter = document.getElementById("open-filter");
+        let applyFilter = document.getElementById("apply-filter");
     
-    applyFilter.addEventListener( 'click', () => {      
-
-        let data = new FormData(filterForm);
-        let url = filterForm.action;
-
-        let sendPostRequest = async () => {
-
-            try {
-                await axios.post(url, data).then(response => {
-                    table.innerHTML = response.data.table;
-                    renderTable();
-                    tableFilter.classList.remove('filter-active')
-                    applyFilter.classList.remove('button-active');
-                    openFilter.classList.add('button-active');
-                });
-                
-            } catch (error) {
-
-            }
-        };
-
-        sendPostRequest();
+        openFilter.addEventListener( 'click', () => {
+            openFilter.classList.remove('button-active');
+            tableFilter.classList.add('filter-active')
+            applyFilter.classList.add('button-active');
+        });
         
-    });
+        applyFilter.addEventListener( 'click', () => {      
+    
+            let data = new FormData(filterForm);
+            let url = filterForm.action;
+    
+            let sendPostRequest = async () => {
+    
+                try {
+                    await axios.post(url, data).then(response => {
+                        table.innerHTML = response.data.table;
+                        renderTable();
+                        tableFilter.classList.remove('filter-active')
+                        applyFilter.classList.remove('button-active');
+                        openFilter.classList.add('button-active');
+                    });
+                    
+                } catch (error) {
+    
+                }
+            };
+    
+            sendPostRequest();
+            
+        });
+    }
 };
 
 export let hideFilterTable = () => {
