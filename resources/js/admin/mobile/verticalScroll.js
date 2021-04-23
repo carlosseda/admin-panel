@@ -81,27 +81,12 @@ export function scrollWindowElement (element){
         
         currentYPosition = currentYPosition - differenceInY;
 
-        if(Math.sign(differenceInY) == 1) {
-            currentYPosition = currentYPosition + 200;
-            console.log(currentYPosition);
-        }
-        
-        if(Math.sign(differenceInY) == -1) {
-            currentYPosition = currentYPosition - 200;
-            console.log(currentYPosition);
-        }
+        transformStyle = currentYPosition+'px';
+        scrollWindowElement.style.top = transformStyle;
+        scrollWindowElement.style.transition = 'all 300ms ease-out';
 
-        if(scrollWindowElement.offsetTop < 0){
-
-            transformStyle = 'translateY('+currentYPosition+'px)';
-
-            scrollWindowElement.style.msTransform = transformStyle;
-            scrollWindowElement.style.MozTransform = transformStyle;
-            scrollWindowElement.style.webkitTransform = transformStyle;
-            scrollWindowElement.style.transform = transformStyle;
-
-            scrollWindowElement.style.transition = 'all 300ms ease-out';
-        };
+        console.log(scrollWindowElement.offsetTop);
+        console.log(scrollWindowElement.getBoundingClientRect());
     }
 
     function getGesturePointFromEvent(evt) {
@@ -125,13 +110,13 @@ export function scrollWindowElement (element){
         }
 
         let differenceInY = initialTouchPos.y - lastTouchPos.y;
-        let newYTransform  = (currentYPosition - differenceInY)+'px';
-        let transformStyle = 'translateY('+newYTransform+')';
+        let transformStyle  = (currentYPosition - differenceInY)+'px';
 
-        scrollWindowElement.style.webkitTransform = transformStyle;
-        scrollWindowElement.style.MozTransform = transformStyle;
-        scrollWindowElement.style.msTransform = transformStyle;
-        scrollWindowElement.style.transform = transformStyle;
+        console.log(scrollWindowElement.offsetTop);
+
+        scrollWindowElement.style.top = transformStyle;
+        
+
 
         rafPending = false;
     }

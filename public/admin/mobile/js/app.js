@@ -2682,27 +2682,11 @@ function scrollWindowElement(element) {
     var transformStyle;
     var differenceInY = initialTouchPos.y - lastTouchPos.y;
     currentYPosition = currentYPosition - differenceInY;
-
-    if (Math.sign(differenceInY) == 1) {
-      currentYPosition = currentYPosition + 200;
-      console.log(currentYPosition);
-    }
-
-    if (Math.sign(differenceInY) == -1) {
-      currentYPosition = currentYPosition - 200;
-      console.log(currentYPosition);
-    }
-
-    if (scrollWindowElement.offsetTop < 0) {
-      transformStyle = 'translateY(' + currentYPosition + 'px)';
-      scrollWindowElement.style.msTransform = transformStyle;
-      scrollWindowElement.style.MozTransform = transformStyle;
-      scrollWindowElement.style.webkitTransform = transformStyle;
-      scrollWindowElement.style.transform = transformStyle;
-      scrollWindowElement.style.transition = 'all 300ms ease-out';
-    }
-
-    ;
+    transformStyle = currentYPosition + 'px';
+    scrollWindowElement.style.top = transformStyle;
+    scrollWindowElement.style.transition = 'all 300ms ease-out';
+    console.log(scrollWindowElement.offsetTop);
+    console.log(scrollWindowElement.getBoundingClientRect());
   }
 
   function getGesturePointFromEvent(evt) {
@@ -2723,12 +2707,9 @@ function scrollWindowElement(element) {
     }
 
     var differenceInY = initialTouchPos.y - lastTouchPos.y;
-    var newYTransform = currentYPosition - differenceInY + 'px';
-    var transformStyle = 'translateY(' + newYTransform + ')';
-    scrollWindowElement.style.webkitTransform = transformStyle;
-    scrollWindowElement.style.MozTransform = transformStyle;
-    scrollWindowElement.style.msTransform = transformStyle;
-    scrollWindowElement.style.transform = transformStyle;
+    var transformStyle = currentYPosition - differenceInY + 'px';
+    console.log(scrollWindowElement.offsetTop);
+    scrollWindowElement.style.top = transformStyle;
     rafPending = false;
   }
 
