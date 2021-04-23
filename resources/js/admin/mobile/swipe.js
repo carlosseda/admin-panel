@@ -4,11 +4,11 @@ export function swipeRevealItem (element){
 
     'use strict';
 
+    let swipeFrontElement = element.querySelector('.swipe-front');
+
     let STATE_DEFAULT = 1;
     let STATE_LEFT_SIDE = 2;
     let STATE_RIGHT_SIDE = 3;
-
-    let swipeFrontElement = element.querySelector('.swipe-front');
 
     let rafPending = false;
     let initialTouchPos = null;
@@ -219,15 +219,15 @@ export function swipeRevealItem (element){
     }
     
     if (window.PointerEvent) {
-        swipeFrontElement.addEventListener('pointerdown', this.handleGestureStart, true);
-        swipeFrontElement.addEventListener('pointermove', this.handleGestureMove, true);
-        swipeFrontElement.addEventListener('pointerup', this.handleGestureEnd, true);
-        swipeFrontElement.addEventListener('pointercancel', this.handleGestureEnd, true);
+        swipeFrontElement.addEventListener('pointerdown', this.handleGestureStart, false);
+        swipeFrontElement.addEventListener('pointermove', this.handleGestureMove, false);
+        swipeFrontElement.addEventListener('pointerup', this.handleGestureEnd, false);
+        swipeFrontElement.addEventListener('pointercancel', this.handleGestureEnd, false);
     } else {
-        swipeFrontElement.addEventListener('touchstart', this.handleGestureStart, true);
-        swipeFrontElement.addEventListener('touchmove', this.handleGestureMove, true);
-        swipeFrontElement.addEventListener('touchend', this.handleGestureEnd, true);
-        swipeFrontElement.addEventListener('touchcancel', this.handleGestureEnd, true);
-        swipeFrontElement.addEventListener('mousedown', this.handleGestureStart, true);
+        swipeFrontElement.addEventListener('touchstart', this.handleGestureStart, false);
+        swipeFrontElement.addEventListener('touchmove', this.handleGestureMove, false);
+        swipeFrontElement.addEventListener('touchend', this.handleGestureEnd, false);
+        swipeFrontElement.addEventListener('touchcancel', this.handleGestureEnd, false);
+        swipeFrontElement.addEventListener('mousedown', this.handleGestureStart, false);
     }    
 };   

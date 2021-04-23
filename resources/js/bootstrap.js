@@ -19,7 +19,7 @@ window.requestAnimFrame = (function(){
             function( callback ){
              	 window.setTimeout(callback, 1000 / 60);
             };
-})();
+})(); 
 
 /**
  * Echo exposes an expressive API for subscribing to channels and listening

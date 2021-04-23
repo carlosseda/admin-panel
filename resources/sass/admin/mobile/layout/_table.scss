@@ -1,7 +1,9 @@
 .table{
-    height: 70vh;
-    width: 100%;
     display: none;
+    height: max-content;
+    overflow: scroll;
+    position: relative;
+    width: 100%;
 
     &.active{
         display: block;
@@ -42,7 +44,7 @@
         margin-top: 0.5em;
 
         span{
-            color: hsl(19, 100%, 50%);
+            color: hsl(183, 98%, 35%);
             margin-right: 0.5em;
         }
     }

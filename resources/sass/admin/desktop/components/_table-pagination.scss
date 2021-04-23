@@ -14,10 +14,18 @@
 
     .table-pagination-buttons{
         
+        p{
+            margin: 0;
+        }
+
         .table-pagination-button{
 
             cursor: pointer;
+            margin-right: 1em;
+        }
 
+        .table-pagination-button:hover{
+            color: hsl(19, 100%, 50%);
         }
     }
 }

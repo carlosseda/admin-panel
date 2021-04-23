@@ -1,5 +1,6 @@
 import {renderCkeditor} from './ckeditor';
 import {swipeRevealItem} from './swipe';
+import {scrollWindowElement} from './verticalScroll';
 import {showForm} from './bottombarMenu';
 
 const table = document.getElementById("table");
@@ -91,6 +92,8 @@ export let renderTable = () => {
         new swipeRevealItem(swipeRevealItemElement);
 
     });
+
+    new scrollWindowElement(table);
 }; 
 
 export let deleteElement = (url) => {

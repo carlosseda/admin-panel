@@ -655,9 +655,13 @@ body {
 }
 
 .table {
-  height: 70vh;
-  width: 100%;
   display: none;
+  height: -webkit-max-content;
+  height: -moz-max-content;
+  height: max-content;
+  overflow: scroll;
+  position: relative;
+  width: 100%;
 }
 .table.active {
   display: block;
@@ -696,7 +700,7 @@ body {
   margin-top: 0.5em;
 }
 .table-field p span {
-  color: #ff5100;
+  color: #02a8b1;
   margin-right: 0.5em;
 }
 

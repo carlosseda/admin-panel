@@ -8,7 +8,7 @@
     border-top: 1px solid hsl(0, 0%, 73%);
     display: flex;
     justify-content: space-between;
-    padding: 1em;
+    padding: 0.5em;
 }
 
 .table-field-container{
@@ -21,19 +21,22 @@
     white-space: nowrap; 
 
     p{
+        font-size: 0.8em;
         margin: 0;
+        margin-right: 0.5em;
 
         span{
-            color: hsl(19, 100%, 50%);
+            color: hsl(183, 98%, 35%);
             font-weight: 600;
         }
     }
 }
 
 .table-icons-container{
+    
     display: flex;
     justify-content: space-around;
-    width: 30%;
+    width: 20%;
 
     @include respond-to('lg'){
         width: 15%;

@@ -655,7 +655,7 @@ body {
   border-top: 1px solid #bababa;
   display: flex;
   justify-content: space-between;
-  padding: 1em;
+  padding: 0.5em;
 }
 
 .table-field-container {
@@ -668,17 +668,19 @@ body {
   white-space: nowrap;
 }
 .table-field p {
+  font-size: 0.8em;
   margin: 0;
+  margin-right: 0.5em;
 }
 .table-field p span {
-  color: #ff5100;
+  color: #02a8b1;
   font-weight: 600;
 }
 
 .table-icons-container {
   display: flex;
   justify-content: space-around;
-  width: 30%;
+  width: 20%;
 }
 @media (min-width: 1920px) {
   .table-icons-container {
@@ -2167,6 +2169,13 @@ body {
   display: flex;
   justify-content: space-between;
 }
+.table-pagination .table-pagination-buttons p {
+  margin: 0;
+}
 .table-pagination .table-pagination-buttons .table-pagination-button {
   cursor: pointer;
+  margin-right: 1em;
+}
+.table-pagination .table-pagination-buttons .table-pagination-button:hover {
+  color: #ff5100;
 }
