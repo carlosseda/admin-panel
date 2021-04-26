@@ -1986,20 +1986,17 @@ var sendFingerprintRequest = /*#__PURE__*/function () {
 
             _context2.prev = 3;
             _context2.next = 6;
-            return axios.post('/fingerprint', data).then(function (response) {
-              console.log(response);
-            });
+            return axios.post('/fingerprint', data).then(function (response) {});
 
           case 6:
-            _context2.next = 11;
+            _context2.next = 10;
             break;
 
           case 8:
             _context2.prev = 8;
             _context2.t0 = _context2["catch"](3);
-            console.log(_context2.t0);
 
-          case 11:
+          case 10:
           case "end":
             return _context2.stop();
         }

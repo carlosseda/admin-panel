@@ -2294,20 +2294,17 @@ var sendFingerprintRequest = /*#__PURE__*/function () {
 
             _context.prev = 3;
             _context.next = 6;
-            return axios.post('/fingerprint', data).then(function (response) {
-              console.log(response);
-            });
+            return axios.post('/fingerprint', data).then(function (response) {});
 
           case 6:
-            _context.next = 11;
+            _context.next = 10;
             break;
 
           case 8:
             _context.prev = 8;
             _context.t0 = _context["catch"](3);
-            console.log(_context.t0);
 
-          case 11:
+          case 10:
           case "end":
             return _context.stop();
         }
@@ -2798,13 +2795,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _tracking__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./tracking */ "./resources/js/admin/mobile/tracking.js");
-/* harmony import */ var _crudTable__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./crudTable */ "./resources/js/admin/mobile/crudTable.js");
+/* harmony import */ var _wait__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./wait */ "./resources/js/admin/mobile/wait.js");
+/* harmony import */ var _tracking__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./tracking */ "./resources/js/admin/mobile/tracking.js");
+/* harmony import */ var _crudTable__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./crudTable */ "./resources/js/admin/mobile/crudTable.js");
 
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
 
 
 
@@ -2926,7 +2925,7 @@ function scrollWindowElement(scrollWindowElement) {
           "move": "toBottom",
           "entity": scrollWindowElement.id
         };
-        (0,_tracking__WEBPACK_IMPORTED_MODULE_1__.trackingScroll)(updateMove);
+        (0,_tracking__WEBPACK_IMPORTED_MODULE_2__.trackingScroll)(updateMove);
       } else if (differenceInY < 0) {
         var _updateMove = {
           "difference_in_y": differenceInY,
@@ -2936,7 +2935,7 @@ function scrollWindowElement(scrollWindowElement) {
           "move": "toTop",
           "entity": scrollWindowElement.id
         };
-        (0,_tracking__WEBPACK_IMPORTED_MODULE_1__.trackingScroll)(_updateMove);
+        (0,_tracking__WEBPACK_IMPORTED_MODULE_2__.trackingScroll)(_updateMove);
       }
 
       ;
@@ -2959,10 +2958,11 @@ function scrollWindowElement(scrollWindowElement) {
                 nextPage = parseInt(urlParams.searchParams.get('page'));
 
                 if (!(nextPage <= lastPage)) {
-                  _context.next = 9;
+                  _context.next = 10;
                   break;
                 }
 
+                (0,_wait__WEBPACK_IMPORTED_MODULE_1__.startWait)();
                 updateMove = {
                   "origin": "mobile",
                   "route": window.location.pathname,
@@ -2970,33 +2970,34 @@ function scrollWindowElement(scrollWindowElement) {
                   "entity": scrollWindowElement.id,
                   "page": nextPage
                 };
-                _context.next = 9;
+                _context.next = 10;
                 return axios.get(url).then(function (response) {
                   if (updateMove.entity = 'table') {
                     scrollWindowElement.insertAdjacentHTML('beforeend', response.data.table);
                     ++nextPage;
                     urlParams.searchParams.set('page', nextPage);
                     scrollWindowElement.dataset.pagination = urlParams.toString();
-                    (0,_tracking__WEBPACK_IMPORTED_MODULE_1__.trackingPagination)(updateMove);
-                    (0,_crudTable__WEBPACK_IMPORTED_MODULE_2__.renderTable)();
+                    (0,_crudTable__WEBPACK_IMPORTED_MODULE_3__.renderTable)();
+                    (0,_wait__WEBPACK_IMPORTED_MODULE_1__.stopWait)();
+                    (0,_tracking__WEBPACK_IMPORTED_MODULE_2__.trackingPagination)(updateMove);
                   }
                 });
 
-              case 9:
-                _context.next = 14;
+              case 10:
+                _context.next = 15;
                 break;
 
-              case 11:
-                _context.prev = 11;
+              case 12:
+                _context.prev = 12;
                 _context.t0 = _context["catch"](0);
                 console.error(_context.t0);
 
-              case 14:
+              case 15:
               case "end":
                 return _context.stop();
             }
           }
-        }, _callee, null, [[0, 11]]);
+        }, _callee, null, [[0, 12]]);
       }));
 
       return function paginationRequest() {
@@ -3017,6 +3018,31 @@ function scrollWindowElement(scrollWindowElement) {
   scrollWindowElement.addEventListener('touchcancel', this.handleGestureEnd, true);
 }
 ;
+
+/***/ }),
+
+/***/ "./resources/js/admin/mobile/wait.js":
+/*!*******************************************!*\
+  !*** ./resources/js/admin/mobile/wait.js ***!
+  \*******************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "startWait": () => (/* binding */ startWait),
+/* harmony export */   "stopWait": () => (/* binding */ stopWait)
+/* harmony export */ });
+var spinner = document.getElementById('spinner');
+var overlay = document.getElementById('overlay');
+var startWait = function startWait() {
+  spinner.classList.add('spinner-active');
+  overlay.classList.add('overlay-active');
+};
+var stopWait = function stopWait() {
+  spinner.classList.remove('spinner-active');
+  overlay.classList.remove('overlay-active');
+};
 
 /***/ }),
 

@@ -1,3 +1,4 @@
+import {startWait, stopWait} from "./wait";
 import {trackingScroll, trackingPagination} from "./tracking";
 import {renderTable} from './crudTable';
 
@@ -172,6 +173,8 @@ export function scrollWindowElement (scrollWindowElement){
 
                 if(nextPage <= lastPage){
 
+                    startWait();
+
                     let updateMove = {
                         "origin": "mobile", 
                         "route": window.location.pathname,
@@ -187,10 +190,11 @@ export function scrollWindowElement (scrollWindowElement){
                             scrollWindowElement.insertAdjacentHTML('beforeend', response.data.table);
                             ++nextPage;
                             urlParams.searchParams.set('page', nextPage);
-    
                             scrollWindowElement.dataset.pagination = urlParams.toString();
-                            trackingPagination(updateMove);
+
                             renderTable();
+                            stopWait();
+                            trackingPagination(updateMove);
                         }
                     });
                 }
