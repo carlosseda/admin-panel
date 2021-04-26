@@ -58,6 +58,7 @@ Route::group(['prefix' => 'admin'], function () {
     ]);
 
     Route::post('/faqs/filter', 'App\Http\Controllers\Admin\FaqController@filter')->name('faqs_filter');
+    // Route::get('/faqs/filter/{filters?}', 'App\Http\Controllers\Admin\FaqController@filter')->name('faqs_filter');
     Route::resource('faqs', 'App\Http\Controllers\Admin\FaqController', [
         'names' => [
             'index' => 'faqs',
@@ -69,6 +70,33 @@ Route::group(['prefix' => 'admin'], function () {
         ]
     ]);
 
+    Route::resource('tracking/scroll', 'App\Http\Controllers\Admin\TrackingScrollController', [
+        'parameters' => [
+            'scroll' => 'scroll', 
+        ],
+        'names' => [
+            'index' => 'tracking_scroll',
+            'create' => 'tracking_scroll_create',
+            'edit' => 'tracking_scroll_edit',
+            'store' => 'tracking_scroll_store',
+            'destroy' => 'tracking_scroll_destroy',
+            'show' => 'tracking_scroll_show',
+        ]
+    ]);
+
+    Route::resource('tracking/pagination', 'App\Http\Controllers\Admin\TrackingPaginationController', [
+        'parameters' => [
+            'pagination' => 'pagination', 
+        ],
+        'names' => [
+            'index' => 'tracking_pagination',
+            'create' => 'tracking_pagination_create',
+            'edit' => 'tracking_pagination_edit',
+            'store' => 'tracking_pagination_store',
+            'destroy' => 'tracking_pagination_destroy',
+            'show' => 'tracking_pagination_show',
+        ]
+    ]);
 });
 
 Route::post('/fingerprint', 'App\Http\Controllers\Front\FingerprintController@store')->name('front_fingerprint');

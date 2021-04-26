@@ -1,4 +1,6 @@
 require('../../bootstrap');
+require('./fingerprint');
+require('./tracking');
 require('./topbarMenu');
 require('./crudTable');
 require('./bottombarMenu');

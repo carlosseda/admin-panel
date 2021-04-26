@@ -151,7 +151,7 @@ export let renderTable = () => {
 
         paginationButton.addEventListener("click", () => {
 
-            let url = paginationButton.dataset.page;
+            let url = paginationButton.dataset.pagination;
 
             let sendPaginationRequest = async () => {
 

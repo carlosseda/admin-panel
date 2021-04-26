@@ -92,9 +92,14 @@ export let renderTable = () => {
         new swipeRevealItem(swipeRevealItemElement);
 
     });
-
-    new scrollWindowElement(table);
 }; 
+
+export let verticalScrollTable = () => {
+    
+    new scrollWindowElement(table);
+
+}
+
 
 export let deleteElement = (url) => {
 
@@ -127,5 +132,6 @@ export let editElement = (url) => {
 
 renderForm();
 renderTable();
+verticalScrollTable();
 
 

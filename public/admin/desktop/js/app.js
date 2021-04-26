@@ -2205,7 +2205,7 @@ var renderTable = function renderTable() {
   });
   paginationButtons.forEach(function (paginationButton) {
     paginationButton.addEventListener("click", function () {
-      var url = paginationButton.dataset.page;
+      var url = paginationButton.dataset.pagination;
 
       var sendPaginationRequest = /*#__PURE__*/function () {
         var _ref6 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee4() {
@@ -2274,10 +2274,11 @@ function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
 
-var table = document.getElementById("table-container");
-var tableFilter = document.getElementById("table-filter");
-var filterForm = document.getElementById("filter-form");
 var renderFilterTable = function renderFilterTable() {
+  var table = document.getElementById("table");
+  var tableFilter = document.getElementById("table-filter");
+  var filterForm = document.getElementById("filter-form");
+
   if (filterForm != null) {
     var openFilter = document.getElementById("open-filter");
     var applyFilter = document.getElementById("apply-filter");
@@ -2327,7 +2328,31 @@ var renderFilterTable = function renderFilterTable() {
         };
       }();
 
-      sendPostRequest();
+      sendPostRequest(); // let data = new FormData(filterForm);
+      // let filters = {};
+      // data.forEach(function(value, key){
+      //     filters[key] = value;
+      // });
+      // let json = JSON.stringify(filters);
+      // console.log(json);
+      // let url = filterForm.action;
+      // let sendPostRequest = async () => {
+      //     try {
+      //         axios.get(url, {
+      //             params: {
+      //               filters: json
+      //             }
+      //         }).then(response => {
+      //             table.innerHTML = response.data.table;
+      //             renderTable();
+      //             tableFilter.classList.remove('filter-active')
+      //             applyFilter.classList.remove('button-active');
+      //             openFilter.classList.add('button-active');
+      //         });
+      //     } catch (error) {
+      //     }
+      // };
+      // sendPostRequest();
     });
   }
 };

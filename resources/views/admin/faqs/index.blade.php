@@ -10,6 +10,11 @@
     
     @isset($faqs)
 
+        @php
+            $pagination = $faqs->nextPageUrl();
+            $last_page = $faqs->lastPage()   
+        @endphp
+
         <div id="table-container">
             @foreach($faqs as $faq_element)
                 <div class="table-row swipe-element">

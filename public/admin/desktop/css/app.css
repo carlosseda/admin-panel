@@ -761,6 +761,7 @@ body {
   border-bottom: 1px solid #bababa;
   color: black;
   font-family: "Ubuntu", sans-serif;
+  font-weight: 600;
   padding: 0.2em 0;
   width: 100%;
 }
@@ -2131,6 +2132,7 @@ body {
   width: 40%;
 }
 .table-filter .table-filter-container form {
+  background-color: white;
   padding: 1em;
 }
 .table-filter .table-filter-buttons {

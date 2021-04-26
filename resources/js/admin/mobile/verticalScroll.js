@@ -1,19 +1,15 @@
-export function scrollWindowElement (element){
+import {trackingScroll, trackingPagination} from "./tracking";
+import {renderTable} from './crudTable';
+
+export function scrollWindowElement (scrollWindowElement){
 
     'use strict';
-
-    let scrollWindowElement = element;
-
-    let STATE_DEFAULT = 1;
-    let STATE_TOP_SIDE = 2;
-    let STATE_BOTTOM_SIDE = 3;
 
     let rafPending = false;
     let initialTouchPos = null;
     let lastTouchPos = null;
     let currentYPosition = 0;
-    let currentState = STATE_DEFAULT;
-    let handleSize = 10;
+    let paginationVisible = false;
 
     this.handleGestureStart = function(evt) {
 
@@ -73,22 +69,7 @@ export function scrollWindowElement (element){
 
     }.bind(this);
 
-
-    function updateScrollRestPosition() {
-
-        let transformStyle;
-        let differenceInY = initialTouchPos.y - lastTouchPos.y;
-        
-        currentYPosition = currentYPosition - differenceInY;
-
-        transformStyle = currentYPosition+'px';
-        scrollWindowElement.style.top = transformStyle;
-        scrollWindowElement.style.transition = 'all 300ms ease-out';
-
-        console.log(scrollWindowElement.offsetTop);
-        console.log(scrollWindowElement.getBoundingClientRect());
-    }
-
+    
     function getGesturePointFromEvent(evt) {
 
         let point = {};
@@ -110,17 +91,117 @@ export function scrollWindowElement (element){
         }
 
         let differenceInY = initialTouchPos.y - lastTouchPos.y;
-        let transformStyle  = (currentYPosition - differenceInY)+'px';
+        let newYTransform  = currentYPosition - differenceInY;
+        let transformStyle  = newYTransform +'px';
 
-        console.log(scrollWindowElement.offsetTop);
+        if(differenceInY < 1){
 
-        scrollWindowElement.style.top = transformStyle;
-        
+            if(scrollWindowElement.style.top > 0+'px'){
+                transformStyle = '0px';
+                scrollWindowElement.style.top = transformStyle;
+            }
 
+            if(scrollWindowElement.style.top < 0+'px'){
+                scrollWindowElement.style.top = transformStyle;
+            }
+        }else{
+            scrollWindowElement.style.top = transformStyle;
+        }
 
+        if(scrollWindowElement.getBoundingClientRect().bottom < window.innerHeight ){
+            
+            if(!paginationVisible){
+                
+                pagination();
+                paginationVisible = true;
+            }
+        }; 
+      
         rafPending = false;
     }
 
+    function updateScrollRestPosition() {
+
+       
+        if(scrollWindowElement.style.top < 0+'px'){
+
+            let differenceInY = (initialTouchPos.y - lastTouchPos.y);
+            currentYPosition = (currentYPosition - differenceInY);
+
+            if(differenceInY > 0) {
+                
+                let updateMove = {
+                    "difference_in_y": differenceInY, 
+                    "current_y_position": currentYPosition,
+                    "origin": "mobile", 
+                    "route": window.location.pathname,
+                    "move": "toBottom",
+                    "entity": scrollWindowElement.id 
+                }
+
+                trackingScroll(updateMove);
+
+            } else if(differenceInY < 0) {
+
+                let updateMove = {
+                    "difference_in_y": differenceInY, 
+                    "current_y_position": currentYPosition,
+                    "origin": "mobile", 
+                    "route": window.location.pathname,
+                    "move": "toTop",
+                    "entity": scrollWindowElement.id 
+                }
+
+                trackingScroll(updateMove); 
+            };
+
+                paginationVisible = false;
+        }
+    }
+
+    function pagination() {
+
+        let paginationRequest = async () => {
+
+            try {
+
+                let lastPage = scrollWindowElement.dataset.lastpage;
+                let url = scrollWindowElement.dataset.pagination;
+                let currentPage = url.replace( /^\D+/g, '');
+
+                let updateMove = {
+                    "origin": "mobile", 
+                    "route": window.location.pathname,
+                    "move": "next_elements",
+                    "entity": scrollWindowElement.id,
+                    "page":  currentPage
+                }
+                
+                await axios.get(url).then(response => {
+                    
+                    if(updateMove.entity = 'table'){
+
+                        if(response.data.table.match(/table-row/g)){
+
+                            scrollWindowElement.insertAdjacentHTML('beforeend', response.data.table);
+
+                            let nextPage = parseInt(currentPage);
+                            nextPage++;
+                            scrollWindowElement.dataset.pagination = url.replace(/[0-9]/g, nextPage)
+
+                            trackingPagination(updateMove, currentPage);
+                            renderTable();
+                        }
+                    }
+                });
+
+            } catch (error) {
+                console.error(error);
+            }
+        };
+
+        paginationRequest();
+    }
     
     scrollWindowElement.addEventListener('touchstart', this.handleGestureStart, {passive: true} );
     scrollWindowElement.addEventListener('touchmove', this.handleGestureMove, {passive: true} );

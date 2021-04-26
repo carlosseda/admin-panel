@@ -2,7 +2,7 @@ import 'clientjs';
 
 const client = new ClientJS();
 
-export let getFingerPrint = async () => {
+export function getFingerPrint ()  {
     
     let fingerprint = {};
     fingerprint['_token'] = document.querySelector('meta[name="csrf-token"]').getAttribute('content');

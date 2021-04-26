@@ -9,6 +9,7 @@ use App\Http\Controllers\Controller;
 use Jenssegers\Agent\Agent;
 use App\Http\Requests\Admin\FaqRequest;
 use App\Models\DB\Faq; 
+use Debugbar;
 
 class FaqController extends Controller
 {
@@ -151,11 +152,13 @@ class FaqController extends Controller
         ]);
     }
 
-    public function filter(Request $request){
+    public function filter($filters = null){
 
         $query = $this->faq->query();
 
-        $query->when(request('category_id'), function ($q, $category_id) {
+        Debugbar::info(request()->json()->all());
+
+        $query->when($filters->category_id, function ($q, $category_id) {
 
             if($category_id == 'all'){
                 return $q;
@@ -165,7 +168,7 @@ class FaqController extends Controller
             }
         });
 
-        $query->when(request('search'), function ($q, $search) {
+        $query->when($filters->search, function ($q, $search) {
 
             if($search == null){
                 return $q;
@@ -175,7 +178,7 @@ class FaqController extends Controller
             }   
         });
 
-        $query->when(request('created_at_from'), function ($q, $created_at_from) {
+        $query->when($filters->created_at_from, function ($q, $created_at_from) {
 
             if($created_at_from == null){
                 return $q;
@@ -185,7 +188,7 @@ class FaqController extends Controller
             }   
         });
 
-        $query->when(request('created_at_since'), function ($q, $created_at_since) {
+        $query->when($filters->created_at_since, function ($q, $created_at_since) {
 
             if($created_at_since == null){
                 return $q;
@@ -195,7 +198,7 @@ class FaqController extends Controller
             }   
         });
 
-        $query->when(request('order'), function ($q, $order) use ($request) {
+        $query->when($filters->order, function ($q, $order) use ($request) {
 
             $q->orderBy($order, $request->direction);
         });
@@ -217,5 +220,9 @@ class FaqController extends Controller
         return response()->json([
             'table' => $view['table'],
         ]);
+    }
+
+    public function filterPagination(){
+        
     }
 }

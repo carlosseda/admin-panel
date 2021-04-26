@@ -1,10 +1,10 @@
 import {renderTable} from './crudTable';
 
-const table = document.getElementById("table-container");
-const tableFilter = document.getElementById("table-filter");
-const filterForm = document.getElementById("filter-form");
-
 export let renderFilterTable = () => {
+
+    let table = document.getElementById("table");
+    let tableFilter = document.getElementById("table-filter");
+    let filterForm = document.getElementById("filter-form");
 
     if(filterForm != null){
 
@@ -17,13 +17,13 @@ export let renderFilterTable = () => {
             applyFilter.classList.add('button-active');
         });
         
-        applyFilter.addEventListener( 'click', () => {      
-    
+        applyFilter.addEventListener( 'click', () => {     
+            
             let data = new FormData(filterForm);
             let url = filterForm.action;
-    
+
             let sendPostRequest = async () => {
-    
+
                 try {
                     await axios.post(url, data).then(response => {
                         table.innerHTML = response.data.table;
@@ -34,11 +34,46 @@ export let renderFilterTable = () => {
                     });
                     
                 } catch (error) {
-    
+
                 }
             };
-    
+
             sendPostRequest();
+    
+            // let data = new FormData(filterForm);
+            // let filters = {};
+            
+            // data.forEach(function(value, key){
+            //     filters[key] = value;
+            // });
+            
+            // let json = JSON.stringify(filters);
+
+            // console.log(json);
+
+            // let url = filterForm.action;
+    
+            // let sendPostRequest = async () => {
+    
+            //     try {
+            //         axios.get(url, {
+            //             params: {
+            //               filters: json
+            //             }
+            //         }).then(response => {
+            //             table.innerHTML = response.data.table;
+            //             renderTable();
+            //             tableFilter.classList.remove('filter-active')
+            //             applyFilter.classList.remove('button-active');
+            //             openFilter.classList.add('button-active');
+            //         });
+                    
+            //     } catch (error) {
+    
+            //     }
+            // };
+    
+            // sendPostRequest();
             
         });
     }
