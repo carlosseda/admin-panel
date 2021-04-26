@@ -165,35 +165,35 @@ export function scrollWindowElement (scrollWindowElement){
 
             try {
 
-                let lastPage = scrollWindowElement.dataset.lastpage;
                 let url = scrollWindowElement.dataset.pagination;
-                let currentPage = url.replace( /^\D+/g, '');
+                let lastPage = scrollWindowElement.dataset.lastpage;
+                let urlParams = new URL(url);
+                let nextPage = parseInt(urlParams.searchParams.get('page'));
 
-                let updateMove = {
-                    "origin": "mobile", 
-                    "route": window.location.pathname,
-                    "move": "next_elements",
-                    "entity": scrollWindowElement.id,
-                    "page":  currentPage
-                }
-                
-                await axios.get(url).then(response => {
+                if(nextPage <= lastPage){
+
+                    let updateMove = {
+                        "origin": "mobile", 
+                        "route": window.location.pathname,
+                        "move": "next_elements",
+                        "entity": scrollWindowElement.id,
+                        "page":  nextPage
+                    }
                     
-                    if(updateMove.entity = 'table'){
-
-                        if(response.data.table.match(/table-row/g)){
-
+                    await axios.get(url).then(response => {
+                        
+                        if(updateMove.entity = 'table'){
+    
                             scrollWindowElement.insertAdjacentHTML('beforeend', response.data.table);
-
-                            let nextPage = parseInt(currentPage);
-                            nextPage++;
-                            scrollWindowElement.dataset.pagination = url.replace(/[0-9]/g, nextPage)
-
-                            trackingPagination(updateMove, currentPage);
+                            ++nextPage;
+                            urlParams.searchParams.set('page', nextPage);
+    
+                            scrollWindowElement.dataset.pagination = urlParams.toString();
+                            trackingPagination(updateMove);
                             renderTable();
                         }
-                    }
-                });
+                    });
+                }
 
             } catch (error) {
                 console.error(error);

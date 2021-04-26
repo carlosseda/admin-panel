@@ -20,12 +20,24 @@ export let renderFilterTable = () => {
         applyFilter.addEventListener( 'click', () => {     
             
             let data = new FormData(filterForm);
+            let filters = {};
+            
+            data.forEach(function(value, key){
+                filters[key] = value;
+            });
+            
+            let json = JSON.stringify(filters);
+
             let url = filterForm.action;
-
+    
             let sendPostRequest = async () => {
-
+    
                 try {
-                    await axios.post(url, data).then(response => {
+                    axios.get(url, {
+                        params: {
+                          filters: json
+                        }
+                    }).then(response => {
                         table.innerHTML = response.data.table;
                         renderTable();
                         tableFilter.classList.remove('filter-active')
@@ -34,46 +46,11 @@ export let renderFilterTable = () => {
                     });
                     
                 } catch (error) {
-
+    
                 }
             };
-
+    
             sendPostRequest();
-    
-            // let data = new FormData(filterForm);
-            // let filters = {};
-            
-            // data.forEach(function(value, key){
-            //     filters[key] = value;
-            // });
-            
-            // let json = JSON.stringify(filters);
-
-            // console.log(json);
-
-            // let url = filterForm.action;
-    
-            // let sendPostRequest = async () => {
-    
-            //     try {
-            //         axios.get(url, {
-            //             params: {
-            //               filters: json
-            //             }
-            //         }).then(response => {
-            //             table.innerHTML = response.data.table;
-            //             renderTable();
-            //             tableFilter.classList.remove('filter-active')
-            //             applyFilter.classList.remove('button-active');
-            //             openFilter.classList.add('button-active');
-            //         });
-                    
-            //     } catch (error) {
-    
-            //     }
-            // };
-    
-            // sendPostRequest();
             
         });
     }

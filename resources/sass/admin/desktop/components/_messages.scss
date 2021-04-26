@@ -1,19 +1,19 @@
 .messages-container{
 
     position: fixed;
-    top: 1em;
-	right: 2em;
+    bottom: 5vh;
+	right: 3%;
 	width: 30%;
 	z-index: 3;
 	
 	&.show{
-		@include translateYInScreen(0, 0.5s);
+		@include translateXInScreen(0, 0.5s);
 	}
 
 	.message {
 		display: none;
 		text-align:left;
-		padding: 0.5em 0;
+		padding: 2em 0;
 		background-color:hsl(0, 0%, 100%);
 		border-radius: 4px;
 		max-width: 100%;
@@ -21,19 +21,19 @@
 		position:relative;
 		box-shadow: 1px 7px 14px -5px rgba(0,0,0,0.2);
 
-		&.success.active{
+		&.success.message-active{
 			display: block;
 		}
 
-		&.info.active{
+		&.info.message-active{
 			display: block;
 		}
 
-		&.error.active{
+		&.error.message-active{
 			display: block;
 		}
 
-		&.reorder.active{
+		&.reorder.message-active{
 			display: block;
 		}
 

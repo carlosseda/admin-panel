@@ -1,4 +1,5 @@
 import {renderCkeditor} from './ckeditor';
+import {showMessage} from './messages';
 
 const table = document.getElementById("table");
 const form = document.getElementById("form");
@@ -53,6 +54,7 @@ export let renderForm = () => {
                     await axios.post(url, data).then(response => {
                         form.id.value = response.data.id;
                         table.innerHTML = response.data.table;
+                        showMessage('success', response.data.message);
                         renderTable();
                     });
                     

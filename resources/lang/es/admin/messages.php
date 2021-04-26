@@ -1,7 +1,7 @@
 <?php
 
 return array (
-  'message-type-success' => 'Operación realizada con éxito',
+  'message-type-success' => 'Acción realizada con éxito',
   'message-type-info' => 'Información del sistema',
   'message-type-error' => 'Error en el servidor',
   'message-description-error' => 'Puede consultar el error en su navegador pulsando F12 y yendo a la pestaña consola.',

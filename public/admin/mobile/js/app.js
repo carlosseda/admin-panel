@@ -2947,51 +2947,56 @@ function scrollWindowElement(scrollWindowElement) {
   function pagination() {
     var paginationRequest = /*#__PURE__*/function () {
       var _ref = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
-        var lastPage, url, currentPage, updateMove;
+        var url, lastPage, urlParams, nextPage, updateMove;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
                 _context.prev = 0;
-                lastPage = scrollWindowElement.dataset.lastpage;
                 url = scrollWindowElement.dataset.pagination;
-                currentPage = url.replace(/^\D+/g, '');
+                lastPage = scrollWindowElement.dataset.lastpage;
+                urlParams = new URL(url);
+                nextPage = parseInt(urlParams.searchParams.get('page'));
+
+                if (!(nextPage <= lastPage)) {
+                  _context.next = 9;
+                  break;
+                }
+
                 updateMove = {
                   "origin": "mobile",
                   "route": window.location.pathname,
                   "move": "next_elements",
                   "entity": scrollWindowElement.id,
-                  "page": currentPage
+                  "page": nextPage
                 };
-                _context.next = 7;
+                _context.next = 9;
                 return axios.get(url).then(function (response) {
                   if (updateMove.entity = 'table') {
-                    if (response.data.table.match(/table-row/g)) {
-                      scrollWindowElement.insertAdjacentHTML('beforeend', response.data.table);
-                      var nextPage = parseInt(currentPage);
-                      nextPage++;
-                      scrollWindowElement.dataset.pagination = url.replace(/[0-9]/g, nextPage);
-                      (0,_tracking__WEBPACK_IMPORTED_MODULE_1__.trackingPagination)(updateMove, currentPage);
-                      (0,_crudTable__WEBPACK_IMPORTED_MODULE_2__.renderTable)();
-                    }
+                    scrollWindowElement.insertAdjacentHTML('beforeend', response.data.table);
+                    ++nextPage;
+                    urlParams.searchParams.set('page', nextPage);
+                    scrollWindowElement.dataset.pagination = urlParams.toString();
+                    (0,_tracking__WEBPACK_IMPORTED_MODULE_1__.trackingPagination)(updateMove);
+                    (0,_crudTable__WEBPACK_IMPORTED_MODULE_2__.renderTable)();
                   }
                 });
 
-              case 7:
-                _context.next = 12;
+              case 9:
+                _context.next = 14;
                 break;
 
-              case 9:
-                _context.prev = 9;
+              case 11:
+                _context.prev = 11;
                 _context.t0 = _context["catch"](0);
                 console.error(_context.t0);
 
-              case 12:
+              case 14:
               case "end":
                 return _context.stop();
             }
           }
-        }, _callee, null, [[0, 9]]);
+        }, _callee, null, [[0, 11]]);
       }));
 
       return function paginationRequest() {

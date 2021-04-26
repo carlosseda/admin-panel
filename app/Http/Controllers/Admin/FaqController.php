@@ -74,6 +74,12 @@ class FaqController extends Controller
             'category_id' => request('category_id'),
         ]);
 
+        if (request('id')){
+            $message = \Lang::get('admin/faqs.faq-update');
+        }else{
+            $message = \Lang::get('admin/faqs.faq-create');
+        }
+
         if($this->agent->isMobile()){
             $view = View::make('admin.faqs.index')
             ->with('faqs', $this->faq->where('active', 1)->paginate(10))
@@ -91,6 +97,7 @@ class FaqController extends Controller
         return response()->json([
             'table' => $view['table'],
             'form' => $view['form'],
+            'message' => $message,
             'id' => $faq->id,
         ]);
     }
@@ -132,6 +139,8 @@ class FaqController extends Controller
         $faq->active = 0;
         $faq->save();
 
+        $message = \Lang::get('admin/faqs.faq-delete');
+
         if($this->agent->isMobile()){
             $view = View::make('admin.faqs.index')
             ->with('faq', $this->faq)
@@ -148,7 +157,8 @@ class FaqController extends Controller
         
         return response()->json([
             'table' => $view['table'],
-            'form' => $view['form']
+            'form' => $view['form'],
+            'message' => $message
         ]);
     }
 
@@ -156,9 +166,7 @@ class FaqController extends Controller
 
         $query = $this->faq->query();
 
-        Debugbar::info(request()->json()->all());
-
-        $query->when($filters->category_id, function ($q, $category_id) {
+        $query->when($filtes->category_id, function ($q, $category_id) {
 
             if($category_id == 'all'){
                 return $q;

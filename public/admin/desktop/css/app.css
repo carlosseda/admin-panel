@@ -1722,14 +1722,14 @@ body {
 }
 .messages-container {
   position: fixed;
-  top: 1em;
-  right: 2em;
+  bottom: 5vh;
+  right: 3%;
   width: 30%;
   z-index: 3;
 }
 .messages-container.show {
-  -webkit-animation-name: translateYInScreen;
-          animation-name: translateYInScreen;
+  -webkit-animation-name: translateXOutScreen;
+          animation-name: translateXOutScreen;
   -webkit-animation-duration: 0.5s;
           animation-duration: 0.5s;
   -webkit-animation-delay: 0;
@@ -1737,26 +1737,26 @@ body {
   -webkit-animation-fill-mode: forwards;
           animation-fill-mode: forwards;
 }
-@-webkit-keyframes translateYInScreen {
+@-webkit-keyframes translateXOutScreen {
   0% {
-    transform: translateY(-150%);
+    transform: translateX(150%);
   }
   100% {
-    transform: translateY(0%);
+    transform: translateX(0%);
   }
 }
-@keyframes translateYInScreen {
+@keyframes translateXOutScreen {
   0% {
-    transform: translateY(-150%);
+    transform: translateX(150%);
   }
   100% {
-    transform: translateY(0%);
+    transform: translateX(0%);
   }
 }
 .messages-container .message {
   display: none;
   text-align: left;
-  padding: 0.5em 0;
+  padding: 2em 0;
   background-color: white;
   border-radius: 4px;
   max-width: 100%;
@@ -1764,16 +1764,16 @@ body {
   position: relative;
   box-shadow: 1px 7px 14px -5px rgba(0, 0, 0, 0.2);
 }
-.messages-container .message.success.active {
+.messages-container .message.success.message-active {
   display: block;
 }
-.messages-container .message.info.active {
+.messages-container .message.info.message-active {
   display: block;
 }
-.messages-container .message.error.active {
+.messages-container .message.error.message-active {
   display: block;
 }
-.messages-container .message.reorder.active {
+.messages-container .message.reorder.message-active {
   display: block;
 }
 .messages-container .message:before {

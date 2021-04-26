@@ -2,6 +2,7 @@ require('../../bootstrap');
 require('./crudTable');
 require('./ckeditor');
 require('./topbarMenu');
+require('./messages');
 require('./tabs');
 require('./filterTable');
 
