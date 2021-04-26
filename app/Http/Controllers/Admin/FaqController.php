@@ -9,7 +9,6 @@ use App\Http\Controllers\Controller;
 use Jenssegers\Agent\Agent;
 use App\Http\Requests\Admin\FaqRequest;
 use App\Models\DB\Faq; 
-use Debugbar;
 
 class FaqController extends Controller
 {

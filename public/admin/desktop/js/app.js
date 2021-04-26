@@ -1996,7 +1996,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _ckeditor__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ckeditor */ "./resources/js/admin/desktop/ckeditor.js");
-/* harmony import */ var _messages__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./messages */ "./resources/js/admin/desktop/messages.js");
+/* harmony import */ var _wait__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./wait */ "./resources/js/admin/desktop/wait.js");
+/* harmony import */ var _messages__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./messages */ "./resources/js/admin/desktop/messages.js");
 
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
@@ -2017,6 +2018,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
+
 var table = document.getElementById("table");
 var form = document.getElementById("form");
 var renderForm = function renderForm() {
@@ -2024,7 +2026,6 @@ var renderForm = function renderForm() {
   var labels = document.querySelectorAll('.label-highlight');
   var inputs = document.querySelectorAll('.input-highlight');
   var storeButton = document.getElementById("store-button");
-  var closeErrorsButton = document.getElementById("close-errors-button");
   inputs.forEach(function (input) {
     input.addEventListener('focusin', function () {
       for (var i = 0; i < labels.length; i++) {
@@ -2063,22 +2064,25 @@ var renderForm = function renderForm() {
             while (1) {
               switch (_context.prev = _context.next) {
                 case 0:
-                  _context.prev = 0;
-                  _context.next = 3;
+                  (0,_wait__WEBPACK_IMPORTED_MODULE_2__.startWait)();
+                  _context.prev = 1;
+                  _context.next = 4;
                   return axios.post(url, data).then(function (response) {
                     form.id.value = response.data.id;
                     table.innerHTML = response.data.table;
-                    (0,_messages__WEBPACK_IMPORTED_MODULE_2__.showMessage)('success', response.data.message);
+                    (0,_wait__WEBPACK_IMPORTED_MODULE_2__.stopWait)();
+                    (0,_messages__WEBPACK_IMPORTED_MODULE_3__.showMessage)('success', response.data.message);
                     renderTable();
                   });
 
-                case 3:
-                  _context.next = 8;
+                case 4:
+                  _context.next = 10;
                   break;
 
-                case 5:
-                  _context.prev = 5;
-                  _context.t0 = _context["catch"](0);
+                case 6:
+                  _context.prev = 6;
+                  _context.t0 = _context["catch"](1);
+                  (0,_wait__WEBPACK_IMPORTED_MODULE_2__.stopWait)();
 
                   if (_context.t0.response.status == '422') {
                     errors = _context.t0.response.data.errors;
@@ -2086,16 +2090,16 @@ var renderForm = function renderForm() {
                     Object.keys(errors).forEach(function (key) {
                       errorMessage += '<li>' + errors[key] + '</li>';
                     });
-                    document.getElementById('error-container').classList.add('active');
-                    document.getElementById('errors').innerHTML = errorMessage;
+                    (0,_messages__WEBPACK_IMPORTED_MODULE_3__.showMessage)('error', errorMessage); // document.getElementById('error-container').classList.add('active');
+                    // document.getElementById('errors').innerHTML = errorMessage;
                   }
 
-                case 8:
+                case 10:
                 case "end":
                   return _context.stop();
               }
             }
-          }, _callee, null, [[0, 5]]);
+          }, _callee, null, [[1, 6]]);
         }));
 
         return function sendPostRequest() {
@@ -2361,9 +2365,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "showMessage": () => (/* binding */ showMessage)
 /* harmony export */ });
+var closeButtons = document.querySelectorAll('.message-close');
+var messagesContainer = document.getElementById('messages-container');
+var messages = document.querySelectorAll('.message');
 var showMessage = function showMessage(state, messageText) {
-  var messagesContainer = document.getElementById('messages-container');
-  var messages = document.querySelectorAll('.message');
   messages.forEach(function (message) {
     if (message.classList.contains(state)) {
       var successMessage = document.getElementById('message-description-' + state);
@@ -2373,12 +2378,21 @@ var showMessage = function showMessage(state, messageText) {
       setTimeout(function () {
         messagesContainer.classList.remove('show');
         message.classList.remove('message-active');
-      }, 5000);
+      }, 7000);
     }
 
     ;
   });
 };
+closeButtons.forEach(function (closeButton) {
+  closeButton.addEventListener("click", function () {
+    messagesContainer.classList.remove('show');
+    var messagesActives = document.querySelectorAll('.message-active');
+    messagesActives.forEach(function (messageActive) {
+      messageActive.classList.remove('message-active');
+    });
+  });
+});
 
 /***/ }),
 
@@ -2481,6 +2495,31 @@ collapseButton.addEventListener("click", function () {
   collapseButton.classList.toggle("active");
   topbar.classList.toggle("active");
 });
+
+/***/ }),
+
+/***/ "./resources/js/admin/desktop/wait.js":
+/*!********************************************!*\
+  !*** ./resources/js/admin/desktop/wait.js ***!
+  \********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "startWait": () => (/* binding */ startWait),
+/* harmony export */   "stopWait": () => (/* binding */ stopWait)
+/* harmony export */ });
+var spinner = document.getElementById('spinner');
+var overlay = document.getElementById('overlay');
+var startWait = function startWait() {
+  spinner.classList.add('spinner-active');
+  overlay.classList.add('overlay-active');
+};
+var stopWait = function stopWait() {
+  spinner.classList.remove('spinner-active');
+  overlay.classList.remove('overlay-active');
+};
 
 /***/ }),
 

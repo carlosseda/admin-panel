@@ -15,6 +15,7 @@
     <body>
         <div class="wrapper" id="app">
 
+            @include('admin.components.wait')
             @include('admin.components.messages')
             @include('admin.components.modal_delete')
             @include('admin.layout.partials.topbar')

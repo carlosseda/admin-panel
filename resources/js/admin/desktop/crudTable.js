@@ -1,4 +1,5 @@
 import {renderCkeditor} from './ckeditor';
+import {startWait, stopWait} from './wait';
 import {showMessage} from './messages';
 
 const table = document.getElementById("table");
@@ -10,7 +11,6 @@ export let renderForm = () => {
     let labels = document.querySelectorAll('.label-highlight');
     let inputs = document.querySelectorAll('.input-highlight');
     let storeButton = document.getElementById("store-button");
-    let closeErrorsButton = document.getElementById("close-errors-button");
 
     inputs.forEach(input => {
 
@@ -49,17 +49,24 @@ export let renderForm = () => {
             let url = form.action;
     
             let sendPostRequest = async () => {
+
+                startWait();
     
                 try {
                     await axios.post(url, data).then(response => {
+
                         form.id.value = response.data.id;
                         table.innerHTML = response.data.table;
+
+                        stopWait();
                         showMessage('success', response.data.message);
                         renderTable();
                     });
                     
                 } catch (error) {
     
+                    stopWait();
+
                     if(error.response.status == '422'){
     
                         let errors = error.response.data.errors;      
@@ -69,8 +76,10 @@ export let renderForm = () => {
                             errorMessage += '<li>' + errors[key] + '</li>';
                         })
         
-                        document.getElementById('error-container').classList.add('active');
-                        document.getElementById('errors').innerHTML = errorMessage;
+                        showMessage('error', errorMessage);
+
+                        // document.getElementById('error-container').classList.add('active');
+                        // document.getElementById('errors').innerHTML = errorMessage;
                     }
                 }
             };
