@@ -11,6 +11,7 @@ export function scrollWindowElement (scrollWindowElement){
     let lastTouchPos = null;
     let currentYPosition = 0;
     let paginationVisible = false;
+    let parentElementHeight = scrollWindowElement.parentElement.getBoundingClientRect().height;
 
     this.handleGestureStart = function(evt) {
 
@@ -91,9 +92,10 @@ export function scrollWindowElement (scrollWindowElement){
             return;
         }
 
-        let differenceInY = initialTouchPos.y - lastTouchPos.y;
-        let newYTransform  = currentYPosition - differenceInY;
+        let differenceInY = (initialTouchPos.y - lastTouchPos.y);
+        let newYTransform  = (currentYPosition - differenceInY);
         let transformStyle  = newYTransform +'px';
+        let offsetBottom = scrollWindowElement.getBoundingClientRect().height + scrollWindowElement.offsetTop;
 
         if(differenceInY < 1){
 
@@ -105,15 +107,21 @@ export function scrollWindowElement (scrollWindowElement){
             if(scrollWindowElement.style.top < 0+'px'){
                 scrollWindowElement.style.top = transformStyle;
             }
-        }else{
-            scrollWindowElement.style.top = transformStyle;
+        }
+
+        else{
+
+            if(offsetBottom > parentElementHeight){
+                scrollWindowElement.style.top = transformStyle;
+            }
         }
 
         if(scrollWindowElement.getBoundingClientRect().bottom < window.innerHeight ){
             
             if(!paginationVisible){
                 
-                pagination();
+                scrollPagination();
+
                 paginationVisible = true;
             }
         }; 
@@ -123,12 +131,23 @@ export function scrollWindowElement (scrollWindowElement){
 
     function updateScrollRestPosition() {
 
-       
+        let offsetBottom = scrollWindowElement.getBoundingClientRect().height + scrollWindowElement.offsetTop;
+
         if(scrollWindowElement.style.top < 0+'px'){
 
             let differenceInY = (initialTouchPos.y - lastTouchPos.y);
-            currentYPosition = (currentYPosition - differenceInY);
 
+            if(offsetBottom > parentElementHeight){
+                currentYPosition = (currentYPosition - differenceInY);
+            }else{
+                if(!paginationVisible){
+                
+                    scrollPagination();
+    
+                    paginationVisible = true;
+                }
+            }
+            
             if(differenceInY > 0) {
                 
                 let updateMove = {
@@ -156,32 +175,32 @@ export function scrollWindowElement (scrollWindowElement){
                 trackingScroll(updateMove); 
             };
 
-                paginationVisible = false;
+            paginationVisible = false;
         }
     }
 
-    function pagination() {
+    function scrollPagination() {
 
-        let paginationRequest = async () => {
+        let scrollPaginationRequest = async () => {
 
             try {
 
-                let url = scrollWindowElement.dataset.pagination;
-                let lastPage = scrollWindowElement.dataset.lastpage;
+                let pagination = scrollWindowElement.querySelector('.pagination');
+                let url = pagination.dataset.pagination;
+                let lastPage = pagination.dataset.lastpage;
                 let urlParams = new URL(url);
                 let nextPage = parseInt(urlParams.searchParams.get('page'));
+                let updateMove = {
+                    "origin": "mobile", 
+                    "route": window.location.pathname,
+                    "move": "next_elements",
+                    "entity": scrollWindowElement.id,
+                    "page":  nextPage
+                }
 
                 if(nextPage <= lastPage){
 
                     startWait();
-
-                    let updateMove = {
-                        "origin": "mobile", 
-                        "route": window.location.pathname,
-                        "move": "next_elements",
-                        "entity": scrollWindowElement.id,
-                        "page":  nextPage
-                    }
                     
                     await axios.get(url).then(response => {
                         
@@ -190,13 +209,14 @@ export function scrollWindowElement (scrollWindowElement){
                             scrollWindowElement.insertAdjacentHTML('beforeend', response.data.table);
                             ++nextPage;
                             urlParams.searchParams.set('page', nextPage);
-                            scrollWindowElement.dataset.pagination = urlParams.toString();
+                            pagination.dataset.pagination = urlParams.toString();
 
                             renderTable();
                             stopWait();
                             trackingPagination(updateMove);
                         }
                     });
+
                 }
 
             } catch (error) {
@@ -204,7 +224,7 @@ export function scrollWindowElement (scrollWindowElement){
             }
         };
 
-        paginationRequest();
+        return scrollPaginationRequest();
     }
     
     scrollWindowElement.addEventListener('touchstart', this.handleGestureStart, {passive: true} );

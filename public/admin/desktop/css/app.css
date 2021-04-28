@@ -493,6 +493,7 @@ body {
 }
 
 .wrapper {
+  min-height: 100vh;
   width: 100%;
 }
 
@@ -999,6 +1000,40 @@ body {
   padding: 0.5rem 1rem;
 }
 
+.forms-buttons {
+  display: flex;
+  margin: 0 0.5em;
+}
+
+.store-button {
+  cursor: pointer;
+}
+.store-button:hover .store-button-icon {
+  fill: #ff5100;
+}
+.store-button svg {
+  margin: 0 0.5em;
+  width: 2.4em;
+  height: 2.4em;
+}
+.store-button svg .store-button-icon {
+  fill: gray;
+}
+
+.create-button {
+  cursor: pointer;
+}
+.create-button:hover .create-button-icon {
+  fill: #ff5100;
+}
+.create-button svg {
+  width: 2.4em;
+  height: 2.4em;
+}
+.create-button svg .create-button-icon {
+  fill: gray;
+}
+
 .modal-delete {
   background-color: white;
   transform: translateY(-200%);
@@ -1316,16 +1351,7 @@ body {
   position: relative;
   box-shadow: 1px 7px 14px -5px rgba(0, 0, 0, 0.2);
 }
-.messages-container .message.success.message-active {
-  display: block;
-}
-.messages-container .message.info.message-active {
-  display: block;
-}
-.messages-container .message.error.message-active {
-  display: block;
-}
-.messages-container .message.reorder.message-active {
+.messages-container .message.message.message-active {
   display: block;
 }
 .messages-container .message:before {
@@ -1360,6 +1386,12 @@ body {
   background-color: #e04857;
 }
 .messages-container .message.error:before {
+  background-color: #e04857;
+}
+.messages-container .message.validation .message-icon {
+  background-color: #e04857;
+}
+.messages-container .message.validation:before {
   background-color: #e04857;
 }
 .messages-container .message .message-icon {
@@ -1559,30 +1591,11 @@ body {
 
 .tabs-container-buttons {
   display: flex;
-}
-.tabs-container-buttons .crud-buttons-container {
   margin-top: 0.2em;
   padding: 0 0.5em;
 }
-.tabs-container-buttons .crud-buttons-container button {
-  background-color: transparent;
-  border: none;
-}
-.tabs-container-buttons .crud-buttons-container .crud-buttons {
-  outline: none;
-}
-.tabs-container-buttons .crud-buttons-container .crud-buttons svg {
-  width: 2.4em;
-  height: 2.4em;
-}
-.tabs-container-buttons .crud-buttons-container .crud-buttons svg .store-button-icon {
-  fill: gray;
-}
-.tabs-container-buttons .crud-buttons-container .crud-buttons svg .store-button-icon:hover {
-  fill: #ff5100;
-}
 .tabs-container-buttons .switch-container {
-  margin: 0.5em;
+  margin: 0.3em 0.5em;
   position: relative;
 }
 .tabs-container-buttons .switch-container .onoffswitch {
@@ -1615,26 +1628,26 @@ body {
   font-family: "Ubuntu", sans-serif;
   font-size: 14px;
   font-weight: 600;
-  height: 2em;
+  height: 2.2em;
   line-height: 2em;
   padding: 0;
   width: 50%;
 }
 .tabs-container-buttons .switch-container .onoffswitch-inner:before {
   background-color: white;
-  color: #1074bc;
+  color: #02a8b1;
   content: "ON";
   padding-left: 10px;
 }
 .tabs-container-buttons .switch-container .onoffswitch-inner:after {
   background-color: white;
-  color: #474747;
+  color: gray;
   content: "OFF";
   padding-right: 10px;
   text-align: right;
 }
 .tabs-container-buttons .switch-container .onoffswitch-switch {
-  background: #474747;
+  background: gray;
   border: 2px solid white;
   border-radius: 0.4em;
   bottom: 0;
@@ -1646,12 +1659,15 @@ body {
   right: 40px;
   width: 1.6em;
 }
+.tabs-container-buttons .switch-container .onoffswitch-switch:hover {
+  background: #ff5100;
+}
 .tabs-container-buttons .switch-container .onoffswitch-checkbox:checked + .onoffswitch-label .onoffswitch-inner {
   margin-left: 0;
 }
 .tabs-container-buttons .switch-container .onoffswitch-checkbox:checked + .onoffswitch-label .onoffswitch-switch {
   right: 0px;
-  background-color: #1074bc;
+  background-color: #02a8b1;
 }
 
 .tab-panel {

@@ -1998,12 +1998,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _ckeditor__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ckeditor */ "./resources/js/admin/desktop/ckeditor.js");
 /* harmony import */ var _wait__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./wait */ "./resources/js/admin/desktop/wait.js");
 /* harmony import */ var _messages__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./messages */ "./resources/js/admin/desktop/messages.js");
-
-
-function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
-
-function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
-
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -2018,6 +2012,12 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+
+
 
 var table = document.getElementById("table");
 var form = document.getElementById("form");
@@ -2026,6 +2026,8 @@ var renderForm = function renderForm() {
   var labels = document.querySelectorAll('.label-highlight');
   var inputs = document.querySelectorAll('.input-highlight');
   var storeButton = document.getElementById("store-button");
+  var createButton = document.getElementById("create-button");
+  var onOffSwitch = document.getElementById('onoffswitch');
   inputs.forEach(function (input) {
     input.addEventListener('focusin', function () {
       for (var i = 0; i < labels.length; i++) {
@@ -2040,33 +2042,82 @@ var renderForm = function renderForm() {
       }
     });
   });
+  onOffSwitch.addEventListener("click", function () {
+    if (onOffSwitch.value == "true") {
+      onOffSwitch.value = "false";
+    } else {
+      onOffSwitch.value = "true";
+    }
+  });
+  createButton.addEventListener("click", function (event) {
+    var url = createButton.dataset.url;
+
+    var sendCreateRequest = /*#__PURE__*/function () {
+      var _ref = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                (0,_wait__WEBPACK_IMPORTED_MODULE_2__.startWait)();
+                _context.prev = 1;
+                _context.next = 4;
+                return axios.get(url).then(function (response) {
+                  form.innerHTML = response.data.form;
+                  renderForm();
+                  (0,_wait__WEBPACK_IMPORTED_MODULE_2__.stopWait)();
+                });
+
+              case 4:
+                _context.next = 10;
+                break;
+
+              case 6:
+                _context.prev = 6;
+                _context.t0 = _context["catch"](1);
+                (0,_wait__WEBPACK_IMPORTED_MODULE_2__.stopWait)();
+
+                if (_context.t0.response.status == '500') {}
+
+              case 10:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee, null, [[1, 6]]);
+      }));
+
+      return function sendCreateRequest() {
+        return _ref.apply(this, arguments);
+      };
+    }();
+
+    sendCreateRequest();
+  });
   storeButton.addEventListener("click", function (event) {
-    event.preventDefault();
     forms.forEach(function (form) {
       var data = new FormData(form);
+      var url = form.action;
 
       if (ckeditors != 'null') {
-        Object.entries(ckeditors).forEach(function (_ref) {
-          var _ref2 = _slicedToArray(_ref, 2),
-              key = _ref2[0],
-              value = _ref2[1];
+        Object.entries(ckeditors).forEach(function (_ref2) {
+          var _ref3 = _slicedToArray(_ref2, 2),
+              key = _ref3[0],
+              value = _ref3[1];
 
           data.append(key, value.getData());
         });
       }
 
-      var url = form.action;
-
       var sendPostRequest = /*#__PURE__*/function () {
-        var _ref3 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
+        var _ref4 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2() {
           var errors, errorMessage;
-          return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
+          return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee2$(_context2) {
             while (1) {
-              switch (_context.prev = _context.next) {
+              switch (_context2.prev = _context2.next) {
                 case 0:
                   (0,_wait__WEBPACK_IMPORTED_MODULE_2__.startWait)();
-                  _context.prev = 1;
-                  _context.next = 4;
+                  _context2.prev = 1;
+                  _context2.next = 4;
                   return axios.post(url, data).then(function (response) {
                     form.id.value = response.data.id;
                     table.innerHTML = response.data.table;
@@ -2076,34 +2127,35 @@ var renderForm = function renderForm() {
                   });
 
                 case 4:
-                  _context.next = 10;
+                  _context2.next = 11;
                   break;
 
                 case 6:
-                  _context.prev = 6;
-                  _context.t0 = _context["catch"](1);
+                  _context2.prev = 6;
+                  _context2.t0 = _context2["catch"](1);
                   (0,_wait__WEBPACK_IMPORTED_MODULE_2__.stopWait)();
 
-                  if (_context.t0.response.status == '422') {
-                    errors = _context.t0.response.data.errors;
+                  if (_context2.t0.response.status == '422') {
+                    errors = _context2.t0.response.data.errors;
                     errorMessage = '';
                     Object.keys(errors).forEach(function (key) {
                       errorMessage += '<li>' + errors[key] + '</li>';
                     });
-                    (0,_messages__WEBPACK_IMPORTED_MODULE_3__.showMessage)('error', errorMessage); // document.getElementById('error-container').classList.add('active');
-                    // document.getElementById('errors').innerHTML = errorMessage;
+                    (0,_messages__WEBPACK_IMPORTED_MODULE_3__.showMessage)('validation', errorMessage);
                   }
 
-                case 10:
+                  if (_context2.t0.response.status == '500') {}
+
+                case 11:
                 case "end":
-                  return _context.stop();
+                  return _context2.stop();
               }
             }
-          }, _callee, null, [[1, 6]]);
+          }, _callee2, null, [[1, 6]]);
         }));
 
         return function sendPostRequest() {
-          return _ref3.apply(this, arguments);
+          return _ref4.apply(this, arguments);
         };
       }();
 
@@ -2124,37 +2176,37 @@ var renderTable = function renderTable() {
       var url = editButton.dataset.url;
 
       var sendEditRequest = /*#__PURE__*/function () {
-        var _ref4 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2() {
-          return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee2$(_context2) {
+        var _ref5 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee3() {
+          return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee3$(_context3) {
             while (1) {
-              switch (_context2.prev = _context2.next) {
+              switch (_context3.prev = _context3.next) {
                 case 0:
-                  _context2.prev = 0;
-                  _context2.next = 3;
+                  _context3.prev = 0;
+                  _context3.next = 3;
                   return axios.get(url).then(function (response) {
                     form.innerHTML = response.data.form;
                     renderForm();
                   });
 
                 case 3:
-                  _context2.next = 8;
+                  _context3.next = 8;
                   break;
 
                 case 5:
-                  _context2.prev = 5;
-                  _context2.t0 = _context2["catch"](0);
-                  console.error(_context2.t0);
+                  _context3.prev = 5;
+                  _context3.t0 = _context3["catch"](0);
+                  console.error(_context3.t0);
 
                 case 8:
                 case "end":
-                  return _context2.stop();
+                  return _context3.stop();
               }
             }
-          }, _callee2, null, [[0, 5]]);
+          }, _callee3, null, [[0, 5]]);
         }));
 
         return function sendEditRequest() {
-          return _ref4.apply(this, arguments);
+          return _ref5.apply(this, arguments);
         };
       }();
 
@@ -2175,13 +2227,13 @@ var renderTable = function renderTable() {
     var url = deleteConfirm.dataset.url;
 
     var sendDeleteRequest = /*#__PURE__*/function () {
-      var _ref5 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee3() {
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee3$(_context3) {
+      var _ref6 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee4() {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee4$(_context4) {
           while (1) {
-            switch (_context3.prev = _context3.next) {
+            switch (_context4.prev = _context4.next) {
               case 0:
-                _context3.prev = 0;
-                _context3.next = 3;
+                _context4.prev = 0;
+                _context4.next = 3;
                 return axios["delete"](url).then(function (response) {
                   table.innerHTML = response.data.table;
                   modalDelete.classList.remove('open');
@@ -2189,24 +2241,24 @@ var renderTable = function renderTable() {
                 });
 
               case 3:
-                _context3.next = 8;
+                _context4.next = 8;
                 break;
 
               case 5:
-                _context3.prev = 5;
-                _context3.t0 = _context3["catch"](0);
-                console.error(_context3.t0);
+                _context4.prev = 5;
+                _context4.t0 = _context4["catch"](0);
+                console.error(_context4.t0);
 
               case 8:
               case "end":
-                return _context3.stop();
+                return _context4.stop();
             }
           }
-        }, _callee3, null, [[0, 5]]);
+        }, _callee4, null, [[0, 5]]);
       }));
 
       return function sendDeleteRequest() {
-        return _ref5.apply(this, arguments);
+        return _ref6.apply(this, arguments);
       };
     }();
 
@@ -2217,37 +2269,37 @@ var renderTable = function renderTable() {
       var url = paginationButton.dataset.pagination;
 
       var sendPaginationRequest = /*#__PURE__*/function () {
-        var _ref6 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee4() {
-          return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee4$(_context4) {
+        var _ref7 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee5() {
+          return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee5$(_context5) {
             while (1) {
-              switch (_context4.prev = _context4.next) {
+              switch (_context5.prev = _context5.next) {
                 case 0:
-                  _context4.prev = 0;
-                  _context4.next = 3;
+                  _context5.prev = 0;
+                  _context5.next = 3;
                   return axios.get(url).then(function (response) {
                     table.innerHTML = response.data.table;
                     renderTable();
                   });
 
                 case 3:
-                  _context4.next = 8;
+                  _context5.next = 8;
                   break;
 
                 case 5:
-                  _context4.prev = 5;
-                  _context4.t0 = _context4["catch"](0);
-                  console.error(_context4.t0);
+                  _context5.prev = 5;
+                  _context5.t0 = _context5["catch"](0);
+                  console.error(_context5.t0);
 
                 case 8:
                 case "end":
-                  return _context4.stop();
+                  return _context5.stop();
               }
             }
-          }, _callee4, null, [[0, 5]]);
+          }, _callee5, null, [[0, 5]]);
         }));
 
         return function sendPaginationRequest() {
-          return _ref6.apply(this, arguments);
+          return _ref7.apply(this, arguments);
         };
       }();
 

@@ -16,9 +16,10 @@ class CreateTFaqs extends Migration
         Schema::create('t_faqs', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name', 255);
-            $table->boolean('active')->default(false);
             $table->unsignedInteger('category_id');
             $table->integer('order')->default(0);
+            $table->boolean('visible');
+            $table->boolean('active');
             $table->timestamps();
         });
     }

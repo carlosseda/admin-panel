@@ -21,19 +21,7 @@
 		position:relative;
 		box-shadow: 1px 7px 14px -5px rgba(0,0,0,0.2);
 
-		&.success.message-active{
-			display: block;
-		}
-
-		&.info.message-active{
-			display: block;
-		}
-
-		&.error.message-active{
-			display: block;
-		}
-
-		&.reorder.message-active{
+		&.message.message-active{
 			display: block;
 		}
 
@@ -77,6 +65,14 @@
 		}
 		  
 		&.error:before{
+			background-color: $message-error;
+		}
+
+		&.validation .message-icon{
+			background-color: $message-error;
+		}
+		  
+		&.validation:before{
 			background-color: $message-error;
 		}
 

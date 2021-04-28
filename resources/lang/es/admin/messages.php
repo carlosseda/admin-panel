@@ -4,6 +4,7 @@ return array (
   'message-type-success' => 'Acción realizada con éxito',
   'message-type-info' => 'Información del sistema',
   'message-type-error' => 'Error en el servidor',
+  'message-type-validation' => 'Formulario incompleto',
   'message-description-error' => 'Puede consultar el error en su navegador pulsando F12 y yendo a la pestaña consola.',
   'message-type-info-reorder' => 'Modo reordenación activado',
   'message-description-info-reorder' => 'Puede cambiar el orden en el que aparecerán los elementos en la web arrastrando las filas de la tabla.',

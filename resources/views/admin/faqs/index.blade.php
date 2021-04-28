@@ -10,11 +10,6 @@
     
     @isset($faqs)
 
-        @php
-            $pagination = $faqs->nextPageUrl();
-            $last_page = $faqs->lastPage()   
-        @endphp
-
         <div id="table-container">
             @foreach($faqs as $faq_element)
                 <div class="table-row swipe-element">
@@ -41,9 +36,7 @@
             @endforeach
         </div>
 
-        @if($agent->isDesktop())
-            @include('admin.components.table_pagination', ['items' => $faqs])
-        @endif
+        @include('admin.components.table_pagination', ['items' => $faqs])
         
     @endif
 
@@ -71,16 +64,9 @@
                     </div>
                     
                     <div class="tabs-container-buttons">
-                        <div class="nav-tabs-container-buttons">
-                            <div class="crud-buttons-container">
-                                <button class="crud-buttons" id="store-button" class="btn btn-main"> 
-                                    <svg viewBox="0 0 24 24">
-                                        <path d="M0 0h24v24H0z" fill="none"/>
-                                        <path class="store-button-icon" d="M17 3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V7l-4-4zm-5 16c-1.66 0-3-1.34-3-3s1.34-3 3-3 3 1.34 3 3-1.34 3-3 3zm3-10H5V5h10v4z"/>
-                                    </svg>
-                                </button>
-                            </div>
-                        </div>  
+                        
+                        @include('admin.components.form_buttons', ['route' => $route])
+                        
                     </div>
                 </div>
                 
@@ -128,12 +114,5 @@
     @endif  
 
 @endsection
-
-
-
-
-
-
-    
 
 

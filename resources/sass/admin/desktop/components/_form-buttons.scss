@@ -1,0 +1,47 @@
+.forms-buttons{
+    display: flex;
+    margin: 0 0.5em;
+}
+
+.store-button{
+
+    cursor: pointer;
+
+    &:hover{
+
+        .store-button-icon{
+            fill: hsl(19, 100%, 50%);
+        }
+    }
+
+    svg{
+        margin: 0 0.5em;
+        width: 2.4em; 
+        height: 2.4em;
+        
+        .store-button-icon{
+            fill: hsl(0, 0%, 50%);
+        } 
+    }
+}
+
+.create-button{
+
+    cursor: pointer;
+
+    &:hover{
+
+        .create-button-icon{
+            fill: hsl(19, 100%, 50%);
+        }
+    }
+
+    svg{
+        width: 2.4em; 
+        height: 2.4em;
+        
+        .create-button-icon{
+            fill: hsl(0, 0%, 50%);
+        } 
+    }
+}

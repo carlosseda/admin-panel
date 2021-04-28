@@ -1,18 +1,21 @@
 import {renderCkeditor} from './ckeditor';
 import {swipeRevealItem} from './swipe';
 import {scrollWindowElement} from './verticalScroll';
+import {startWait, stopWait} from './wait';
+import {showMessage} from './messages';
 import {showForm} from './bottombarMenu';
 
 const table = document.getElementById("table");
 const form = document.getElementById("form");
-const closeErrorsButton = document.getElementById("close-errors-button");
 
 export let renderForm = () => {
 
     let forms = document.querySelectorAll(".admin-form");
     let labels = document.querySelectorAll('.label-highlight');
     let inputs = document.querySelectorAll('.input-highlight');
-    let storeButton = document.getElementById("store-button");
+    let storeButton = document.getElementById('store-button');
+    let createButton = document.getElementById("create-button");
+    let onOffSwitch = document.getElementById('onoffswitch');
 
     inputs.forEach(input => {
 
@@ -31,6 +34,44 @@ export let renderForm = () => {
                 labels[i].classList.remove("active");
             }
         });
+    });
+
+    onOffSwitch.addEventListener("click", () => {
+        
+        if(onOffSwitch.value == true){
+            onOffSwitch.value = false;
+        }else{
+            onOffSwitch.value = true;
+        }
+    });
+
+    createButton.addEventListener("click", (event) => {
+
+        let url = createButton.dataset.url;
+
+        let sendCreateRequest = async () => {
+
+            startWait();
+
+            try {
+                await axios.get(url).then(response => {
+
+                    form.innerHTML = response.data.form;
+                    renderForm();
+                    stopWait();
+                });
+                
+            } catch (error) {
+
+                stopWait();
+
+                if(error.response.status == '500'){
+                
+                }
+            }
+        };
+
+        sendCreateRequest();
     });
     
     storeButton.addEventListener("click", (event) => {

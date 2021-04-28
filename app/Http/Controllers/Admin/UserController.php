@@ -86,7 +86,7 @@ class UserController extends Controller
         ]);
     }
 
-    public function edit(user $user)
+    public function edit(User $user)
     {
         $view = View::make('admin.users.index')
         ->with('user', $user)
@@ -104,11 +104,11 @@ class UserController extends Controller
         return $view;
     }
 
-    public function show(user $user){
+    public function show(User $user){
 
     }
 
-    public function destroy(user $user)
+    public function destroy(User $user)
     {
         $user->active = 0;
         $user->save();

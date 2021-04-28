@@ -36,35 +36,6 @@
 
     display: flex;
 
-    .crud-buttons-container{
-
-        margin-top: 0.2em;
-        padding: 0 0.5em;
-
-        button{
-            background-color: transparent;
-            border: none;
-        }
-
-        .crud-buttons{
-
-            outline: none;
-    
-            svg{
-                width: 2.4em; 
-                height: 2.4em;
-                
-                .store-button-icon{
-                    fill: hsl(0, 0%, 50%);
-                }
-
-                .store-button-icon:hover{
-                    fill: hsl(19, 100%, 50%);
-                }
-            }
-        }
-    }
-
     .switch-container{
 
         margin: 0.5em;
@@ -104,7 +75,7 @@
             font-family: $font-stack;
             font-size: 14px;
             font-weight: 600;
-            height: 2em;
+            height: 2.2em;
             line-height: 2em;
             padding: 0;
             width: 50%;
@@ -112,7 +83,7 @@
 
         .onoffswitch-inner:before {
             background-color: $white;
-            color: $interaction-color;
+            color: hsl(183, 98%, 35%);
             content: "ON";
             padding-left: 10px;
 
@@ -120,14 +91,14 @@
 
         .onoffswitch-inner:after {
             background-color: $white;
-            color: $grey-dark;
+            color: hsl(0, 0%, 50%);;
             content: "OFF";
             padding-right: 10px;
             text-align: right;
         }
 
         .onoffswitch-switch {
-            background: $grey-dark;
+            background: hsl(0, 0%, 50%);;
             border: 2px solid white;
             border-radius: 0.4em;
             bottom: 0;
@@ -145,7 +116,7 @@
         }
         .onoffswitch-checkbox:checked + .onoffswitch-label .onoffswitch-switch {
             right: 0px;
-            background-color: $interaction-color;
+            background-color: hsl(183, 98%, 35%);
         }
     }
 }

@@ -1,7 +1,6 @@
 .table{
     display: none;
     height: max-content;
-    overflow: scroll;
     position: relative;
     transition: all 300ms ease-out;
     width: 100%;
@@ -9,10 +8,6 @@
     &.active{
         display: block;
     }
-}
-
-.table-container{
-    height: 70vh;
 }
 
 .table-row {

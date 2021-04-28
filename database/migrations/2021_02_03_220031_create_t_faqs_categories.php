@@ -16,7 +16,7 @@ class CreateTFaqsCategories extends Migration
         Schema::create('t_faqs_categories', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name', 255);
-            $table->boolean('active')->default(false);
+            $table->boolean('active');
             $table->timestamps();
         });
     }

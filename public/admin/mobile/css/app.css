@@ -499,7 +499,7 @@ body {
 }
 
 .main-content {
-  height: 80vh;
+  height: 75vh;
   position: relative;
   top: 10vh;
   width: 100%;
@@ -643,17 +643,12 @@ body {
   height: -webkit-max-content;
   height: -moz-max-content;
   height: max-content;
-  overflow: scroll;
   position: relative;
   transition: all 300ms ease-out;
   width: 100%;
 }
 .table.active {
   display: block;
-}
-
-.table-container {
-  height: 70vh;
 }
 
 .table-row {
@@ -1065,6 +1060,30 @@ body {
   padding: 0.5rem 1rem;
 }
 
+.forms-buttons {
+  display: flex;
+}
+
+.forms-buttons .form-button {
+  margin: 0.3em 0.5em;
+}
+.forms-buttons .form-button:active .store-button-icon {
+  fill: #253788;
+}
+.forms-buttons .form-button:active .create-button-icon {
+  fill: #253788;
+}
+.forms-buttons .form-button svg {
+  width: 2.4em;
+  height: 2.4em;
+}
+.forms-buttons .form-button svg .store-button-icon {
+  fill: gray;
+}
+.forms-buttons .form-button svg .create-button-icon {
+  fill: gray;
+}
+
 .table-filter {
   height: -webkit-max-content;
   height: -moz-max-content;
@@ -1297,7 +1316,7 @@ body {
   right: 0;
   position: fixed;
   top: 45vh;
-  width: 5%;
+  width: 20%;
   z-index: 3001;
 }
 .spinner.spinner-active svg {
@@ -1679,27 +1698,6 @@ body {
 .tabs-container-buttons {
   display: flex;
 }
-.tabs-container-buttons .crud-buttons-container {
-  margin-top: 0.2em;
-  padding: 0 0.5em;
-}
-.tabs-container-buttons .crud-buttons-container button {
-  background-color: transparent;
-  border: none;
-}
-.tabs-container-buttons .crud-buttons-container .crud-buttons {
-  outline: none;
-}
-.tabs-container-buttons .crud-buttons-container .crud-buttons svg {
-  width: 2.4em;
-  height: 2.4em;
-}
-.tabs-container-buttons .crud-buttons-container .crud-buttons svg .store-button-icon {
-  fill: gray;
-}
-.tabs-container-buttons .crud-buttons-container .crud-buttons svg .store-button-icon:hover {
-  fill: #ff5100;
-}
 .tabs-container-buttons .switch-container {
   margin: 0.5em;
   position: relative;
@@ -1734,26 +1732,26 @@ body {
   font-family: "Ubuntu", sans-serif;
   font-size: 14px;
   font-weight: 600;
-  height: 2em;
+  height: 2.2em;
   line-height: 2em;
   padding: 0;
   width: 50%;
 }
 .tabs-container-buttons .switch-container .onoffswitch-inner:before {
   background-color: white;
-  color: #1074bc;
+  color: #02a8b1;
   content: "ON";
   padding-left: 10px;
 }
 .tabs-container-buttons .switch-container .onoffswitch-inner:after {
   background-color: white;
-  color: #474747;
+  color: gray;
   content: "OFF";
   padding-right: 10px;
   text-align: right;
 }
 .tabs-container-buttons .switch-container .onoffswitch-switch {
-  background: #474747;
+  background: gray;
   border: 2px solid white;
   border-radius: 0.4em;
   bottom: 0;
@@ -1770,7 +1768,7 @@ body {
 }
 .tabs-container-buttons .switch-container .onoffswitch-checkbox:checked + .onoffswitch-label .onoffswitch-switch {
   right: 0px;
-  background-color: #1074bc;
+  background-color: #02a8b1;
 }
 
 .tab-panel {

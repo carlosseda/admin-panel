@@ -1,0 +1,32 @@
+.forms-buttons{
+    display: flex;
+}
+
+.forms-buttons .form-button{
+
+    margin: 0.3em 0.5em;
+
+    &:active{
+
+        .store-button-icon{
+            fill: hsl(229, 57%, 34%);
+        } 
+        
+        .create-button-icon{
+            fill: hsl(229, 57%, 34%);
+        } 
+    }
+
+    svg{
+        width: 2.4em; 
+        height: 2.4em;
+        
+        .store-button-icon{
+            fill: hsl(0, 0%, 50%);
+        } 
+
+        .create-button-icon{
+            fill: hsl(0, 0%, 50%);
+        } 
+    }
+}

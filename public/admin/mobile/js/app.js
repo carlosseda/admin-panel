@@ -1975,13 +1975,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _ckeditor__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ckeditor */ "./resources/js/admin/mobile/ckeditor.js");
 /* harmony import */ var _swipe__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./swipe */ "./resources/js/admin/mobile/swipe.js");
 /* harmony import */ var _verticalScroll__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./verticalScroll */ "./resources/js/admin/mobile/verticalScroll.js");
-/* harmony import */ var _bottombarMenu__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./bottombarMenu */ "./resources/js/admin/mobile/bottombarMenu.js");
-
-
-function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
-
-function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
-
+/* harmony import */ var _wait__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./wait */ "./resources/js/admin/mobile/wait.js");
+/* harmony import */ var _messages__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./messages */ "./resources/js/admin/mobile/messages.js");
+/* harmony import */ var _bottombarMenu__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./bottombarMenu */ "./resources/js/admin/mobile/bottombarMenu.js");
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -1996,16 +1992,25 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+
+
+
+
 
 
 var table = document.getElementById("table");
 var form = document.getElementById("form");
-var closeErrorsButton = document.getElementById("close-errors-button");
 var renderForm = function renderForm() {
   var forms = document.querySelectorAll(".admin-form");
   var labels = document.querySelectorAll('.label-highlight');
   var inputs = document.querySelectorAll('.input-highlight');
-  var storeButton = document.getElementById("store-button");
+  var storeButton = document.getElementById('store-button');
+  var createButton = document.getElementById("create-button");
+  var onOffSwitch = document.getElementById('onoffswitch');
   inputs.forEach(function (input) {
     input.addEventListener('focusin', function () {
       for (var i = 0; i < labels.length; i++) {
@@ -2020,16 +2025,67 @@ var renderForm = function renderForm() {
       }
     });
   });
+  onOffSwitch.addEventListener("click", function () {
+    if (onOffSwitch.value == true) {
+      onOffSwitch.value = false;
+    } else {
+      onOffSwitch.value = true;
+    }
+  });
+  createButton.addEventListener("click", function (event) {
+    var url = createButton.dataset.url;
+
+    var sendCreateRequest = /*#__PURE__*/function () {
+      var _ref = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                (0,_wait__WEBPACK_IMPORTED_MODULE_4__.startWait)();
+                _context.prev = 1;
+                _context.next = 4;
+                return axios.get(url).then(function (response) {
+                  form.innerHTML = response.data.form;
+                  renderForm();
+                  (0,_wait__WEBPACK_IMPORTED_MODULE_4__.stopWait)();
+                });
+
+              case 4:
+                _context.next = 10;
+                break;
+
+              case 6:
+                _context.prev = 6;
+                _context.t0 = _context["catch"](1);
+                (0,_wait__WEBPACK_IMPORTED_MODULE_4__.stopWait)();
+
+                if (_context.t0.response.status == '500') {}
+
+              case 10:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee, null, [[1, 6]]);
+      }));
+
+      return function sendCreateRequest() {
+        return _ref.apply(this, arguments);
+      };
+    }();
+
+    sendCreateRequest();
+  });
   storeButton.addEventListener("click", function (event) {
     event.preventDefault();
     forms.forEach(function (form) {
       var data = new FormData(form);
 
       if (ckeditors != 'null') {
-        Object.entries(ckeditors).forEach(function (_ref) {
-          var _ref2 = _slicedToArray(_ref, 2),
-              key = _ref2[0],
-              value = _ref2[1];
+        Object.entries(ckeditors).forEach(function (_ref2) {
+          var _ref3 = _slicedToArray(_ref2, 2),
+              key = _ref3[0],
+              value = _ref3[1];
 
           data.append(key, value.getData());
         });
@@ -2038,14 +2094,14 @@ var renderForm = function renderForm() {
       var url = form.action;
 
       var sendPostRequest = /*#__PURE__*/function () {
-        var _ref3 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
+        var _ref4 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2() {
           var errors, errorMessage;
-          return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
+          return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee2$(_context2) {
             while (1) {
-              switch (_context.prev = _context.next) {
+              switch (_context2.prev = _context2.next) {
                 case 0:
-                  _context.prev = 0;
-                  _context.next = 3;
+                  _context2.prev = 0;
+                  _context2.next = 3;
                   return axios.post(url, data).then(function (response) {
                     form.id.value = response.data.id;
                     table.innerHTML = response.data.table;
@@ -2053,15 +2109,15 @@ var renderForm = function renderForm() {
                   });
 
                 case 3:
-                  _context.next = 8;
+                  _context2.next = 8;
                   break;
 
                 case 5:
-                  _context.prev = 5;
-                  _context.t0 = _context["catch"](0);
+                  _context2.prev = 5;
+                  _context2.t0 = _context2["catch"](0);
 
-                  if (_context.t0.response.status == '422') {
-                    errors = _context.t0.response.data.errors;
+                  if (_context2.t0.response.status == '422') {
+                    errors = _context2.t0.response.data.errors;
                     errorMessage = '';
                     Object.keys(errors).forEach(function (key) {
                       errorMessage += '<li>' + errors[key] + '</li>';
@@ -2072,14 +2128,14 @@ var renderForm = function renderForm() {
 
                 case 8:
                 case "end":
-                  return _context.stop();
+                  return _context2.stop();
               }
             }
-          }, _callee, null, [[0, 5]]);
+          }, _callee2, null, [[0, 5]]);
         }));
 
         return function sendPostRequest() {
-          return _ref3.apply(this, arguments);
+          return _ref4.apply(this, arguments);
         };
       }();
 
@@ -2105,38 +2161,38 @@ var deleteElement = function deleteElement(url) {
 };
 var editElement = function editElement(url) {
   var sendEditRequest = /*#__PURE__*/function () {
-    var _ref4 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2() {
-      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee2$(_context2) {
+    var _ref5 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee3() {
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee3$(_context3) {
         while (1) {
-          switch (_context2.prev = _context2.next) {
+          switch (_context3.prev = _context3.next) {
             case 0:
-              (0,_bottombarMenu__WEBPACK_IMPORTED_MODULE_4__.showForm)();
-              _context2.prev = 1;
-              _context2.next = 4;
+              (0,_bottombarMenu__WEBPACK_IMPORTED_MODULE_6__.showForm)();
+              _context3.prev = 1;
+              _context3.next = 4;
               return axios.get(url).then(function (response) {
                 form.innerHTML = response.data.form;
                 renderForm();
               });
 
             case 4:
-              _context2.next = 9;
+              _context3.next = 9;
               break;
 
             case 6:
-              _context2.prev = 6;
-              _context2.t0 = _context2["catch"](1);
-              console.error(_context2.t0);
+              _context3.prev = 6;
+              _context3.t0 = _context3["catch"](1);
+              console.error(_context3.t0);
 
             case 9:
             case "end":
-              return _context2.stop();
+              return _context3.stop();
           }
         }
-      }, _callee2, null, [[1, 6]]);
+      }, _callee3, null, [[1, 6]]);
     }));
 
     return function sendEditRequest() {
-      return _ref4.apply(this, arguments);
+      return _ref5.apply(this, arguments);
     };
   }();
 
@@ -2318,6 +2374,48 @@ var sendFingerprintRequest = /*#__PURE__*/function () {
 }();
 
 sendFingerprintRequest();
+
+/***/ }),
+
+/***/ "./resources/js/admin/mobile/messages.js":
+/*!***********************************************!*\
+  !*** ./resources/js/admin/mobile/messages.js ***!
+  \***********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "showMessage": () => (/* binding */ showMessage)
+/* harmony export */ });
+var closeButtons = document.querySelectorAll('.message-close');
+var messagesContainer = document.getElementById('messages-container');
+var messages = document.querySelectorAll('.message');
+var showMessage = function showMessage(state, messageText) {
+  messages.forEach(function (message) {
+    if (message.classList.contains(state)) {
+      var successMessage = document.getElementById('message-description-' + state);
+      messagesContainer.classList.add('show');
+      message.classList.add('message-active');
+      successMessage.innerHTML = messageText;
+      setTimeout(function () {
+        messagesContainer.classList.remove('show');
+        message.classList.remove('message-active');
+      }, 7000);
+    }
+
+    ;
+  });
+};
+closeButtons.forEach(function (closeButton) {
+  closeButton.addEventListener("click", function () {
+    messagesContainer.classList.remove('show');
+    var messagesActives = document.querySelectorAll('.message-active');
+    messagesActives.forEach(function (messageActive) {
+      messageActive.classList.remove('message-active');
+    });
+  });
+});
 
 /***/ }),
 
@@ -2815,6 +2913,7 @@ function scrollWindowElement(scrollWindowElement) {
   var lastTouchPos = null;
   var currentYPosition = 0;
   var paginationVisible = false;
+  var parentElementHeight = scrollWindowElement.parentElement.getBoundingClientRect().height;
 
   this.handleGestureStart = function (evt) {
     if (evt.touches && evt.touches.length > 1) {
@@ -2886,6 +2985,7 @@ function scrollWindowElement(scrollWindowElement) {
     var differenceInY = initialTouchPos.y - lastTouchPos.y;
     var newYTransform = currentYPosition - differenceInY;
     var transformStyle = newYTransform + 'px';
+    var offsetBottom = scrollWindowElement.getBoundingClientRect().height + scrollWindowElement.offsetTop;
 
     if (differenceInY < 1) {
       if (scrollWindowElement.style.top > 0 + 'px') {
@@ -2897,12 +2997,14 @@ function scrollWindowElement(scrollWindowElement) {
         scrollWindowElement.style.top = transformStyle;
       }
     } else {
-      scrollWindowElement.style.top = transformStyle;
+      if (offsetBottom > parentElementHeight) {
+        scrollWindowElement.style.top = transformStyle;
+      }
     }
 
     if (scrollWindowElement.getBoundingClientRect().bottom < window.innerHeight) {
       if (!paginationVisible) {
-        pagination();
+        scrollPagination();
         paginationVisible = true;
       }
     }
@@ -2912,9 +3014,19 @@ function scrollWindowElement(scrollWindowElement) {
   }
 
   function updateScrollRestPosition() {
+    var offsetBottom = scrollWindowElement.getBoundingClientRect().height + scrollWindowElement.offsetTop;
+
     if (scrollWindowElement.style.top < 0 + 'px') {
       var differenceInY = initialTouchPos.y - lastTouchPos.y;
-      currentYPosition = currentYPosition - differenceInY;
+
+      if (offsetBottom > parentElementHeight) {
+        currentYPosition = currentYPosition - differenceInY;
+      } else {
+        if (!paginationVisible) {
+          scrollPagination();
+          paginationVisible = true;
+        }
+      }
 
       if (differenceInY > 0) {
         var updateMove = {
@@ -2943,26 +3055,20 @@ function scrollWindowElement(scrollWindowElement) {
     }
   }
 
-  function pagination() {
-    var paginationRequest = /*#__PURE__*/function () {
+  function scrollPagination() {
+    var scrollPaginationRequest = /*#__PURE__*/function () {
       var _ref = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
-        var url, lastPage, urlParams, nextPage, updateMove;
+        var pagination, url, lastPage, urlParams, nextPage, updateMove;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
                 _context.prev = 0;
-                url = scrollWindowElement.dataset.pagination;
-                lastPage = scrollWindowElement.dataset.lastpage;
+                pagination = scrollWindowElement.querySelector('.pagination');
+                url = pagination.dataset.pagination;
+                lastPage = pagination.dataset.lastpage;
                 urlParams = new URL(url);
                 nextPage = parseInt(urlParams.searchParams.get('page'));
-
-                if (!(nextPage <= lastPage)) {
-                  _context.next = 10;
-                  break;
-                }
-
-                (0,_wait__WEBPACK_IMPORTED_MODULE_1__.startWait)();
                 updateMove = {
                   "origin": "mobile",
                   "route": window.location.pathname,
@@ -2970,42 +3076,49 @@ function scrollWindowElement(scrollWindowElement) {
                   "entity": scrollWindowElement.id,
                   "page": nextPage
                 };
-                _context.next = 10;
+
+                if (!(nextPage <= lastPage)) {
+                  _context.next = 11;
+                  break;
+                }
+
+                (0,_wait__WEBPACK_IMPORTED_MODULE_1__.startWait)();
+                _context.next = 11;
                 return axios.get(url).then(function (response) {
                   if (updateMove.entity = 'table') {
                     scrollWindowElement.insertAdjacentHTML('beforeend', response.data.table);
                     ++nextPage;
                     urlParams.searchParams.set('page', nextPage);
-                    scrollWindowElement.dataset.pagination = urlParams.toString();
+                    pagination.dataset.pagination = urlParams.toString();
                     (0,_crudTable__WEBPACK_IMPORTED_MODULE_3__.renderTable)();
                     (0,_wait__WEBPACK_IMPORTED_MODULE_1__.stopWait)();
                     (0,_tracking__WEBPACK_IMPORTED_MODULE_2__.trackingPagination)(updateMove);
                   }
                 });
 
-              case 10:
-                _context.next = 15;
+              case 11:
+                _context.next = 16;
                 break;
 
-              case 12:
-                _context.prev = 12;
+              case 13:
+                _context.prev = 13;
                 _context.t0 = _context["catch"](0);
                 console.error(_context.t0);
 
-              case 15:
+              case 16:
               case "end":
                 return _context.stop();
             }
           }
-        }, _callee, null, [[0, 12]]);
+        }, _callee, null, [[0, 13]]);
       }));
 
-      return function paginationRequest() {
+      return function scrollPaginationRequest() {
         return _ref.apply(this, arguments);
       };
     }();
 
-    paginationRequest();
+    return scrollPaginationRequest();
   }
 
   scrollWindowElement.addEventListener('touchstart', this.handleGestureStart, {

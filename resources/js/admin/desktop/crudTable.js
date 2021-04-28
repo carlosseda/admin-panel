@@ -11,6 +11,8 @@ export let renderForm = () => {
     let labels = document.querySelectorAll('.label-highlight');
     let inputs = document.querySelectorAll('.input-highlight');
     let storeButton = document.getElementById("store-button");
+    let createButton = document.getElementById("create-button");
+    let onOffSwitch = document.getElementById('onoffswitch');
 
     inputs.forEach(input => {
 
@@ -30,14 +32,51 @@ export let renderForm = () => {
             }
         });
     });
-    
-    storeButton.addEventListener("click", (event) => {
 
-        event.preventDefault();
+    onOffSwitch.addEventListener("click", () => {
+
+        if(onOffSwitch.value == "true"){
+            onOffSwitch.value = "false";
+        }else{
+            onOffSwitch.value = "true";
+        }
+    });
+
+    createButton.addEventListener("click", (event) => {
+
+        let url = createButton.dataset.url;
+
+        let sendCreateRequest = async () => {
+
+            startWait();
+
+            try {
+                await axios.get(url).then(response => {
+
+                    form.innerHTML = response.data.form;
+                    renderForm();
+                    stopWait();
+                });
+                
+            } catch (error) {
+
+                stopWait();
+
+                if(error.response.status == '500'){
+                
+                }
+            }
+        };
+
+        sendCreateRequest();
+    });
+
+    storeButton.addEventListener("click", (event) => {
     
         forms.forEach(form => { 
             
             let data = new FormData(form);
+            let url = form.action;
 
             if( ckeditors != 'null'){
 
@@ -46,8 +85,6 @@ export let renderForm = () => {
                 });
             }
 
-            let url = form.action;
-    
             let sendPostRequest = async () => {
 
                 startWait();
@@ -76,10 +113,11 @@ export let renderForm = () => {
                             errorMessage += '<li>' + errors[key] + '</li>';
                         })
         
-                        showMessage('error', errorMessage);
+                        showMessage('validation', errorMessage);
+                    }
 
-                        // document.getElementById('error-container').classList.add('active');
-                        // document.getElementById('errors').innerHTML = errorMessage;
+                    if(error.response.status == '500'){
+                    
                     }
                 }
             };

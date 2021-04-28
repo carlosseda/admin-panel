@@ -2,7 +2,7 @@
 
 @section('content')
 
-    <div class="table active" id="table" data-pagination="{{$pagination}}" data-lastpage="{{$last_page}}">
+    <div class="table active" id="table">
         @yield('table')
     </div>
 

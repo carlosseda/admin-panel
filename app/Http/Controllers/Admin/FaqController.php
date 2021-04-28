@@ -19,6 +19,8 @@ class FaqController extends Controller
         $this->middleware('auth');
         $this->agent = $agent;
         $this->faq = $faq;
+
+        $this->faq->visible = 1;
     }
 
     public function index()
@@ -28,6 +30,7 @@ class FaqController extends Controller
             $view = View::make('admin.faqs.index')
             ->with('faq', $this->faq)
             ->with('faqs', $this->faq->where('active', 1)
+            ->orderBy('created_at', 'desc')
             ->paginate(10));
         }
 
@@ -35,6 +38,7 @@ class FaqController extends Controller
             $view = View::make('admin.faqs.index')
             ->with('faq', $this->faq)
             ->with('faqs', $this->faq->where('active', 1)
+            ->orderBy('created_at', 'desc')
             ->paginate(6));
         }
     
@@ -70,6 +74,7 @@ class FaqController extends Controller
             'id' => request('id')],[
             'name' => request('name'),
             'active' => 1,
+            'visible' => request('visible') == "true" ? 1 : 0 ,
             'category_id' => request('category_id'),
         ]);
 
@@ -81,14 +86,14 @@ class FaqController extends Controller
 
         if($this->agent->isMobile()){
             $view = View::make('admin.faqs.index')
-            ->with('faqs', $this->faq->where('active', 1)->paginate(10))
+            ->with('faqs', $this->faq->where('active', 1)->orderBy('created_at', 'desc')->paginate(10))
             ->with('faq', $faq)
             ->renderSections();        
         }
 
         if($this->agent->isDesktop()){
             $view = View::make('admin.faqs.index')
-            ->with('faqs', $this->faq->where('active', 1)->paginate(6))
+            ->with('faqs', $this->faq->where('active', 1)->orderBy('created_at', 'desc')->paginate(6))
             ->with('faq', $faq)
             ->renderSections();        
         }
@@ -106,13 +111,13 @@ class FaqController extends Controller
         if($this->agent->isMobile()){
             $view = View::make('admin.faqs.index')
             ->with('faq', $faq)
-            ->with('faqs', $this->faq->where('active', 1)->paginate(10));        
+            ->with('faqs', $this->faq->where('active', 1)->orderBy('created_at', 'desc')->paginate(10));        
         }
 
         if($this->agent->isDesktop()){
             $view = View::make('admin.faqs.index')
             ->with('faq', $faq)
-            ->with('faqs', $this->faq->where('active', 1)->paginate(6));        
+            ->with('faqs', $this->faq->where('active', 1)->orderBy('created_at', 'desc')->paginate(6));        
         }
         
         if(request()->ajax()) {
@@ -143,14 +148,14 @@ class FaqController extends Controller
         if($this->agent->isMobile()){
             $view = View::make('admin.faqs.index')
             ->with('faq', $this->faq)
-            ->with('faqs', $this->faq->where('active', 1)->paginate(10))
+            ->with('faqs', $this->faq->where('active', 1)->orderBy('created_at', 'desc')->paginate(10))
             ->renderSections();        
         }
 
         if($this->agent->isDesktop()){
             $view = View::make('admin.faqs.index')
             ->with('faq', $this->faq)
-            ->with('faqs', $this->faq->where('active', 1)->paginate(6))
+            ->with('faqs', $this->faq->where('active', 1)->orderBy('created_at', 'desc')->paginate(6))
             ->renderSections();        
         }
         
@@ -212,12 +217,12 @@ class FaqController extends Controller
         
         if($this->agent->isMobile()){
             $faqs = $query->join('t_faqs_categories', 't_faqs.category_id', '=', 't_faqs_categories.id')
-            ->where('t_faqs.active', 1)->paginate(10);  
+            ->where('t_faqs.active', 1)->orderBy('created_at', 'desc')->paginate(10);  
         }
 
         if($this->agent->isDesktop()){
             $faqs = $query->join('t_faqs_categories', 't_faqs.category_id', '=', 't_faqs_categories.id')
-            ->where('t_faqs.active', 1)->paginate(6);   
+            ->where('t_faqs.active', 1)->orderBy('created_at', 'desc')->paginate(6);   
         }
 
         $view = View::make('admin.faqs.index')
@@ -227,9 +232,5 @@ class FaqController extends Controller
         return response()->json([
             'table' => $view['table'],
         ]);
-    }
-
-    public function filterPagination(){
-        
     }
 }
