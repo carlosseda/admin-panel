@@ -60,6 +60,9 @@ Route::group(['prefix' => 'admin'], function () {
   
     Route::get('/faqs/filter/{filters?}', 'App\Http\Controllers\Admin\FaqController@filter')->name('faqs_filter');
     Route::resource('faqs', 'App\Http\Controllers\Admin\FaqController', [
+        'parameters' => [
+            'faqs' => 'faq', 
+        ],
         'names' => [
             'index' => 'faqs',
             'create' => 'faqs_create',

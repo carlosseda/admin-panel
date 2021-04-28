@@ -2105,6 +2105,8 @@ var renderForm = function renderForm() {
                   return axios.post(url, data).then(function (response) {
                     form.id.value = response.data.id;
                     table.innerHTML = response.data.table;
+                    (0,_wait__WEBPACK_IMPORTED_MODULE_4__.stopWait)();
+                    (0,_messages__WEBPACK_IMPORTED_MODULE_5__.showMessage)('success', response.data.message);
                     renderTable();
                   });
 
@@ -2122,8 +2124,7 @@ var renderForm = function renderForm() {
                     Object.keys(errors).forEach(function (key) {
                       errorMessage += '<li>' + errors[key] + '</li>';
                     });
-                    document.getElementById('error-container').classList.add('active');
-                    document.getElementById('errors').innerHTML = errorMessage;
+                    (0,_messages__WEBPACK_IMPORTED_MODULE_5__.showMessage)('validation', errorMessage);
                   }
 
                 case 8:

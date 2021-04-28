@@ -40,6 +40,7 @@ export let renderFilterTable = () => {
                     }).then(response => {
                         table.innerHTML = response.data.table;
                         renderTable();
+                        
                         tableFilter.classList.remove('filter-active')
                         applyFilter.classList.remove('button-active');
                         openFilter.classList.add('button-active');

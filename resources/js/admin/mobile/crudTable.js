@@ -97,6 +97,9 @@ export let renderForm = () => {
                     await axios.post(url, data).then(response => {
                         form.id.value = response.data.id;
                         table.innerHTML = response.data.table;
+                        
+                        stopWait();
+                        showMessage('success', response.data.message);
                         renderTable();
                     });
                     
@@ -111,8 +114,7 @@ export let renderForm = () => {
                             errorMessage += '<li>' + errors[key] + '</li>';
                         })
         
-                        document.getElementById('error-container').classList.add('active');
-                        document.getElementById('errors').innerHTML = errorMessage;
+                        showMessage('validation', errorMessage);
                     }
                 }
             };

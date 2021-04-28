@@ -1,7 +1,7 @@
 @php
     $route = 'faqs';
     $filters = ['category' => $faqs_categories, 'search' => true, 'created_at' => true ]; 
-    $order = ['fecha de creación' => 't_faqs.created_at', 'nombre' => 't_faqs.name', 'categoría' => 't_faqs_categories.name'];
+    $order = ['fecha de creación' => 'created_at', 'nombre' => 'name', 'categoría' => 'category_id'];
 @endphp
 
 @extends('admin.layout.table_form')
