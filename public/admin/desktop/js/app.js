@@ -2369,8 +2369,12 @@ var renderFilterTable = function renderFilterTable() {
                         filters: json
                       }
                     }).then(function (response) {
+                      table.classList.add('table-hide');
                       table.innerHTML = response.data.table;
                       (0,_crudTable__WEBPACK_IMPORTED_MODULE_1__.renderTable)();
+                      setTimeout(function () {
+                        table.classList.remove('table-hide');
+                      }, 500);
                       tableFilter.classList.remove('filter-active');
                       applyFilter.classList.remove('button-active');
                       openFilter.classList.add('button-active');

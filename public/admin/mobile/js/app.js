@@ -2242,6 +2242,11 @@ var renderFilterTable = function renderFilterTable() {
     });
     applyFilter.addEventListener('click', function () {
       var data = new FormData(filterForm);
+      var filters = {};
+      data.forEach(function (value, key) {
+        filters[key] = value;
+      });
+      var json = JSON.stringify(filters);
       var url = filterForm.action;
 
       var sendPostRequest = /*#__PURE__*/function () {
@@ -2250,30 +2255,26 @@ var renderFilterTable = function renderFilterTable() {
             while (1) {
               switch (_context.prev = _context.next) {
                 case 0:
-                  _context.prev = 0;
-                  _context.next = 3;
-                  return axios.post(url, data).then(function (response) {
-                    table.innerHTML = response.data.table;
-                    (0,_crudTable__WEBPACK_IMPORTED_MODULE_1__.renderTable)();
-                    tableFilter.classList.remove('filter-active');
-                    applyFilter.classList.remove('button-active');
-                    openFilter.classList.add('button-active');
-                  });
+                  try {
+                    axios.get(url, {
+                      params: {
+                        filters: json
+                      }
+                    }).then(function (response) {
+                      table.innerHTML = response.data.table;
+                      (0,_crudTable__WEBPACK_IMPORTED_MODULE_1__.renderTable)();
+                      tableFilter.classList.remove('filter-active');
+                      applyFilter.classList.remove('button-active');
+                      openFilter.classList.add('button-active');
+                    });
+                  } catch (error) {}
 
-                case 3:
-                  _context.next = 7;
-                  break;
-
-                case 5:
-                  _context.prev = 5;
-                  _context.t0 = _context["catch"](0);
-
-                case 7:
+                case 1:
                 case "end":
                   return _context.stop();
               }
             }
-          }, _callee, null, [[0, 5]]);
+          }, _callee);
         }));
 
         return function sendPostRequest() {

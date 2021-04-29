@@ -1412,7 +1412,7 @@ body {
 }
 .messages-container {
   position: fixed;
-  bottom: 10vh;
+  bottom: 15vh;
   right: 0;
   width: 100%;
   z-index: 3;

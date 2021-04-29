@@ -6,10 +6,10 @@
         </div>
         <div class="table-pagination-buttons">
             <p>
-                <span class="table-pagination-button" data-pagination="{{$items->url(1)}}">Primera</span>
-                <span class="table-pagination-button" data-pagination="{{$items->previousPageUrl()}}">Anterior</span>
-                <span class="table-pagination-button" data-pagination="{{$items->nextPageUrl()}}">Siguiente</span>
-                <span class="table-pagination-button" data-pagination="{{$items->url($items->lastPage())}}">Última</span>
+            <span class="table-pagination-button {{$items->onFirstPage() ? 'inactive' : ''}}" data-pagination="{{$items->url(1)}}">Primera</span>
+                <span class="table-pagination-button {{$items->onFirstPage() ? 'inactive' : ''}}" data-pagination="{{$items->previousPageUrl()}}">Anterior</span>
+                <span class="table-pagination-button {{$items->currentPage() == $items->lastPage() ? 'inactive' : ''}}" data-pagination="{{$items->nextPageUrl()}}">Siguiente</span>
+                <span class="table-pagination-button {{$items->currentPage() == $items->lastPage() ? 'inactive' : ''}}" data-pagination="{{$items->url($items->lastPage())}}">Última</span>
             </p>
         </div>
     </div>

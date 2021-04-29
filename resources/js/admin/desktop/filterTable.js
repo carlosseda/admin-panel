@@ -38,8 +38,13 @@ export let renderFilterTable = () => {
                           filters: json
                         }
                     }).then(response => {
+                        table.classList.add('table-hide');
                         table.innerHTML = response.data.table;
                         renderTable();
+
+                        setTimeout(function(){
+                            table.classList.remove('table-hide');
+                        }, 500)
                         
                         tableFilter.classList.remove('filter-active')
                         applyFilter.classList.remove('button-active');

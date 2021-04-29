@@ -631,7 +631,13 @@ body {
 }
 
 .table {
+  opacity: 1;
+  transition: all 0.2s;
   width: 30%;
+}
+.table.table-hide {
+  opacity: 0;
+  transition: all 0.5s;
 }
 
 .table-row {
@@ -1735,6 +1741,10 @@ body {
   fill: white;
 }
 
+.table-pagination {
+  position: absolute;
+  bottom: 5vh;
+}
 .table-pagination .table-pagination-info {
   display: flex;
   justify-content: space-between;
@@ -1748,4 +1758,7 @@ body {
 }
 .table-pagination .table-pagination-buttons .table-pagination-button:hover {
   color: #ff5100;
+}
+.table-pagination .table-pagination-buttons .table-pagination-button.inactive {
+  color: #b0b0b0;
 }
