@@ -7,15 +7,22 @@ use App\Models\DB\Country;
 
 class Countries
 {
-    public $countries;
+    static $composed;
 
-    public function __construct()
+    public function __construct(Country $countries)
     {
-        $this->countries = Country::orderBy('name', 'asc')->get();
+        $this->countries = $countries;
     }
 
     public function compose(View $view)
     {
-        $view->with('countries', $this->countries);
+        if(static::$composed)
+        {
+            return $view->with('countries', static::$composed);
+        }
+
+        static::$composed = $this->countries->orderBy('name', 'asc')->get();
+
+        $view->with('countries', static::$composed);
     }
 }
