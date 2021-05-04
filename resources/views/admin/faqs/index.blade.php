@@ -57,9 +57,12 @@
                 <div class="tabs-container">
                     <div class="tabs-container-menu">
                         <ul>
-                            <li class="tab-item tab-active" data-tab="contenido">
+                            <li class="tab-item tab-active" data-tab="content">
                                 Contenido
                             </li>      
+                            <li class="tab-item" data-tab="images">
+                                Imágenes
+                            </li>
                         </ul>
                     </div>
                     
@@ -70,7 +73,7 @@
                     </div>
                 </div>
                 
-                <div class="tab-panel tab-active" data-tab="contenido">
+                <div class="tab-panel tab-active" data-tab="content">
                     <div class="two-columns">
                         <div class="form-group">
                             <div class="form-label">
@@ -97,20 +100,73 @@
                             </div>
                         </div>
                     </div>
-                    
-                    <div class="one-column">
-                        <div class="form-group">
-                            <div class="form-label">
-                                <label for="description" class="label-highlight">Descripción</label>
+
+                    @component('admin.components.locale', ['tab' => 'content'])
+
+                        @foreach ($localizations as $localization)
+
+                            <div class="locale-tab-panel {{ $loop->first ? 'locale-tab-active':'' }}" data-tab="content" data-localetab="{{$localization->alias}}">
+
+                                <div class="one-column">
+                                    <div class="form-group">
+                                        <div class="form-label">
+                                            <label for="name" class="label-highlight">Título</label>
+                                        </div>
+                                        <div class="form-input">
+                                            <input type="text" name="locale[title.{{$localization->alias}}]" value="{{isset($locale["title.$localization->alias"]) ? $locale["title.$localization->alias"] : ''}}" class="input-highlight">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="one-column">
+                                    <div class="form-group">
+                                        <div class="form-label">
+                                            <label for="description" class="label-highlight">Descripción</label>
+                                        </div>
+                                        <div class="form-input">
+                                            <textarea class="ckeditor input-highlight" name="locale[description.{{$localization->alias}}]">{{isset($locale["description.$localization->alias"]) ? $locale["description.$localization->alias"] : ''}}</textarea>
+                                        </div>
+                                    </div>
+                                </div>
+
                             </div>
-                            <div class="form-input">
-                                <textarea class="ckeditor" name="description" class="input-highlight">{{isset($faq->description) ? $faq->description : ''}}</textarea>
-                            </div>
-                        </div>
-                    </div>
+
+                        @endforeach
+                
+                    @endcomponent
                 </div>
+
+                <div class="tab-panel" data-tab="images">
+
+                    @component('admin.components.locale', ['tab' => 'images'])
+
+                        @foreach ($localizations as $localization)
+
+                        <div class="locale-tab-panel {{ $loop->first ? 'locale-tab-active':'' }}" data-tab="images" data-localetab="{{$localization->alias}}">
+
+                            <div class="two-columns">
+                                <div class="form-group">
+                                    <div class="form-label">
+                                        <label for="name" class="label-highlight">Foto destacada</label>
+                                    </div>
+                                    <div class="form-input">
+                                        @include('admin.components.upload', ['type' => 'image', 'content' => 'featured', "alias" => $localization->alias])
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        @endforeach
+                
+                    @endcomponent
+
+                </div>
+
             </form>
+
         </div>
+
     @endif  
 
 @endsection
