@@ -88,7 +88,7 @@ class FaqController extends Controller
         }
 
         if(request('images')){
-            $images = $this->image->storeRequest(request('images'), $faq->id);
+            $images = $this->image->storeRequest(request('images'), 'webp', $faq->id);
         }
 
         if (request('id')){

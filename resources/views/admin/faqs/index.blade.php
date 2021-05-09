@@ -150,7 +150,12 @@
                                         <label for="name" class="label-highlight">Foto destacada</label>
                                     </div>
                                     <div class="form-input">
-                                        @include('admin.components.upload', ['type' => 'image', 'content' => 'featured', "alias" => $localization->alias])
+                                        @include('admin.components.upload', [
+                                            'type' => 'image', 
+                                            'content' => 'featured', 
+                                            'alias' => $localization->alias,
+                                            'files' => $faq->images_featured
+                                        ])
                                     </div>
                                 </div>
                             </div>
