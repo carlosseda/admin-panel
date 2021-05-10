@@ -3,6 +3,7 @@
 namespace App\Vendor\Locale\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Debugbar;
 
 class Locale extends Model
 {
