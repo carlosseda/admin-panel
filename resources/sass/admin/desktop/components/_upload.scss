@@ -1,0 +1,55 @@
+.upload {
+    align-items: center;
+    border: 0.2em dashed hsl(183, 98%, 35%);
+    color: #cccccc;
+    cursor: pointer;
+    display: flex;
+    font-size: 1.2em;
+    font-weight: 500;
+    height: 30vh;
+    justify-content: center;
+    margin-top: 1em;
+    padding: 1em;
+    text-align: center;
+}
+
+.upload:hover{
+    border: 4px dashed hsl(19, 100%, 50%);
+}
+  
+.upload-over {
+    border-style: solid;
+}
+
+.upload-prompt{
+    position: absolute;
+    width: 15%;
+    z-index: 999;
+}
+
+.upload-input {
+    display: none;
+}
+
+.upload-thumb {
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+    overflow: hidden;
+    background-color: #cccccc;
+    background-size: cover;
+    position: relative;
+}
+
+.upload-thumb::after {
+content: attr(data-label);
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 5px 0;
+    color: #ffffff;
+    background: rgba(0, 0, 0, 0.75);
+    font-size: 14px;
+    text-align: center;
+}
