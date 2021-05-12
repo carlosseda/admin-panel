@@ -5,6 +5,7 @@ namespace App\Vendor\Image;
 use Illuminate\Support\Facades\Storage;
 use App\Vendor\Image\Models\ImageConfiguration;
 use App\Vendor\Image\Models\Image as DBImage;
+use App\Vendor\Image\Models\ImageResize;
 use App\Jobs\ProcessImage;
 use App\Jobs\DeleteImage;
 use Jcupitt\Vips;
@@ -49,11 +50,6 @@ class Image
 			$width = $data[0];
 			$height = $data[1];
 		}
-		
-		$settings = ImageConfiguration::where('entity', $this->entity)
-		->where('content', $content)
-		->where('grid', 'original')
-		->first();
 
 		$path = '/' . $entity_id . '/' . $language . '/' . $content . '/original/' . $name . '.' . $file_extension;
 		$path = str_replace(" ", "-", $path);
@@ -66,7 +62,6 @@ class Image
 			$image = DBImage::updateOrCreate([
 				'entity_id' => $entity_id,
 				'entity' => $this->entity,
-				'grid' => 'original',
 				'language' => $language,
 				'content' => $content],[
 				'path' => $this->entity . $path,
@@ -75,8 +70,6 @@ class Image
 				'size' => $file->getSize(),
 				'width' => isset($width)? $width : null,
 				'height' => isset($height)? $height : null,
-				'quality' => 100,
-				'image_configuration_id' => $settings->id,
 			]);
 		}
 
@@ -96,17 +89,14 @@ class Image
 			$image = DBImage::create([
 				'entity_id' => $entity_id,
 				'entity' => $this->entity,
-				'grid' => 'original',
 				'language' => $language,
-				'content' => $content,
+				'content' => $content],[
 				'path' => $this->entity . $path,
 				'filename' => $filename,
 				'mime_type' => 'image/'. $file_extension,
 				'size' => $file->getSize(),
 				'width' => isset($width)? $width : null,
 				'height' => isset($height)? $height : null,
-				'quality' => 100,
-				'image_configuration_id' => $settings->id,
 			]);
 		}
 
@@ -119,7 +109,6 @@ class Image
 		$file_extension = strtolower(pathinfo($file->getClientOriginalName(), PATHINFO_EXTENSION));
 		$settings = ImageConfiguration::where('entity', $this->entity)
 					->where('content', $content)
-					->where('grid', '!=', 'original')
 					->get();
 
 		foreach ($settings as $setting => $value) {
