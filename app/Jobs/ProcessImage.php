@@ -9,7 +9,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Support\Facades\Storage;
 use Jcupitt\Vips;
-use App\Vendor\Image\Models\ImageResize;
+use App\Vendor\Image\Models\ImageResized;
 use App\Vendor\Image\Models\ImageConfiguration;
 use Debugbar;
 
@@ -110,7 +110,7 @@ class ProcessImage implements ShouldQueue
         
         if($this->type == 'single'){
 
-            ImageResize::updateOrCreate([
+            ImageResized::updateOrCreate([
                 'entity_id' => $this->entity_id,
                 'entity' => $this->entity,
                 'grid' => $this->grid,
@@ -129,7 +129,7 @@ class ProcessImage implements ShouldQueue
 
         elseif($this->type == 'collection'){
 
-            ImageResize::create([
+            ImageResized::create([
                 'entity_id' => $this->entity_id,
                 'entity' => $this->entity,
                 'grid' => $this->grid,

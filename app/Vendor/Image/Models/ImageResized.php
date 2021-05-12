@@ -4,14 +4,14 @@ namespace App\Vendor\Image\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class ImageResize extends Model
+class ImageResized extends Model
 {
     /**
      * The table associated with the model.
      *
      * @var string
      */
-    protected $table = 't_image_resize';
+    protected $table = 't_image_resized';
     protected $guarded = [];
 
     public function configuration()

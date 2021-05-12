@@ -5,7 +5,7 @@ namespace App\Vendor\Image;
 use Illuminate\Support\Facades\Storage;
 use App\Vendor\Image\Models\ImageConfiguration;
 use App\Vendor\Image\Models\Image as DBImage;
-use App\Vendor\Image\Models\ImageResize;
+use App\Vendor\Image\Models\ImageResized;
 use App\Jobs\ProcessImage;
 use App\Jobs\DeleteImage;
 use Jcupitt\Vips;
