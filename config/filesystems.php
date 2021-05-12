@@ -29,7 +29,6 @@ return [
     */
 
     'disks' => [
-
         'local' => [
             'driver' => 'local',
             'root' => storage_path('app'),
@@ -49,7 +48,20 @@ return [
             'region' => env('AWS_DEFAULT_REGION'),
             'bucket' => env('AWS_BUCKET'),
             'url' => env('AWS_URL'),
-            'endpoint' => env('AWS_ENDPOINT'),
+        ],
+
+        'public_sitemap' => [
+            'driver' => 'local',
+            'root' => storage_path('app/public/sitemap'),
+            'url' => env('APP_URL').'/storage',
+            'visibility' => 'public',
+        ],
+
+        'faqs' => [
+            'driver' => 'local',
+            'root' => storage_path('app/public/faqs'),
+            'url' => env('APP_URL').'/storage',
+            'visibility' => 'public',
         ],
 
     ],
