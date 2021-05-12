@@ -4,8 +4,8 @@ namespace App\Vendor\Image;
 
 use Illuminate\Support\Facades\Storage;
 use App\Vendor\Image\Models\ImageConfiguration;
-use App\Vendor\Image\Models\Image as DBImage;
-use App\Vendor\Image\Models\ImageResized;
+use App\Vendor\Image\Models\ImageOriginal;
+use App\Vendor\Image\Models\ImageResize;
 use App\Jobs\ProcessImage;
 use App\Jobs\DeleteImage;
 use Jcupitt\Vips;
@@ -50,6 +50,11 @@ class Image
 			$width = $data[0];
 			$height = $data[1];
 		}
+		
+		$settings = ImageConfiguration::where('entity', $this->entity)
+		->where('content', $content)
+		->where('grid', 'original')
+		->first();
 
 		$path = '/' . $entity_id . '/' . $language . '/' . $content . '/original/' . $name . '.' . $file_extension;
 		$path = str_replace(" ", "-", $path);
@@ -59,7 +64,7 @@ class Image
 			Storage::disk($this->entity)->deleteDirectory('/' . $entity_id . '/' . $language . '/' . $content . '/original');
 			Storage::disk($this->entity)->putFileAs('/' . $entity_id . '/' . $language . '/' . $content . '/original', $file, $filename);
 
-			$image = DBImage::updateOrCreate([
+			$image = ImageOriginal::updateOrCreate([
 				'entity_id' => $entity_id,
 				'entity' => $this->entity,
 				'language' => $language,
@@ -86,7 +91,7 @@ class Image
 
 			Storage::disk($this->entity)->putFileAs('/' . $entity_id . '/' . $language . '/' . $content . '/original', $file, $filename);
 
-			$image = DBImage::create([
+			$image = ImageOriginal::create([
 				'entity_id' => $entity_id,
 				'entity' => $this->entity,
 				'language' => $language,
@@ -109,6 +114,7 @@ class Image
 		$file_extension = strtolower(pathinfo($file->getClientOriginalName(), PATHINFO_EXTENSION));
 		$settings = ImageConfiguration::where('entity', $this->entity)
 					->where('content', $content)
+					->where('grid', '!=', 'original')
 					->get();
 
 		foreach ($settings as $setting => $value) {
@@ -194,12 +200,12 @@ class Image
 
 	public function show($entity_id, $language)
 	{
-		return DBImage::getPreviewImage($this->entity, $entity_id, $language)->first();
+		return ImageOriginal::getPreviewImage($this->entity, $entity_id, $language)->first();
 	}
 
 	public function preview($entity_id)
 	{
-		$items = DBImage::getPreviewImage($this->entity, $entity_id)->pluck('path','language')->all();
+		$items = ImageOriginal::getPreviewImage($this->entity, $entity_id)->pluck('path','language')->all();
 
         return $items;
 	}
@@ -207,7 +213,7 @@ class Image
 	public function galleryImage($entity, $grid, $entity_id, $filename)
 	{
 		
-		$image = DBImage::getGalleryImage($entity, $entity_id, $filename, $grid)->first();
+		$image = ImageOriginal::getGalleryImage($entity, $entity_id, $filename, $grid)->first();
 
 		return response()->json([
 			'path' => Storage::url($image->path),
@@ -217,7 +223,7 @@ class Image
 	public function galleryPreviousImage($entity, $grid, $entity_id, $id)
 	{		
 
-		$image = DBImage::getGalleryPreviousImage($entity_id, $entity, $grid, $id)->first();
+		$image = ImageOriginal::getGalleryPreviousImage($entity_id, $entity, $grid, $id)->first();
 
 		$previous = route('gallery_previous_image', ['entity' => $entity, 'grid' => $grid, 'entity_id' => $entity_id, 'id' => $image->id]);
 		$next = route('gallery_next_image', ['entity' => $entity, 'grid' => $grid, 'entity_id' => $entity_id, 'id' => $image->id]);
@@ -232,7 +238,7 @@ class Image
 	public function galleryNextImage($entity, $grid, $entity_id, $id)
 	{
 
-		$image = DBImage::getGalleryNextImage($entity_id, $entity, $grid, $id)->first();
+		$image = ImageOriginal::getGalleryNextImage($entity_id, $entity, $grid, $id)->first();
 
 		$previous = route('gallery_previous_image', ['entity' => $entity, 'grid' => $grid, 'entity_id' => $entity_id, 'id' => $image->id]);
 		$next = route('gallery_next_image', ['entity' => $entity, 'grid' => $grid, 'entity_id' => $entity_id, 'id' => $image->id]);
@@ -246,14 +252,14 @@ class Image
 
 	public function original($entity_id)
 	{
-		$items = DBImage::getOriginalImage($this->entity, $entity_id)->pluck('path','language')->all();
+		$items = ImageOriginal::getOriginalImage($this->entity, $entity_id)->pluck('path','language')->all();
 
         return $items;
 	}
 
 	public function getAllByLanguage($language){ 
 
-        $items = DBImage::getAllByLanguage($this->entity, $language)->get()->groupBy('entity_id');
+        $items = ImageOriginal::getAllByLanguage($this->entity, $language)->get()->groupBy('entity_id');
 
         $items =  $items->map(function ($item) {
             return $item->pluck('path','grid');
@@ -262,7 +268,7 @@ class Image
         return $items;
     }
 
-	public function destroy(DBImage $image)
+	public function destroy(ImageOriginal $image)
 	{
 		DeleteImage::dispatch($image->filename, $image->content, $image->entity)->onQueue('delete_image');
 
@@ -275,9 +281,9 @@ class Image
 
 	public function delete($entity_id)
 	{
-		if (DBImage::getImages($this->entity, $entity_id)->count() > 0) {
+		if (ImageOriginal::getImages($this->entity, $entity_id)->count() > 0) {
 
-			$images = DBImage::getImages($this->entity, $entity_id)->get();
+			$images = ImageOriginal::getImages($this->entity, $entity_id)->get();
 
 			foreach ($images as $image){
 				Storage::disk($image->entity)->delete($image->path);
