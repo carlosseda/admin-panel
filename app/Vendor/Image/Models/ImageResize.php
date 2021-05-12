@@ -4,39 +4,19 @@ namespace App\Vendor\Image\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Image extends Model
+class ImageResize extends Model
 {
     /**
      * The table associated with the model.
      *
      * @var string
      */
-    protected $table = 't_image';
+    protected $table = 't_image_resize';
     protected $guarded = [];
 
     public function configuration()
     {
         return $this->belongsTo(ImageConfiguration::class, 'image_configuration_id');
-    }
-
-    public function rotuloItem()
-    {
-        return $this->belongsTo(RotuloItem::class, 'entity_id');
-    }
-
-    public function slideItem()
-    {
-        return $this->belongsTo(SlideItem::class, 'entity_id');
-    }
-
-    public function menuItem()
-    {
-        return $this->belongsTo(MenuItem::class, 'entity_id');
-    }
-
-    public function mediaItem()
-    {
-        return $this->belongsTo(Media::class, 'entity_id');
     }
 
     public function scopeGetImages($query, $entity, $entity_id){
