@@ -514,6 +514,12 @@ a:hover, a:focus {
   margin: 3% auto;
   width: 80%;
 }
+.faqs .faqs-title h3 {
+  color: white;
+  font-size: 2.5em;
+  font-weight: 600;
+  text-align: center;
+}
 .faqs .faq {
   width: 100%;
 }
@@ -584,15 +590,23 @@ a:hover, a:focus {
 }
 .faqs .faq .faq-description {
   background-color: white;
+  display: flex;
+  justify-content: space-between;
   max-height: 0;
   overflow: hidden;
   transition: max-height 0.5s;
   width: 100%;
 }
-.faqs .faq .faq-description p {
+.faqs .faq .faq-description .faq-description-text p {
   color: black;
   font-weight: 200;
   margin: 1em;
+}
+.faqs .faq .faq-description .faq-description-image {
+  min-width: -webkit-max-content;
+  min-width: -moz-max-content;
+  min-width: max-content;
+  padding: 1em;
 }
 .faqs .faq.active .faq-title-container {
   background-color: #110c40;

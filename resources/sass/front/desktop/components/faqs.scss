@@ -3,6 +3,13 @@
     margin: 3% auto;
     width: 80%;
 
+    .faqs-title h3{
+        color: $white;
+        font-size: 2.5em;
+        font-weight: 600;
+        text-align: center;
+    }
+
     .faq{
 
         width: 100%;
@@ -42,16 +49,27 @@
         .faq-description{
 
             background-color: $white;
+            display: flex;
+            justify-content: space-between;
             max-height: 0;
             overflow: hidden;
             transition: max-height 0.5s;
             width: 100%;
 
-            p{
-                color: $black;
-                font-weight: 200;
-                margin: 1em;
+            .faq-description-text{
+
+                p{
+                    color: $black;
+                    font-weight: 200;
+                    margin: 1em;
+                }
             }
+
+            .faq-description-image{
+                min-width: max-content;
+                padding: 1em;
+            }
+           
         }
     }
 

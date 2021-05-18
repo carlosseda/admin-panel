@@ -30,7 +30,7 @@ export let renderFilterTable = () => {
 
             let url = filterForm.action;
     
-            let sendPostRequest = async () => {
+            let sendFilterRequest = async () => {
     
                 try {
                     axios.get(url, {
@@ -56,7 +56,7 @@ export let renderFilterTable = () => {
                 }
             };
     
-            sendPostRequest();
+            sendFilterRequest();
             
         });
     }

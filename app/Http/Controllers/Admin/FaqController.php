@@ -9,22 +9,26 @@ use App\Http\Controllers\Controller;
 use Jenssegers\Agent\Agent;
 use App\Http\Requests\Admin\FaqRequest;
 use App\Vendor\Locale\Locale;
+use App\Vendor\Locale\LocaleSlugSeo;
 use App\Vendor\Image\Image;
 use App\Models\DB\Faq; 
+use Debugbar;
 
 class FaqController extends Controller
 {
     protected $agent;
     protected $locale;
+    protected $locale_slug_seo;
     protected $image;
     protected $paginate;
     protected $faq;
 
-    function __construct(Faq $faq, Agent $agent, Locale $locale, Image $image)
+    function __construct(Faq $faq, Agent $agent, Locale $locale, LocaleSlugSeo $locale_slug_seo, Image $image)
     {
         $this->middleware('auth');
         $this->agent = $agent;
         $this->locale = $locale;
+        $this->locale_slug_seo = $locale_slug_seo;
         $this->image = $image;
         $this->faq = $faq;
         $this->faq->visible = 1;
@@ -38,6 +42,7 @@ class FaqController extends Controller
         }
 
         $this->locale->setParent('faqs');
+        $this->locale_slug_seo->setParent('faqs');
         $this->image->setEntity('faqs');
     }
 
@@ -74,7 +79,10 @@ class FaqController extends Controller
     }
 
     public function store(FaqRequest $request)
-    {                   
+    {            
+        
+        Debugbar::info(request('images'));
+        
         $faq = $this->faq->updateOrCreate([
             'id' => request('id')],[
             'name' => request('name'),
@@ -83,12 +91,16 @@ class FaqController extends Controller
             'category_id' => request('category_id'),
         ]);
 
+        if(request('seo')){
+            $seo = $this->locale_slug_seo->store(request("seo"), $faq->id, 'front_faq');
+        }
+
         if(request('locale')){
             $locale = $this->locale->store(request('locale'), $faq->id);
         }
 
         if(request('images')){
-            $images = $this->image->storeRequest(request('images'), 'webp', $faq->id);
+            $images = $this->image->storeRequest(request('images'),'webp', $faq->id);
         }
 
         if (request('id')){
@@ -99,23 +111,24 @@ class FaqController extends Controller
 
         $view = View::make('admin.faqs.index')
         ->with('faqs', $this->faq->where('active', 1)->orderBy('created_at', 'desc')->paginate($this->paginate))
-        ->with('faq', $faq)
+        ->with('faq', $this->faq)
         ->renderSections();        
 
         return response()->json([
             'table' => $view['table'],
             'form' => $view['form'],
             'message' => $message,
-            'id' => $faq->id,
         ]);
     }
 
     public function edit(Faq $faq)
     {
         $locale = $this->locale->show($faq->id);
+        $seo = $this->locale_slug_seo->show($faq->id);
 
         $view = View::make('admin.faqs.index')
         ->with('locale', $locale)
+        ->with('seo', $seo)
         ->with('faq', $faq)
         ->with('faqs', $this->faq->where('active', 1)->orderBy('created_at', 'desc')->paginate($this->paginate));        
         

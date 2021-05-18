@@ -766,7 +766,9 @@ body {
 }
 
 .form-input textarea {
+  border: 1px solid #bababa;
   height: 20vh;
+  padding: 1em;
 }
 
 .form-footer {
@@ -1318,7 +1320,7 @@ body {
   bottom: 5vh;
   right: 3%;
   width: 30%;
-  z-index: 3;
+  z-index: 2000;
 }
 .messages-container.show {
   -webkit-animation-name: translateXOutScreen;
@@ -1585,12 +1587,17 @@ body {
   padding: 0;
 }
 .tabs-container-menu li {
-  color: #02a8b1;
+  color: gray;
   cursor: pointer;
+  font-weight: 600;
   padding: 1em 0.5em;
   text-align: center;
 }
-.tabs-container-menu li.tab-active {
+.tabs-container-menu li:hover {
+  color: #ff5100;
+}
+.tabs-container-menu li.tab-active,
+.tabs-container-menu li.tab-active:hover {
   background-color: #02a8b1;
   color: white;
 }
@@ -1683,6 +1690,204 @@ body {
 .tab-panel.tab-active {
   display: block;
   padding: 2em;
+}
+
+.locale-tabs {
+  background-color: #d6d6d6;
+}
+
+.locale-tabs-container {
+  background-color: #d6d6d6;
+  display: flex;
+  justify-content: space-between;
+  margin-top: 1em;
+}
+
+.locale-tabs-container-menu {
+  width: 100%;
+}
+.locale-tabs-container-menu ul {
+  background-color: #d6d6d6;
+  display: flex;
+  margin: 0;
+  padding: 0;
+}
+.locale-tabs-container-menu li {
+  color: gray;
+  cursor: pointer;
+  font-weight: 600;
+  padding: 1em 0.5em;
+  text-align: center;
+}
+.locale-tabs-container-menu li:hover {
+  color: #ff5100;
+}
+.locale-tabs-container-menu li.locale-tab-active,
+.locale-tabs-container-menu li.locale-tab-active:hover {
+  background-color: #02a8b1;
+  color: white;
+}
+
+.locale-tab-panel {
+  display: none;
+}
+
+.locale-tab-panel.locale-tab-active {
+  display: block;
+  padding: 2em;
+}
+
+.upload-image,
+.upload-image-add {
+  align-items: center;
+  border: 0.2em dashed #02a8b1;
+  color: #cccccc;
+  cursor: pointer;
+  display: flex;
+  font-size: 1.2em;
+  font-weight: 500;
+  height: 30vh;
+  justify-content: center;
+  padding: 0.5em;
+  text-align: center;
+}
+
+.upload-image-add.single {
+  border: none;
+}
+
+.upload-image-collection {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 10px;
+}
+
+.upload-image.collection,
+.upload-image-add.collection {
+  height: 15vh;
+  padding: 0;
+}
+
+.upload-image:hover,
+.upload-image-add:hover {
+  border: 4px dashed #ff5100;
+}
+
+.upload-image-over {
+  border-style: solid;
+}
+
+.upload-image-prompt {
+  position: absolute;
+  width: 15%;
+  z-index: 999;
+}
+
+.upload-image-options {
+  display: none;
+}
+
+.upload-image:hover .upload-image-options {
+  display: initial;
+  position: absolute;
+  width: 15%;
+  z-index: 999;
+}
+.upload-image:hover .upload-image-options svg {
+  height: 1.2em;
+  width: 1.2em;
+}
+.upload-image:hover .upload-image-options svg path {
+  fill: white;
+}
+
+.upload-image-input {
+  display: none;
+}
+
+.upload-image-thumb {
+  width: 100%;
+  height: 100%;
+  border-radius: 10px;
+  overflow: hidden;
+  background-color: #cccccc;
+  background-size: cover;
+  position: relative;
+  z-index: 900;
+}
+
+.upload-image-thumb::after {
+  content: attr(data-label);
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  padding: 5px 0;
+  color: #ffffff;
+  font-size: 14px;
+  text-align: center;
+}
+
+#upload-image-modal {
+  background-color: white;
+  display: flex;
+  height: 80vh;
+  justify-content: space-between;
+  left: 10%;
+  padding: 1em;
+  position: fixed;
+  top: -100vh;
+  transition: top 0.3s;
+  width: 80%;
+  z-index: 3000;
+}
+
+#upload-image-modal.modal-active {
+  top: 10vh;
+  transition: top 0.3s;
+}
+
+.modal-image {
+  padding: 1em;
+  width: 65%;
+}
+
+#modal-image-original {
+  height: 100%;
+  width: 100%;
+}
+
+.modal-image-attributes {
+  padding: 1em;
+  width: 30%;
+}
+
+.modal-image-store-button {
+  cursor: pointer;
+}
+.modal-image-store-button:hover .store-button-icon {
+  fill: #ff5100;
+}
+.modal-image-store-button svg {
+  float: right;
+  height: 2.4em;
+  width: 2.4em;
+}
+.modal-image-store-button svg .store-button-icon {
+  fill: gray;
+}
+
+.modal-image-delete-button {
+  bottom: 1em;
+  cursor: pointer;
+  position: absolute;
+  width: -webkit-max-content;
+  width: -moz-max-content;
+  width: max-content;
+}
+.modal-image-delete-button p {
+  color: red;
+  text-decoration: underline;
 }
 
 .table-filter {

@@ -8,7 +8,7 @@
         <div class="faq" data-content="{{$loop->iteration}}">
             <div class="faq-title-container">
                 <div class="faq-title">
-                    <h3>{{isset($faq->locale['title']) ? $faq->locale['title'] : ""}}</h3>
+                    <h3>{{isset($faq->seo->title) ? $faq->seo->title : ""}}</h3>
                 </div>
 
                 <div class="faq-plus-button" data-button="{{$loop->iteration}}"></div>

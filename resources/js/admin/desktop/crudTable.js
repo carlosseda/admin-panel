@@ -1,6 +1,13 @@
 import {renderCkeditor} from './ckeditor';
 import {startWait, stopWait} from './wait';
 import {showMessage} from './messages';
+import {renderTabs} from './tabs';
+import {renderLocaleTabs} from './localeTabs';
+import {renderUploadImage} from './uploadImage';
+import {renderInputCounter} from './inputCounter';
+import {renderInputHighlight} from './inputHighlight';
+import {renderOnOffSwitch} from './onOffSwitch';
+import {renderPagination} from './pagination';
 
 const table = document.getElementById("table");
 const form = document.getElementById("form");
@@ -8,39 +15,8 @@ const form = document.getElementById("form");
 export let renderForm = () => {
 
     let forms = document.querySelectorAll(".admin-form");
-    let labels = document.querySelectorAll('.label-highlight');
-    let inputs = document.querySelectorAll('.input-highlight');
     let storeButton = document.getElementById("store-button");
     let createButton = document.getElementById("create-button");
-    let onOffSwitch = document.getElementById('onoffswitch');
-
-    inputs.forEach(input => {
-
-        input.addEventListener('focusin', () => {
-    
-            for( var i = 0; i < labels.length; i++ ) {
-                if (labels[i].htmlFor == input.name){
-                    labels[i].classList.add("active");
-                }
-            }
-        });
-    
-        input.addEventListener('blur', () => {
-    
-            for( var i = 0; i < labels.length; i++ ) {
-                labels[i].classList.remove("active");
-            }
-        });
-    });
-
-    onOffSwitch.addEventListener("click", () => {
-
-        if(onOffSwitch.value == "true"){
-            onOffSwitch.value = "false";
-        }else{
-            onOffSwitch.value = "true";
-        }
-    });
 
     createButton.addEventListener("click", (event) => {
 
@@ -94,10 +70,12 @@ export let renderForm = () => {
 
                         form.id.value = response.data.id;
                         table.innerHTML = response.data.table;
+                        form.innerHTML = response.data.form;
 
                         stopWait();
                         showMessage('success', response.data.message);
                         renderTable();
+                        renderForm();
                     });
                     
                 } catch (error) {
@@ -127,6 +105,12 @@ export let renderForm = () => {
     });
     
     renderCkeditor();
+    renderTabs();
+    renderLocaleTabs();
+    renderUploadImage();
+    renderInputCounter();
+    renderInputHighlight();
+    renderOnOffSwitch();
 };
 
 export let renderTable = () => {
@@ -136,7 +120,6 @@ export let renderTable = () => {
     let modalDelete = document.getElementById('modal-delete');
     let deleteConfirm = document.getElementById('delete-confirm');
     let deleteCancel = document.getElementById('delete-cancel');
-    let paginationButtons = document.querySelectorAll('.table-pagination-button');
 
     editButtons.forEach(editButton => {
 
@@ -179,16 +162,24 @@ export let renderTable = () => {
 
         let url = deleteConfirm.dataset.url;
 
+        startWait();
+
         let sendDeleteRequest = async () => {
 
             try {
                 await axios.delete(url).then(response => {
                     table.innerHTML = response.data.table;
+                    form.innerHTML = response.data.form;
                     modalDelete.classList.remove('open');
                     renderTable();
+                    renderForm();
+
+                    stopWait();
+                    showMessage('success', response.data.message);
                 });
                 
             } catch (error) {
+                stopWait();
                 console.error(error);
             }
         };
@@ -196,29 +187,7 @@ export let renderTable = () => {
         sendDeleteRequest();
     });
 
-    paginationButtons.forEach(paginationButton => {
-
-        paginationButton.addEventListener("click", () => {
-
-            let url = paginationButton.dataset.pagination;
-
-            let sendPaginationRequest = async () => {
-
-                try {
-                    await axios.get(url).then(response => {
-                        table.innerHTML = response.data.table;
-                        renderTable();
-                    });
-                    
-                } catch (error) {
-                    console.error(error);
-                }
-            };
-
-            sendPaginationRequest();
-            
-        });
-    });
+    renderPagination();
 };
 
 renderForm();

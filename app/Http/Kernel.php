@@ -62,5 +62,10 @@ class Kernel extends HttpKernel
         'signed' => \Illuminate\Routing\Middleware\ValidateSignature::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
+        'localize' => \App\Vendor\Locale\Middleware\LocalizationSeoRoutes::class,
+        'localizationRedirect' => \App\Vendor\Locale\Middleware\LocalizationSeoRedirectFilter::class,
+        'localeSessionRedirect'=> \App\Vendor\Locale\Middleware\LocaleSessionRedirect::class,
+        'localeCookieRedirect'=> \App\Vendor\Locale\Middleware\LocaleCookieRedirect::class,
+        'localeViewPath'=> \App\Vendor\Locale\Middleware\LocalizationSeoViewPath::class
     ];
 }

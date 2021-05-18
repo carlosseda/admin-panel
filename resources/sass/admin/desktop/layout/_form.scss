@@ -71,7 +71,13 @@
 }
 
 .form-input textarea{
+	border: 1px solid #bababa;
 	height: 20vh;
+	padding: 1em;
+}
+
+.form-input .ck-editor__editable{
+	
 }
 
 .form-footer{

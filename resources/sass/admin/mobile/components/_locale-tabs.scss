@@ -1,0 +1,49 @@
+.locale-tabs{
+    background-color: hsl(0, 0%, 84%);
+}
+
+.locale-tabs-container{
+    background-color: hsl(0, 0%, 84%);
+    display: flex;
+    justify-content: space-between;
+    margin-top: 1em;
+}
+
+.locale-tabs-container-menu{
+
+    width: 100%;
+
+    ul{
+        background-color: hsl(0, 0%, 84%);
+        display: flex;
+        margin: 0;
+        padding: 0;
+    }
+
+    li{
+        color: hsl(0, 0%, 50%);
+        cursor: pointer;
+        font-weight: 600;
+        padding: 1em 0.5em;
+        text-align: center;
+    }
+
+    li:hover{
+        color: hsl(19, 100%, 50%);
+    }
+
+    li.locale-tab-active,
+    li.locale-tab-active:hover{
+        background-color: hsl(183, 98%, 35%) ;
+        color: $white;
+    }
+}
+
+.locale-tab-panel{
+    display: none;
+}
+
+.locale-tab-panel.locale-tab-active{
+    display: block;
+    padding: 2em;
+}

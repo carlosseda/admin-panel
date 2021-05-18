@@ -49,32 +49,32 @@ export let renderUploadImage = () => {
     }
       
     function updateThumbnail(uploadElement, file) {
-    
-        let thumbnailElement = uploadElement.querySelector(".upload-image-thumb");
-
-        if(uploadElement.classList.contains('collection')){
-
-            if(thumbnailElement == null){
-
-                let cloneUploadElement = uploadElement.cloneNode(true);
-                let cloneInput = cloneUploadElement.querySelector('.upload-image-input');
-
-                uploadImage(cloneInput);
-                uploadElement.parentElement.appendChild(cloneUploadElement);
-            }
-        }
-    
-        if (uploadElement.querySelector(".upload-image-prompt")) {
-            uploadElement.querySelector(".upload-image-prompt").remove();
-        }
-        
-        if (!thumbnailElement) {
-            thumbnailElement = document.createElement("div");
-            thumbnailElement.classList.add("upload-image-thumb");
-            uploadElement.appendChild(thumbnailElement);
-        }
                 
         if (file.type.startsWith("image/")) {
+
+            let thumbnailElement = uploadElement.querySelector(".upload-image-thumb");
+
+            if(uploadElement.classList.contains('collection')){
+    
+                if(thumbnailElement == null){
+    
+                    let cloneUploadElement = uploadElement.cloneNode(true);
+                    let cloneInput = cloneUploadElement.querySelector('.upload-image-input');
+    
+                    uploadImage(cloneInput);
+                    uploadElement.parentElement.appendChild(cloneUploadElement);
+                }
+            }
+        
+            if (uploadElement.querySelector(".upload-image-prompt")) {
+                uploadElement.querySelector(".upload-image-prompt").remove();
+            }
+            
+            if (!thumbnailElement) {
+                thumbnailElement = document.createElement("div");
+                thumbnailElement.classList.add("upload-image-thumb");
+                uploadElement.appendChild(thumbnailElement);
+            }
 
             let reader = new FileReader();
         

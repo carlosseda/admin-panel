@@ -20,13 +20,19 @@
     }
 
     li{
-        color: hsl(183, 98%, 35%);
+        color: hsl(0, 0%, 50%);
         cursor: pointer;
+        font-weight: 600;
         padding: 1em 0.5em;
         text-align: center;
     }
 
-    li.tab-active{
+    li:hover{
+        color: hsl(19, 100%, 50%);
+    }
+
+    li.tab-active,
+    li.tab-active:hover{
         background-color: hsl(183, 98%, 35%) ;
         color: $white;
     }

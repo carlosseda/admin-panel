@@ -2,8 +2,8 @@
 
 return [
 
-    'title' => 'Alize Boats | Alquiler de barcos sin licencia | Mallorca',
-    'short-title' => 'Alize Boats',
-    'description' => 'Disfruta de tus vacaciones en Mallorca',
-    'keywords' => 'mallorca, mediterraneo, barcos ',
+    'web-name' => 'Dev-Maquetación',
+    'title' => 'Título por defecto en español',
+    'description' => 'Descripción por defecto en español',
+    'keywords' => 'keywords por defecto en español',
 ];

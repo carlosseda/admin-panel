@@ -1772,3 +1772,48 @@ body {
   display: block;
   padding: 2em;
 }
+
+.locale-tabs {
+  background-color: #d6d6d6;
+}
+
+.locale-tabs-container {
+  background-color: #d6d6d6;
+  display: flex;
+  justify-content: space-between;
+  margin-top: 1em;
+}
+
+.locale-tabs-container-menu {
+  width: 100%;
+}
+.locale-tabs-container-menu ul {
+  background-color: #d6d6d6;
+  display: flex;
+  margin: 0;
+  padding: 0;
+}
+.locale-tabs-container-menu li {
+  color: gray;
+  cursor: pointer;
+  font-weight: 600;
+  padding: 1em 0.5em;
+  text-align: center;
+}
+.locale-tabs-container-menu li:hover {
+  color: #ff5100;
+}
+.locale-tabs-container-menu li.locale-tab-active,
+.locale-tabs-container-menu li.locale-tab-active:hover {
+  background-color: #02a8b1;
+  color: white;
+}
+
+.locale-tab-panel {
+  display: none;
+}
+
+.locale-tab-panel.locale-tab-active {
+  display: block;
+  padding: 2em;
+}
