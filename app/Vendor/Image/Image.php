@@ -3,9 +3,10 @@
 namespace App\Vendor\Image;
 
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Http\Request;
 use App\Vendor\Image\Models\ImageConfiguration;
 use App\Vendor\Image\Models\ImageOriginal;
-use App\Vendor\Image\Models\ImageResize;
+use App\Vendor\Image\Models\ImageResized;
 use App\Jobs\ProcessImage;
 use App\Jobs\DeleteImage;
 use Jcupitt\Vips;
@@ -91,11 +92,13 @@ class Image
 
 			Storage::disk($this->entity)->putFileAs('/' . $entity_id . '/' . $language . '/' . $content . '/original', $file, $filename);
 
+			Debugbar::info($path);
+
 			$image = ImageOriginal::create([
 				'entity_id' => $entity_id,
 				'entity' => $this->entity,
 				'language' => $language,
-				'content' => $content],[
+				'content' => $content,
 				'path' => $this->entity . $path,
 				'filename' => $filename,
 				'mime_type' => 'image/'. $file_extension,
@@ -103,6 +106,7 @@ class Image
 				'width' => isset($width)? $width : null,
 				'height' => isset($height)? $height : null,
 			]);
+
 		}
 
 		return $image;
@@ -137,29 +141,7 @@ class Image
 				$filename = $name . '.' . $this->extension_conversion;
 			}		
 
-			if($value->type == 'single'){
-
-				ProcessImage::dispatch(
-					$entity_id,
-					$value->entity,
-					$directory,
-					$value->grid,
-					$language, 
-					$value->disk,
-					$path, 
-					$filename, 
-					$value->content,
-					$value->type,
-					$file_extension,
-					$this->extension_conversion,
-					$value->width,
-					$value->quality,
-					$original_path, 
-					$value->id
-				)->onQueue('process_image');
-			}
-
-			elseif($value->type == 'collection'){
+			if($value->type == 'collection'){
 
 				$counter = 2;
 
@@ -175,27 +157,63 @@ class Image
 						$counter++;
 					}		
 				}
-
-				ProcessImage::dispatch(
-					$entity_id,
-					$value->entity,
-					$directory,
-					$value->grid,
-					$language, 
-					$value->disk,
-					$path, 
-					$filename, 
-					$value->content,
-					$value->type,
-					$extension,
-					$this->extension_conversion,
-					$value->width,
-					$value->quality,
-					$original_path, 
-					$value->id
-				)->onQueue('process_image');
 			}
+
+			ProcessImage::dispatch(
+				$entity_id,
+				$value->entity,
+				$directory,
+				$value->grid,
+				$language, 
+				$value->disk,
+				$path, 
+				$filename, 
+				$value->content,
+				$value->type,
+				$file_extension,
+				$this->extension_conversion,
+				$value->width,
+				$value->quality,
+				$original_path, 
+				$value->id
+			)->onQueue('process_image');
 		}
+	}
+
+	public function showImageSeo(Request $request, $image)
+	{		
+
+		return ImageResized::find($image);
+		
+	}
+
+	public function storeImageSeo(Request $request)
+	{
+		$images = ImageResized::getImagesSeo(request('filename'), request('entity_id'), request('language'))->get();
+
+		foreach ($images as $image) {
+			$image->title = request('title');
+			$image->alt = request('alt');
+			$image->save();
+		}
+
+		$message = \Lang::get('admin/image.image-update');
+
+		return response()->json([
+            'message' => $message,
+        ]); 
+	}
+
+	public function destroy(Request $request, $image = null)
+	{
+		$image = ImageResized::find($request->input('image'));
+		DeleteImage::dispatch($image->filename, $image->content, $image->entity, $image->language)->onQueue('delete_image');
+
+		$message = \Lang::get('admin/image.image-delete');
+
+		return response()->json([
+            'message' => $message,
+        ]);
 	}
 
 	public function show($entity_id, $language)
@@ -267,28 +285,4 @@ class Image
 
         return $items;
     }
-
-	public function destroy(ImageOriginal $image)
-	{
-		DeleteImage::dispatch($image->filename, $image->content, $image->entity)->onQueue('delete_image');
-
-		$message = \Lang::get('admin/media.media-delete');
-
-		return response()->json([
-            'message' => $message,
-        ]);
-	}
-
-	public function delete($entity_id)
-	{
-		if (ImageOriginal::getImages($this->entity, $entity_id)->count() > 0) {
-
-			$images = ImageOriginal::getImages($this->entity, $entity_id)->get();
-
-			foreach ($images as $image){
-				Storage::disk($image->entity)->delete($image->path);
-				$image->delete();
-			}
-		}
-	}
 }

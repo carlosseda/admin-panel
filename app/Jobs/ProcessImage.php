@@ -11,7 +11,6 @@ use Illuminate\Support\Facades\Storage;
 use Jcupitt\Vips;
 use App\Vendor\Image\Models\ImageResized;
 use App\Vendor\Image\Models\ImageConfiguration;
-use Debugbar;
 
 class ProcessImage implements ShouldQueue
 {
@@ -106,7 +105,6 @@ class ProcessImage implements ShouldQueue
             $path = public_path(Storage::url($this->disk . $this->path));
             $size = filesize($path);
         }
-        
         
         if($this->type == 'single'){
 

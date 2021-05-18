@@ -1,6 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Vendor\Locale\LocalizationSeo;
+
+$localizationseo = new LocalizationSeo();
 
 /*
 |--------------------------------------------------------------------------
@@ -14,6 +17,10 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::group(['prefix' => 'admin'], function () {
+
+    Route::get('/image/delete/{image?}', 'App\Vendor\Image\Image@destroy')->name('delete_image');
+    Route::get('/image/{image}', 'App\Vendor\Image\Image@showImageSeo')->name('show_image_seo');
+    Route::post('/image', 'App\Vendor\Image\Image@storeImageSeo')->name('store_image_seo');
 
     Route::resource('clientes', 'App\Http\Controllers\Admin\CustomerController', [
         'parameters' => [
@@ -102,11 +109,21 @@ Route::group(['prefix' => 'admin'], function () {
     ]);
 });
 
+Route::group(['prefix' => $localizationseo->setLocale(),
+              'middleware' => [ 'localize' ]
+            ], function () use ($localizationseo) {
+
+    Route::get($localizationseo->transRoute('routes.front_faqs'), 'App\Http\Controllers\Front\FaqController@index')->name('front_faqs');
+    Route::get($localizationseo->transRoute('routes.front_faq'), 'App\Http\Controllers\Front\FaqController@show')->name('front_faq');
+});
+
+
+Route::get('/', 'App\Http\Controllers\Front\HomeController@index')->name('home_front');
 Route::post('/fingerprint', 'App\Http\Controllers\Front\FingerprintController@store')->name('front_fingerprint');
+
+
 
 Route::get('/login', 'App\Http\Controllers\Front\LoginController@index')->name('front_login');
 Route::post('/login', 'App\Http\Controllers\Front\LoginController@login')->name('front_login_submit');
 
-Route::get('/', 'App\Http\Controllers\Front\HomeController@index')->name('home_front');
-Route::get('/faqs', 'App\Http\Controllers\Front\FaqController@index')->name('faqs_front');
 
