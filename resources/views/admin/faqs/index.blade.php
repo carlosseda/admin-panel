@@ -154,7 +154,8 @@
                                     </div>
                                     <div class="form-input">
                                         @include('admin.components.upload_image', [
-                                            'type' => 'image', 
+                                            'entity' => 'faqs',
+                                            'type' => 'single', 
                                             'content' => 'featured', 
                                             'alias' => $localization->alias,
                                             'files' => $faq->images_featured_preview
@@ -168,7 +169,8 @@
                                     </div>
                                     <div class="form-input">
                                         @include('admin.components.upload_image', [
-                                            'type' => 'images', 
+                                            'entity' => 'faqs',
+                                            'type' => 'collection', 
                                             'content' => 'grid', 
                                             'alias' => $localization->alias,
                                             'files' => $faq->images_grid_preview

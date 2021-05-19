@@ -1,4 +1,4 @@
-import {openImageModal} from './modalImage';
+import {openModal, openImageModal, updateImageModal} from './modalImage';
 
 export let renderUploadImage = () => {
 
@@ -10,13 +10,27 @@ export let renderUploadImage = () => {
         uploadImage(inputElement);
     });
 
+    uploadImages.forEach(uploadImage => {
+
+        uploadImage.addEventListener("click", (e) => {
+
+            openImage(uploadImage);
+        });
+    });
+
     function uploadImage(inputElement){
 
-        let uploadElement = inputElement.closest(".upload-image-add");
+        let uploadElement = inputElement.parentElement;
 
-        uploadElement.addEventListener("click", (event) => {
+        uploadElement.addEventListener("click", (e) => {
+            
+            let thumbnailElement = uploadElement.querySelector(".upload-image-thumb");
 
-            inputElement.click();
+            if(!thumbnailElement){
+                inputElement.click();
+            }else{
+                openImage(uploadElement);
+            };
         });
       
         inputElement.addEventListener("change", (e) => {
@@ -56,13 +70,13 @@ export let renderUploadImage = () => {
 
             if(uploadElement.classList.contains('collection')){
     
-                if(thumbnailElement == null){
+                if(!thumbnailElement){
     
                     let cloneUploadElement = uploadElement.cloneNode(true);
                     let cloneInput = cloneUploadElement.querySelector('.upload-image-input');
     
                     uploadImage(cloneInput);
-                    uploadElement.parentElement.appendChild(cloneUploadElement);
+                    uploadElement.parentElement.insertBefore(cloneUploadElement,uploadElement);
                 }
             }
         
@@ -79,10 +93,15 @@ export let renderUploadImage = () => {
             let reader = new FileReader();
         
             reader.readAsDataURL(file);
-    
+            
             reader.onload = () => {
                 thumbnailElement.style.backgroundImage = `url('${reader.result}')`;
+                updateImageModal(reader.result);
+                openModal();
             };
+
+            uploadElement.classList.remove('upload-image-add');
+            uploadElement.classList.add('upload-image');
 
             if(uploadElement.classList.contains('collection')){
 
@@ -98,19 +117,19 @@ export let renderUploadImage = () => {
         }
     }
 
-    uploadImages.forEach(uploadImage => {
-    
-        uploadImage.addEventListener("click", (e) => {
-            
-            let url = uploadImage.dataset.url;
-    
+    function openImage(image){
+
+        let url = image.dataset.url;
+
+        if(url){
+
             let sendImageRequest = async () => {
-    
+
                 try {
                     axios.get(url).then(response => {
-
+    
                         openImageModal(response.data);
-                      
+                        
                     });
                     
                 } catch (error) {
@@ -120,6 +139,9 @@ export let renderUploadImage = () => {
     
             sendImageRequest();
 
-        });
-    });
+        }else{            
+
+            openModal();
+        }
+    }
 }

@@ -10,7 +10,6 @@ use App\Vendor\Image\Models\ImageResized;
 use App\Jobs\ProcessImage;
 use App\Jobs\DeleteImage;
 use Jcupitt\Vips;
-use Debugbar;
 
 class Image
 {
@@ -182,9 +181,7 @@ class Image
 
 	public function showImageSeo(Request $request, $image)
 	{		
-
 		return ImageResized::find($image);
-		
 	}
 
 	public function storeImageSeo(Request $request)

@@ -4,28 +4,47 @@ import {showMessage} from './messages';
 let modalImageStoreButton = document.getElementById('modal-image-store-button');
 let modalImageDeleteButton = document.getElementById('modal-image-delete-button');
 
+export let openModal = () => {
+
+    let modal = document.getElementById('upload-image-modal');
+
+    modal.classList.add('modal-active');
+    startOverlay();
+}
+
 export let openImageModal = (image) => {
 
     let modal = document.getElementById('upload-image-modal');
     let imageContainer = document.getElementById('modal-image-original');
-    let imageId = document.getElementById('modal-image-id');
-    let imageFilename = document.getElementById('modal-image-filename');
-    let imageEntityId = document.getElementById('modal-image-entity-id');
-    let imageLanguage = document.getElementById('modal-image-language');
-    let imageTitle = document.getElementById('modal-image-title');
-    let imageAlt = document.getElementById('modal-image-alt');
+    let imageForm = document.getElementById('image-form');
 
-    imageContainer.src = '../storage/' + image.path;
-    imageFilename.value = image.filename;
-    imageEntityId.value = image.entity_id;
-    imageLanguage.value = image.language;
-    imageId.value = image.id;
-    imageTitle.value = image.title;
-    imageAlt.value = image.alt;
+    if(image.path){
+        imageContainer.src = '../storage/' + image.path;
+    }
+
+    for (var [key, val] of Object.entries(image)) {
+
+        let input = imageForm.elements[key];
+
+        if(input){
+
+            switch(input.type) {
+                case 'checkbox': input.checked = !!val; break;
+                default:         input.value = val;     break;
+            }
+        }
+    }
 
     modal.classList.add('modal-active');
 
     startOverlay();
+}
+
+export let updateImageModal = (image) => {
+
+    let imageContainer = document.getElementById('modal-image-original');
+
+    imageContainer.src = image;
 }
 
 modalImageStoreButton .addEventListener("click", (e) => {

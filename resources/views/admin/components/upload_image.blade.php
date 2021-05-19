@@ -1,4 +1,4 @@
-@if($type == "image" )
+@if($type == "single" )
     @foreach ($files as $image)
         @if($image->language == $alias)
             <div class="upload-image single {{$image->id}}" data-url="{{route('show_image_seo', ['image' => $image->id])}}">
@@ -14,15 +14,22 @@
         @endif
     @endforeach
 
-    <div class="upload-image-add single">
-        <span class="upload-image-prompt">@lang('admin/image.image-drop')</span>
-        <input class="upload-image-input" type="file" name="images[{{$content}}.{{$alias}}]">
-    </div>
+    @if($files->count() == 0)
+        <div class="upload-image-add single" data-entity="{{$entity}}" data-content="{{$content}}" data-alias="{{$alias}}">
+            <span class="upload-image-prompt">@lang('admin/image.image-drop')</span>
+            <input class="upload-image-input" type="file" name="images[{{$content}}.{{$alias}}]">
+        </div>
+    @endif
 @endif
 
-@if($type == "images")
+@if($type == "collection")
 
     <div class="upload-image-collection">      
+
+        <div class="upload-image-add collection" data-content="{{$content}}" data-alias="{{$alias}}">      
+            <span class="upload-image-prompt">+</span>
+            <input class="upload-image-input" type="file">
+        </div>
 
         @foreach ($files as $image)
             @if($image->language == $alias)
@@ -37,11 +44,6 @@
                 </div>
             @endif
         @endforeach
-
-        <div class="upload-image-add collection" data-content="{{$content}}" data-alias="{{$alias}}">      
-            <span class="upload-image-prompt">+</span>
-            <input class="upload-image-input" type="file">
-        </div>
     </div>
 
 @endif
