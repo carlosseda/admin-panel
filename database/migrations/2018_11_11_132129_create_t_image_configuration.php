@@ -22,6 +22,7 @@ class CreateTImageConfiguration extends Migration
             $table->string('content', 255);
             $table->string('grid', 255);
             $table->string('content_accepted', 255);
+            $table->string('extension_conversion');
             $table->integer('width')->nullable();
             $table->integer('height')->nullable();
             $table->integer('quality');

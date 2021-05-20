@@ -1,7 +1,7 @@
 @if($type == "single" )
     @foreach ($files as $image)
         @if($image->language == $alias)
-            <div class="upload-image single {{$image->id}}" data-url="{{route('show_image_seo', ['image' => $image->id])}}">
+            <div class="upload-image single" data-temporalId="{{$image->id}}" data-url="{{route('show_image_seo', ['image' => $image->id])}}">
                 
                 <div class="upload-image-options">
                     <svg viewBox="0 0 24 24">
@@ -9,15 +9,16 @@
                     </svg>
                 </div>
 
+                <span class="upload-image-prompt hidden">@lang('admin/image.image-drop')</span>
                 <div class="upload-image-thumb" style="background-image: url({{Storage::url($image->path)}})"></div>
             </div>
         @endif
     @endforeach
 
     @if($files->count() == 0)
-        <div class="upload-image-add single" data-entity="{{$entity}}" data-content="{{$content}}" data-alias="{{$alias}}">
+        <div class="upload-image-add single" data-entity="{{$entity}}" data-content="{{$content}}" data-language="{{$alias}}">
             <span class="upload-image-prompt">@lang('admin/image.image-drop')</span>
-            <input class="upload-image-input" type="file" name="images[{{$content}}.{{$alias}}]">
+            <input class="upload-image-input" type="file">
         </div>
     @endif
 @endif
@@ -26,7 +27,7 @@
 
     <div class="upload-image-collection">      
 
-        <div class="upload-image-add collection" data-content="{{$content}}" data-alias="{{$alias}}">      
+        <div class="upload-image-add collection" data-entity="{{$entity}}" data-content="{{$content}}" data-language="{{$alias}}">      
             <span class="upload-image-prompt">+</span>
             <input class="upload-image-input" type="file">
         </div>

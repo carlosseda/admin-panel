@@ -1,5 +1,6 @@
 import {startOverlay, startWait, stopWait} from './wait';
 import {showMessage} from './messages';
+import {deleteThumbnail} from './uploadImage';
 
 let modalImageStoreButton = document.getElementById('modal-image-store-button');
 let modalImageDeleteButton = document.getElementById('modal-image-delete-button');
@@ -43,11 +44,26 @@ export let openImageModal = (image) => {
 export let updateImageModal = (image) => {
 
     let imageContainer = document.getElementById('modal-image-original');
+    imageContainer.src = image.dataset.image;
 
-    imageContainer.src = image;
+    let imageForm = document.getElementById('image-form');
+    imageForm.reset();
+
+    for (var [key, val] of Object.entries(image.dataset)) {
+
+        let input = imageForm.elements[key];
+
+        if(input){
+
+            switch(input.type) {
+                case 'checkbox': input.checked = !!val; break;
+                default:         input.value = val;     break;
+            }
+        }
+    }
 }
 
-modalImageStoreButton .addEventListener("click", (e) => {
+modalImageStoreButton.addEventListener("click", (e) => {
          
     let modal = document.getElementById('upload-image-modal');
     let imageForm = document.getElementById('image-form');
@@ -77,38 +93,32 @@ modalImageDeleteButton.addEventListener("click", (e) => {
          
     let modal = document.getElementById('upload-image-modal');
     let url = modalImageDeleteButton.dataset.route;
-    let imageId = document.getElementById('modal-image-id').value;
+    let temporalId = document.getElementById('modal-image-temporal-id').value;
+    let entityId = document.getElementById('modal-image-entity-id').value;
 
-    let sendImageDeleteRequest = async () => {
+    if(entityId){
 
-        try {
-            axios.get(url, {
-                params: {
-                  'image': imageId
-                }
-            }).then(response => {
+        let sendImageDeleteRequest = async () => {
 
-                modal.classList.remove('modal-active');
-                stopWait();
-                showMessage('success', response.data.message);
-
-                let uploadImages = document.querySelectorAll(".upload-image");
-
-                uploadImages.forEach(uploadImage => {
-
-                    if(uploadImage.classList.contains(imageId)){
-
-                        uploadImage.remove();
+            try {
+                axios.get(url, {
+                    params: {
+                      'image': imageId
                     }
-                
+                }).then(response => {
+                    showMessage('success', response.data.message);
                 });
-        
-            });
-            
-        } catch (error) {
+                
+            } catch (error) {
+    
+            }
+        };
+    
+        sendImageDeleteRequest();
 
-        }
-    };
+    }
 
-    sendImageDeleteRequest();
+    modal.classList.remove('modal-active');
+    stopWait();
+    deleteThumbnail(temporalId);
 });

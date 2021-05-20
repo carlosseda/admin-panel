@@ -19,6 +19,11 @@ class ImageResized extends Model
         return $this->belongsTo(ImageConfiguration::class, 'image_configuration_id');
     }
 
+    public function original_image()
+    {
+        return $this->belongsTo(ImageOriginal::class, 'image_original_id');
+    }
+
     public function scopeGetImageSeo($query, $filename, $entity_id, $language){
         
         return $query->where('language', $language)

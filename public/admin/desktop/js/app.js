@@ -2473,6 +2473,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _wait__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./wait */ "./resources/js/admin/desktop/wait.js");
 /* harmony import */ var _messages__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./messages */ "./resources/js/admin/desktop/messages.js");
+/* harmony import */ var _uploadImage__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./uploadImage */ "./resources/js/admin/desktop/uploadImage.js");
 
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
@@ -2490,6 +2491,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
 
 
 
@@ -2534,7 +2536,29 @@ var openImageModal = function openImageModal(image) {
 };
 var updateImageModal = function updateImageModal(image) {
   var imageContainer = document.getElementById('modal-image-original');
-  imageContainer.src = image;
+  imageContainer.src = image.dataset.image;
+  var imageForm = document.getElementById('image-form');
+  imageForm.reset();
+
+  for (var _i2 = 0, _Object$entries2 = Object.entries(image.dataset); _i2 < _Object$entries2.length; _i2++) {
+    var _Object$entries2$_i = _slicedToArray(_Object$entries2[_i2], 2),
+        key = _Object$entries2$_i[0],
+        val = _Object$entries2$_i[1];
+
+    var input = imageForm.elements[key];
+
+    if (input) {
+      switch (input.type) {
+        case 'checkbox':
+          input.checked = !!val;
+          break;
+
+        default:
+          input.value = val;
+          break;
+      }
+    }
+  }
 };
 modalImageStoreButton.addEventListener("click", function (e) {
   var modal = document.getElementById('upload-image-modal');
@@ -2574,46 +2598,45 @@ modalImageStoreButton.addEventListener("click", function (e) {
 modalImageDeleteButton.addEventListener("click", function (e) {
   var modal = document.getElementById('upload-image-modal');
   var url = modalImageDeleteButton.dataset.route;
-  var imageId = document.getElementById('modal-image-id').value;
+  var temporalId = document.getElementById('modal-image-temporal-id').value;
+  var entityId = document.getElementById('modal-image-entity-id').value;
 
-  var sendImageDeleteRequest = /*#__PURE__*/function () {
-    var _ref2 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2() {
-      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee2$(_context2) {
-        while (1) {
-          switch (_context2.prev = _context2.next) {
-            case 0:
-              try {
-                axios.get(url, {
-                  params: {
-                    'image': imageId
-                  }
-                }).then(function (response) {
-                  modal.classList.remove('modal-active');
-                  (0,_wait__WEBPACK_IMPORTED_MODULE_1__.stopWait)();
-                  (0,_messages__WEBPACK_IMPORTED_MODULE_2__.showMessage)('success', response.data.message);
-                  var uploadImages = document.querySelectorAll(".upload-image");
-                  uploadImages.forEach(function (uploadImage) {
-                    if (uploadImage.classList.contains(imageId)) {
-                      uploadImage.remove();
+  if (entityId) {
+    var sendImageDeleteRequest = /*#__PURE__*/function () {
+      var _ref2 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2() {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee2$(_context2) {
+          while (1) {
+            switch (_context2.prev = _context2.next) {
+              case 0:
+                try {
+                  axios.get(url, {
+                    params: {
+                      'image': imageId
                     }
+                  }).then(function (response) {
+                    (0,_messages__WEBPACK_IMPORTED_MODULE_2__.showMessage)('success', response.data.message);
                   });
-                });
-              } catch (error) {}
+                } catch (error) {}
 
-            case 1:
-            case "end":
-              return _context2.stop();
+              case 1:
+              case "end":
+                return _context2.stop();
+            }
           }
-        }
-      }, _callee2);
-    }));
+        }, _callee2);
+      }));
 
-    return function sendImageDeleteRequest() {
-      return _ref2.apply(this, arguments);
-    };
-  }();
+      return function sendImageDeleteRequest() {
+        return _ref2.apply(this, arguments);
+      };
+    }();
 
-  sendImageDeleteRequest();
+    sendImageDeleteRequest();
+  }
+
+  modal.classList.remove('modal-active');
+  (0,_wait__WEBPACK_IMPORTED_MODULE_1__.stopWait)();
+  (0,_uploadImage__WEBPACK_IMPORTED_MODULE_3__.deleteThumbnail)(temporalId);
 });
 
 /***/ }),
@@ -2827,7 +2850,8 @@ collapseButton.addEventListener("click", function () {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "renderUploadImage": () => (/* binding */ renderUploadImage)
+/* harmony export */   "renderUploadImage": () => (/* binding */ renderUploadImage),
+/* harmony export */   "deleteThumbnail": () => (/* binding */ deleteThumbnail)
 /* harmony export */ });
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
@@ -2850,129 +2874,150 @@ var renderUploadImage = function renderUploadImage() {
       openImage(uploadImage);
     });
   });
+};
 
-  function uploadImage(inputElement) {
-    var uploadElement = inputElement.parentElement;
-    uploadElement.addEventListener("click", function (e) {
-      var thumbnailElement = uploadElement.querySelector(".upload-image-thumb");
+function uploadImage(inputElement) {
+  var uploadElement = inputElement.parentElement;
+  uploadElement.addEventListener("click", function (e) {
+    var thumbnailElement = uploadElement.querySelector(".upload-image-thumb");
 
-      if (!thumbnailElement) {
-        inputElement.click();
-      } else {
-        openImage(uploadElement);
-      }
+    if (!thumbnailElement) {
+      inputElement.click();
+    } else {
+      openImage(uploadElement);
+    }
 
-      ;
-    });
-    inputElement.addEventListener("change", function (e) {
-      if (inputElement.files.length) {
-        updateThumbnail(uploadElement, inputElement.files[0]);
-      }
-    });
-    uploadElement.addEventListener("dragover", function (e) {
-      e.preventDefault();
-      uploadElement.classList.add("upload-image-over");
-    });
-    ["dragleave", "dragend"].forEach(function (type) {
-      uploadElement.addEventListener(type, function (e) {
-        uploadElement.classList.remove("upload-image-over");
-      });
-    });
-    uploadElement.addEventListener("drop", function (e) {
-      e.preventDefault();
-
-      if (e.dataTransfer.files.length) {
-        inputElement.files = e.dataTransfer.files;
-        updateThumbnail(uploadElement, e.dataTransfer.files[0]);
-      }
-
+    ;
+  });
+  inputElement.addEventListener("change", function (e) {
+    if (inputElement.files.length) {
+      updateThumbnail(uploadElement, inputElement.files[0]);
+    }
+  });
+  uploadElement.addEventListener("dragover", function (e) {
+    e.preventDefault();
+    uploadElement.classList.add("upload-image-over");
+  });
+  ["dragleave", "dragend"].forEach(function (type) {
+    uploadElement.addEventListener(type, function (e) {
       uploadElement.classList.remove("upload-image-over");
     });
-  }
+  });
+  uploadElement.addEventListener("drop", function (e) {
+    e.preventDefault();
 
-  function updateThumbnail(uploadElement, file) {
-    if (file.type.startsWith("image/")) {
-      var _thumbnailElement = uploadElement.querySelector(".upload-image-thumb");
+    if (e.dataTransfer.files.length) {
+      inputElement.files = e.dataTransfer.files;
+      updateThumbnail(uploadElement, e.dataTransfer.files[0]);
+    }
 
-      if (uploadElement.classList.contains('collection')) {
-        if (!_thumbnailElement) {
-          var cloneUploadElement = uploadElement.cloneNode(true);
-          var cloneInput = cloneUploadElement.querySelector('.upload-image-input');
-          uploadImage(cloneInput);
-          uploadElement.parentElement.insertBefore(cloneUploadElement, uploadElement);
-        }
-      }
+    uploadElement.classList.remove("upload-image-over");
+  });
+}
 
-      if (uploadElement.querySelector(".upload-image-prompt")) {
-        uploadElement.querySelector(".upload-image-prompt").remove();
-      }
+function updateThumbnail(uploadElement, file) {
+  if (file.type.startsWith("image/")) {
+    var _thumbnailElement = uploadElement.querySelector(".upload-image-thumb");
 
+    if (uploadElement.classList.contains('collection')) {
       if (!_thumbnailElement) {
-        _thumbnailElement = document.createElement("div");
-
-        _thumbnailElement.classList.add("upload-image-thumb");
-
-        uploadElement.appendChild(_thumbnailElement);
+        var cloneUploadElement = uploadElement.cloneNode(true);
+        var cloneInput = cloneUploadElement.querySelector('.upload-image-input');
+        uploadImage(cloneInput);
+        uploadElement.parentElement.insertBefore(cloneUploadElement, uploadElement);
       }
+    }
 
-      var reader = new FileReader();
-      reader.readAsDataURL(file);
+    if (uploadElement.querySelector(".upload-image-prompt")) {
+      uploadElement.querySelector(".upload-image-prompt").classList.add('hidden');
+    }
 
-      reader.onload = function () {
-        _thumbnailElement.style.backgroundImage = "url('".concat(reader.result, "')");
-        (0,_modalImage__WEBPACK_IMPORTED_MODULE_1__.updateImageModal)(reader.result);
-        (0,_modalImage__WEBPACK_IMPORTED_MODULE_1__.openModal)();
-      };
+    if (!_thumbnailElement) {
+      _thumbnailElement = document.createElement("div");
 
+      _thumbnailElement.classList.add("upload-image-thumb");
+
+      uploadElement.appendChild(_thumbnailElement);
+    }
+
+    var reader = new FileReader();
+    reader.readAsDataURL(file);
+
+    reader.onload = function () {
+      var temporalId = Math.floor(Math.random() * 99999 + 1);
+      var content = uploadElement.dataset.content;
+      var language = uploadElement.dataset.language;
+      var inputElement = uploadElement.getElementsByClassName("upload-image-input")[0];
+      _thumbnailElement.style.backgroundImage = "url('".concat(reader.result, "')");
+      uploadElement.dataset.temporalId = temporalId;
+      uploadElement.dataset.image = reader.result;
+      inputElement.name = "images[" + content + "-" + temporalId + "." + language + "]";
       uploadElement.classList.remove('upload-image-add');
       uploadElement.classList.add('upload-image');
-
-      if (uploadElement.classList.contains('collection')) {
-        var content = uploadElement.dataset.content;
-        var alias = uploadElement.dataset.alias;
-        var inputElement = uploadElement.getElementsByClassName("upload-image-input")[0];
-        inputElement.name = "images[" + content + "-" + Math.floor(Math.random() * 99999 + 1) + "." + alias + "]";
-      }
-    } else {
-      thumbnailElement.style.backgroundImage = null;
-    }
-  }
-
-  function openImage(image) {
-    var url = image.dataset.url;
-
-    if (url) {
-      var sendImageRequest = /*#__PURE__*/function () {
-        var _ref = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
-          return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
-            while (1) {
-              switch (_context.prev = _context.next) {
-                case 0:
-                  try {
-                    axios.get(url).then(function (response) {
-                      (0,_modalImage__WEBPACK_IMPORTED_MODULE_1__.openImageModal)(response.data);
-                    });
-                  } catch (error) {}
-
-                case 1:
-                case "end":
-                  return _context.stop();
-              }
-            }
-          }, _callee);
-        }));
-
-        return function sendImageRequest() {
-          return _ref.apply(this, arguments);
-        };
-      }();
-
-      sendImageRequest();
-    } else {
+      (0,_modalImage__WEBPACK_IMPORTED_MODULE_1__.updateImageModal)(uploadElement);
       (0,_modalImage__WEBPACK_IMPORTED_MODULE_1__.openModal)();
-    }
+    };
+  } else {
+    thumbnailElement.style.backgroundImage = null;
   }
-};
+}
+
+function openImage(image) {
+  var url = image.dataset.url;
+
+  if (url) {
+    var sendImageRequest = /*#__PURE__*/function () {
+      var _ref = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                try {
+                  axios.get(url).then(function (response) {
+                    (0,_modalImage__WEBPACK_IMPORTED_MODULE_1__.openImageModal)(response.data);
+                  });
+                } catch (error) {}
+
+              case 1:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee);
+      }));
+
+      return function sendImageRequest() {
+        return _ref.apply(this, arguments);
+      };
+    }();
+
+    sendImageRequest();
+  } else {
+    (0,_modalImage__WEBPACK_IMPORTED_MODULE_1__.updateImageModal)(image);
+    (0,_modalImage__WEBPACK_IMPORTED_MODULE_1__.openModal)();
+  }
+}
+
+function deleteThumbnail(imageId) {
+  var uploadImages = document.querySelectorAll(".upload-image");
+  uploadImages.forEach(function (uploadImage) {
+    if (uploadImage.classList.contains('collection') && uploadImage.dataset.imageid == imageId) {
+      uploadImage.remove();
+    }
+
+    if (uploadImage.classList.contains('single') && uploadImage.dataset.imageid == imageId) {
+      uploadImage.querySelector(".upload-image-thumb").remove();
+      uploadImage.dataset.imageid == '';
+      uploadImage.querySelector(".upload-image-prompt").classList.remove('hidden');
+      uploadImage.classList.remove('upload-image');
+      uploadImage.classList.add('upload-image-add');
+
+      if (uploadImage.querySelector(".upload-image-input")) {
+        uploadImage.querySelector(".upload-image-input").value = "";
+      }
+    }
+  });
+}
 
 /***/ }),
 
