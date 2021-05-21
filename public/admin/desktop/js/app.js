@@ -2578,10 +2578,10 @@ modalImageDeleteButton.addEventListener("click", function (e) {
   var url = modalImageDeleteButton.dataset.route;
   var modal = document.getElementById('upload-image-modal');
   var imageForm = document.getElementById('image-form');
-  var temporalId = document.getElementById('modal-image-temporal-id').value;
-  var id = document.getElementById('modal-image-id').value;
+  var temporalId = document.getElementById('modal-image-temporal-id');
+  var id = document.getElementById('modal-image-id');
 
-  if (id) {
+  if (id.value) {
     var sendImageDeleteRequest = /*#__PURE__*/function () {
       var _ref2 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2() {
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee2$(_context2) {
@@ -2591,7 +2591,7 @@ modalImageDeleteButton.addEventListener("click", function (e) {
                 try {
                   axios.get(url, {
                     params: {
-                      'image': id
+                      'image': id.value
                     }
                   }).then(function (response) {
                     (0,_uploadImage__WEBPACK_IMPORTED_MODULE_3__.deleteThumbnail)(response.data.imageId);
@@ -2614,11 +2614,13 @@ modalImageDeleteButton.addEventListener("click", function (e) {
 
     sendImageDeleteRequest();
   } else {
-    (0,_uploadImage__WEBPACK_IMPORTED_MODULE_3__.deleteThumbnail)(temporalId);
+    (0,_uploadImage__WEBPACK_IMPORTED_MODULE_3__.deleteThumbnail)(temporalId.value);
   }
 
-  modal.classList.remove('modal-active');
+  temporalId.value = "";
+  id.value = "";
   imageForm.reset();
+  modal.classList.remove('modal-active');
   (0,_wait__WEBPACK_IMPORTED_MODULE_1__.stopWait)();
 });
 
@@ -3031,8 +3033,10 @@ function deleteThumbnail(imageId) {
 
     if (uploadImage.classList.contains('single')) {
       if (uploadImage.dataset.temporalId == imageId || uploadImage.dataset.imageId == imageId) {
+        console.log("hola");
         uploadImage.querySelector(".upload-image-thumb").remove();
-        uploadImage.dataset.temporalId == '';
+        uploadImage.dataset.imageId = '';
+        uploadImage.dataset.url = '';
         uploadImage.querySelector(".upload-image-prompt").classList.remove('hidden');
         uploadImage.classList.remove('upload-image');
         uploadImage.classList.add('upload-image-add');

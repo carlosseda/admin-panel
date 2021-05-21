@@ -221,7 +221,6 @@ class Image
 
 	public function destroy(Request $request, $image = null)
 	{
-		Debugbar::info($request->input('image'));
 		$image = ImageResized::find($request->input('image'));
 
 		DeleteImage::dispatch($image->filename, $image->content, $image->entity, $image->language)->onQueue('delete_image');
