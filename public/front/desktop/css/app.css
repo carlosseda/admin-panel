@@ -597,16 +597,27 @@ a:hover, a:focus {
   transition: max-height 0.5s;
   width: 100%;
 }
+.faqs .faq .faq-description .faq-description-text {
+  width: 60%;
+}
 .faqs .faq .faq-description .faq-description-text p {
   color: black;
   font-weight: 200;
   margin: 1em;
 }
 .faqs .faq .faq-description .faq-description-image {
-  min-width: -webkit-max-content;
-  min-width: -moz-max-content;
-  min-width: max-content;
+  width: 40%;
   padding: 1em;
+}
+.faqs .faq .faq-description .faq-description-image {
+  padding: 1em;
+}
+.faqs .faq .faq-description .faq-description-image-grid {
+  display: flex;
+  flex-wrap: wrap;
+}
+.faqs .faq .faq-description .faq-description-image-grid-item {
+  width: 20%;
 }
 .faqs .faq.active .faq-title-container {
   background-color: #110c40;

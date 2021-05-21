@@ -10,7 +10,6 @@ use App\Vendor\Image\Models\ImageResized;
 use App\Jobs\ProcessImage;
 use App\Jobs\DeleteImage;
 use Jcupitt\Vips;
-use Debugbar;
 
 class Image
 {
@@ -37,27 +36,52 @@ class Image
 			$image->temporal_id = $temporal_id;
 
 			$this->storeResize($file, $entity_id, $content, $language, $image);
+			$this->destroyTemporal();
 		}
 	}
 
 	public function storeSeo(Request $request){
+
 		
 		$settings = ImageConfiguration::where('entity', request('entity'))
 				->where('content', request('content'))
 				->where('grid', '!=', 'original')
 				->get();
 
-		foreach ($settings as $setting => $configuration){
+		if(request('temporalId')){
 
-			ImageResized::updateOrCreate([
-				'temporal_id' => request('temporalId'),
-				'grid' => $configuration->grid],[
-				'title' => request('title'),
-				'entity' => request('entity'),
-				'language' => request('language'),
-				'content' => request('content'),
-				'alt' => request('alt'),
-			]);
+			foreach ($settings as $setting => $configuration){
+
+				ImageResized::updateOrCreate([
+					'temporal_id' => request('temporalId'),
+					'grid' => $configuration->grid],[
+					'title' => request('title'),
+					'entity' => request('entity'),
+					'language' => request('language'),
+					'content' => request('content'),
+					'alt' => request('alt'),
+				]);
+			}
+		}
+			
+		if(request('imageId')){
+
+			$entity_id = ImageResized::find(request('imageId'))->entity_id;
+
+			foreach ($settings as $setting => $configuration){
+
+				$image = ImageResized::updateOrCreate([
+					'entity_id' => $entity_id,
+					'grid' => $configuration->grid,
+					'filename' => request('filename'),
+					'entity' => request('entity'),
+					'language' => request('language'),
+					'content' => request('content')],[
+					'title' => request('title'),
+					'alt' => request('alt'),
+				]);
+
+			}
 		}
 	
 		$message = \Lang::get('admin/image.image-update');
@@ -233,14 +257,8 @@ class Image
         ]);
 	}
 
-	public function getAllByLanguage($language){ 
-
-        $items = ImageOriginal::getAllByLanguage($this->entity, $language)->get()->groupBy('entity_id');
-
-        $items =  $items->map(function ($item) {
-            return $item->pluck('path','grid');
-        });
-
-        return $items;
-    }
+	public function destroyTemporal()
+	{
+		$image = ImageResized::where('entity_id', null)->delete();
+	}
 }

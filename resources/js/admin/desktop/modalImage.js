@@ -53,8 +53,10 @@ modalImageStoreButton.addEventListener("click", (e) => {
          
     let modal = document.getElementById('upload-image-modal');
     let imageForm = document.getElementById('image-form');
-    let data = new FormData(imageForm);
     let url = imageForm.action;
+    let data = new FormData(imageForm);
+    let temporalId = document.getElementById('modal-image-temporal-id');
+    let id = document.getElementById('modal-image-id');
 
     let sendImagePostRequest = async () => {
 
@@ -62,6 +64,8 @@ modalImageStoreButton.addEventListener("click", (e) => {
             axios.post(url, data).then(response => {
 
                 modal.classList.remove('modal-active');
+                temporalId.value = "";
+                id.value = "";
                 imageForm.reset();
                 stopWait();
                 showMessage('success', response.data.message);

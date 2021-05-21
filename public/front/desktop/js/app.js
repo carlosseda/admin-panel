@@ -1940,72 +1940,55 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
 
 var client = new ClientJS();
-var getFingerPrint = /*#__PURE__*/function () {
+var getFingerPrint = function getFingerPrint() {
+  var fingerprint = {};
+  fingerprint['_token'] = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+  fingerprint['fingerprint_code'] = client.getFingerprint();
+  fingerprint['browser'] = client.getBrowser();
+  fingerprint['browser_version'] = client.getBrowserMajorVersion();
+  fingerprint['OS'] = client.getOS();
+  fingerprint['resolution'] = client.getCurrentResolution();
+  fingerprint['current_url'] = window.location.pathname;
+  return fingerprint;
+};
+
+var sendFingerprintRequest = /*#__PURE__*/function () {
   var _ref = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
-    var fingerprint;
+    var fingerprint, data, key;
     return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
       while (1) {
         switch (_context.prev = _context.next) {
           case 0:
-            fingerprint = {};
-            fingerprint['_token'] = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
-            fingerprint['fingerprint_code'] = client.getFingerprint();
-            fingerprint['browser'] = client.getBrowser();
-            fingerprint['browser_version'] = client.getBrowserMajorVersion();
-            fingerprint['OS'] = client.getOS();
-            fingerprint['resolution'] = client.getCurrentResolution();
-            fingerprint['current_url'] = window.location.pathname;
-            return _context.abrupt("return", fingerprint);
-
-          case 9:
-          case "end":
-            return _context.stop();
-        }
-      }
-    }, _callee);
-  }));
-
-  return function getFingerPrint() {
-    return _ref.apply(this, arguments);
-  };
-}();
-
-var sendFingerprintRequest = /*#__PURE__*/function () {
-  var _ref2 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2() {
-    var fingerprint, data, key;
-    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee2$(_context2) {
-      while (1) {
-        switch (_context2.prev = _context2.next) {
-          case 0:
             fingerprint = getFingerPrint();
+            console.log(fingerprint);
             data = new FormData();
 
             for (key in fingerprint) {
               data.append(key, fingerprint[key]);
             }
 
-            _context2.prev = 3;
-            _context2.next = 6;
+            _context.prev = 4;
+            _context.next = 7;
             return axios.post('/fingerprint', data).then(function (response) {});
 
-          case 6:
-            _context2.next = 10;
+          case 7:
+            _context.next = 11;
             break;
 
-          case 8:
-            _context2.prev = 8;
-            _context2.t0 = _context2["catch"](3);
+          case 9:
+            _context.prev = 9;
+            _context.t0 = _context["catch"](4);
 
-          case 10:
+          case 11:
           case "end":
-            return _context2.stop();
+            return _context.stop();
         }
       }
-    }, _callee2, null, [[3, 8]]);
+    }, _callee, null, [[4, 9]]);
   }));
 
   return function sendFingerprintRequest() {
-    return _ref2.apply(this, arguments);
+    return _ref.apply(this, arguments);
   };
 }();
 

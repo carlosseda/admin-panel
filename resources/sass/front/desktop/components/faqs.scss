@@ -58,6 +58,8 @@
 
             .faq-description-text{
 
+                width: 60%;
+
                 p{
                     color: $black;
                     font-weight: 200;
@@ -66,8 +68,21 @@
             }
 
             .faq-description-image{
-                min-width: max-content;
+                width: 40%;
                 padding: 1em;
+            }
+
+            .faq-description-image{
+                padding: 1em;
+            }
+            
+            .faq-description-image-grid{
+                display: flex;
+                flex-wrap: wrap;
+            }
+
+            .faq-description-image-grid-item{
+                width: 20%;
             }
            
         }

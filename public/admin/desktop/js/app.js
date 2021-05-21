@@ -2541,8 +2541,10 @@ var updateImageModal = function updateImageModal(image) {
 modalImageStoreButton.addEventListener("click", function (e) {
   var modal = document.getElementById('upload-image-modal');
   var imageForm = document.getElementById('image-form');
-  var data = new FormData(imageForm);
   var url = imageForm.action;
+  var data = new FormData(imageForm);
+  var temporalId = document.getElementById('modal-image-temporal-id');
+  var id = document.getElementById('modal-image-id');
 
   var sendImagePostRequest = /*#__PURE__*/function () {
     var _ref = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
@@ -2553,6 +2555,8 @@ modalImageStoreButton.addEventListener("click", function (e) {
               try {
                 axios.post(url, data).then(function (response) {
                   modal.classList.remove('modal-active');
+                  temporalId.value = "";
+                  id.value = "";
                   imageForm.reset();
                   (0,_wait__WEBPACK_IMPORTED_MODULE_1__.stopWait)();
                   (0,_messages__WEBPACK_IMPORTED_MODULE_2__.showMessage)('success', response.data.message);
@@ -3033,7 +3037,6 @@ function deleteThumbnail(imageId) {
 
     if (uploadImage.classList.contains('single')) {
       if (uploadImage.dataset.temporalId == imageId || uploadImage.dataset.imageId == imageId) {
-        console.log("hola");
         uploadImage.querySelector(".upload-image-thumb").remove();
         uploadImage.dataset.imageId = '';
         uploadImage.dataset.url = '';
