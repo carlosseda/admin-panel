@@ -41,36 +41,23 @@ class Image
 	}
 
 	public function storeSeo(Request $request){
+		
+		$settings = ImageConfiguration::where('entity', request('entity'))
+				->where('content', request('content'))
+				->where('grid', '!=', 'original')
+				->get();
 
-		if(request('filename')){
+		foreach ($settings as $setting => $configuration){
 
-			$images = ImageResized::getImagesSeo(request('filename'), request('entity_id'), request('language'))->get();
-
-			foreach ($images as $image) {
-				$image->title = request('title');
-				$image->alt = request('alt');
-				$image->save();
-			}	
-
-		}else{
-
-			$settings = ImageConfiguration::where('entity', request('entity'))
-					->where('content', request('content'))
-					->where('grid', '!=', 'original')
-					->get();
-
-			foreach ($settings as $setting => $configuration){
-
-				ImageResized::create([
-					'title' => request('title'),
-					'entity' => request('entity'),
-					'language' => request('language'),
-					'content' => request('content'),
-					'grid' => $configuration->grid,
-					'alt' => request('alt'),
-					'temporal_id' => request('temporalId'),
-				]);
-			}
+			ImageResized::updateOrCreate([
+				'temporal_id' => request('temporalId'),
+				'grid' => $configuration->grid],[
+				'title' => request('title'),
+				'entity' => request('entity'),
+				'language' => request('language'),
+				'content' => request('content'),
+				'alt' => request('alt'),
+			]);
 		}
 	
 		$message = \Lang::get('admin/image.image-update');
@@ -215,26 +202,34 @@ class Image
 				$configuration->width,
 				$configuration->quality,
 				$image->path, 
+				$configuration->id,
 				$image->id,
-				$image->temporal_id,
-				$configuration->id
+				$image->temporal_id
 			)->onQueue('process_image');
 		}
 	}
 
 	public function show(Request $request, $image)
 	{		
-		return ImageResized::find($image)->original_image;
+		return ImageResized::with('original_image')->find($image);
+	}
+
+	public function showTemporal(Request $request, $image = null)
+	{		
+		return ImageResized::where('temporal_id', $request->input('image'))->first();
 	}
 
 	public function destroy(Request $request, $image = null)
 	{
+		Debugbar::info($request->input('image'));
 		$image = ImageResized::find($request->input('image'));
+
 		DeleteImage::dispatch($image->filename, $image->content, $image->entity, $image->language)->onQueue('delete_image');
 
 		$message = \Lang::get('admin/image.image-delete');
 
 		return response()->json([
+			'imageId' => $request->input('image'),
             'message' => $message,
         ]);
 	}

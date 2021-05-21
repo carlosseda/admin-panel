@@ -105,7 +105,7 @@ function updateThumbnail(uploadElement, file) {
 
             thumbnailElement.style.backgroundImage = `url('${reader.result}')`;
             uploadElement.dataset.temporalId = temporalId;
-            uploadElement.dataset.image = reader.result;
+            uploadElement.dataset.path = reader.result;
             inputElement.name = "images[" + content + "-" + temporalId + "." + language  + "]"; 
 
             uploadElement.classList.remove('upload-image-add');
@@ -122,30 +122,57 @@ function updateThumbnail(uploadElement, file) {
 
 function openImage(image){
 
+    let temporalId = image.dataset.temporalId;
     let url = image.dataset.url;
 
-    if(url){
+    if(temporalId){
 
         let sendImageRequest = async () => {
 
             try {
-                axios.get(url).then(response => {
+                axios.get(url, {
+                    params: {
+                      'image': temporalId
+                    }
+                }).then(response => {
+                        
+                    if(response.data){  
+                        response.data.path = image.dataset.path;
+                        updateImageModal(response.data);
+                    }else{
+                        updateImageModal(image);
+                    };
 
-                    openImageModal(response.data);
+                    openModal();
                     
                 });
                 
             } catch (error) {
-
+    
             }
         };
 
         sendImageRequest();
 
-    }else{       
-        
-        updateImageModal(image);
-        openModal();
+    }else{
+
+        let sendImageRequest = async () => {
+
+            try {
+                axios.get(url).then(response => {
+    
+                    response.data.path = response.data.original_image.path;
+                    updateImageModal(response.data);
+                    openModal();
+                    
+                });
+                
+            } catch (error) {
+    
+            }
+        };
+
+        sendImageRequest();
     }
 }
 
@@ -154,22 +181,28 @@ export function deleteThumbnail(imageId) {
     let uploadImages = document.querySelectorAll(".upload-image");
 
     uploadImages.forEach(uploadImage => {
-    
-        if(uploadImage.classList.contains('collection') && uploadImage.dataset.imageid == imageId){
 
-            uploadImage.remove();
+        if(uploadImage.classList.contains('collection')){
+
+            if(uploadImage.dataset.temporalId == imageId || uploadImage.dataset.imageId == imageId){
+
+                uploadImage.remove();
+            }
         }
 
-        if(uploadImage.classList.contains('single') && uploadImage.dataset.imageid == imageId){
+        if(uploadImage.classList.contains('single')){
 
-            uploadImage.querySelector(".upload-image-thumb").remove();
-            uploadImage.dataset.imageid == '';
-            uploadImage.querySelector(".upload-image-prompt").classList.remove('hidden');
-            uploadImage.classList.remove('upload-image');
-            uploadImage.classList.add('upload-image-add');
+            if(uploadImage.dataset.temporalId == imageId || uploadImage.dataset.imageId == imageId){
 
-            if(uploadImage.querySelector(".upload-image-input")){
-                uploadImage.querySelector(".upload-image-input").value = "";
+                uploadImage.querySelector(".upload-image-thumb").remove();
+                uploadImage.dataset.temporalId == '';
+                uploadImage.querySelector(".upload-image-prompt").classList.remove('hidden');
+                uploadImage.classList.remove('upload-image');
+                uploadImage.classList.add('upload-image-add');
+
+                if(uploadImage.querySelector(".upload-image-input")){
+                    uploadImage.querySelector(".upload-image-input").value = "";
+                }
             }
         }
     });

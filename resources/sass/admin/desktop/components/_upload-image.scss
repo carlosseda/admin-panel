@@ -34,10 +34,13 @@
     border-style: solid;
 }
 
-.upload-image-prompt{
+.upload-image-prompt.single,
+.upload-image-prompt.collection{
     position: absolute;
-    width: 15%;
     z-index: 999;
+}
+.upload-image-prompt.single{
+    width: 15%;
 }
 
 .upload-image-options{
