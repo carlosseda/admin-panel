@@ -194,8 +194,6 @@ export function deleteThumbnail(imageId) {
 
             if(uploadImage.dataset.temporalId == imageId || uploadImage.dataset.imageId == imageId){
 
-                console.log("hola");
-
                 uploadImage.querySelector(".upload-image-thumb").remove();
                 uploadImage.dataset.imageId = '';
                 uploadImage.dataset.url = '';
