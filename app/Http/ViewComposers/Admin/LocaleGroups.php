@@ -11,12 +11,12 @@ class LocaleGroups
 
     public function __construct()
     {
-        $groups = LocaleTag::select('group')->where('group', 'not like', 'admin/%')->groupBy('group')->get();
-
-        $this->groups = $groups->each(function($item, $key){
-            $item->name = $item->group;
-            $item->id = $key;
-        });
+        $this->groups = LocaleTag::select('group')
+        ->where('group', 'not like', 'admin/%')
+        ->where('group', 'not like', 'front/seo')
+        ->groupBy('group')
+        ->pluck('group')
+        ->toArray();
     }
 
     public function compose(View $view)

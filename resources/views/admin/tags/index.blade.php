@@ -1,7 +1,7 @@
 @php
     $route = 'tags';
-    $filters = ['parent' => $groups, 'created_at' => true ]; 
-    $order = ['grupo' => 'group' , 'clave' => 'key','fecha de creación' => 'created_at'];
+    $filters = ['parent' => $groups]; 
+    $order = ['grupo' => 'group' , 'clave' => 'key', 'fecha de creación' => 'created_at'];
 @endphp
 
 @extends('admin.layout.table_form')

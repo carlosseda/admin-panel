@@ -76,9 +76,6 @@ class LocaleTagController extends Controller
                 'language' => $language,
                 'group' => request('group'),
                 'key' => request('key')],[
-                'language' => $language,
-                'group' => request('group'),
-                'key' => request('key'),
                 'value' => $value,
                 'active' => 1
             ]);
@@ -136,6 +133,46 @@ class LocaleTagController extends Controller
         }
                 
         return $view;
+    }
+
+    public function filter(Request $request, $filters = null){
+
+        $filters = json_decode($request->input('filters'));
+        
+        $query = $this->locale_tag->query();
+
+        if($filters != null){
+
+            $query->when($filters->parent, function ($q, $parent) {
+
+                if($parent == 'all'){
+                    return $q;
+                }
+                else{
+                    return $q->where('group', $parent);
+                }
+            });
+    
+            $query->when($filters->order, function ($q, $order) use ($filters) {
+    
+                $q->orderBy($order, $filters->direction);
+            });
+        }
+    
+        $tags = $query->select('group', 'key')
+                ->groupBy('group', 'key')
+                ->where('group', 'not like', 'admin/%')
+                ->where('group', 'not like', 'front/seo')
+                ->paginate($this->paginate)
+                ->appends(['filters' => json_encode($filters)]);  
+
+        $view = View::make('admin.tags.index')
+            ->with('tags', $tags)
+            ->renderSections();
+
+        return response()->json([
+            'table' => $view['table'],
+        ]);
     }
 
     public function importTags()
