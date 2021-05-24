@@ -686,7 +686,7 @@ body {
   fill: #ff5100;
 }
 .table-icons svg {
-  width: 100%;
+  width: 2em;
 }
 .table-icons svg path {
   fill: gray;

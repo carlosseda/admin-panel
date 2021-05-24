@@ -5,6 +5,7 @@
             <ul>
                 <li class="menu-item" data-url="{{route('users')}}">Usuarios</li>
                 <li class="menu-item" data-url="{{route('customers')}}">Clientes</li>
+                <li class="menu-item" data-url="{{route('tags')}}">Traducciones</li>
                 <li class="menu-item" data-url="{{route('faqs')}}">Faqs</li>
                 <li class="menu-item"  data-url="{{route('faqs_categories')}}">Categorías Faqs</li>
             </ul>

@@ -38,7 +38,7 @@
 
         @include('admin.components.table_pagination', ['items' => $faqs])
         
-    @endif
+    @endisset
 
 @endsection
 
@@ -71,7 +71,7 @@
                     
                     <div class="tabs-container-buttons">
                         
-                        @include('admin.components.form_buttons', ['route' => $route])
+                        @include('admin.components.form_buttons', ['route' => $route, 'visible' => $faq->visible, 'create' => 'create'])
                         
                     </div>
                 </div>

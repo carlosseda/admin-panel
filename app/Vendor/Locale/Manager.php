@@ -7,6 +7,7 @@ use Illuminate\Contracts\Events\Dispatcher;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Str;
 use Symfony\Component\Finder\Finder;
 use Route;
 use App\Vendor\Locale\Models\LocaleTag;
@@ -292,18 +293,18 @@ class Manager
                 if($group == '*'){
                     return $this->exportAllTranslations();
                 }else{
-                    if(starts_with( $group, "vendor")){
+                    if(Str::startsWith( $group, "vendor")){
                         $vendor = true;
                     }
                 }
 
                 if($group == 'routes'){
                     $tree = $this->makeTree( LocaleSeo::ofTranslatedGroup( $group )
-                        ->orderByGroupKeys(array_get( $this->config_tag, 'sort_keys', false ) )
+                        ->orderByGroupKeys(Arr::get( $this->config_tag, 'sort_keys', false ) )
                         ->get() );                    
                 }else{
                     $tree = $this->makeTree( LocaleTag::ofTranslatedGroup( $group )
-                        ->orderByGroupKeys(array_get( $this->config_tag, 'sort_keys', false ) )
+                        ->orderByGroupKeys(Arr::get( $this->config_tag, 'sort_keys', false ) )
                         ->get() );
                 }
                
@@ -356,11 +357,11 @@ class Manager
 
             if($group == 'routes'){
                 $tree = $this->makeTree( LocaleSeo::ofTranslatedGroup( self::JSON_GROUP )
-                        ->orderByGroupKeys( array_get( $this->config_tag, 'sort_keys', false ) )
+                        ->orderByGroupKeys(Arr::get( $this->config_tag, 'sort_keys', false ) )
                         ->get(), true );
             }else{
                 $tree = $this->makeTree( LocaleTag::ofTranslatedGroup( self::JSON_GROUP )
-                        ->orderByGroupKeys( array_get( $this->config_tag, 'sort_keys', false ) )
+                        ->orderByGroupKeys(Arr::get( $this->config_tag, 'sort_keys', false ) )
                         ->get(), true );
             }
             
@@ -404,11 +405,11 @@ class Manager
                     $translation->value );
             }
             elseif($translation->group == 'routes'){
-                array_set( $array[ $translation->language ][ $translation->group ], $translation->key,
+                Arr::set( $array[ $translation->language ][ $translation->group ], $translation->key,
                     $translation->url );
             }
             else {
-                array_set( $array[ $translation->language ][ $translation->group ], $translation->key,
+                Arr::set( $array[ $translation->language ][ $translation->group ], $translation->key,
                     $translation->value );
             }
         }

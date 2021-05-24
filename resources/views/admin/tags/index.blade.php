@@ -1,113 +1,106 @@
 @php
     $route = 'tags';
+    $filters = ['parent' => $groups, 'created_at' => true ]; 
+    $order = ['grupo' => 'group' , 'clave' => 'key','fecha de creación' => 'created_at'];
 @endphp
 
 @extends('admin.layout.table_form')
 
 @section('table')
 
-    <div class="table-container">       
-        
-        @include('admin.layout.components.table_filters', [
-            'subfilter' => $groups,
-            'import' => 'tags_import'
-        ])
+    @isset($tags)
 
-        <table id="main-table" class="mdl-data-table"  route="{{route($route . '_json')}}">
-            <thead>
-                <tr>
-                    <th data-data="id" data-name="id" data-visible="false">#</th>
-                    <th data-data="group" data-name="group" id="subfilter-column">Grupo</th>
-                    <th data-data="key" data-name="key">Clave</th>
-                    <th data-data="updated_at" data-name="updated_at" class="minimize-column">Modificado</th>
-                    <th data-orderable="false" data-defaultContent="
-                        @include('admin.layout.components.table_buttons')
-                        ">
-                    </th>
-                </tr>
-            </thead>
-        </table>
-    </div>
+        <div id="table-container">
+            @foreach($tags as $tag_element)
+                <div class="table-row swipe-element">
+                    <div class="table-field-container swipe-front">
+                        <div class="table-field"><p><span>Grupo:</span> {{$tag_element->group}}</p></div>
+                        <div class="table-field"><p><span>Clave:</span> {{$tag_element->key}}</p></div>
+                    </div>
+
+                    <div class="table-icons-container swipe-back">
+                        <div class="table-icons edit-button right-swipe" data-url="{{route('tags_edit', ['group' => str_replace('/', '-' , $tag_element->group) , 'key' => $tag_element->key])}}">
+                            <svg viewBox="0 0 24 24">
+                                <path d="M20.71,7.04C21.1,6.65 21.1,6 20.71,5.63L18.37,3.29C18,2.9 17.35,2.9 16.96,3.29L15.12,5.12L18.87,8.87M3,17.25V21H6.75L17.81,9.93L14.06,6.18L3,17.25Z" />
+                            </svg>
+                        </div> 
+                    </div>
+                </div>
+            @endforeach
+        </div>
+
+        @include('admin.components.table_pagination', ['items' => $tags])
+        
+    @endisset
 
 @endsection
 
 @section('form')
 
-    @isset($tags)
+    @isset($tag)
 
-        @include('admin.components.errors')
+        <div class="form-container">
 
-        <form class='admin-form' id='{{$route}}-form' action="{{route($route.'_store')}}">
+            <form class="admin-form" id="tags-form" action="{{route("tags_store")}}" autocomplete="off">
+            
+                {{ csrf_field() }}
         
-            {{ csrf_field() }}
-    
-            @isset ($tags->id)
-                <input type="hidden" name="group" value="{{$tags->group}}">
-                <input type="hidden" name="key" value="{{$tags->key}}">
-            @endisset
+                <input type="hidden" name="group" value="{{$tag->group}}">
+                <input type="hidden" name="key" value="{{$tag->key}}">
 
-            <input class="input-id" type="hidden" name="id" value="{{isset($tags->id) ? $tags->id : '' }}">
+                <input autocomplete="false" name="hidden" type="text" style="display:none;">
 
-            <div class="nav-tabs-container">
-                <div class="nav-tabs-container-menu">
-                    <ul class="nav nav-tabs" role="tablist">
-                        <li role="presentation" class="nav-item active">
-                            <a href="#contenido" class="nav-link active" aria-controls="contenido" role="tab" data-toggle="tab" aria-expanded="true">
-                                <span>Contenido</span>
-                            </a>
-                        </li>       
-                    </ul>
-                </div>
-    
-                <div class="nav-tabs-container-buttons">
-                    <div class="crud-buttons-container">
-                        <button class="crud-buttons" id="store-button" class="btn btn-main"> 
-                            <svg viewBox="0 0 24 24">
-                                <path d="M0 0h24v24H0z" fill="none"/>
-                                <path class="store-button-icon" d="M17 3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V7l-4-4zm-5 16c-1.66 0-3-1.34-3-3s1.34-3 3-3 3 1.34 3 3-1.34 3-3 3zm3-10H5V5h10v4z"/>
-                            </svg>
-                        </button>
+                <div class="tabs-container">
+                    <div class="tabs-container-menu">
+                        <ul>
+                            <li class="tab-item tab-active" data-tab="content">
+                                Contenido
+                            </li>      
+                        </ul>
                     </div>
-                </div>   
-            </div>
-    
-            <div class="tab-content">
-    
-                <div role="tabpanel" class="tab-pane active" id="contenido">
-
-                    <div class="form-content">
-                        
-                        @component('admin.components.locale')
-        
-                        @foreach ($localizations as $localization)
+                    
+                    <div class="tabs-container-buttons">       
+                        @include('admin.components.form_buttons', ['route' => $route])
+                    </div>
+                </div>
                 
-                        <div role="tabpanel" class="tab-pane {{ $loop->first ? ' active' : '' }}" id="{{$localization->alias}}">
-                            <div class="one-column">
-                                <div class="form-group">
-                                    <div class="form-group">
-                                        <div class="label-container">
-                                            <label for="locale" class="locale-value-{{$localization->alias}}">
-                                                Valor *
-                                            </label>
-                                        </div>
-                                        <div class="input-container">
-                                            <input type="text" name="locale[value.{{$localization->alias}}]" value='{{$locale["value.$localization->alias"]}}' class="form-control locale-value-{{$localization->alias}}">
+                <div class="tab-panel tab-active" data-tab="content">
+
+                    @if($tag->id)
+
+                        @component('admin.components.locale', ['tab' => 'content'])
+
+                            @foreach ($localizations as $localization)
+
+                                <div class="locale-tab-panel {{ $loop->first ? 'locale-tab-active':'' }}" data-tab="content" data-localetab="{{$localization->alias}}">
+
+                                    <div class="one-column">
+                                        <div class="form-group">
+                                            <div class="form-label">
+                                                <label for="name" class="label-highlight">Traducción para la clave {{$tag->key}} del grupo {{$tag->group}}</label>
+                                            </div>
+                                            <div class="form-input">
+                                                <input type="text" name="tag[value.{{$localization->alias}}]" value="{{isset($tag["value.$localization->alias"]) ? $tag["value.$localization->alias"] : ''}}" class="input-highlight">
+                                            </div>
                                         </div>
                                     </div>
+
                                 </div>
-                            </div>
-                        </div>
-                
-                        @endforeach
-                
+
+                            @endforeach
+                    
                         @endcomponent
-                    </div>
+                    
+                    @else
+
+                    @endif
 
                 </div>
 
-            </div>
+                
+            </form>
 
-        </form>
+        </div>
 
     @endisset
 

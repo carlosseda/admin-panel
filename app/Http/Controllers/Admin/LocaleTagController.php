@@ -10,6 +10,7 @@ use App\Vendor\Locale\Manager;
 use App\Http\Controllers\Controller;
 use App\Vendor\Locale\Models\LocaleLanguage;
 use App\Vendor\Locale\Models\LocaleTag;
+use Debugbar;
 
 class LocaleTagController extends Controller 
 {
@@ -19,7 +20,7 @@ class LocaleTagController extends Controller
     protected $manager;
     protected $paginate;
 
-    function __construct(LocaleTag $locale_tag, LocaleLanguage $language, Manager $manager)
+    function __construct(Agent $agent, LocaleTag $locale_tag, LocaleLanguage $language, Manager $manager)
     {
         $this->middleware('auth');
         $this->agent = $agent;
@@ -39,32 +40,17 @@ class LocaleTagController extends Controller
 
     public function index()
     {
-
-        $tag = $this->locale_tag->where('group', 'not like', 'admin/%')->orderBy('id', 'desc')->first();
-        $tags = null;
-        $locale = null;
-
-        if(isset($tag)){
-            $tags = $this->locale_tag->where('key', $tag->key)->get();
-            $tags->key = $tag->key;
-            $tags->group = $tag->group;
-            $tags->id = $tag->id;
-
-            $languages = $this->language->get();
-
-            foreach($languages as $language){
-                $tag = $tags->filter(function($item) use($language) {
-                    return $item->language == $language->alias;
-                })->first();
-
-                $locale['value.'. $language->alias] = empty($tag->value) ? '': $tag->value; 
-            }
-        }
+        $tags = $this->locale_tag
+                ->select('group', 'key')
+                ->groupBy('group', 'key')
+                ->where('group', 'not like', 'admin/%')
+                ->where('group', 'not like', 'front/seo')
+                ->paginate($this->paginate);         
 
         $view = View::make('admin.tags.index')
-            ->with('locale', $locale)
-            ->with('tags', $tags);
-
+            ->with('tags',  $tags)
+            ->with('tag', $this->locale_tag);
+  
         if(request()->ajax()) {
 
             $sections = $view->renderSections(); 
@@ -86,7 +72,7 @@ class LocaleTagController extends Controller
     public function store(Request $request)
     {    
     
-        foreach (request('locale') as $rel_anchor => $value){
+        foreach (request('tag') as $rel_anchor => $value){
 
             $rel_anchor = str_replace(['-', '_'], ".", $rel_anchor); 
             $explode_rel_anchor = explode('.', $rel_anchor);
@@ -99,68 +85,63 @@ class LocaleTagController extends Controller
                 'language' => $language,
                 'group' => request('group'),
                 'key' => request('key'),
-                'value' => $value
+                'value' => $value,
+                'active' => 1
             ]);
         }
-
-        $tags = $this->locale_tag->where('key', $locale_tag->key)->get();
-        $tags->key = $locale_tag->key;
-        $tags->group = $locale_tag->group;
-        $tags->id = $locale_tag->id;
-
+        
         $this->manager->exportTranslations(request('group'));   
+
+        $tags = $this->locale_tag
+        ->select('group', 'key')
+        ->groupBy('group', 'key')
+        ->where('group', 'not like', 'admin/%')
+        ->where('group', 'not like', 'front/seo')
+        ->paginate($this->paginate);  
 
         $message = \Lang::get('admin/tags.tag-update');
 
         $view = View::make('admin.tags.index')
         ->with('tags', $tags)
-        ->with('locale', $locale_tag)
+        ->with('tag', $this->locale_tag)
         ->renderSections(); 
 
         return response()->json([
             'table' => $view['table'],
-            'id' => $locale_tag->id,
             'message' => $message,
         ]);
     }
 
-    public function show(LocaleTag $tag)
+    public function edit($group, $key)
     {
 
-        $tags = $this->locale_tag->where('key', $tag->key)->get();
-        $tags->key = $tag->key;
-        $tags->group = $tag->group;
-        $tags->id = $tag->id;
+        $tags = $this->locale_tag->where('key', $key)->where('group', str_replace('-', '/' , $group))->paginate($this->paginate); 
+        $tag = $tags->first();
 
         $languages = $this->language->get();
 
         foreach($languages as $language){
-            $tag = $tags->filter(function($item) use($language) {
+            $locale = $tags->filter(function($item) use($language) {
                 return $item->language == $language->alias;
             })->first();
 
-            $locale['value.'. $language->alias] = empty($tag->value) ? '': $tag->value; 
+            $tag['value.'. $language->alias] = empty($locale->value) ? '': $locale->value; 
         }
         
         $view = View::make('admin.tags.index')
-        ->with('locale', $locale)
-        ->with('tags', $tags);
+        ->with('tags', $tags)
+        ->with('tag', $tag);
         
         if(request()->ajax()) {
             $sections = $view->renderSections(); 
     
             return response()->json([
-                'layout' => $sections['content'],
+                'table' => $sections['table'],
                 'form' => $sections['form'],
             ]); 
         }
                 
         return $view;
-    }
-
-    public function destroy()
-    {
-       
     }
 
     public function importTags()

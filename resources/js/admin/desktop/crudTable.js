@@ -18,92 +18,97 @@ export let renderForm = () => {
     let storeButton = document.getElementById("store-button");
     let createButton = document.getElementById("create-button");
 
-    createButton.addEventListener("click", (event) => {
+    if(createButton){
+        createButton.addEventListener("click", (event) => {
 
-        let url = createButton.dataset.url;
-
-        let sendCreateRequest = async () => {
-
-            startWait();
-
-            try {
-                await axios.get(url).then(response => {
-
-                    form.innerHTML = response.data.form;
-                    renderForm();
-                    stopWait();
-                });
-                
-            } catch (error) {
-
-                stopWait();
-
-                if(error.response.status == '500'){
-                
-                }
-            }
-        };
-
-        sendCreateRequest();
-    });
-
-    storeButton.addEventListener("click", (event) => {
+            let url = createButton.dataset.url;
     
-        forms.forEach(form => { 
-            
-            let data = new FormData(form);
-            let url = form.action;
-
-            if( ckeditors != 'null'){
-
-                Object.entries(ckeditors).forEach(([key, value]) => {
-                    data.append(key, value.getData());
-                });
-            }
-
-            let sendPostRequest = async () => {
-
+            let sendCreateRequest = async () => {
+    
                 startWait();
     
                 try {
-                    await axios.post(url, data).then(response => {
-
-                        form.id.value = response.data.id;
-                        table.innerHTML = response.data.table;
+                    await axios.get(url).then(response => {
+    
                         form.innerHTML = response.data.form;
-
-                        stopWait();
-                        showMessage('success', response.data.message);
-                        renderTable();
                         renderForm();
+                        stopWait();
                     });
                     
                 } catch (error) {
     
                     stopWait();
-
-                    if(error.response.status == '422'){
     
-                        let errors = error.response.data.errors;      
-                        let errorMessage = '';
-    
-                        Object.keys(errors).forEach(function(key) {
-                            errorMessage += '<li>' + errors[key] + '</li>';
-                        })
-        
-                        showMessage('validation', errorMessage);
-                    }
-
                     if(error.response.status == '500'){
                     
                     }
                 }
             };
     
-            sendPostRequest();
+            sendCreateRequest();
         });
-    });
+    }
+
+    if(storeButton){
+
+        storeButton.addEventListener("click", (event) => {
     
+            forms.forEach(form => { 
+                
+                let data = new FormData(form);
+                let url = form.action;
+    
+                if( ckeditors != 'null'){
+    
+                    Object.entries(ckeditors).forEach(([key, value]) => {
+                        data.append(key, value.getData());
+                    });
+                }
+    
+                let sendPostRequest = async () => {
+    
+                    startWait();
+        
+                    try {
+                        await axios.post(url, data).then(response => {
+    
+                            form.id.value = response.data.id;
+                            table.innerHTML = response.data.table;
+                            form.innerHTML = response.data.form;
+    
+                            stopWait();
+                            showMessage('success', response.data.message);
+                            renderTable();
+                            renderForm();
+                        });
+                        
+                    } catch (error) {
+        
+                        stopWait();
+    
+                        if(error.response.status == '422'){
+        
+                            let errors = error.response.data.errors;      
+                            let errorMessage = '';
+        
+                            Object.keys(errors).forEach(function(key) {
+                                errorMessage += '<li>' + errors[key] + '</li>';
+                            })
+            
+                            showMessage('validation', errorMessage);
+                        }
+    
+                        if(error.response.status == '500'){
+                        
+                        }
+                    }
+                };
+        
+                sendPostRequest();
+            });
+        });
+    }
+ 
     renderCkeditor();
     renderTabs();
     renderLocaleTabs();
@@ -121,72 +126,78 @@ export let renderTable = () => {
     let deleteConfirm = document.getElementById('delete-confirm');
     let deleteCancel = document.getElementById('delete-cancel');
 
-    editButtons.forEach(editButton => {
+    if(editButtons){
 
-        editButton.addEventListener("click", () => {
+        editButtons.forEach(editButton => {
 
-            let url = editButton.dataset.url;
+            editButton.addEventListener("click", () => {
+    
+                let url = editButton.dataset.url;
+    
+                let sendEditRequest = async () => {
+    
+                    try {
+                        await axios.get(url).then(response => {
+                            form.innerHTML = response.data.form;
+                            renderForm();
+                        });
+                        
+                    } catch (error) {
+                        console.error(error);
+                    }
+                };
+    
+                sendEditRequest();
+            });
+        });
+    }
 
-            let sendEditRequest = async () => {
+    if(deleteButtons){
 
+        deleteButtons.forEach(deleteButton => {
+
+            deleteButton.addEventListener("click", () => {
+    
+                let url = deleteButton.dataset.url;
+                deleteConfirm.dataset.url = url;
+                modalDelete.classList.add('open');
+            });
+        });
+    
+        deleteCancel.addEventListener("click", () => {
+            modalDelete.classList.remove('open');
+        });
+    
+        deleteConfirm.addEventListener("click", () => {
+    
+            let url = deleteConfirm.dataset.url;
+    
+            startWait();
+    
+            let sendDeleteRequest = async () => {
+    
                 try {
-                    await axios.get(url).then(response => {
+                    await axios.delete(url).then(response => {
+                        table.innerHTML = response.data.table;
                         form.innerHTML = response.data.form;
+                        modalDelete.classList.remove('open');
+                        renderTable();
                         renderForm();
+    
+                        stopWait();
+                        showMessage('success', response.data.message);
                     });
                     
                 } catch (error) {
+                    stopWait();
                     console.error(error);
                 }
             };
-
-            sendEditRequest();
-        });
-    });
-
-    deleteButtons.forEach(deleteButton => {
-
-        deleteButton.addEventListener("click", () => {
-
-            let url = deleteButton.dataset.url;
-            deleteConfirm.dataset.url = url;
-            modalDelete.classList.add('open');
-        });
-    });
-
-    deleteCancel.addEventListener("click", () => {
-        modalDelete.classList.remove('open');
-    });
-
-    deleteConfirm.addEventListener("click", () => {
-
-        let url = deleteConfirm.dataset.url;
-
-        startWait();
-
-        let sendDeleteRequest = async () => {
-
-            try {
-                await axios.delete(url).then(response => {
-                    table.innerHTML = response.data.table;
-                    form.innerHTML = response.data.form;
-                    modalDelete.classList.remove('open');
-                    renderTable();
-                    renderForm();
-
-                    stopWait();
-                    showMessage('success', response.data.message);
-                });
-                
-            } catch (error) {
-                stopWait();
-                console.error(error);
-            }
-        };
-
-        sendDeleteRequest();
-    });
-
+    
+            sendDeleteRequest();
+        });    
+    }
+   
     renderPagination();
 };
 

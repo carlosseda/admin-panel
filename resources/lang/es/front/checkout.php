@@ -1,5 +1,5 @@
 <?php
 
-return [
-    'checkout-continue' => 'Entrar',
-];
+return array (
+  'checkout-continue' => 'Entrar',
+);

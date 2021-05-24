@@ -12,7 +12,6 @@ use App\Vendor\Locale\Locale;
 use App\Vendor\Locale\LocaleSlugSeo;
 use App\Vendor\Image\Image;
 use App\Models\DB\Faq; 
-use Debugbar;
 
 class FaqController extends Controller
 {

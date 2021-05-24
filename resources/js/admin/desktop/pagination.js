@@ -1,3 +1,5 @@
+import {renderTable} from './crudTable';
+
 export let renderPagination = () => {
 
     let paginationButtons = document.querySelectorAll('.table-pagination-button');
