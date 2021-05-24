@@ -41,6 +41,13 @@
 	transition: color 0.5s;
 }
 
+.form-label label span{
+
+	color: hsl(19, 100%, 50%);
+	cursor: pointer;
+	text-decoration: underline;
+}
+
 .form-label label.active{
 	color: hsl(19, 100%, 50%);
 }

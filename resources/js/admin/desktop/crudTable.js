@@ -3,6 +3,7 @@ import {startWait, stopWait} from './wait';
 import {showMessage} from './messages';
 import {renderTabs} from './tabs';
 import {renderLocaleTabs} from './localeTabs';
+import {renderLocaleTags} from './localeTags';
 import {renderUploadImage} from './uploadImage';
 import {renderInputCounter} from './inputCounter';
 import {renderInputHighlight} from './inputHighlight';
@@ -116,6 +117,7 @@ export let renderForm = () => {
     renderInputCounter();
     renderInputHighlight();
     renderOnOffSwitch();
+    renderLocaleTags();
 };
 
 export let renderTable = () => {

@@ -736,6 +736,12 @@ body {
   transition: color 0.5s;
 }
 
+.form-label label span {
+  color: #ff5100;
+  cursor: pointer;
+  text-decoration: underline;
+}
+
 .form-label label.active {
   color: #ff5100;
 }

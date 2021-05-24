@@ -37,7 +37,7 @@
 
 @section('form')
 
-    @isset($tag)
+    @isset($tag->group)
 
         <div class="form-container">
 
@@ -101,7 +101,32 @@
             </form>
 
         </div>
+    
+    @else
 
+        <div class="form-container">
+            <div class="tabs-container">
+                <div class="tabs-container-menu">
+                    <ul>
+                        <li class="tab-item tab-active" data-tab="content">
+                            Contenido
+                        </li>      
+                    </ul>
+                </div>
+            </div>
+
+            <div class="tab-panel tab-active" data-tab="content">
+                <div class="one-column">
+                    <div class="form-group">
+                        <div class="form-label">
+                            <label>
+                            Pulse <span id="import-tags" data-url="{{route('tags_import')}}">aquí</span> para importar todos los archivos de traducciones.
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     @endisset
 
 @endsection

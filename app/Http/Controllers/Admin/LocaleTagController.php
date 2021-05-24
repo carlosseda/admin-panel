@@ -10,7 +10,6 @@ use App\Vendor\Locale\Manager;
 use App\Http\Controllers\Controller;
 use App\Vendor\Locale\Models\LocaleLanguage;
 use App\Vendor\Locale\Models\LocaleTag;
-use Debugbar;
 
 class LocaleTagController extends Controller 
 {
@@ -62,11 +61,6 @@ class LocaleTagController extends Controller
         }
 
         return $view;
-    }
-
-    public function create()
-    {
-
     }
 
     public function store(Request $request)
@@ -149,37 +143,22 @@ class LocaleTagController extends Controller
         $this->manager->importTranslations();  
         $message =  \Lang::get('admin/tags.tag-import');
 
-        $tag = $this->locale_tag->where('group', 'not like', 'admin/%')->orderBy('id', 'desc')->first();
-        $tags = null;
-        $locale = null;
-
-        if(isset($tag)){
-            $tags = $this->locale_tag->where('key', $tag->key)->get();
-            $tags->key = $tag->key;
-            $tags->group = $tag->group;
-            $tags->id = $tag->id;
-
-            $languages = $this->language->get();
-
-            foreach($languages as $language){
-                $tag = $tags->filter(function($item) use($language) {
-                    return $item->language == $language->alias;
-                })->first();
-
-                $locale['value.'. $language->alias] = empty($tag->value) ? '': $tag->value; 
-            }
-        }
+        $tags = $this->locale_tag
+        ->select('group', 'key')
+        ->groupBy('group', 'key')
+        ->where('group', 'not like', 'admin/%')
+        ->where('group', 'not like', 'front/seo')
+        ->paginate($this->paginate);  
 
         $view = View::make('admin.tags.index')
-            ->with('locale', $locale)
-            ->with('tags', $tags);
+            ->with('tags', $tags)
+            ->with('tag', $this->locale_tag);
 
         if(request()->ajax()) {
 
             $sections = $view->renderSections(); 
     
             return response()->json([
-                'topbar' => $topbar,
                 'table' => $sections['table'],
                 'message' => $message,
             ]); 
