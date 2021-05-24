@@ -99,6 +99,7 @@ class LocaleTagController extends Controller
 
         return response()->json([
             'table' => $view['table'],
+            'form' => $view['form'],
             'message' => $message,
         ]);
     }

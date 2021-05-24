@@ -73,7 +73,10 @@ export let renderForm = () => {
                     try {
                         await axios.post(url, data).then(response => {
     
-                            form.id.value = response.data.id;
+                            if(response.data.id){
+                                form.id.value = response.data.id;
+                            }
+                            
                             table.innerHTML = response.data.table;
                             form.innerHTML = response.data.form;
     

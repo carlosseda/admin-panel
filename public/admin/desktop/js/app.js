@@ -2059,7 +2059,10 @@ var renderForm = function renderForm() {
                     _context2.prev = 1;
                     _context2.next = 4;
                     return axios.post(url, data).then(function (response) {
-                      form.id.value = response.data.id;
+                      if (response.data.id) {
+                        form.id.value = response.data.id;
+                      }
+
                       table.innerHTML = response.data.table;
                       form.innerHTML = response.data.form;
                       (0,_wait__WEBPACK_IMPORTED_MODULE_2__.stopWait)();
