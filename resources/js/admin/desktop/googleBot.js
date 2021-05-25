@@ -1,23 +1,22 @@
 import {renderTable} from './crudTable';
 import {showMessage} from './messages';
+import {startWait, stopWait} from './wait';
 
-export let renderLocaleTags = () => {
+export let renderGoogleBot = () => {
 
     let table = document.getElementById("table");
-    let importTags = document.getElementById('import-tags');
+    let pingGoogle = document.getElementById('ping-google');
 
-    if(importTags){
+    if(pingGoogle){
 
-        importTags.addEventListener("click", () => {
+        pingGoogle.addEventListener("click", () => {
 
-            let url = importTags.dataset.url;
+            let url = pingGoogle.dataset.url;
         
-            let sendImportTagsRequest = async () => {
+            let sendEditRequest = async () => {
     
                 try {
                     await axios.get(url).then(response => {
-                        table.innerHTML = response.data.table;
-                        renderTable();
                         showMessage('success', response.data.message);
                     });
                     
@@ -26,7 +25,7 @@ export let renderLocaleTags = () => {
                 }
             };
     
-            sendImportTagsRequest();
+            sendEditRequest();
         });
     }
 }

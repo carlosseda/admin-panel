@@ -1,7 +1,7 @@
 @php
     $route = 'tags';
     $filters = ['parent' => $groups]; 
-    $order = ['grupo' => 'group' , 'clave' => 'key', 'fecha de creación' => 'created_at'];
+    $order = ['grupo' => 'group' , 'clave' => 'key'];
 @endphp
 
 @extends('admin.layout.table_form')
@@ -66,34 +66,28 @@
                 
                 <div class="tab-panel tab-active" data-tab="content">
 
-                    @if($tag->id)
+                    @component('admin.components.locale', ['tab' => 'content'])
 
-                        @component('admin.components.locale', ['tab' => 'content'])
+                        @foreach ($localizations as $localization)
 
-                            @foreach ($localizations as $localization)
+                            <div class="locale-tab-panel {{ $loop->first ? 'locale-tab-active':'' }}" data-tab="content" data-localetab="{{$localization->alias}}">
 
-                                <div class="locale-tab-panel {{ $loop->first ? 'locale-tab-active':'' }}" data-tab="content" data-localetab="{{$localization->alias}}">
-
-                                    <div class="one-column">
-                                        <div class="form-group">
-                                            <div class="form-label">
-                                                <label for="name" class="label-highlight">Traducción para la clave {{$tag->key}} del grupo {{$tag->group}}</label>
-                                            </div>
-                                            <div class="form-input">
-                                                <input type="text" name="tag[value.{{$localization->alias}}]" value="{{isset($tag["value.$localization->alias"]) ? $tag["value.$localization->alias"] : ''}}" class="input-highlight">
-                                            </div>
+                                <div class="one-column">
+                                    <div class="form-group">
+                                        <div class="form-label">
+                                            <label for="tag[value.{{$localization->alias}}]" class="label-highlight">Traducción para la clave {{$tag->key}} del grupo {{$tag->group}}</label>
+                                        </div>
+                                        <div class="form-input">
+                                            <input type="text" name="tag[value.{{$localization->alias}}]" value="{{isset($tag["value.$localization->alias"]) ? $tag["value.$localization->alias"] : ''}}" class="input-highlight">
                                         </div>
                                     </div>
-
                                 </div>
 
-                            @endforeach
-                    
-                        @endcomponent
-                    
-                    @else
+                            </div>
 
-                    @endif
+                        @endforeach
+                
+                    @endcomponent
 
                 </div>
 

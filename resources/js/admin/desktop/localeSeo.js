@@ -1,24 +1,25 @@
 import {renderTable} from './crudTable';
 import {showMessage} from './messages';
 
-export let renderLocaleTags = () => {
+export let renderLocaleSeo = () => {
 
     let table = document.getElementById("table");
-    let importTags = document.getElementById('import-tags');
+    let importSeo = document.getElementById('import-seo');
 
-    if(importTags){
+    if(importSeo){
 
-        importTags.addEventListener("click", () => {
+        importSeo.addEventListener("click", () => {
 
-            let url = importTags.dataset.url;
+            let url = importSeo.dataset.url;
         
-            let sendImportTagsRequest = async () => {
+            let sendEditRequest = async () => {
     
                 try {
                     await axios.get(url).then(response => {
                         table.innerHTML = response.data.table;
                         renderTable();
                         showMessage('success', response.data.message);
+                        stopWait();
                     });
                     
                 } catch (error) {
@@ -26,7 +27,7 @@ export let renderLocaleTags = () => {
                 }
             };
     
-            sendImportTagsRequest();
+            sendEditRequest();
         });
     }
 }

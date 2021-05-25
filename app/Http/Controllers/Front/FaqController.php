@@ -32,6 +32,7 @@ class FaqController extends Controller
         $seo = $this->locale_slug_seo->getByKey(Route::currentRouteName());
 
         if($this->agent->isDesktop()){
+
             $faqs = $this->faq
                     ->with('image_featured_desktop')
                     ->where('active', 1)
@@ -63,7 +64,6 @@ class FaqController extends Controller
 
     public function show($slug)
     {      
-
         $seo = $this->locale_slug_seo->getIdByLanguage($slug);
 
         if(isset($seo->key)){

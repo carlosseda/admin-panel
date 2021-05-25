@@ -18,16 +18,23 @@ $localizationseo = new LocalizationSeo();
 
 Route::group(['prefix' => 'admin'], function () {
 
-    Route::get('/image/delete/{image?}', 'App\Vendor\Image\Image@destroy')->name('delete_image');
-    Route::get('/image/temporal/{image?}', 'App\Vendor\Image\Image@showTemporal')->name('show_temporal_image_seo');
-    Route::get('/image/{image}', 'App\Vendor\Image\Image@show')->name('show_image_seo');
-    Route::post('/image/seo', 'App\Vendor\Image\Image@storeSeo')->name('store_image_seo');
+    Route::get('/seo/sitemap', 'App\Http\Controllers\Admin\LocaleSeoController@getSitemaps')->name('create_sitemap');
+    Route::get('/seo/import', 'App\Http\Controllers\Admin\LocaleSeoController@importSeo')->name('seo_import');
+    Route::get('/seo/{key}', 'App\Http\Controllers\Admin\LocaleSeoController@edit')->name('seo_edit');
+    Route::get('/seo', 'App\Http\Controllers\Admin\LocaleSeoController@index')->name('seo');
+    Route::post('/seo', 'App\Http\Controllers\Admin\LocaleSeoController@store')->name('seo_store');
+    Route::get('/ping-google', 'App\Http\Controllers\Admin\LocaleSeoController@pingGoogle')->name('ping_google');
 
     Route::get('/tags/filter/{filters?}', 'App\Http\Controllers\Admin\LocaleTagController@filter')->name('tags_filter');
     Route::get('/tags/{group}/{key}', 'App\Http\Controllers\Admin\LocaleTagController@edit')->name('tags_edit');
     Route::get('/tags/import', 'App\Http\Controllers\Admin\LocaleTagController@importTags')->name('tags_import');
     Route::get('/tags', 'App\Http\Controllers\Admin\LocaleTagController@index')->name('tags');
     Route::post('/tags', 'App\Http\Controllers\Admin\LocaleTagController@store')->name('tags_store');
+
+    Route::get('/image/delete/{image?}', 'App\Vendor\Image\Image@destroy')->name('delete_image');
+    Route::get('/image/temporal/{image?}', 'App\Vendor\Image\Image@showTemporal')->name('show_temporal_image_seo');
+    Route::get('/image/{image}', 'App\Vendor\Image\Image@show')->name('show_image_seo');
+    Route::post('/image/seo', 'App\Vendor\Image\Image@storeSeo')->name('store_image_seo'); 
 
     Route::resource('clientes', 'App\Http\Controllers\Admin\CustomerController', [
         'parameters' => [
@@ -124,6 +131,7 @@ Route::group(['prefix' => $localizationseo->setLocale(),
 });
 
 Route::get('/', 'App\Http\Controllers\Front\HomeController@index')->name('home_front');
+Route::get('/sitemap', 'App\Http\Controllers\Front\LocaleSeoController@getSitemaps')->name('sitemap');
 Route::post('/fingerprint', 'App\Http\Controllers\Front\FingerprintController@store')->name('front_fingerprint');
 
 Route::get('/login', 'App\Http\Controllers\Front\LoginController@index')->name('front_login');

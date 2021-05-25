@@ -1888,6 +1888,59 @@ __webpack_require__(/*! ./filterTable */ "./resources/js/admin/desktop/filterTab
 
 /***/ }),
 
+/***/ "./resources/js/admin/desktop/blockParameters.js":
+/*!*******************************************************!*\
+  !*** ./resources/js/admin/desktop/blockParameters.js ***!
+  \*******************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "renderBlockParameters": () => (/* binding */ renderBlockParameters)
+/* harmony export */ });
+var renderBlockParameters = function renderBlockParameters() {
+  var blockParameters = document.querySelectorAll('.block-parameters');
+
+  if (blockParameters) {
+    blockParameters.forEach(function (blockParameter) {
+      blockParameter.addEventListener("keydown", function () {
+        var parameters = blockParameter.value.match(/\{.*?\}/g);
+        blockParameter.dataset.url = blockParameter.value;
+        blockParameter.dataset.parameters = parameters;
+      });
+      blockParameter.addEventListener("keyup", function () {
+        var parameters = blockParameter.value.match(/\{.*?\}/g);
+        var previousParameters = blockParameter.dataset.parameters;
+
+        if (parameters) {
+          var parametersString = parameters.toString();
+        }
+
+        if (previousParameters == null && parameters == null) {
+          var isSame = true;
+        }
+
+        if (previousParameters != null && parameters == null) {
+          var isSame = false;
+        }
+
+        if (previousParameters != null && parameters != null) {
+          var isSame = parametersString.length == previousParameters.length && parameters.every(function (element, index) {
+            return element[index] === previousParameters[index];
+          });
+        }
+
+        if (!isSame) {
+          blockParameter.value = blockParameter.dataset.url;
+        }
+      });
+    });
+  }
+};
+
+/***/ }),
+
 /***/ "./resources/js/admin/desktop/ckeditor.js":
 /*!************************************************!*\
   !*** ./resources/js/admin/desktop/ckeditor.js ***!
@@ -1944,11 +1997,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _tabs__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./tabs */ "./resources/js/admin/desktop/tabs.js");
 /* harmony import */ var _localeTabs__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./localeTabs */ "./resources/js/admin/desktop/localeTabs.js");
 /* harmony import */ var _localeTags__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./localeTags */ "./resources/js/admin/desktop/localeTags.js");
-/* harmony import */ var _uploadImage__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./uploadImage */ "./resources/js/admin/desktop/uploadImage.js");
-/* harmony import */ var _inputCounter__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./inputCounter */ "./resources/js/admin/desktop/inputCounter.js");
-/* harmony import */ var _inputHighlight__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./inputHighlight */ "./resources/js/admin/desktop/inputHighlight.js");
-/* harmony import */ var _onOffSwitch__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./onOffSwitch */ "./resources/js/admin/desktop/onOffSwitch.js");
-/* harmony import */ var _pagination__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./pagination */ "./resources/js/admin/desktop/pagination.js");
+/* harmony import */ var _localeSeo__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./localeSeo */ "./resources/js/admin/desktop/localeSeo.js");
+/* harmony import */ var _googleBot__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./googleBot */ "./resources/js/admin/desktop/googleBot.js");
+/* harmony import */ var _sitemap__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./sitemap */ "./resources/js/admin/desktop/sitemap.js");
+/* harmony import */ var _uploadImage__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./uploadImage */ "./resources/js/admin/desktop/uploadImage.js");
+/* harmony import */ var _inputCounter__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./inputCounter */ "./resources/js/admin/desktop/inputCounter.js");
+/* harmony import */ var _inputHighlight__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./inputHighlight */ "./resources/js/admin/desktop/inputHighlight.js");
+/* harmony import */ var _onOffSwitch__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./onOffSwitch */ "./resources/js/admin/desktop/onOffSwitch.js");
+/* harmony import */ var _pagination__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./pagination */ "./resources/js/admin/desktop/pagination.js");
+/* harmony import */ var _blockParameters__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./blockParameters */ "./resources/js/admin/desktop/blockParameters.js");
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -1966,6 +2023,10 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+
+
+
 
 
 
@@ -2112,11 +2173,15 @@ var renderForm = function renderForm() {
   (0,_ckeditor__WEBPACK_IMPORTED_MODULE_1__.renderCkeditor)();
   (0,_tabs__WEBPACK_IMPORTED_MODULE_4__.renderTabs)();
   (0,_localeTabs__WEBPACK_IMPORTED_MODULE_5__.renderLocaleTabs)();
-  (0,_uploadImage__WEBPACK_IMPORTED_MODULE_7__.renderUploadImage)();
-  (0,_inputCounter__WEBPACK_IMPORTED_MODULE_8__.renderInputCounter)();
-  (0,_inputHighlight__WEBPACK_IMPORTED_MODULE_9__.renderInputHighlight)();
-  (0,_onOffSwitch__WEBPACK_IMPORTED_MODULE_10__.renderOnOffSwitch)();
+  (0,_uploadImage__WEBPACK_IMPORTED_MODULE_10__.renderUploadImage)();
+  (0,_inputCounter__WEBPACK_IMPORTED_MODULE_11__.renderInputCounter)();
+  (0,_blockParameters__WEBPACK_IMPORTED_MODULE_15__.renderBlockParameters)();
+  (0,_inputHighlight__WEBPACK_IMPORTED_MODULE_12__.renderInputHighlight)();
+  (0,_onOffSwitch__WEBPACK_IMPORTED_MODULE_13__.renderOnOffSwitch)();
   (0,_localeTags__WEBPACK_IMPORTED_MODULE_6__.renderLocaleTags)();
+  (0,_localeSeo__WEBPACK_IMPORTED_MODULE_7__.renderLocaleSeo)();
+  (0,_googleBot__WEBPACK_IMPORTED_MODULE_8__.renderGoogleBot)();
+  (0,_sitemap__WEBPACK_IMPORTED_MODULE_9__.renderSitemap)();
 };
 var renderTable = function renderTable() {
   var editButtons = document.querySelectorAll(".edit-button");
@@ -2230,7 +2295,7 @@ var renderTable = function renderTable() {
     });
   }
 
-  (0,_pagination__WEBPACK_IMPORTED_MODULE_11__.renderPagination)();
+  (0,_pagination__WEBPACK_IMPORTED_MODULE_14__.renderPagination)();
 };
 renderForm();
 renderTable();
@@ -2335,6 +2400,80 @@ renderFilterTable();
 
 /***/ }),
 
+/***/ "./resources/js/admin/desktop/googleBot.js":
+/*!*************************************************!*\
+  !*** ./resources/js/admin/desktop/googleBot.js ***!
+  \*************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "renderGoogleBot": () => (/* binding */ renderGoogleBot)
+/* harmony export */ });
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _crudTable__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./crudTable */ "./resources/js/admin/desktop/crudTable.js");
+/* harmony import */ var _messages__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./messages */ "./resources/js/admin/desktop/messages.js");
+/* harmony import */ var _wait__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./wait */ "./resources/js/admin/desktop/wait.js");
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+
+
+
+var renderGoogleBot = function renderGoogleBot() {
+  var table = document.getElementById("table");
+  var pingGoogle = document.getElementById('ping-google');
+
+  if (pingGoogle) {
+    pingGoogle.addEventListener("click", function () {
+      var url = pingGoogle.dataset.url;
+
+      var sendEditRequest = /*#__PURE__*/function () {
+        var _ref = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
+          return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
+            while (1) {
+              switch (_context.prev = _context.next) {
+                case 0:
+                  _context.prev = 0;
+                  _context.next = 3;
+                  return axios.get(url).then(function (response) {
+                    (0,_messages__WEBPACK_IMPORTED_MODULE_2__.showMessage)('success', response.data.message);
+                  });
+
+                case 3:
+                  _context.next = 8;
+                  break;
+
+                case 5:
+                  _context.prev = 5;
+                  _context.t0 = _context["catch"](0);
+                  console.error(_context.t0);
+
+                case 8:
+                case "end":
+                  return _context.stop();
+              }
+            }
+          }, _callee, null, [[0, 5]]);
+        }));
+
+        return function sendEditRequest() {
+          return _ref.apply(this, arguments);
+        };
+      }();
+
+      sendEditRequest();
+    });
+  }
+};
+
+/***/ }),
+
 /***/ "./resources/js/admin/desktop/inputCounter.js":
 /*!****************************************************!*\
   !*** ./resources/js/admin/desktop/inputCounter.js ***!
@@ -2393,6 +2532,81 @@ var renderInputHighlight = function renderInputHighlight() {
       }
     });
   });
+};
+
+/***/ }),
+
+/***/ "./resources/js/admin/desktop/localeSeo.js":
+/*!*************************************************!*\
+  !*** ./resources/js/admin/desktop/localeSeo.js ***!
+  \*************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "renderLocaleSeo": () => (/* binding */ renderLocaleSeo)
+/* harmony export */ });
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _crudTable__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./crudTable */ "./resources/js/admin/desktop/crudTable.js");
+/* harmony import */ var _messages__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./messages */ "./resources/js/admin/desktop/messages.js");
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+
+
+var renderLocaleSeo = function renderLocaleSeo() {
+  var table = document.getElementById("table");
+  var importSeo = document.getElementById('import-seo');
+
+  if (importSeo) {
+    importSeo.addEventListener("click", function () {
+      var url = importSeo.dataset.url;
+
+      var sendEditRequest = /*#__PURE__*/function () {
+        var _ref = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
+          return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
+            while (1) {
+              switch (_context.prev = _context.next) {
+                case 0:
+                  _context.prev = 0;
+                  _context.next = 3;
+                  return axios.get(url).then(function (response) {
+                    table.innerHTML = response.data.table;
+                    (0,_crudTable__WEBPACK_IMPORTED_MODULE_1__.renderTable)();
+                    (0,_messages__WEBPACK_IMPORTED_MODULE_2__.showMessage)('success', response.data.message);
+                    stopWait();
+                  });
+
+                case 3:
+                  _context.next = 8;
+                  break;
+
+                case 5:
+                  _context.prev = 5;
+                  _context.t0 = _context["catch"](0);
+                  console.error(_context.t0);
+
+                case 8:
+                case "end":
+                  return _context.stop();
+              }
+            }
+          }, _callee, null, [[0, 5]]);
+        }));
+
+        return function sendEditRequest() {
+          return _ref.apply(this, arguments);
+        };
+      }();
+
+      sendEditRequest();
+    });
+  }
 };
 
 /***/ }),
@@ -2460,47 +2674,50 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 var renderLocaleTags = function renderLocaleTags() {
   var table = document.getElementById("table");
   var importTags = document.getElementById('import-tags');
-  importTags.addEventListener("click", function () {
-    var url = importTags.dataset.url;
 
-    var sendEditRequest = /*#__PURE__*/function () {
-      var _ref = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
-          while (1) {
-            switch (_context.prev = _context.next) {
-              case 0:
-                _context.prev = 0;
-                _context.next = 3;
-                return axios.get(url).then(function (response) {
-                  table.innerHTML = response.data.table;
-                  (0,_crudTable__WEBPACK_IMPORTED_MODULE_1__.renderTable)();
-                  (0,_messages__WEBPACK_IMPORTED_MODULE_2__.showMessage)('success', response.data.message);
-                });
+  if (importTags) {
+    importTags.addEventListener("click", function () {
+      var url = importTags.dataset.url;
 
-              case 3:
-                _context.next = 8;
-                break;
+      var sendImportTagsRequest = /*#__PURE__*/function () {
+        var _ref = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
+          return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
+            while (1) {
+              switch (_context.prev = _context.next) {
+                case 0:
+                  _context.prev = 0;
+                  _context.next = 3;
+                  return axios.get(url).then(function (response) {
+                    table.innerHTML = response.data.table;
+                    (0,_crudTable__WEBPACK_IMPORTED_MODULE_1__.renderTable)();
+                    (0,_messages__WEBPACK_IMPORTED_MODULE_2__.showMessage)('success', response.data.message);
+                  });
 
-              case 5:
-                _context.prev = 5;
-                _context.t0 = _context["catch"](0);
-                console.error(_context.t0);
+                case 3:
+                  _context.next = 8;
+                  break;
 
-              case 8:
-              case "end":
-                return _context.stop();
+                case 5:
+                  _context.prev = 5;
+                  _context.t0 = _context["catch"](0);
+                  console.error(_context.t0);
+
+                case 8:
+                case "end":
+                  return _context.stop();
+              }
             }
-          }
-        }, _callee, null, [[0, 5]]);
-      }));
+          }, _callee, null, [[0, 5]]);
+        }));
 
-      return function sendEditRequest() {
-        return _ref.apply(this, arguments);
-      };
-    }();
+        return function sendImportTagsRequest() {
+          return _ref.apply(this, arguments);
+        };
+      }();
 
-    sendEditRequest();
-  });
+      sendImportTagsRequest();
+    });
+  }
 };
 
 /***/ }),
@@ -2813,6 +3030,77 @@ var renderPagination = function renderPagination() {
       sendPaginationRequest();
     });
   });
+};
+
+/***/ }),
+
+/***/ "./resources/js/admin/desktop/sitemap.js":
+/*!***********************************************!*\
+  !*** ./resources/js/admin/desktop/sitemap.js ***!
+  \***********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "renderSitemap": () => (/* binding */ renderSitemap)
+/* harmony export */ });
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _wait__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./wait */ "./resources/js/admin/desktop/wait.js");
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+
+var renderSitemap = function renderSitemap() {
+  var createSitemap = document.getElementById('create-sitemap');
+  var sitemap = document.getElementById('sitemap');
+
+  if (createSitemap) {
+    createSitemap.addEventListener("click", function () {
+      var url = createSitemap.dataset.url;
+
+      var sendEditRequest = /*#__PURE__*/function () {
+        var _ref = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
+          return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
+            while (1) {
+              switch (_context.prev = _context.next) {
+                case 0:
+                  _context.prev = 0;
+                  _context.next = 3;
+                  return axios.get(url).then(function (response) {
+                    console.log(sitemap);
+                    sitemap.value = response.data.sitemap;
+                  });
+
+                case 3:
+                  _context.next = 8;
+                  break;
+
+                case 5:
+                  _context.prev = 5;
+                  _context.t0 = _context["catch"](0);
+                  console.error(_context.t0);
+
+                case 8:
+                case "end":
+                  return _context.stop();
+              }
+            }
+          }, _callee, null, [[0, 5]]);
+        }));
+
+        return function sendEditRequest() {
+          return _ref.apply(this, arguments);
+        };
+      }();
+
+      sendEditRequest();
+    });
+  }
 };
 
 /***/ }),

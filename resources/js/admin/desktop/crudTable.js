@@ -4,11 +4,15 @@ import {showMessage} from './messages';
 import {renderTabs} from './tabs';
 import {renderLocaleTabs} from './localeTabs';
 import {renderLocaleTags} from './localeTags';
+import {renderLocaleSeo} from './localeSeo';
+import {renderGoogleBot} from './googleBot';
+import {renderSitemap} from './sitemap';
 import {renderUploadImage} from './uploadImage';
 import {renderInputCounter} from './inputCounter';
 import {renderInputHighlight} from './inputHighlight';
 import {renderOnOffSwitch} from './onOffSwitch';
 import {renderPagination} from './pagination';
+import {renderBlockParameters} from './blockParameters'
 
 const table = document.getElementById("table");
 const form = document.getElementById("form");
@@ -118,9 +122,13 @@ export let renderForm = () => {
     renderLocaleTabs();
     renderUploadImage();
     renderInputCounter();
+    renderBlockParameters();
     renderInputHighlight();
     renderOnOffSwitch();
     renderLocaleTags();
+    renderLocaleSeo();
+    renderGoogleBot();
+    renderSitemap();
 };
 
 export let renderTable = () => {

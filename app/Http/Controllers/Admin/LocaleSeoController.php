@@ -5,13 +5,17 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\View;
 use App\Http\Controllers\Controller;
+use Route;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
 use Jenssegers\Agent\Agent;
 use App\Vendor\Locale\Models\LocaleLanguage;
 use App\Vendor\Locale\Manager;
+use App\Vendor\Locale\Models\Sitemap;
 use App\Vendor\Locale\Models\LocaleSeo;
 use App\Vendor\Locale\Models\LocaleRedirect;
 use App\Vendor\Locale\Models\Googlebot;
+use Debugbar;
 
 class LocaleSeoController extends Controller
 {
@@ -23,12 +27,13 @@ class LocaleSeoController extends Controller
     protected $googlebot;
     protected $paginate;
     
-    function __construct(Manager $manager, LocaleLanguage $language, LocaleSeo $seo, LocaleRedirect $locale_redirect, Googlebot $googlebot)
+    function __construct(Agent $agent, Manager $manager, LocaleLanguage $language, Sitemap $sitemap, LocaleSeo $seo, LocaleRedirect $locale_redirect, Googlebot $googlebot)
     {
         $this->middleware('auth');
         $this->agent = $agent;
         $this->manager = $manager;
         $this->language = $language;
+        $this->sitemap = $sitemap;
         $this->seo = $seo;
         $this->locale_redirect = $locale_redirect;
         $this->googlebot = $googlebot;
@@ -44,12 +49,12 @@ class LocaleSeoController extends Controller
 
     public function index()
     {
+        $seos = $this->seo
+                ->select('key')
+                ->groupBy('key')
+                ->paginate($this->paginate);  
 
-        $view = View::make('admin.seo.index')
-        ->with('seo', $this->seo)
-        ->with('faqs', $this->faq->where('active', 1)
-        ->orderBy('created_at', 'desc')
-        ->paginate($this->paginate));
+        $view = View::make('admin.seo.index')->with('seos', $seos);
 
         if(request()->ajax()) {
 
@@ -62,17 +67,6 @@ class LocaleSeoController extends Controller
         }
 
         return $view;
-    }
-
-    public function create()
-    {
-        $view = View::make('admin.seo.index')
-        ->with('seo', $this->seo)
-        ->renderSections();
-
-        return response()->json([
-            'form' => $view['form']
-        ]);
     }
 
     public function store(Request $request)
@@ -91,7 +85,7 @@ class LocaleSeoController extends Controller
                     'group' =>request('seo')['group.'. $language],
                     'key' => request('seo')['key.'. $language]],[
                     'url' => request('seo')['url.'. $language],
-                    'redirection' => request('seo')['old_url.'.  $language] != request('locale')['url.'.  $language] ? 1 : 0,
+                    'redirection' => request('seo')['old_url.'.  $language] != request('seo')['url.'.  $language] ? 1 : 0,
                     'title' => request('seo')['title.'.  $language],
                     'description' => request('seo')['description.'.  $language],
                     'keywords' => request('seo')['keywords.'.  $language],
@@ -108,51 +102,41 @@ class LocaleSeoController extends Controller
                         'locale_seo_id' => $locale_seo->id,
                     ]);
                 }
-
-                $seos = $this->seo->where('key', $locale_seo->key)->get();
-
-                $locale = $seos->filter(function($item) use($language) {
-                    return $item->language == $language;
-                })->first();
-    
-                $seo['url.'. $language] = empty($locale->url) ? '': $locale->url; 
-                $seo['description.'. $language] = empty($locale->description) ? '': $locale->description; 
-                $seo['keywords.'. $language] = empty($locale->keywords) ? '': $locale->keywords; 
-                $seo['key.'. $language] = empty($locale->key) ? '': $locale->key;
-                $seo['group.'. $language] = empty($locale->group) ? '': $locale->group; 
             }
         }
 
         $this->manager->exportTranslations('routes');   
 
-        if (request('id')){
-            $message = \Lang::get('admin/seo.seo-update');
-        }else{
-            $message = \Lang::get('admin/seo.seo-create');
-        }
- 
+        $seos = $this->seo
+                ->select('key')
+                ->groupBy('key')
+                ->paginate($this->paginate);  
+
+        $message = \Lang::get('admin/seo.seo-update');
+       
         $view = View::make('admin.seo.index')
-        ->with('seo', $seo);
+        ->with('seos', $seos);
         
         if(request()->ajax()) {
             $sections = $view->renderSections(); 
     
             return response()->json([
                 'table' => $sections['table'],
-                'id' => $seo->id,
+                'form' => $sections['form'],
                 'message' => $message,
             ]); 
         }
     }
 
-    public function show(LocaleSeo $seo)
+    public function edit($key)
     {
-        
-        $seos = $this->seo->where('key', $seo->key)->get();
+    
+        $seos = $this->seo->where('key', $key)->paginate($this->paginate); 
 
         $languages = $this->language->get();
 
         foreach($languages as $language){
+
             $locale = $seos->filter(function($item) use($language) {
                 return $item->language == $language->alias;
             })->first();
@@ -162,10 +146,11 @@ class LocaleSeoController extends Controller
             $seo['description.'. $language->alias] = empty($locale->description) ? '': $locale->description; 
             $seo['keywords.'. $language->alias] = empty($locale->keywords) ? '': $locale->keywords; 
             $seo['key.'. $language->alias] = empty($locale->key) ? '': $locale->key;
-            $seo['group.'. $language->alias] = empty($locale->group) ? '': $locale->group; 
+            $seo['group.'. $language->alias] = empty($locale->group) ? '': $locale->group;
         }
 
         $view = View::make('admin.seo.index')
+        ->with('seos', $seos)
         ->with('seo', $seo);
         
         if(request()->ajax()) {
@@ -180,40 +165,17 @@ class LocaleSeoController extends Controller
         return $view;
     }
 
-    public function destroy()
-    {
-       
-    }
-
     public function importSeo()
     {
         $this->manager->importTranslations();  
         $message =  \Lang::get('admin/seo.seo-import');
 
-        $seo = $this->seo->where('group', 'not like', 'admin/%')->orderBy('id', 'desc')->first();
-        $seos = null;
-        $locale = null;
+        $seos = $this->seo
+            ->select('key')
+            ->groupBy('key')
+            ->paginate($this->paginate); 
 
-        if(isset($seo)){
-            $seos = $this->seo->where('key', $seo->key)->get();
-            $seos->key = $seo->key;
-            $seos->group = $seo->group;
-            $seos->id = $seo->id;
-
-            $languages = $this->language->get();
-
-            foreach($languages as $language){
-                $seo = $seos->filter(function($item) use($language) {
-                    return $item->language == $language->alias;
-                })->first();
-
-                $locale['value.'. $language->alias] = empty($tag->value) ? '': $tag->value; 
-            }
-        }
-
-        $view = View::make('admin.seo.index')
-            ->with('locale', $locale)
-            ->with('seo', $seo);
+        $view = View::make('admin.seo.index')->with('seos', $seos);
 
         if(request()->ajax()) {
 
@@ -263,5 +225,102 @@ class LocaleSeoController extends Controller
                 'message' => $message,
             ]); 
         }
+    }
+
+    public function getSitemaps()
+    {
+
+        $sitemap = $this->createSitemaps();
+
+        $this->googlebot::create([
+            'action' => 'deliver',
+            'sitemap_id' => $sitemap['id'],
+            'complete' => 1,
+        ]);
+
+        $this->seo->where('redirection', 1)->update(array('redirection' => 0 ));
+        $this->locale_redirect->truncate();
+
+        Debugbar::info($sitemap['xml']);
+        if(request()->ajax()) {
+    
+            return response()->json([
+                'sitemap' => $sitemap['xml']
+            ]); 
+        }
+    }
+
+    public function createSitemaps()
+    {
+        $routes = Route::getRoutes();
+        $routes->getByName('seo_import')->getController()->importSeo(); 
+
+        $normalTimeLimit = ini_get('max_execution_time');
+        ini_set('max_execution_time', 600); 
+
+        $urlset = new \SimpleXMLElement('<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"/>');
+        $custom_sitemaps = collect();
+        $rgx_parameters = '/\{.*?\}/';
+
+        $total_pages = 0;
+        $sitemaps = LocaleSeo::where('sitemap', 1)->get();
+
+        foreach ($sitemaps as $sitemap){
+
+            preg_match_all($rgx_parameters, $sitemap->url, $parameters);
+            
+            if(count($parameters[0]) > 0){
+
+                $pages = $sitemap->slugs()->get();
+                
+                if(count($pages) > 0){
+
+                    foreach($pages as $page){
+                        $collection[] = str_replace('{slug}', $page->slug, $sitemap->url);
+                    }
+                    
+                    foreach($collection as $url){               
+
+                        $xml_url = $urlset->addChild('url');
+                        $xml_url->addChild('loc', secure_url('/') . '/' . $sitemap->language . '/' . $url );
+                        $xml_url->addChild('lastmod',$sitemap->updated_at->format("Y-m-d"));
+                        $xml_url->addChild('changefreq', $sitemap->changefreq);  
+                        $xml_url->addChild('priority', $sitemap->priority);
+
+                        $total_pages++;
+                    }
+                }
+            }
+
+            else{
+
+                $xml_url = $urlset->addChild('url');
+                $xml_url->addChild('loc', secure_url('/') . '/' . $sitemap->language . '/' . $sitemap->url);
+                $xml_url->addChild('lastmod', $sitemap->updated_at->format("Y-m-d"));
+                $xml_url->addChild('changefreq', $sitemap->changefreq);  
+                $xml_url->addChild('priority', $sitemap->priority);
+
+                $total_pages++;
+            }
+        }
+
+        $dom = new \DomDocument();
+        $dom->loadXML($urlset->asXML());
+        $dom->formatOutput = true;
+        $xml_string = $dom->saveXML();
+       
+        $sitemapDB = $this->sitemap::create([
+            'pages' => $total_pages,
+        ]);
+
+        $sitemap['id'] = $sitemapDB->id;
+
+        Storage::disk('public_sitemap')->put($sitemap['id'] .'/sitemap.xml', $xml_string);
+
+        $sitemap['xml'] = Storage::disk('public_sitemap')->get($sitemap['id'] . '/sitemap.xml');
+
+        ini_set('max_execution_time', $normalTimeLimit);
+
+        return $sitemap;
     }
 }
