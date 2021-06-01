@@ -3,37 +3,41 @@ require('@ckeditor/ckeditor5-build-classic/build/translations/es.js');
 
 export let renderCkeditor = () => {
 
-    window.ckeditors = [];
+    let ckeditors = document.querySelectorAll('.ckeditor');
 
-    document.querySelectorAll('.ckeditor').forEach(ckeditor => {
+    if(ckeditors){
+        window.ckeditors = [];
 
-        ClassicEditor.create(ckeditor, {
-            
-            toolbar: {
-                items: [
-                    'bold',
-                    'italic',
-                    'link',
-                    'bulletedList',
-                    'numberedList',
-                    '|',
-                    'outdent',
-                    'indent',
-                    '|',
-                    'blockQuote',
-                    'undo',
-                    'redo'
-                ]
-            },
-            language: 'es',
-            licenseKey: '',
-        })
-        .then( classicEditor => {
-            ckeditors[ckeditor.name] = classicEditor;
-        })
-        .catch( error => {
-            console.error(error);
-        } );
-    });
+        ckeditors.forEach(ckeditor => {
+    
+            ClassicEditor.create(ckeditor, {
+                
+                toolbar: {
+                    items: [
+                        'bold',
+                        'italic',
+                        'link',
+                        'bulletedList',
+                        'numberedList',
+                        '|',
+                        'outdent',
+                        'indent',
+                        '|',
+                        'blockQuote',
+                        'undo',
+                        'redo'
+                    ]
+                },
+                language: 'es',
+                licenseKey: '',
+            })
+            .then( classicEditor => {
+                ckeditors[ckeditor.name] = classicEditor;
+            })
+            .catch( error => {
+                console.error(error);
+            } );
+        });
+    }
 }
 

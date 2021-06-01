@@ -1904,37 +1904,26 @@ var renderBlockParameters = function renderBlockParameters() {
 
   if (blockParameters) {
     blockParameters.forEach(function (blockParameter) {
-      blockParameter.addEventListener("keydown", function () {
-        var parameters = blockParameter.value.match(/\{.*?\}/g);
-        blockParameter.dataset.url = blockParameter.value;
-        blockParameter.dataset.parameters = parameters;
-      });
-      blockParameter.addEventListener("keyup", function () {
-        var parameters = blockParameter.value.match(/\{.*?\}/g);
-        var previousParameters = blockParameter.dataset.parameters;
+      var originalInput = blockParameter.value.match(/\{.*?\}/g);
 
-        if (parameters) {
-          var parametersString = parameters.toString();
-        }
+      if (originalInput) {
+        blockParameter.addEventListener("keydown", function () {
+          var setInput = blockParameter.value;
+          blockParameter.addEventListener("keyup", function () {
+            var finalInput = blockParameter.value.match(/\{.*?\}/g);
 
-        if (previousParameters == null && parameters == null) {
-          var isSame = true;
-        }
+            if (finalInput) {
+              if (originalInput.toString() != finalInput.toString()) {
+                blockParameter.value = setInput;
+              }
+            } else {
+              blockParameter.value = setInput;
+            }
 
-        if (previousParameters != null && parameters == null) {
-          var isSame = false;
-        }
-
-        if (previousParameters != null && parameters != null) {
-          var isSame = parametersString.length == previousParameters.length && parameters.every(function (element, index) {
-            return element[index] === previousParameters[index];
+            setInput = blockParameter.value;
           });
-        }
-
-        if (!isSame) {
-          blockParameter.value = blockParameter.dataset.url;
-        }
-      });
+        });
+      }
     });
   }
 };
@@ -1959,20 +1948,24 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__(/*! @ckeditor/ckeditor5-build-classic/build/translations/es.js */ "./node_modules/@ckeditor/ckeditor5-build-classic/build/translations/es.js");
 
 var renderCkeditor = function renderCkeditor() {
-  window.ckeditors = [];
-  document.querySelectorAll('.ckeditor').forEach(function (ckeditor) {
-    _ckeditor_ckeditor5_build_classic__WEBPACK_IMPORTED_MODULE_0___default().create(ckeditor, {
-      toolbar: {
-        items: ['bold', 'italic', 'link', 'bulletedList', 'numberedList', '|', 'outdent', 'indent', '|', 'blockQuote', 'undo', 'redo']
-      },
-      language: 'es',
-      licenseKey: ''
-    }).then(function (classicEditor) {
-      ckeditors[ckeditor.name] = classicEditor;
-    })["catch"](function (error) {
-      console.error(error);
+  var ckeditors = document.querySelectorAll('.ckeditor');
+
+  if (ckeditors) {
+    window.ckeditors = [];
+    ckeditors.forEach(function (ckeditor) {
+      _ckeditor_ckeditor5_build_classic__WEBPACK_IMPORTED_MODULE_0___default().create(ckeditor, {
+        toolbar: {
+          items: ['bold', 'italic', 'link', 'bulletedList', 'numberedList', '|', 'outdent', 'indent', '|', 'blockQuote', 'undo', 'redo']
+        },
+        language: 'es',
+        licenseKey: ''
+      }).then(function (classicEditor) {
+        ckeditors[ckeditor.name] = classicEditor;
+      })["catch"](function (error) {
+        console.error(error);
+      });
     });
-  });
+  }
 };
 
 /***/ }),
@@ -2006,6 +1999,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _onOffSwitch__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./onOffSwitch */ "./resources/js/admin/desktop/onOffSwitch.js");
 /* harmony import */ var _pagination__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./pagination */ "./resources/js/admin/desktop/pagination.js");
 /* harmony import */ var _blockParameters__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./blockParameters */ "./resources/js/admin/desktop/blockParameters.js");
+/* harmony import */ var _sortable__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./sortable */ "./resources/js/admin/desktop/sortable.js");
+/* harmony import */ var _menuItems__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./menuItems */ "./resources/js/admin/desktop/menuItems.js");
+/* harmony import */ var _selects__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./selects */ "./resources/js/admin/desktop/selects.js");
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -2023,6 +2019,9 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+
+
 
 
 
@@ -2182,6 +2181,9 @@ var renderForm = function renderForm() {
   (0,_localeSeo__WEBPACK_IMPORTED_MODULE_7__.renderLocaleSeo)();
   (0,_googleBot__WEBPACK_IMPORTED_MODULE_8__.renderGoogleBot)();
   (0,_sitemap__WEBPACK_IMPORTED_MODULE_9__.renderSitemap)();
+  (0,_sortable__WEBPACK_IMPORTED_MODULE_16__.renderNestedSortables)();
+  (0,_menuItems__WEBPACK_IMPORTED_MODULE_17__.renderMenuItems)();
+  (0,_selects__WEBPACK_IMPORTED_MODULE_18__.renderSelects)();
 };
 var renderTable = function renderTable() {
   var editButtons = document.querySelectorAll(".edit-button");
@@ -2240,15 +2242,16 @@ var renderTable = function renderTable() {
       deleteButton.addEventListener("click", function () {
         var url = deleteButton.dataset.url;
         deleteConfirm.dataset.url = url;
-        modalDelete.classList.add('open');
+        modalDelete.classList.add('modal-active');
+        (0,_wait__WEBPACK_IMPORTED_MODULE_2__.startOverlay)();
       });
     });
     deleteCancel.addEventListener("click", function () {
-      modalDelete.classList.remove('open');
+      modalDelete.classList.remove('modal-active');
+      (0,_wait__WEBPACK_IMPORTED_MODULE_2__.stopWait)();
     });
     deleteConfirm.addEventListener("click", function () {
       var url = deleteConfirm.dataset.url;
-      (0,_wait__WEBPACK_IMPORTED_MODULE_2__.startWait)();
 
       var sendDeleteRequest = /*#__PURE__*/function () {
         var _ref6 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee4() {
@@ -2259,9 +2262,12 @@ var renderTable = function renderTable() {
                   _context4.prev = 0;
                   _context4.next = 3;
                   return axios["delete"](url).then(function (response) {
-                    table.innerHTML = response.data.table;
+                    if (response.data.table) {
+                      table.innerHTML = response.data.table;
+                    }
+
                     form.innerHTML = response.data.form;
-                    modalDelete.classList.remove('open');
+                    modalDelete.classList.remove('modal-active');
                     renderTable();
                     renderForm();
                     (0,_wait__WEBPACK_IMPORTED_MODULE_2__.stopWait)();
@@ -2722,6 +2728,151 @@ var renderLocaleTags = function renderLocaleTags() {
 
 /***/ }),
 
+/***/ "./resources/js/admin/desktop/menuItems.js":
+/*!*************************************************!*\
+  !*** ./resources/js/admin/desktop/menuItems.js ***!
+  \*************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "renderMenuItems": () => (/* binding */ renderMenuItems)
+/* harmony export */ });
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _modalMenuItem__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./modalMenuItem */ "./resources/js/admin/desktop/modalMenuItem.js");
+/* harmony import */ var _wait__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./wait */ "./resources/js/admin/desktop/wait.js");
+/* harmony import */ var _selects__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./selects */ "./resources/js/admin/desktop/selects.js");
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+
+
+
+var renderMenuItems = function renderMenuItems() {
+  var createButtons = document.querySelectorAll('.menu-item-create');
+  var editButtons = document.querySelectorAll('.menu-item-edit');
+  var deleteButtons = document.querySelectorAll('.menu-item-delete');
+  var modalDelete = document.getElementById('modal-delete');
+  var deleteConfirm = document.getElementById('delete-confirm');
+
+  if (createButtons) {
+    createButtons.forEach(function (createButton) {
+      createButton.addEventListener('click', function () {
+        var url = createButton.dataset.url;
+        var language = createButton.dataset.language;
+        var menu = createButton.dataset.menu;
+        var modalContainer = document.getElementById('menu-item-modal-container');
+
+        var sendMenuItemRequest = /*#__PURE__*/function () {
+          var _ref = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
+            return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
+              while (1) {
+                switch (_context.prev = _context.next) {
+                  case 0:
+                    try {
+                      axios.get(url, {
+                        params: {
+                          'language': language
+                        }
+                      }).then(function (response) {
+                        modalContainer.innerHTML = response.data.form;
+                        document.getElementById('menu-item-language').value = language;
+                        document.getElementById('menu-id').value = menu;
+                        (0,_selects__WEBPACK_IMPORTED_MODULE_3__.renderSelects)();
+                        (0,_modalMenuItem__WEBPACK_IMPORTED_MODULE_1__.renderMenuItemForm)();
+                        setTimeout(function () {
+                          (0,_modalMenuItem__WEBPACK_IMPORTED_MODULE_1__.openModal)();
+                        }, 200);
+                      });
+                    } catch (error) {}
+
+                  case 1:
+                  case "end":
+                    return _context.stop();
+                }
+              }
+            }, _callee);
+          }));
+
+          return function sendMenuItemRequest() {
+            return _ref.apply(this, arguments);
+          };
+        }();
+
+        sendMenuItemRequest();
+      });
+    });
+  }
+
+  if (editButtons) {
+    editButtons.forEach(function (editButton) {
+      editButton.addEventListener("click", function () {
+        var modalContainer = document.getElementById('menu-item-modal-container');
+        var url = editButton.dataset.route + '/' + editButton.dataset.id;
+
+        var sendEditRequest = /*#__PURE__*/function () {
+          var _ref2 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2() {
+            return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee2$(_context2) {
+              while (1) {
+                switch (_context2.prev = _context2.next) {
+                  case 0:
+                    _context2.prev = 0;
+                    _context2.next = 3;
+                    return axios.get(url).then(function (response) {
+                      modalContainer.innerHTML = response.data.form;
+                      (0,_selects__WEBPACK_IMPORTED_MODULE_3__.renderSelects)();
+                      (0,_modalMenuItem__WEBPACK_IMPORTED_MODULE_1__.renderMenuItemForm)();
+                      setTimeout(function () {
+                        (0,_modalMenuItem__WEBPACK_IMPORTED_MODULE_1__.openModal)();
+                      }, 200);
+                    });
+
+                  case 3:
+                    _context2.next = 8;
+                    break;
+
+                  case 5:
+                    _context2.prev = 5;
+                    _context2.t0 = _context2["catch"](0);
+                    console.error(_context2.t0);
+
+                  case 8:
+                  case "end":
+                    return _context2.stop();
+                }
+              }
+            }, _callee2, null, [[0, 5]]);
+          }));
+
+          return function sendEditRequest() {
+            return _ref2.apply(this, arguments);
+          };
+        }();
+
+        sendEditRequest();
+      });
+    });
+  }
+
+  if (deleteButtons) {
+    deleteButtons.forEach(function (deleteButton) {
+      deleteButton.addEventListener("click", function () {
+        var url = deleteButton.dataset.route + '/' + deleteButton.dataset.id;
+        deleteConfirm.dataset.url = url;
+        modalDelete.classList.add('modal-active');
+        (0,_wait__WEBPACK_IMPORTED_MODULE_2__.startOverlay)();
+      });
+    });
+  }
+};
+
+/***/ }),
+
 /***/ "./resources/js/admin/desktop/messages.js":
 /*!************************************************!*\
   !*** ./resources/js/admin/desktop/messages.js ***!
@@ -2938,6 +3089,90 @@ modalImageDeleteButton.addEventListener("click", function (e) {
 
 /***/ }),
 
+/***/ "./resources/js/admin/desktop/modalMenuItem.js":
+/*!*****************************************************!*\
+  !*** ./resources/js/admin/desktop/modalMenuItem.js ***!
+  \*****************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "openModal": () => (/* binding */ openModal),
+/* harmony export */   "renderMenuItemForm": () => (/* binding */ renderMenuItemForm)
+/* harmony export */ });
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _menuItems__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./menuItems */ "./resources/js/admin/desktop/menuItems.js");
+/* harmony import */ var _crudTable__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./crudTable */ "./resources/js/admin/desktop/crudTable.js");
+/* harmony import */ var _wait__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./wait */ "./resources/js/admin/desktop/wait.js");
+/* harmony import */ var _messages__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./messages */ "./resources/js/admin/desktop/messages.js");
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+
+
+
+
+var openModal = function openModal() {
+  var modal = document.getElementById('menu-item-modal');
+  modal.classList.add('modal-active');
+  (0,_wait__WEBPACK_IMPORTED_MODULE_3__.startOverlay)();
+};
+var renderMenuItemForm = function renderMenuItemForm() {
+  var menuItemStoreButton = document.getElementById('modal-menu-item-store-button');
+
+  if (menuItemStoreButton) {
+    menuItemStoreButton.addEventListener("click", function (e) {
+      var menuItemFormContainer = document.getElementById('menu-item-form-container');
+      var modal = document.getElementById('menu-item-modal');
+      var itemMenuForm = document.getElementById('menu-item-form');
+      var url = itemMenuForm.action;
+      var data = new FormData(itemMenuForm);
+      var id = document.getElementById('modal-image-id');
+
+      var sendItemMenuPostRequest = /*#__PURE__*/function () {
+        var _ref = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
+          return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
+            while (1) {
+              switch (_context.prev = _context.next) {
+                case 0:
+                  try {
+                    axios.post(url, data).then(function (response) {
+                      menuItemFormContainer.innerHTML = response.data.form;
+                      modal.classList.remove('modal-active');
+                      id.value = "";
+                      itemMenuForm.reset();
+                      (0,_menuItems__WEBPACK_IMPORTED_MODULE_1__.renderMenuItems)();
+                      (0,_crudTable__WEBPACK_IMPORTED_MODULE_2__.renderForm)();
+                      (0,_wait__WEBPACK_IMPORTED_MODULE_3__.stopWait)();
+                      (0,_messages__WEBPACK_IMPORTED_MODULE_4__.showMessage)('success', response.data.message);
+                    });
+                  } catch (error) {}
+
+                case 1:
+                case "end":
+                  return _context.stop();
+              }
+            }
+          }, _callee);
+        }));
+
+        return function sendItemMenuPostRequest() {
+          return _ref.apply(this, arguments);
+        };
+      }();
+
+      sendItemMenuPostRequest();
+    });
+  }
+};
+
+/***/ }),
+
 /***/ "./resources/js/admin/desktop/onOffSwitch.js":
 /*!***************************************************!*\
   !*** ./resources/js/admin/desktop/onOffSwitch.js ***!
@@ -3034,6 +3269,75 @@ var renderPagination = function renderPagination() {
 
 /***/ }),
 
+/***/ "./resources/js/admin/desktop/selects.js":
+/*!***********************************************!*\
+  !*** ./resources/js/admin/desktop/selects.js ***!
+  \***********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "renderSelects": () => (/* binding */ renderSelects)
+/* harmony export */ });
+var renderSelects = function renderSelects() {
+  var selectsRelated = document.querySelectorAll('.primary-select-related');
+  var selectsDisplay = document.querySelectorAll('.select-display');
+  selectsDisplay.forEach(function (selectDisplay) {
+    selectDisplay.addEventListener("change", function () {
+      var selectDisplayOptions = document.querySelectorAll('.select-display-option');
+      selectDisplayOptions.forEach(function (selectDisplayOption) {
+        if (selectDisplayOption.dataset.option == selectDisplay.value) {
+          selectDisplayOption.classList.add('visible');
+        } else {
+          selectDisplayOption.classList.remove('visible');
+        }
+      });
+    });
+  });
+  selectsRelated.forEach(function (selectRelated) {
+    selectRelated.addEventListener("change", function () {
+      var secondaryRelated = document.querySelector('.secondary-select-related');
+      var secondaryRelatedOptions = document.querySelectorAll('.secondary-select-related option');
+      secondaryRelatedOptions.forEach(function (secondaryRelatedOption) {
+        if (selectRelated.value == secondaryRelatedOption.dataset.related) {
+          secondaryRelated.closest('.select-related').classList.add('visible');
+          secondaryRelatedOption.classList.remove('hidden');
+        } else {
+          secondaryRelated.closest('.select-related').classList.remove('visible');
+          secondaryRelatedOption.classList.add('hidden');
+        }
+      });
+    });
+  });
+}; // $(document).on('change', '.primary-select-related', function(){
+//     var optionId =  $(this).val();
+//     $('.select-related').removeClass('visible');
+//     $(".secondary-select-related").val(" ");
+//     $('.secondary-select-related').prop("disabled", false); 
+//     $('.secondary-select-related option').addClass('hidden');
+//     $('.primary-select-related option[value="' + optionId + '"]').prop('selected', true);
+//     var matching = $('.secondary-select-related option').filter(function(){
+//         return $(this).data('related') == optionId;
+//     });
+//     if(matching.length > 0){
+//         $(matching).removeClass('hidden'); 
+//         $('.select-related').addClass('visible');
+//     }
+// });
+// // select_display
+// $(document).on('change', '.select-display', function(){
+//     $('.select-display-option').removeClass('visible');
+//     $('.select-display-option :input').val('');
+//     $('.select-display-option').prop("disabled", true);
+//     var select = $('.select-display-option#' + $(this).children(":selected").attr("id"));
+//     select.addClass('visible');
+//     select.find('.select-option').prop("disabled", false);
+// });
+//
+
+/***/ }),
+
 /***/ "./resources/js/admin/desktop/sitemap.js":
 /*!***********************************************!*\
   !*** ./resources/js/admin/desktop/sitemap.js ***!
@@ -3072,7 +3376,6 @@ var renderSitemap = function renderSitemap() {
                   _context.prev = 0;
                   _context.next = 3;
                   return axios.get(url).then(function (response) {
-                    console.log(sitemap);
                     sitemap.value = response.data.sitemap;
                   });
 
@@ -3102,6 +3405,122 @@ var renderSitemap = function renderSitemap() {
     });
   }
 };
+
+/***/ }),
+
+/***/ "./resources/js/admin/desktop/sortable.js":
+/*!************************************************!*\
+  !*** ./resources/js/admin/desktop/sortable.js ***!
+  \************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "renderNestedSortables": () => (/* binding */ renderNestedSortables)
+/* harmony export */ });
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var nested_sort__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! nested-sort */ "./node_modules/nested-sort/dist/nested-sort.umd.js");
+/* harmony import */ var nested_sort__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(nested_sort__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _menuItems__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./menuItems */ "./resources/js/admin/desktop/menuItems.js");
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+
+
+var renderNestedSortables = function renderNestedSortables() {
+  var nestedContainers = document.querySelectorAll('.nested-sort-wrap');
+  nestedContainers.forEach(function (nestedContainer) {
+    if (nestedContainer) {
+      var url = nestedContainer.dataset.route;
+      var orderUrl = nestedContainer.dataset.order;
+      var nestedContainerId = '#' + nestedContainer.id;
+
+      var sendIndexRequest = function sendIndexRequest() {
+        try {
+          axios.get(url).then(function (response) {
+            new (nested_sort__WEBPACK_IMPORTED_MODULE_1___default())({
+              data: response.data.items,
+              propertyMap: {
+                id: 'id',
+                parent: 'parent_id',
+                text: 'name'
+              },
+              actions: {
+                onDrop: function onDrop(data) {
+                  storeOrder(orderUrl, data);
+                }
+              },
+              el: nestedContainerId,
+              listClassNames: ['nested-sort']
+            });
+            setItemActions();
+            (0,_menuItems__WEBPACK_IMPORTED_MODULE_2__.renderMenuItems)();
+          });
+        } catch (error) {}
+      };
+
+      sendIndexRequest();
+    }
+  });
+};
+
+function storeOrder(url, data) {
+  var sendOrderPostRequest = /*#__PURE__*/function () {
+    var _ref = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
+        while (1) {
+          switch (_context.prev = _context.next) {
+            case 0:
+              _context.prev = 0;
+              _context.next = 3;
+              return axios.post(url, data).then(function (response) {});
+
+            case 3:
+              _context.next = 8;
+              break;
+
+            case 5:
+              _context.prev = 5;
+              _context.t0 = _context["catch"](0);
+
+              if (_context.t0.response.status == '500') {}
+
+            case 8:
+            case "end":
+              return _context.stop();
+          }
+        }
+      }, _callee, null, [[0, 5]]);
+    }));
+
+    return function sendOrderPostRequest() {
+      return _ref.apply(this, arguments);
+    };
+  }();
+
+  sendOrderPostRequest();
+}
+
+function setItemActions() {
+  var itemActions = document.getElementById('item-actions');
+  var nestedSorts = document.querySelectorAll('.nested-sort li');
+  nestedSorts.forEach(function (nestedSort) {
+    if (!nestedSort.querySelector('#item-actions')) {
+      var itemActionsCloned = itemActions.cloneNode(true);
+      var itemEdit = itemActionsCloned.querySelector('.item-edit');
+      var itemDelete = itemActionsCloned.querySelector('.item-delete');
+      itemActionsCloned.classList.remove('clone');
+      itemEdit.dataset.id = nestedSort.dataset.id;
+      itemDelete.dataset.id = nestedSort.dataset.id;
+      nestedSort.insertAdjacentElement('afterbegin', itemActionsCloned);
+    }
+  });
+}
 
 /***/ }),
 
@@ -20779,6 +21198,848 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 // extracted by mini-css-extract-plugin
+
+
+/***/ }),
+
+/***/ "./node_modules/nested-sort/dist/nested-sort.umd.js":
+/*!**********************************************************!*\
+  !*** ./node_modules/nested-sort/dist/nested-sort.umd.js ***!
+  \**********************************************************/
+/***/ (function(module) {
+
+(function (global, factory) {
+   true ? module.exports = factory() :
+  0;
+}(this, (function () { 'use strict';
+
+  function _arrayLikeToArray(arr, len) {
+    if (len == null || len > arr.length) len = arr.length;
+
+    for (var i = 0, arr2 = new Array(len); i < len; i++) {
+      arr2[i] = arr[i];
+    }
+
+    return arr2;
+  }
+
+  var arrayLikeToArray = _arrayLikeToArray;
+
+  function _arrayWithoutHoles(arr) {
+    if (Array.isArray(arr)) return arrayLikeToArray(arr);
+  }
+
+  var arrayWithoutHoles = _arrayWithoutHoles;
+
+  function _iterableToArray(iter) {
+    if (typeof Symbol !== "undefined" && Symbol.iterator in Object(iter)) return Array.from(iter);
+  }
+
+  var iterableToArray = _iterableToArray;
+
+  function _unsupportedIterableToArray(o, minLen) {
+    if (!o) return;
+    if (typeof o === "string") return arrayLikeToArray(o, minLen);
+    var n = Object.prototype.toString.call(o).slice(8, -1);
+    if (n === "Object" && o.constructor) n = o.constructor.name;
+    if (n === "Map" || n === "Set") return Array.from(n);
+    if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return arrayLikeToArray(o, minLen);
+  }
+
+  var unsupportedIterableToArray = _unsupportedIterableToArray;
+
+  function _nonIterableSpread() {
+    throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
+  }
+
+  var nonIterableSpread = _nonIterableSpread;
+
+  function _toConsumableArray(arr) {
+    return arrayWithoutHoles(arr) || iterableToArray(arr) || unsupportedIterableToArray(arr) || nonIterableSpread();
+  }
+
+  var toConsumableArray = _toConsumableArray;
+
+  function _classCallCheck(instance, Constructor) {
+    if (!(instance instanceof Constructor)) {
+      throw new TypeError("Cannot call a class as a function");
+    }
+  }
+
+  var classCallCheck = _classCallCheck;
+
+  function _defineProperties(target, props) {
+    for (var i = 0; i < props.length; i++) {
+      var descriptor = props[i];
+      descriptor.enumerable = descriptor.enumerable || false;
+      descriptor.configurable = true;
+      if ("value" in descriptor) descriptor.writable = true;
+      Object.defineProperty(target, descriptor.key, descriptor);
+    }
+  }
+
+  function _createClass(Constructor, protoProps, staticProps) {
+    if (protoProps) _defineProperties(Constructor.prototype, protoProps);
+    if (staticProps) _defineProperties(Constructor, staticProps);
+    return Constructor;
+  }
+
+  var createClass = _createClass;
+
+  function _defineProperty(obj, key, value) {
+    if (key in obj) {
+      Object.defineProperty(obj, key, {
+        value: value,
+        enumerable: true,
+        configurable: true,
+        writable: true
+      });
+    } else {
+      obj[key] = value;
+    }
+
+    return obj;
+  }
+
+  var defineProperty = _defineProperty;
+
+  var DataEngine = /*#__PURE__*/function () {
+    /**
+     * @constructor
+     * @param {object[]} [data]
+     * @param {object} [propertyMap={}]
+     */
+    function DataEngine(_ref) {
+      var data = _ref.data,
+          _ref$propertyMap = _ref.propertyMap,
+          propertyMap = _ref$propertyMap === void 0 ? {} : _ref$propertyMap;
+
+      classCallCheck(this, DataEngine);
+
+      this.data = data;
+      this.sortedData = [];
+      this.sortedDataDomArray = [];
+      this.propertyMap = propertyMap;
+      this.maybeTransformData();
+    }
+
+    createClass(DataEngine, [{
+      key: "maybeTransformData",
+      value: function maybeTransformData() {
+        if (!Object.keys(this.propertyMap).length || !Array.isArray(this.data)) return;
+        var getItemPropProxyName = this.getItemPropProxyName.bind(this);
+        this.data = this.data.map(function (item) {
+          return new Proxy(item, {
+            get: function get(target, prop, receiver) {
+              return Reflect.get(target, getItemPropProxyName(prop), receiver);
+            }
+          });
+        });
+      }
+      /**
+       * @param {PropertyKey} prop
+       * @returns {PropertyKey}
+       */
+
+    }, {
+      key: "getItemPropProxyName",
+      value: function getItemPropProxyName(prop) {
+        if (Object.prototype.hasOwnProperty.call(this.propertyMap, prop)) {
+          return this.propertyMap[prop];
+        }
+
+        return prop;
+      }
+    }, {
+      key: "isTopLevelItem",
+      value: function isTopLevelItem(item) {
+        return !item.parent;
+      }
+      /**
+       * @returns {object[]}
+       */
+
+    }, {
+      key: "sortListItems",
+      value: function sortListItems() {
+        var _this = this;
+
+        var items = toConsumableArray(this.data);
+
+        var topLevelItems = items.filter(function (a) {
+          return _this.isTopLevelItem(a);
+        }).sort(function (a, b) {
+          return a.order && b.order ? a.order - b.order : 0;
+        });
+        var childItems = items.filter(function (a) {
+          return !_this.isTopLevelItem(a);
+        }).reduce(function (groups, item) {
+          if (Object.prototype.hasOwnProperty.call(groups, item.parent)) {
+            groups[item.parent].push(item);
+          } else {
+            groups[item.parent] = [item];
+          }
+
+          return groups;
+        }, {});
+        Object.keys(childItems).forEach(function (parentId) {
+          childItems[parentId].sort(function (a, b) {
+            return a.order && b.order ? a.order - b.order : 0;
+          });
+        });
+        this.sortedData = [].concat(toConsumableArray(topLevelItems), toConsumableArray(Object.values(childItems).flat()));
+        return this.sortedData;
+      }
+      /**
+       * @param {object[]} item
+       * @param {string} nodeName
+       * @returns {HTMLElement}
+       */
+
+    }, {
+      key: "createItemElement",
+      value: function createItemElement(item) {
+        var nodeName = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'li';
+        var id = item.id,
+            text = item.text;
+        var el = document.createElement(nodeName);
+        el.dataset.id = id;
+        if (nodeName === 'li') el.innerHTML = text;
+        return el;
+      }
+      /**
+       * @param {HTMLElement} node
+       * @param {object} item
+       * @returns {boolean}
+       */
+
+    }, {
+      key: "elementIsParentOfItem",
+      value: function elementIsParentOfItem(node, item) {
+        return node.dataset.id === "".concat(item.parent);
+      }
+      /**
+       * @param {HTMLElement} node
+       * @param {object} item
+       * @param {string} nodeName
+       * @returns {Element|null}
+       */
+
+    }, {
+      key: "getParentNodeOfItem",
+      value: function getParentNodeOfItem(node, item, nodeName) {
+        return node.querySelector("".concat(nodeName, "[data-id=\"").concat(item.parent, "\"]"));
+      }
+      /**
+       * @param {HTMLElement} node
+       * @param {object} item
+       * @returns {boolean}
+       */
+
+    }, {
+      key: "elementIsAncestorOfItem",
+      value: function elementIsAncestorOfItem(node, item) {
+        return !!this.getParentNodeOfItem(node, item, 'li');
+      }
+      /**
+       * @param {HTMLElement} node
+       * @param {object} item
+       * @returns {HTMLElement}
+       */
+
+    }, {
+      key: "getDirectListParentOfItem",
+      value: function getDirectListParentOfItem(node, item) {
+        return this.getParentNodeOfItem(node, item, 'ol');
+      }
+      /**
+       * @param {object} item
+       * @returns {boolean}
+       */
+
+    }, {
+      key: "maybeAppendItemToParentDom",
+      value: function maybeAppendItemToParentDom(item) {
+        var _this2 = this;
+
+        var parent = item.parent;
+        var topParent = this.sortedDataDomArray.find(function (topLevelListItem) {
+          return _this2.elementIsParentOfItem(topLevelListItem, item) || _this2.elementIsAncestorOfItem(topLevelListItem, item);
+        });
+        if (!topParent) return false;
+        var listItem = this.createItemElement(item);
+        var directParentList = this.getDirectListParentOfItem(topParent, item);
+
+        if (!directParentList) {
+          // we need to create the direct parent OL and append it to the direct parent LI
+          directParentList = this.createItemElement({
+            id: parent
+          }, 'ol');
+          var directParentListItem = this.getParentNodeOfItem(topParent, item, 'li') || topParent;
+          directParentListItem.appendChild(directParentList);
+        }
+
+        directParentList.appendChild(listItem);
+        return true;
+      }
+      /**
+       * @returns {array}
+       */
+
+    }, {
+      key: "getListItemsDom",
+      value: function getListItemsDom() {
+        var _this3 = this;
+
+        this.sortedDataDomArray = [];
+        var processedItems = [];
+
+        while (processedItems.length !== this.sortListItems().length) {
+          processedItems = this.sortedData.reduce(function (processedItems, item) {
+            var id = item.id;
+            if (processedItems.includes(id)) return processedItems;
+            var itemAdded;
+
+            if (!item.parent) {
+              var listItem = _this3.createItemElement(item);
+
+              _this3.sortedDataDomArray.push(listItem);
+
+              itemAdded = true;
+            } else {
+              itemAdded = _this3.maybeAppendItemToParentDom(item);
+            }
+
+            if (itemAdded) processedItems.push(id);
+            return processedItems;
+          }, processedItems);
+        }
+
+        return this.sortedDataDomArray;
+      }
+      /**
+       * @param {HTMLOListElement|HTMLUListElement} list
+       * @returns {object[]}
+       */
+
+    }, {
+      key: "convertDomToData",
+      value: function convertDomToData(list) {
+        var _this4 = this;
+
+        return Array.from(list.querySelectorAll('li')).map(function (li) {
+          var _ref2;
+
+          var parentListItem = li.parentNode;
+          var parent = parentListItem.dataset.id;
+          var order = Array.from(parentListItem.children).findIndex(function (item) {
+            return item === li;
+          }) + 1;
+          return _ref2 = {}, defineProperty(_ref2, _this4.getItemPropProxyName('id'), li.dataset.id), defineProperty(_ref2, _this4.getItemPropProxyName('parent'), parent), defineProperty(_ref2, _this4.getItemPropProxyName('order'), order), _ref2;
+        });
+      }
+      /**
+       * @returns {HTMLOListElement}
+       */
+
+    }, {
+      key: "render",
+      value: function render() {
+        var list = document.createElement('ol');
+        this.getListItemsDom().forEach(function (listItem) {
+          return list.appendChild(listItem);
+        });
+        return list;
+      }
+    }]);
+
+    return DataEngine;
+  }();
+
+  var NestedSort = /*#__PURE__*/function () {
+    /**
+     * @constructor
+     * @param {object} [actions={}]
+     * @param {array} [data]
+     * @param {number} [droppingEdge=15]
+     * @param {string|HTMLElement} el
+     * @param {boolean} [init=true]
+     * @param {array|string} [listClassNames]
+     * @param {array|string} [listItemClassNames]
+     * @param {number|string} [nestingLevels]
+     * @param {object} [propertyMap={}]
+     */
+    function NestedSort(_ref) {
+      var _ref$actions = _ref.actions;
+      _ref$actions = _ref$actions === void 0 ? {} : _ref$actions;
+      var onDrop = _ref$actions.onDrop,
+          data = _ref.data,
+          _ref$droppingEdge = _ref.droppingEdge,
+          droppingEdge = _ref$droppingEdge === void 0 ? 15 : _ref$droppingEdge,
+          el = _ref.el,
+          _ref$init = _ref.init,
+          init = _ref$init === void 0 ? true : _ref$init,
+          listClassNames = _ref.listClassNames,
+          listItemClassNames = _ref.listItemClassNames,
+          nestingLevels = _ref.nestingLevels,
+          _ref$propertyMap = _ref.propertyMap,
+          propertyMap = _ref$propertyMap === void 0 ? {} : _ref$propertyMap;
+
+      classCallCheck(this, NestedSort);
+
+      this.data = data;
+      this.selector = el;
+      this.sortableList = null;
+      this.placeholderList = null;
+      this.placeholderInUse = null;
+      this.draggedNode = null;
+      this.targetedNode = null;
+      this.listClassNames = this.createListClassNamesArray(listClassNames);
+      this.mainListClassName = this.listClassNames[0] || 'nested-sort';
+      this.listItemClassNames = this.createListClassNamesArray(listItemClassNames);
+      this.propertyMap = propertyMap;
+      this.actions = {
+        onDrop: onDrop
+      };
+      this.initialised = false;
+      this.targetNode = {
+        X: null,
+        Y: null
+      };
+      this.distances = {
+        droppingEdge: droppingEdge,
+        droppingEdgeNegative: droppingEdge * -1,
+        mouseTo: {
+          targetedElTop: undefined
+        }
+      };
+      this.dimensions = {
+        targetedEl: {
+          H: undefined
+        }
+      };
+      this.cursor = {
+        X: null,
+        Y: null
+      };
+      this.classNames = {
+        dragged: 'ns-dragged',
+        placeholder: 'ns-placeholder',
+        targeted: 'ns-targeted'
+      };
+      this.listEventListeners = {
+        dragover: this.onDragOver.bind(this),
+        dragstart: this.onDragStart.bind(this),
+        dragenter: this.onDragEnter.bind(this),
+        dragend: this.onDragEnd.bind(this),
+        drop: this.onDrop.bind(this)
+      };
+      var intNestingLevels = parseInt(nestingLevels);
+      this.nestingLevels = isNaN(intNestingLevels) ? -1 : intNestingLevels; // values less than 0 mean infinite levels of nesting
+
+      this.listInterface = this.getListInterface();
+      this.maybeInitDataDom();
+      this.addListAttributes();
+      if (init) this.initDragAndDrop();
+    }
+
+    createClass(NestedSort, [{
+      key: "getListInterface",
+      value: function getListInterface() {
+        if (Array.isArray(this.data) && this.data.length) return HTMLOListElement;
+        var el = this.selector instanceof HTMLElement ? this.selector : document.querySelector(this.selector);
+        return el instanceof HTMLOListElement ? HTMLOListElement : HTMLUListElement;
+      }
+    }, {
+      key: "getDataEngine",
+      value: function getDataEngine() {
+        if (this.dataEngine instanceof DataEngine) {
+          return this.dataEngine;
+        }
+
+        this.dataEngine = new DataEngine({
+          data: this.data,
+          propertyMap: this.propertyMap
+        });
+        return this.dataEngine;
+      }
+    }, {
+      key: "createListClassNamesArray",
+      value: function createListClassNamesArray(listClassNames) {
+        if (!listClassNames) return [];
+        return Array.isArray(listClassNames) ? listClassNames : listClassNames.split(' ');
+      }
+    }, {
+      key: "maybeInitDataDom",
+      value: function maybeInitDataDom() {
+        if (!(Array.isArray(this.data) && this.data.length)) return;
+        var wrapper = document.querySelector(this.selector);
+        var list = this.getDataEngine().render();
+        wrapper.innerHTML = '';
+        wrapper.appendChild(list);
+      }
+    }, {
+      key: "getListTagName",
+      value: function getListTagName() {
+        return this.listInterface === HTMLOListElement ? 'ol' : 'ul';
+      }
+    }, {
+      key: "getSortableList",
+      value: function getSortableList() {
+        if (this.sortableList instanceof this.listInterface) return this.sortableList;
+
+        if (this.selector instanceof this.listInterface) {
+          this.sortableList = this.selector;
+        } else {
+          var list = document.querySelector(this.selector);
+          this.sortableList = list instanceof this.listInterface ? list : list.querySelector(this.getListTagName());
+        }
+
+        return this.sortableList;
+      }
+    }, {
+      key: "addListAttributes",
+      value: function addListAttributes() {
+        var _list$classList,
+            _this = this;
+
+        var list = this.getSortableList();
+
+        (_list$classList = list.classList).add.apply(_list$classList, toConsumableArray(this.listClassNames.concat(this.mainListClassName)));
+
+        list.querySelectorAll(this.getListTagName()).forEach(function (l) {
+          var _l$classList;
+
+          (_l$classList = l.classList).add.apply(_l$classList, toConsumableArray(_this.listClassNames));
+        });
+        list.querySelectorAll('li').forEach(function (li) {
+          var _li$classList;
+
+          (_li$classList = li.classList).add.apply(_li$classList, toConsumableArray(_this.listItemClassNames));
+        });
+      }
+    }, {
+      key: "toggleMainListLifeCycleClassName",
+      value: function toggleMainListLifeCycleClassName() {
+        var enabled = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : true;
+        var className = "".concat(this.mainListClassName, "--enabled");
+        var classList = this.getSortableList().classList;
+        return enabled ? classList.add(className) : classList.remove(className);
+      }
+    }, {
+      key: "toggleListItemAttributes",
+      value: function toggleListItemAttributes() {
+        var enable = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : true;
+        this.getSortableList().querySelectorAll('li').forEach(function (el) {
+          el.setAttribute('draggable', enable);
+        });
+      }
+    }, {
+      key: "toggleListEventListeners",
+      value: function toggleListEventListeners() {
+        var _this2 = this;
+
+        var remove = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
+        var list = this.getSortableList();
+        Object.keys(this.listEventListeners).forEach(function (event) {
+          if (remove) {
+            list.removeEventListener(event, _this2.listEventListeners[event]);
+          } else {
+            list.addEventListener(event, _this2.listEventListeners[event], false);
+          }
+        });
+      }
+    }, {
+      key: "initDragAndDrop",
+      value: function initDragAndDrop() {
+        if (this.initialised) return;
+        this.toggleListEventListeners();
+        this.initPlaceholderList();
+        this.toggleListItemAttributes();
+        this.toggleMainListLifeCycleClassName();
+        this.initialised = true;
+      }
+    }, {
+      key: "init",
+      value: function init() {
+        this.initDragAndDrop();
+      }
+    }, {
+      key: "destroy",
+      value: function destroy() {
+        this.toggleListEventListeners(true);
+        this.toggleListItemAttributes(false);
+        this.toggleMainListLifeCycleClassName(false);
+        this.initialised = false;
+      }
+    }, {
+      key: "removeClassFromEl",
+      value: function removeClassFromEl(el, className) {
+        if (el && el.classList.contains(className)) {
+          el.classList.remove(className);
+        }
+      }
+    }, {
+      key: "canBeTargeted",
+      value: function canBeTargeted(el) {
+        if (!this.draggedNode || this.draggedNode === el) return false;
+        return el.nodeName === 'LI' || el instanceof this.listInterface && el.classList.contains(this.classNames.placeholder);
+      }
+    }, {
+      key: "onDragStart",
+      value: function onDragStart(e) {
+        this.draggedNode = e.target;
+        this.draggedNode.classList.add(this.classNames.dragged);
+        e.dataTransfer.setData('text', 'Drag started!'); // Hack for Firefox!
+      }
+    }, {
+      key: "onDragOver",
+      value: function onDragOver(e) {
+        e.preventDefault(); // prevent default to allow drop
+
+        this.updateCoordination(e);
+        this.managePlaceholderLists(e);
+      }
+    }, {
+      key: "onDragEnter",
+      value: function onDragEnter(e) {
+        if (!this.canBeTargeted(e.target)) return;
+        this.removeClassFromEl(this.targetedNode, this.classNames.targeted);
+        this.targetedNode = e.target;
+        this.targetedNode.classList.add(this.classNames.targeted);
+      }
+    }, {
+      key: "onDragEnd",
+      value: function onDragEnd(e) {
+        e.stopPropagation();
+        this.removeClassFromEl(this.draggedNode, this.classNames.dragged);
+        this.removeClassFromEl(this.targetedNode, this.classNames.targeted);
+        this.cleanupPlaceholderLists();
+        this.draggedNode = null;
+        this.targetedNode = null;
+      }
+    }, {
+      key: "onDrop",
+      value: function onDrop(e) {
+        e.stopPropagation();
+        this.maybeDrop();
+        this.cleanupPlaceholderLists();
+
+        if (typeof this.actions.onDrop === 'function') {
+          this.actions.onDrop(this.getDataEngine().convertDomToData(this.getSortableList()));
+        }
+      }
+    }, {
+      key: "updateCoordination",
+      value: function updateCoordination(e) {
+        this.calcMouseCoords(e);
+        this.calcMouseToTargetedElDist();
+      }
+    }, {
+      key: "getDropLocation",
+      value: function getDropLocation() {
+        if (this.canBeDropped()) {
+          if (this.targetedNode.nodeName === 'LI' && !this.cursorIsIndentedEnough()) return 'before';else if (this.targetedNode instanceof this.listInterface) return 'inside';
+        }
+      }
+    }, {
+      key: "maybeDrop",
+      value: function maybeDrop(e) {
+        var location = this.getDropLocation();
+        if (location) this.dropTheItem(location, e);
+      }
+    }, {
+      key: "dropTheItem",
+      value: function dropTheItem(place) {
+        switch (place) {
+          case 'before':
+            this.targetedNode.parentNode.insertBefore(this.draggedNode, this.targetedNode);
+            break;
+
+          case 'inside':
+            this.targetedNode.appendChild(this.draggedNode);
+            break;
+        }
+      }
+    }, {
+      key: "calcMouseCoords",
+      value: function calcMouseCoords(e) {
+        // we're having the client coords because on the next lines, we use getBoundingClientRect which behaves in the same way
+        this.cursor.X = e.clientX;
+        this.cursor.Y = e.clientY;
+      }
+    }, {
+      key: "calcMouseToTargetedElDist",
+      value: function calcMouseToTargetedElDist() {
+        if (!this.targetedNode) {
+          return;
+        }
+
+        var offset = this.targetedNode.getBoundingClientRect();
+        this.targetNode.X = offset.left;
+        this.targetNode.Y = offset.top;
+        var result = this.targetNode.Y - this.cursor.Y;
+        this.distances.mouseTo.targetedElTop = result;
+        this.distances.mouseTo.targetedElTopAbs = Math.abs(result);
+        this.dimensions.targetedEl.H = this.targetedNode.clientHeight;
+        this.distances.mouseTo.targetedElBot = this.distances.mouseTo.targetedElTopAbs - this.dimensions.targetedEl.H;
+      }
+    }, {
+      key: "areNested",
+      value: function areNested(child, parent) {
+        return parent && Array.from(parent.querySelectorAll('li')).some(function (li) {
+          return li === child;
+        });
+      }
+    }, {
+      key: "cursorIsIndentedEnough",
+      value: function cursorIsIndentedEnough() {
+        return this.cursor.X - this.targetNode.X > 50;
+      }
+    }, {
+      key: "mouseIsTooCloseToTop",
+      value: function mouseIsTooCloseToTop() {
+        return this.cursor.Y - this.targetNode.Y < this.distances.droppingEdge;
+      }
+    }, {
+      key: "managePlaceholderLists",
+      value: function managePlaceholderLists(e) {
+        var _this3 = this;
+
+        var actions = this.analysePlaceHolderSituation(e);
+        actions.forEach(function (action) {
+          switch (action) {
+            case 'add':
+              _this3.cleanupPlaceholderLists();
+
+              _this3.addPlaceholderList();
+
+              break;
+
+            case 'cleanup':
+              _this3.cleanupPlaceholderLists();
+
+              break;
+          }
+        });
+      }
+    }, {
+      key: "targetedNodeIsPlaceholder",
+      value: function targetedNodeIsPlaceholder() {
+        return this.targetedNode instanceof this.listInterface && this.targetedNode.classList.contains(this.classNames.placeholder);
+      }
+    }, {
+      key: "getTargetedNodeDepth",
+      value: function getTargetedNodeDepth() {
+        var depth = 0;
+        var el = this.targetedNode;
+        var list = this.getSortableList();
+
+        while (list !== el.parentElement) {
+          if (el.parentElement instanceof this.listInterface) depth++;
+          el = el.parentElement;
+        }
+
+        return depth;
+      }
+    }, {
+      key: "nestingThresholdReached",
+      value: function nestingThresholdReached() {
+        if (this.nestingLevels < 0) return false;
+        if (this.nestingLevels === 0) return true;
+        return this.getTargetedNodeDepth() >= this.nestingLevels;
+      }
+    }, {
+      key: "analysePlaceHolderSituation",
+      value: function analysePlaceHolderSituation() {
+        if (!this.targetedNode || this.areNested(this.targetedNode, this.draggedNode)) {
+          return [];
+        }
+
+        var actions = [];
+
+        if (!this.cursorIsIndentedEnough() || this.mouseIsTooCloseToTop()) {
+          if (!this.targetedNodeIsPlaceholder()) {
+            actions.push('cleanup');
+          }
+        } else if (this.targetedNode !== this.draggedNode && this.targetedNode.nodeName === 'LI' && !this.targetedNode.querySelectorAll(this.getListTagName()).length && !this.nestingThresholdReached()) {
+          actions.push('add');
+        }
+
+        return actions;
+      }
+    }, {
+      key: "animatePlaceholderList",
+      value: function animatePlaceholderList() {
+        this.placeholderInUse.style.minHeight = '0';
+        this.placeholderInUse.style.transition = 'min-height ease .2s';
+        this.placeholderInUse.style.minHeight = "".concat(this.draggedNode.offsetHeight, "px");
+      }
+    }, {
+      key: "addPlaceholderList",
+      value: function addPlaceholderList() {
+        this.getPlaceholderList();
+        this.targetedNode.appendChild(this.placeholderInUse);
+        this.animatePlaceholderList();
+      }
+    }, {
+      key: "targetNodeIsIdentified",
+      value: function targetNodeIsIdentified() {
+        return !!this.targetedNode;
+      }
+    }, {
+      key: "targetNodeIsBeingDragged",
+      value: function targetNodeIsBeingDragged() {
+        return this.targetNodeIsIdentified() && this.targetedNode === this.draggedNode;
+      }
+    }, {
+      key: "targetNodeIsListWithItems",
+      value: function targetNodeIsListWithItems() {
+        return this.targetNodeIsIdentified() && this.targetedNode instanceof this.listInterface && this.targetedNode.querySelectorAll('li').length;
+      }
+    }, {
+      key: "canBeDropped",
+      value: function canBeDropped() {
+        return this.targetNodeIsIdentified() && !this.targetNodeIsBeingDragged() && !this.targetNodeIsListWithItems() && !this.areNested(this.targetedNode, this.draggedNode);
+      }
+    }, {
+      key: "cleanupPlaceholderLists",
+      value: function cleanupPlaceholderLists() {
+        var _this4 = this;
+
+        this.getSortableList().querySelectorAll(this.getListTagName()).forEach(function (ul) {
+          if (!ul.querySelectorAll('li').length) {
+            ul.remove();
+          } else if (ul.classList.contains(_this4.classNames.placeholder)) {
+            ul.classList.remove(_this4.classNames.placeholder);
+            ul.style.minHeight = 'auto';
+            ul.dataset.id = ul.parentNode.dataset.id;
+          }
+        });
+      }
+    }, {
+      key: "initPlaceholderList",
+      value: function initPlaceholderList() {
+        var _this$placeholderList;
+
+        this.placeholderList = document.createElement(this.getListTagName());
+
+        (_this$placeholderList = this.placeholderList.classList).add.apply(_this$placeholderList, [this.classNames.placeholder].concat(toConsumableArray(this.listClassNames)));
+      }
+    }, {
+      key: "getPlaceholderList",
+      value: function getPlaceholderList() {
+        this.placeholderInUse = this.placeholderList.cloneNode(true);
+        return this.placeholderInUse;
+      }
+    }]);
+
+    return NestedSort;
+  }();
+
+  return NestedSort;
+
+})));
 
 
 /***/ }),

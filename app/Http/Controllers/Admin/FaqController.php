@@ -89,7 +89,7 @@ class FaqController extends Controller
         ]);
 
         if(request('seo')){
-            $seo = $this->locale_slug_seo->store(request("seo"), $faq->id, 'front_faq');
+            $seo = $this->locale_slug_seo->store(request('seo'), $faq->id, 'front_faq');
         }
 
         if(request('locale')){

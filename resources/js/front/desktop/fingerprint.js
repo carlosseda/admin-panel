@@ -20,8 +20,6 @@ let sendFingerprintRequest = async () => {
     
     let fingerprint = getFingerPrint();
 
-    console.log(fingerprint);
-
     let data = new FormData();
 
     for ( var key in fingerprint ) {

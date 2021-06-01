@@ -1,5 +1,5 @@
 import {renderCkeditor} from './ckeditor';
-import {startWait, stopWait} from './wait';
+import {startWait, stopWait, startOverlay} from './wait';
 import {showMessage} from './messages';
 import {renderTabs} from './tabs';
 import {renderLocaleTabs} from './localeTabs';
@@ -12,7 +12,10 @@ import {renderInputCounter} from './inputCounter';
 import {renderInputHighlight} from './inputHighlight';
 import {renderOnOffSwitch} from './onOffSwitch';
 import {renderPagination} from './pagination';
-import {renderBlockParameters} from './blockParameters'
+import {renderBlockParameters} from './blockParameters';
+import {renderNestedSortables} from './sortable';
+import {renderMenuItems} from './menuItems';
+import {renderSelects} from './selects';
 
 const table = document.getElementById("table");
 const form = document.getElementById("form");
@@ -24,6 +27,7 @@ export let renderForm = () => {
     let createButton = document.getElementById("create-button");
 
     if(createButton){
+
         createButton.addEventListener("click", (event) => {
 
             let url = createButton.dataset.url;
@@ -129,6 +133,9 @@ export let renderForm = () => {
     renderLocaleSeo();
     renderGoogleBot();
     renderSitemap();
+    renderNestedSortables();
+    renderMenuItems();
+    renderSelects();
 };
 
 export let renderTable = () => {
@@ -173,27 +180,31 @@ export let renderTable = () => {
     
                 let url = deleteButton.dataset.url;
                 deleteConfirm.dataset.url = url;
-                modalDelete.classList.add('open');
+                modalDelete.classList.add('modal-active');
+                startOverlay();
             });
         });
     
         deleteCancel.addEventListener("click", () => {
-            modalDelete.classList.remove('open');
+            modalDelete.classList.remove('modal-active');
+            stopWait();
         });
     
         deleteConfirm.addEventListener("click", () => {
     
             let url = deleteConfirm.dataset.url;
-    
-            startWait();
-    
+        
             let sendDeleteRequest = async () => {
     
                 try {
                     await axios.delete(url).then(response => {
-                        table.innerHTML = response.data.table;
+                        
+                        if(response.data.table){
+                            table.innerHTML = response.data.table;
+                        }
+
                         form.innerHTML = response.data.form;
-                        modalDelete.classList.remove('open');
+                        modalDelete.classList.remove('modal-active');
                         renderTable();
                         renderForm();
     

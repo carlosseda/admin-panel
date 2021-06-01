@@ -12,7 +12,7 @@
     width: 40%;
     z-index: 3000;
 
-    &.open{
+    &.modal-active{
         top: 30%;
         transform: translateY(0);
     }

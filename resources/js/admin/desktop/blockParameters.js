@@ -6,44 +6,33 @@ export let renderBlockParameters = () => {
     if(blockParameters){
 
         blockParameters.forEach( blockParameter => {
+        
+            let originalInput = blockParameter.value.match(/\{.*?\}/g)
 
-            blockParameter.addEventListener("keydown", () => {
-    
-                let parameters = blockParameter.value.match(/\{.*?\}/g);
-    
-                blockParameter.dataset.url = blockParameter.value;
-                blockParameter.dataset.parameters = parameters ;
-            });
-    
-            blockParameter.addEventListener("keyup", () => {
-    
-                let parameters = blockParameter.value.match(/\{.*?\}/g);
-                let previousParameters =  blockParameter.dataset.parameters;
+            if (originalInput){
 
-                if(parameters){
-                    var parametersString = parameters.toString();
-                }
+                blockParameter.addEventListener("keydown", () =>{
+                    
+                    let setInput = blockParameter.value;
 
-                if(previousParameters == null && parameters == null){
-                    var isSame = true;
-                }
-                
-                if(previousParameters != null && parameters == null){
-                    var isSame = false;
-                }
-            
-                if(previousParameters != null && parameters != null){
+                    blockParameter.addEventListener("keyup", () =>{
+                        
+                        let finalInput = blockParameter.value.match(/\{.*?\}/g)
+        
+                        if (finalInput){
 
-                    var isSame = (parametersString.length == previousParameters.length) && parameters.every(function(element, index) {
+                            if(originalInput.toString() != finalInput.toString()){
+                                blockParameter.value = setInput;
+                            }
 
-                        return element[index] === previousParameters[index]; 
-                    });
-                }
-            
-                if(!isSame){
-                    blockParameter.value = blockParameter.dataset.url;
-                }
-            });
+                        }else{
+                            blockParameter.value = setInput;
+                        }
+                        
+                        setInput = blockParameter.value
+                    })
+                });   
+            }  
         });
     }
 }

@@ -10,8 +10,11 @@
                 @endforeach
             </ul>
         </div>
-    </div>
 
+        @isset($subform)
+            @include('admin.components.form_buttons', ['subform' => $subform])
+        @endisset
+    </div>
 
     {{ $slot }}
 

@@ -12,6 +12,7 @@ export let stopWait = () => {
 }
 
 export let startOverlay = () => {
+    
     overlay.classList.add('overlay-active');
 
     overlay.addEventListener("click", (e) => {

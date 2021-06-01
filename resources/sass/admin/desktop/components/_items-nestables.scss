@@ -1,0 +1,66 @@
+.nested-sort-wrap{
+
+    width: 100%;
+
+    .nested-sort{ 
+
+        margin-top: 1.5em;
+        
+        li{
+            background: #fafafa;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+            box-sizing: border-box; 
+            cursor: pointer;
+            display: block;
+            justify-content: space-between;
+            font-weight: bold; 
+            margin-top: 1em;
+            padding: 1em;
+            text-decoration: none; 
+            
+            &:hover { 
+                color: $interaction-color; 
+            }
+        }
+
+        .item-actions{
+
+            display: flex;
+            float: right;
+            position: relative;
+            top: -0.5em;
+            width: max-content;
+
+            .item-button {
+    
+                cursor: pointer;
+                
+                svg{
+                    height: 2em;
+                    margin: 0 0.5em;
+                    width: 2em;
+            
+                    .button-icon{
+                        fill: hsl(0, 0%, 40%);
+                    }
+                }
+            }
+        
+            .item-button:hover{
+            
+                svg{
+                    .menu-button-icon{
+                        fill: hsl(19, 100%, 50%);
+                    }
+                }
+            }
+        }
+       
+    }
+}
+
+.item-actions.clone{
+    display: none;
+}
+

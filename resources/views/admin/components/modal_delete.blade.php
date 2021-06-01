@@ -1,4 +1,4 @@
-<div class="modal-delete" id="modal-delete">
+<div id="modal-delete" class="modal-delete modal">
     <div class="modal-delete-content">
 
         <div class="modal-delete-header">

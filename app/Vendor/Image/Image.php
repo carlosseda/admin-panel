@@ -9,6 +9,7 @@ use App\Vendor\Image\Models\ImageOriginal;
 use App\Vendor\Image\Models\ImageResized;
 use App\Jobs\ProcessImage;
 use App\Jobs\DeleteImage;
+use App\Jobs\DeleteTemporalImage;
 use Jcupitt\Vips;
 
 class Image
@@ -36,13 +37,13 @@ class Image
 			$image->temporal_id = $temporal_id;
 
 			$this->storeResize($file, $entity_id, $content, $language, $image);
-			$this->destroyTemporal();
 		}
+
+		$this->destroyTemporal();
 	}
 
 	public function storeSeo(Request $request){
 
-		
 		$settings = ImageConfiguration::where('entity', request('entity'))
 				->where('content', request('content'))
 				->where('grid', '!=', 'original')
@@ -80,7 +81,6 @@ class Image
 					'title' => request('title'),
 					'alt' => request('alt'),
 				]);
-
 			}
 		}
 	
@@ -259,6 +259,6 @@ class Image
 
 	public function destroyTemporal()
 	{
-		$image = ImageResized::where('entity_id', null)->delete();
+		deleteTemporalImage::dispatch()->onQueue('process_image');
 	}
 }

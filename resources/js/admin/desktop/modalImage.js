@@ -1,4 +1,4 @@
-import {startOverlay, startWait, stopWait} from './wait';
+import {startOverlay, stopWait} from './wait';
 import {showMessage} from './messages';
 import {deleteThumbnail} from './uploadImage';
 

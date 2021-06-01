@@ -41,3 +41,12 @@ img {
         width: 23%;
     }
 }
+
+.five-columns{
+    display: flex;
+    justify-content: space-between;
+
+    .form-group{
+        width: 18%;
+    }
+}

@@ -111,48 +111,23 @@ class ProcessImage implements ShouldQueue
             $size = filesize($path);
         }
         
-        if($this->type == 'single'){
-
-            ImageResized::updateOrCreate([
-                'temporal_id' => $this->temporal_id,
-                'entity' => $this->entity,
-                'grid' => $this->grid,
-                'language' => $this->language,
-                'content' => $this->content],[
-                'entity_id' => $this->entity_id,
-                'path' => $this->disk . $this->path,
-                'filename' => $this->filename,
-                'mime_type' => $this->file_extension == "svg" ? 'image/'. $this->file_extension : 'image/'. $this->extension_conversion,
-                'size' => $size,
-                'width' => $this->width,
-				'height' => isset($height)? $height : null,
-                'quality' => $this->quality,
-                'temporal_id' => null,
-                'image_original_id' => $this->image_original_id,
-                'image_configuration_id' => $this->image_configuration_id,
-            ]);
-        }
-
-        elseif($this->type == 'collection'){
-
-            ImageResized::updateOrCreate([
-                'temporal_id' => $this->temporal_id,
-                'entity' => $this->entity,
-                'grid' => $this->grid,
-                'language' => $this->language,
-                'content' => $this->content],[
-                'entity_id' => $this->entity_id,
-                'path' => $this->disk . $this->path,
-                'filename' => $this->filename,
-                'mime_type' => $this->file_extension == "svg" ? 'image/'. $this->file_extension : 'image/'. $this->extension_conversion,
-                'size' => $size,
-                'width' => $this->width,
-				'height' => isset($height)? $height : null,
-                'quality' => $this->quality,
-                'temporal_id' => null,
-                'image_original_id' => $this->image_original_id,
-                'image_configuration_id' => $this->image_configuration_id,
-            ]);
-        }
+        ImageResized::updateOrCreate([
+            'temporal_id' => $this->temporal_id,
+            'entity' => $this->entity,
+            'grid' => $this->grid,
+            'language' => $this->language,
+            'content' => $this->content],[
+            'entity_id' => $this->entity_id,
+            'path' => $this->disk . $this->path,
+            'filename' => $this->filename,
+            'mime_type' => $this->file_extension == "svg" ? 'image/'. $this->file_extension : 'image/'. $this->extension_conversion,
+            'size' => $size,
+            'width' => $this->width,
+            'height' => isset($height)? $height : null,
+            'quality' => $this->quality,
+            'temporal_id' => null,
+            'image_original_id' => $this->image_original_id,
+            'image_configuration_id' => $this->image_configuration_id,
+        ]);
     }
 }

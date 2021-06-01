@@ -35,6 +35,14 @@ img {
   width: 23%;
 }
 
+.five-columns {
+  display: flex;
+  justify-content: space-between;
+}
+.five-columns .form-group {
+  width: 18%;
+}
+
 /*! normalize.css v3.0.3 | MIT License | github.com/necolas/normalize.css */
 /**
  * 1. Set default font family to sans-serif.
@@ -717,6 +725,12 @@ body {
 .form-container {
   width: 100%;
 }
+.form-container #menu-item-form-container {
+  padding: 0 2em;
+}
+.form-container #menu-item-form-container .locale-tabs-container {
+  margin-top: 0;
+}
 
 .form-group {
   margin-bottom: 1em;
@@ -763,6 +777,10 @@ body {
   width: 100%;
 }
 
+.form-input select, select:focus, select:active {
+  outline: 0 !important;
+}
+
 .form-input input:focus, .form-input textarea:focus {
   outline: none;
 }
@@ -780,6 +798,7 @@ body {
 .form-footer {
   display: flex;
   justify-content: flex-end;
+  padding: 2em;
 }
 
 .form-submit {
@@ -1034,6 +1053,22 @@ body {
   fill: gray;
 }
 
+.subtable-store-button {
+  cursor: pointer;
+  margin-top: 0.2em;
+}
+.subtable-store-button:hover svg path {
+  fill: #ff5100;
+}
+.subtable-store-button svg {
+  margin: 0 0.5em;
+  width: 2.4em;
+  height: 2.4em;
+}
+.subtable-store-button svg path {
+  fill: gray;
+}
+
 .create-button {
   cursor: pointer;
 }
@@ -1061,7 +1096,7 @@ body {
   width: 40%;
   z-index: 3000;
 }
-.modal-delete.open {
+.modal-delete.modal-active {
   top: 30%;
   transform: translateY(0);
 }
@@ -1092,112 +1127,119 @@ body {
   background-color: #d74242;
 }
 
-.modal-menu-item {
+#menu-item-modal {
   background-color: white;
-  height: 80vh;
-  transform: translateY(-200%);
+  height: -webkit-max-content;
+  height: -moz-max-content;
+  height: max-content;
+  justify-content: space-between;
+  left: 35%;
+  padding: 2em 1em;
   position: fixed;
-  left: 0;
-  right: 0;
-  margin-left: auto;
-  margin-right: auto;
-  top: -10%;
-  transition: transform 0.5s;
-  max-width: 80%;
+  top: -100vh;
+  transition: top 0.3s;
+  width: 30%;
   z-index: 3000;
 }
-.modal-menu-item.open {
-  top: 10%;
-  transform: translateY(0);
+
+#menu-item-modal.modal-active {
+  top: 20vh;
+  transition: top 0.3s;
 }
-.modal-menu-item .modal-header {
-  background-color: #d9d9d9;
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-  padding: 0;
+
+.modal-menu-item-store-button {
+  cursor: pointer;
+  float: right;
+  padding-top: 1em;
+  width: -webkit-max-content;
+  width: -moz-max-content;
+  width: max-content;
 }
-.modal-menu-item .modal-header .modal-header-title {
-  padding: 1em 0 0 1em;
+.modal-menu-item-store-button:hover .store-button-icon {
+  fill: #ff5100;
 }
-.modal-menu-item .modal-header .modal-header-title h4 {
-  font-size: 1.6em;
-  margin: 0;
+.modal-menu-item-store-button svg {
+  float: right;
+  height: 2.4em;
+  width: 2.4em;
 }
-.modal-menu-item .modal-header .close-modal-button {
+.modal-menu-item-store-button svg .store-button-icon {
+  fill: gray;
+}
+
+.modal-menu-item-delete-button {
+  bottom: 1em;
   cursor: pointer;
   position: absolute;
-  right: 1em;
-  top: 1em;
+  width: -webkit-max-content;
+  width: -moz-max-content;
+  width: max-content;
 }
-.modal-menu-item .modal-header .close-modal-button svg {
-  height: 2em;
-  width: 2em;
+.modal-menu-item-delete-button p {
+  color: red;
+  text-decoration: underline;
 }
-.modal-menu-item .modal-header .close-modal-button svg path {
-  fill: black;
-}
-.modal-menu-item .modal-menu-item-body {
-  padding: 2em 2em 0 2em;
-}
-.modal-menu-item .modal-menu-item-body .modal-form {
+
+#upload-image-modal {
+  background-color: white;
   display: flex;
+  height: 80vh;
   justify-content: space-between;
+  left: 10%;
+  padding: 1em;
+  position: fixed;
+  top: -100vh;
+  transition: top 0.3s;
+  width: 80%;
+  z-index: 3000;
+}
+
+#upload-image-modal.modal-active {
+  top: 10vh;
+  transition: top 0.3s;
+}
+
+.modal-image {
+  padding: 1em;
+  width: 65%;
+}
+
+#modal-image-original {
+  height: 100%;
   width: 100%;
 }
-.modal-menu-item .modal-menu-item-body .modal-column {
-  width: 32%;
+
+.modal-image-attributes {
+  padding: 1em;
+  width: 30%;
 }
-.modal-menu-item .modal-menu-item-body .modal-column .description-container .form-control {
-  height: 80%;
-}
-.modal-menu-item .modal-menu-item-body .modal-column .dropify-wrapper {
-  height: 18em;
-}
-.modal-menu-item .modal-menu-item-body .modal-column .sidebar-route {
-  margin: 0.15em;
-  padding-top: 0.6em;
-}
-.modal-menu-item .modal-menu-item-body .modal-column #menu-links {
-  border: 1px solid grey;
-  padding: 0.5em;
-  width: 100%;
-}
-.modal-menu-item .modal-menu-item-body .modal-column .secondary-select-related option.hidden {
-  display: none;
-}
-.modal-menu-item .modal-menu-item-body .modal-column .select-display-option {
-  display: none;
-}
-.modal-menu-item .modal-menu-item-body .modal-column .select-display-option.visible {
-  display: grid;
-}
-.modal-menu-item .modal-menu-item-footer .modal-footer-buttons {
-  display: block;
-  margin: auto;
-  width: 20%;
-}
-.modal-menu-item .modal-menu-item-footer .modal-footer-buttons .btn-save {
-  background-color: #1074bc;
-  border-color: none;
-  border-radius: 0.5em;
+
+.modal-image-store-button {
   cursor: pointer;
-  color: white;
-  font-size: 1.2em;
-  font-weight: 400;
-  line-height: 1.5;
-  padding: 0.5em 2em;
-  text-align: center;
-  -webkit-user-select: none;
-     -moz-user-select: none;
-      -ms-user-select: none;
-          user-select: none;
-  vertical-align: middle;
-  white-space: nowrap;
-  width: 100%;
 }
-.modal-menu-item .modal-menu-item-footer .modal-footer-buttons .btn-save:hover {
-  background-color: #23abe1;
+.modal-image-store-button:hover .store-button-icon {
+  fill: #ff5100;
+}
+.modal-image-store-button svg {
+  float: right;
+  height: 2.4em;
+  width: 2.4em;
+}
+.modal-image-store-button svg .store-button-icon {
+  fill: gray;
+}
+
+.modal-image-delete-button {
+  bottom: 1em;
+  cursor: pointer;
+  position: absolute;
+  width: -webkit-max-content;
+  width: -moz-max-content;
+  width: max-content;
+}
+.modal-image-delete-button p {
+  color: red;
+  text-decoration: underline;
 }
 
 .overlay {
@@ -1448,55 +1490,13 @@ body {
   width: 1em;
 }
 
-.menu-nestable-container {
+.nested-sort-wrap {
   width: 100%;
 }
-.menu-nestable-container .menu-item-store {
-  background-color: #1074bc;
-  cursor: pointer;
-  display: flex;
-  height: 2em;
-  margin-bottom: 2em;
-  padding: 0.5em 2.5em;
-  position: relative;
-  width: auto;
+.nested-sort-wrap .nested-sort {
+  margin-top: 1.5em;
 }
-.menu-nestable-container .menu-item-store .menu-item-store-icon {
-  width: 20%;
-}
-.menu-nestable-container .menu-item-store .menu-item-store-icon svg {
-  height: 100%;
-  width: 100%;
-}
-.menu-nestable-container .menu-item-store .menu-item-store-icon svg path {
-  fill: white;
-}
-.menu-nestable-container .menu-item-store .menu-item-store-title {
-  margin: 0.3em 1em;
-  width: 80%;
-}
-.menu-nestable-container .menu-item-store .menu-item-store-title span {
-  color: white;
-  font-weight: 600;
-}
-.menu-nestable-container .one-column .form-group {
-  width: 100%;
-}
-.menu-nestable-container .menu-nestable-list {
-  margin: 0;
-  padding: 0;
-}
-.menu-nestable-container .menu-nestable-list .menu-nestable-list {
-  padding-left: 3em;
-}
-.menu-nestable-container .menu-nestable-collapsed .menu-nestable-list {
-  display: none;
-}
-.menu-nestable-container .menu-nestable-item {
-  display: block;
-  position: relative;
-}
-.menu-nestable-container .menu-nestable-item .menu-nestable-handle {
+.nested-sort-wrap .nested-sort li {
   background: #fafafa;
   border: 1px solid #ccc;
   border-radius: 3px;
@@ -1505,72 +1505,39 @@ body {
   display: block;
   justify-content: space-between;
   font-weight: bold;
-  margin-bottom: 5px;
-  padding: 0.5em;
+  margin-top: 1em;
+  padding: 1em;
   text-decoration: none;
 }
-.menu-nestable-container .menu-nestable-item .menu-nestable-handle:hover {
+.nested-sort-wrap .nested-sort li:hover {
   color: #1074bc;
 }
-.menu-nestable-container .menu-nestable-item .menu-item-actions {
+.nested-sort-wrap .nested-sort .item-actions {
   display: flex;
-  position: absolute;
-  top: 0.5em;
-  right: 0;
+  float: right;
+  position: relative;
+  top: -0.5em;
+  width: -webkit-max-content;
+  width: -moz-max-content;
+  width: max-content;
 }
-.menu-nestable-container .menu-nestable-item .menu-item-actions .menu-item-button {
+.nested-sort-wrap .nested-sort .item-actions .item-button {
   cursor: pointer;
 }
-.menu-nestable-container .menu-nestable-item .menu-item-actions .menu-item-button svg {
+.nested-sort-wrap .nested-sort .item-actions .item-button svg {
   height: 2em;
   margin: 0 0.5em;
   width: 2em;
 }
-.menu-nestable-container .menu-nestable-item .menu-item-actions .menu-item-button svg .menu-button-icon {
+.nested-sort-wrap .nested-sort .item-actions .item-button svg .button-icon {
   fill: #666666;
 }
-.menu-nestable-container .menu-nestable-item .menu-item-actions .menu-item-button:hover svg .menu-button-icon {
-  fill: #1074bc;
+.nested-sort-wrap .nested-sort .item-actions .item-button:hover svg .menu-button-icon {
+  fill: #ff5100;
 }
-.menu-nestable-container .menu-nestable-item > button {
-  color: #1074bc;
-  display: block;
-  position: relative;
-  cursor: pointer;
-  float: left;
-  width: 40px;
-  height: 37px;
-  padding: 0;
-  text-indent: 100%;
-  white-space: nowrap;
-  overflow: hidden;
-  border: 0;
-  background: transparent;
-  font-size: 2em;
-  line-height: 1;
-  text-align: center;
-  font-weight: bold;
-}
-.menu-nestable-container .menu-nestable-item > button:before {
-  content: "+";
-  display: block;
-  position: absolute;
-  width: 100%;
-  text-align: center;
-  text-indent: 0;
-}
-.menu-nestable-container .menu-nestable-item > button[data-action=collapse]:before {
-  content: "-";
-}
-.menu-nestable-container .menu-nestable-placeholder,
-.menu-nestable-container .menu-nestable-empty {
-  margin: 5px 0;
-  padding: 0;
-  min-height: 30px;
-  background: #f2fbff;
-  border: 1px dashed #b6bcbf;
-  box-sizing: border-box;
-  -moz-box-sizing: border-box;
+
+.item-actions.clone {
+  display: none;
 }
 
 .tabs {
@@ -1743,6 +1710,20 @@ body {
   padding: 2em;
 }
 
+.select-display-option {
+  display: none;
+}
+.select-display-option.visible {
+  display: inherit;
+}
+
+.select-related {
+  display: none;
+}
+.select-related.visible {
+  display: grid;
+}
+
 .upload-image,
 .upload-image-add {
   align-items: center;
@@ -1851,68 +1832,6 @@ body {
   color: #ffffff;
   font-size: 14px;
   text-align: center;
-}
-
-#upload-image-modal {
-  background-color: white;
-  display: flex;
-  height: 80vh;
-  justify-content: space-between;
-  left: 10%;
-  padding: 1em;
-  position: fixed;
-  top: -100vh;
-  transition: top 0.3s;
-  width: 80%;
-  z-index: 3000;
-}
-
-#upload-image-modal.modal-active {
-  top: 10vh;
-  transition: top 0.3s;
-}
-
-.modal-image {
-  padding: 1em;
-  width: 65%;
-}
-
-#modal-image-original {
-  height: 100%;
-  width: 100%;
-}
-
-.modal-image-attributes {
-  padding: 1em;
-  width: 30%;
-}
-
-.modal-image-store-button {
-  cursor: pointer;
-}
-.modal-image-store-button:hover .store-button-icon {
-  fill: #ff5100;
-}
-.modal-image-store-button svg {
-  float: right;
-  height: 2.4em;
-  width: 2.4em;
-}
-.modal-image-store-button svg .store-button-icon {
-  fill: gray;
-}
-
-.modal-image-delete-button {
-  bottom: 1em;
-  cursor: pointer;
-  position: absolute;
-  width: -webkit-max-content;
-  width: -moz-max-content;
-  width: max-content;
-}
-.modal-image-delete-button p {
-  color: red;
-  text-decoration: underline;
 }
 
 .table-filter {

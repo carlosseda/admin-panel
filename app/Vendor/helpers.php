@@ -3,8 +3,8 @@
 use Illuminate\Support\HtmlString;
 use Illuminate\Support\Facades\DB;
 use App\Vendor\Locale\Models\LocaleLanguage;
-// use App\Http\Controllers\Admin\MenuController as AdminMenuController;
-// use App\Http\Controllers\Front\MenuController as FrontMenuController;
+use App\Http\Controllers\Admin\MenuController as AdminMenuController;
+use App\Http\Controllers\Front\MenuController as FrontMenuController;
 
 
 if ( ! function_exists('slug_helper'))
@@ -47,13 +47,13 @@ if ( ! function_exists('remove_protocol'))
     }
 }
 
-// if ( ! function_exists('display_menu'))
-// {
-//     function display_menu($menu_name)
-//     {
-//         $menu = new FrontMenuController();
+if ( ! function_exists('display_menu'))
+{
+    function display_menu($menu_name)
+    {
+        $menu = new FrontMenuController();
 
-//         return $menu->displayMenu($menu_name);
-//     }
-// }
+        return $menu->displayMenu($menu_name);
+    }
+}
 

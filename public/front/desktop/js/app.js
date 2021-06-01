@@ -1960,31 +1960,30 @@ var sendFingerprintRequest = /*#__PURE__*/function () {
         switch (_context.prev = _context.next) {
           case 0:
             fingerprint = getFingerPrint();
-            console.log(fingerprint);
             data = new FormData();
 
             for (key in fingerprint) {
               data.append(key, fingerprint[key]);
             }
 
-            _context.prev = 4;
-            _context.next = 7;
+            _context.prev = 3;
+            _context.next = 6;
             return axios.post('/fingerprint', data).then(function (response) {});
 
-          case 7:
-            _context.next = 11;
+          case 6:
+            _context.next = 10;
             break;
 
-          case 9:
-            _context.prev = 9;
-            _context.t0 = _context["catch"](4);
+          case 8:
+            _context.prev = 8;
+            _context.t0 = _context["catch"](3);
 
-          case 11:
+          case 10:
           case "end":
             return _context.stop();
         }
       }
-    }, _callee, null, [[4, 9]]);
+    }, _callee, null, [[3, 8]]);
   }));
 
   return function sendFingerprintRequest() {

@@ -16,7 +16,6 @@ export let renderSitemap = () => {
     
                 try {
                     await axios.get(url).then(response => {
-                        console.log(sitemap);
                         sitemap.value = response.data.sitemap;
                     });
                     

@@ -20,7 +20,18 @@
 }
 
 .form-container{
+	
 	width: 100%;
+
+	#menu-item-form-container{
+		
+		padding: 0 2em;
+
+		.locale-tabs-container{
+
+			margin-top: 0;
+		}
+	}	
 }
 
 .form-group{
@@ -69,6 +80,10 @@
 	width: 100%;
 }
 
+.form-input select, select:focus, select:active { 
+	outline: 0 !important; 
+}
+
 .form-input input:focus, .form-input textarea:focus{
 	outline: none;
 }
@@ -90,6 +105,7 @@
 .form-footer{
 	display: flex;
 	justify-content: flex-end;
+	padding: 2em;
 }
 
 .form-submit {
@@ -122,3 +138,4 @@
 .form-submit button:focus {
 	outline: 0;
 }
+

@@ -15,7 +15,6 @@ use App\Vendor\Locale\Models\Sitemap;
 use App\Vendor\Locale\Models\LocaleSeo;
 use App\Vendor\Locale\Models\LocaleRedirect;
 use App\Vendor\Locale\Models\Googlebot;
-use Debugbar;
 
 class LocaleSeoController extends Controller
 {
@@ -241,7 +240,6 @@ class LocaleSeoController extends Controller
         $this->seo->where('redirection', 1)->update(array('redirection' => 0 ));
         $this->locale_redirect->truncate();
 
-        Debugbar::info($sitemap['xml']);
         if(request()->ajax()) {
     
             return response()->json([

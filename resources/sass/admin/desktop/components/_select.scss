@@ -1,0 +1,17 @@
+.select-display-option{
+
+    display: none;
+
+    &.visible{
+        display: inherit;
+    }
+}
+
+.select-related{
+
+    display: none;
+
+    &.visible{
+        display: grid;
+    }
+}

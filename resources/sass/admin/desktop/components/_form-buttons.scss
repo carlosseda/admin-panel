@@ -25,6 +25,33 @@
     }
 }
 
+.subtable-store-button{
+
+    cursor: pointer;
+    margin-top: 0.2em;
+
+    &:hover{
+
+        svg{
+
+            path{
+                fill: hsl(19, 100%, 50%);
+            }
+        }
+    }
+
+    svg{
+        margin: 0 0.5em;
+        width: 2.4em; 
+        height: 2.4em;
+        
+        path{
+            fill: hsl(0, 0%, 50%);
+        } 
+    }
+}
+
+
 .create-button{
 
     cursor: pointer;

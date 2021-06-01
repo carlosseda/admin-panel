@@ -35,6 +35,14 @@ img {
   width: 23%;
 }
 
+.five-columns {
+  display: flex;
+  justify-content: space-between;
+}
+.five-columns .form-group {
+  width: 18%;
+}
+
 /*! normalize.css v3.0.3 | MIT License | github.com/necolas/normalize.css */
 /**
  * 1. Set default font family to sans-serif.
@@ -1084,6 +1092,20 @@ body {
   fill: gray;
 }
 
+.select-display-option {
+  display: none;
+}
+.select-display-option.visible {
+  display: inherit;
+}
+
+.select-related {
+  display: none;
+}
+.select-related.visible {
+  display: grid;
+}
+
 .table-filter {
   height: -webkit-max-content;
   height: -moz-max-content;
@@ -1179,114 +1201,6 @@ body {
 }
 .modal-delete .modal-delete-footer .modal-delete-option#delete-confirm {
   background-color: #d74242;
-}
-
-.modal-menu-item {
-  background-color: white;
-  height: 80vh;
-  transform: translateY(-200%);
-  position: fixed;
-  left: 0;
-  right: 0;
-  margin-left: auto;
-  margin-right: auto;
-  top: -10%;
-  transition: transform 0.5s;
-  max-width: 80%;
-  z-index: 3000;
-}
-.modal-menu-item.open {
-  top: 10%;
-  transform: translateY(0);
-}
-.modal-menu-item .modal-header {
-  background-color: #d9d9d9;
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-  padding: 0;
-}
-.modal-menu-item .modal-header .modal-header-title {
-  padding: 1em 0 0 1em;
-}
-.modal-menu-item .modal-header .modal-header-title h4 {
-  font-size: 1.6em;
-  margin: 0;
-}
-.modal-menu-item .modal-header .close-modal-button {
-  cursor: pointer;
-  position: absolute;
-  right: 1em;
-  top: 1em;
-}
-.modal-menu-item .modal-header .close-modal-button svg {
-  height: 2em;
-  width: 2em;
-}
-.modal-menu-item .modal-header .close-modal-button svg path {
-  fill: black;
-}
-.modal-menu-item .modal-menu-item-body {
-  padding: 2em 2em 0 2em;
-}
-.modal-menu-item .modal-menu-item-body .modal-form {
-  display: flex;
-  justify-content: space-between;
-  width: 100%;
-}
-.modal-menu-item .modal-menu-item-body .modal-column {
-  width: 32%;
-}
-.modal-menu-item .modal-menu-item-body .modal-column .description-container .form-control {
-  height: 80%;
-}
-.modal-menu-item .modal-menu-item-body .modal-column .dropify-wrapper {
-  height: 18em;
-}
-.modal-menu-item .modal-menu-item-body .modal-column .sidebar-route {
-  margin: 0.15em;
-  padding-top: 0.6em;
-}
-.modal-menu-item .modal-menu-item-body .modal-column #menu-links {
-  border: 1px solid grey;
-  padding: 0.5em;
-  width: 100%;
-}
-.modal-menu-item .modal-menu-item-body .modal-column .secondary-select-related option.hidden {
-  display: none;
-}
-.modal-menu-item .modal-menu-item-body .modal-column .select-display-option {
-  display: none;
-}
-.modal-menu-item .modal-menu-item-body .modal-column .select-display-option.visible {
-  display: grid;
-}
-.modal-menu-item .modal-menu-item-footer .modal-footer-buttons {
-  display: block;
-  margin: auto;
-  width: 20%;
-}
-.modal-menu-item .modal-menu-item-footer .modal-footer-buttons .btn-save {
-  background-color: #1074bc;
-  border-color: none;
-  border-radius: 0.5em;
-  cursor: pointer;
-  color: white;
-  font-size: 1.2em;
-  font-weight: 400;
-  line-height: 1.5;
-  padding: 0.5em 2em;
-  text-align: center;
-  -webkit-user-select: none;
-     -moz-user-select: none;
-      -ms-user-select: none;
-          user-select: none;
-  vertical-align: middle;
-  white-space: nowrap;
-  width: 100%;
-}
-.modal-menu-item .modal-menu-item-footer .modal-footer-buttons .btn-save:hover {
-  background-color: #23abe1;
 }
 
 .overlay {

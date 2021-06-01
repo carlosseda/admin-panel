@@ -1,0 +1,56 @@
+#menu-item-modal{
+
+    background-color: hsl(0, 0%, 100%);
+    height: max-content;
+    justify-content: space-between;
+    left: 35%;
+    padding: 2em 1em;
+    position: fixed;
+    top: -100vh;
+    transition: top 0.3s;
+    width: 30%;
+    z-index: 3000;
+}
+
+#menu-item-modal.modal-active{
+    top: 20vh;
+    transition: top 0.3s;
+}
+
+.modal-menu-item-store-button{
+
+    cursor: pointer;
+    float: right;
+    padding-top: 1em;
+    width: max-content;
+
+    &:hover{
+
+        .store-button-icon{
+            fill: hsl(19, 100%, 50%);
+        }
+    }
+
+    svg{
+        float: right;
+        height: 2.4em;
+        width: 2.4em; 
+        
+        .store-button-icon{
+            fill: hsl(0, 0%, 50%);
+        } 
+    }
+}
+
+.modal-menu-item-delete-button{
+
+    bottom: 1em;
+    cursor: pointer;
+    position: absolute;
+    width: max-content;
+
+    p{
+        color: hsl(0, 100%, 50%);
+        text-decoration: underline;
+    }
+}

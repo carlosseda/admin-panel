@@ -1,4 +1,4 @@
-import {openModal, openImageModal, updateImageModal} from './modalImage';
+import {openModal, updateImageModal} from './modalImage';
 
 export let renderUploadImage = () => {
 
