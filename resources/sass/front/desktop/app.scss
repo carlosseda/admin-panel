@@ -6,6 +6,13 @@
 @import "../base/normalize";
 @import "../base/typography";
 @import "layout/master";
+@import "layout/topbar";
+@import "layout/header";
+@import "layout/footer";
+@import "layout/bottombar";
 @import "components/faqs";
 @import "components/login";
+@import "components/register";
 @import "components/errors";
+@import "components/menu";
+@import "components/page-header";

@@ -1,0 +1,41 @@
+.menu-mobile{
+
+	background-color: $white;
+	height: 100vh;
+	position: fixed;
+	top: -100vh;
+	transition: top 0.3s;
+	width: 100%;
+	z-index: 3000;
+
+	&.active{
+		top: 0;
+		transition: top 0.3s;
+	}
+
+	.menu-inline{
+		padding: 0;
+		position: relative;
+		top: 25%;
+		display: block;
+		margin: auto;
+		width: 25%;
+		z-index: 1001;
+
+		@include respond-to('xs'){
+			top: 20%;
+			width: 30%;
+		}
+	
+		li{
+			display: inline-flex;
+			margin: 0em 2.5em 0 0;
+			width: 100%;
+	
+			h4{
+				color: #253786;
+				font-size: 1.3em;
+			}
+		}
+	}
+}

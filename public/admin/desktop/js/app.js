@@ -1948,24 +1948,20 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__(/*! @ckeditor/ckeditor5-build-classic/build/translations/es.js */ "./node_modules/@ckeditor/ckeditor5-build-classic/build/translations/es.js");
 
 var renderCkeditor = function renderCkeditor() {
-  var ckeditors = document.querySelectorAll('.ckeditor');
-
-  if (ckeditors) {
-    window.ckeditors = [];
-    ckeditors.forEach(function (ckeditor) {
-      _ckeditor_ckeditor5_build_classic__WEBPACK_IMPORTED_MODULE_0___default().create(ckeditor, {
-        toolbar: {
-          items: ['bold', 'italic', 'link', 'bulletedList', 'numberedList', '|', 'outdent', 'indent', '|', 'blockQuote', 'undo', 'redo']
-        },
-        language: 'es',
-        licenseKey: ''
-      }).then(function (classicEditor) {
-        ckeditors[ckeditor.name] = classicEditor;
-      })["catch"](function (error) {
-        console.error(error);
-      });
+  window.ckeditors = [];
+  document.querySelectorAll('.ckeditor').forEach(function (ckeditor) {
+    _ckeditor_ckeditor5_build_classic__WEBPACK_IMPORTED_MODULE_0___default().create(ckeditor, {
+      toolbar: {
+        items: ['bold', 'italic', 'link', 'bulletedList', 'numberedList', '|', 'outdent', 'indent', '|', 'blockQuote', 'undo', 'redo']
+      },
+      language: 'es',
+      licenseKey: ''
+    }).then(function (classicEditor) {
+      ckeditors[ckeditor.name] = classicEditor;
+    })["catch"](function (error) {
+      console.error(error);
     });
-  }
+  });
 };
 
 /***/ }),
@@ -2169,7 +2165,6 @@ var renderForm = function renderForm() {
     });
   }
 
-  (0,_ckeditor__WEBPACK_IMPORTED_MODULE_1__.renderCkeditor)();
   (0,_tabs__WEBPACK_IMPORTED_MODULE_4__.renderTabs)();
   (0,_localeTabs__WEBPACK_IMPORTED_MODULE_5__.renderLocaleTabs)();
   (0,_uploadImage__WEBPACK_IMPORTED_MODULE_10__.renderUploadImage)();
@@ -2182,6 +2177,7 @@ var renderForm = function renderForm() {
   (0,_googleBot__WEBPACK_IMPORTED_MODULE_8__.renderGoogleBot)();
   (0,_sitemap__WEBPACK_IMPORTED_MODULE_9__.renderSitemap)();
   (0,_sortable__WEBPACK_IMPORTED_MODULE_16__.renderNestedSortables)();
+  (0,_ckeditor__WEBPACK_IMPORTED_MODULE_1__.renderCkeditor)();
   (0,_menuItems__WEBPACK_IMPORTED_MODULE_17__.renderMenuItems)();
   (0,_selects__WEBPACK_IMPORTED_MODULE_18__.renderSelects)();
 };

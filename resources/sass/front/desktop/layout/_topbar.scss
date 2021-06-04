@@ -1,0 +1,58 @@
+.topbar{
+
+    background-image: linear-gradient(to right, #253786 0%, #253786 50%, #253786 100%) !important;
+    display: flex;
+    justify-content: space-between;
+    padding: 1% 5%;
+	height: max-content;
+	width: 90%;
+    z-index: $z-index-header-fixed;
+    
+    .topbar-element{
+
+        display: flex;
+        margin: 0 1em;
+
+        .topbar-element-icon{
+
+            margin: auto;
+            margin-right: 0.5em;
+
+            svg{
+                height: 1em;
+                width: 1em;
+
+                path{
+                    fill: white;
+                }
+            }
+        }
+
+        .topbar-element-text{
+
+            margin: auto;
+
+            p, a, h1{
+                color: white;
+                font-size: 0.9em;
+                font-weight: 300;
+            }
+
+            @include respond-to('lg'){
+
+                p{
+                    font-size: 1em;
+                }
+            }
+
+        }
+    } 
+
+	&.hidden{
+		@include fadeOut(0,1s);
+	}
+
+    .topbar-left, .topbar-right{
+        display: flex;
+    }
+}

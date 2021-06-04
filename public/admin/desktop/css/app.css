@@ -457,6 +457,7 @@ th {
 ==============================================================================*/
 ol, ul {
   list-style: none;
+  padding-left: 0;
 }
 
 /*====================
@@ -706,6 +707,9 @@ body {
   height: -moz-max-content;
   height: max-content;
   width: 65%;
+}
+.form.fullscreen {
+  width: 100%;
 }
 
 .form-error {

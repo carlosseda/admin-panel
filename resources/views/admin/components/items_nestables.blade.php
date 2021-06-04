@@ -1,7 +1,7 @@
 @if($language)
-    <div class="nested-sort-wrap" id="nested-sort-wrap-{{$language}}" data-order="{{route($order_route)}}" data-route="{{route($route, ['language' => $language])}}"></div>
+    <div class="nested-sort-wrap" id="nested-sort-wrap-{{$language}}" data-order="{{route($order_route)}}" data-route="{{route($route, ['language' => $language, 'item' => $item])}}"></div>
 @else
-    <div class="nested-sort-wrap" id="nested-sort-wrap" data-route="{{route($route)}}"></div>
+    <div class="nested-sort-wrap" id="nested-sort-wrap" data-route="{{route($route, ['item' => $item])}}"></div>
 @endif
 
 <div class="item-actions clone" id="item-actions">

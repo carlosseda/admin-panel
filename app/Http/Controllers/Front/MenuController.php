@@ -7,12 +7,11 @@ use Illuminate\Support\HtmlString;
 use App\Http\Controllers\Controller;
 use Jenssegers\Agent\Agent;
 use App\Models\DB\Menu;
-use Config;
 
 class MenuController extends Controller
 {
     
-    public function displayMenu($menu_name)
+    public function displayMenu($menu_name, $type)
     {
         $language = app()->getLocale();
         $agent = new Agent();
@@ -30,7 +29,7 @@ class MenuController extends Controller
                 return new \Illuminate\Support\HtmlString(
                     View::make('front.components.desktop.custom_menu', [
                         'items' => $items,
-                        'menu_name' => $menu_name,
+                        'type' => $type
                     ])->render()
                 );
             }
@@ -39,7 +38,7 @@ class MenuController extends Controller
                 return new \Illuminate\Support\HtmlString(
                     View::make('front.components.mobile.custom_menu_mobile', [
                         'items' => $items,
-                        'menu_name' => $menu_name,
+                        'type' => $type
                     ])->render()
                 );
             }
@@ -54,12 +53,8 @@ class MenuController extends Controller
         foreach($items as $item){
             
             if($item->locale_seo_id != null){
-                $item->url = $item->localeSeo->key; 
-
-                // if($item->parent_id == null && isset($item->image->first()->name)){
-
-                //     $item->featured_image = $item->image;
-                // }
+                
+                $item->custom_url = $item->localeSeo->key; 
             }
     
             if(!$item->children->isEmpty()){

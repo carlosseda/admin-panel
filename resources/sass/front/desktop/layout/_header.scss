@@ -1,0 +1,63 @@
+.header-fixed{
+	padding: 1% 5%;
+	height: max-content;
+	width: 90%;
+	z-index: $z-index-header-fixed;
+
+	&.hidden{
+		@include fadeOut(0,1s);
+	}
+
+	&.blur{
+		background-color: rgba(73, 73, 73, 0.8);
+		overflow: hidden;
+
+		h4{
+			color: #ffffff;
+		}
+	}
+}
+
+.header-fixed .header-container{
+
+	display: flex;
+	justify-content: space-between;
+	height: 100%;
+
+	.header-logo{
+		width: max-content;
+		z-index: $z-index-logo;
+	}
+
+	.header-menu{
+		display: flex;
+		width: max-content;
+		z-index: $z-index-logo;
+
+		.booking-button{
+			
+			margin: auto;
+			margin-left: 2em;
+
+			button{
+				@include gradientButton(#253786,#02A8B0, 1em);
+			}
+		}
+	}
+}
+
+.header-fixed .header-bar{
+
+	height: 3.5em;
+	overflow: hidden;
+	padding-top: 1em;
+	width: 100%;
+	z-index: $z-index-header-bar;
+
+	&.blur{
+		background-color: grey;
+		filter: blur(2px);
+		opacity: 0.8;
+		overflow: hidden;
+	}
+}

@@ -15,21 +15,6 @@
     padding: 0 2em;
     position: relative;
 
-    .close-errors-button{
-
-        cursor: pointer;
-        margin: auto 0;
-
-        svg{
-            height: 2em;
-            width: 2em;
-
-            path{
-                fill: $white;
-            }
-        }
-    }
-
     ul{
         
         li{

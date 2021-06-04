@@ -3,7 +3,6 @@ $font-stack: "Ubuntu", sans-serif;
 $font-stack-condensed: "Ubuntu Condensed";
 
 //colors
-
 $white: hsl(0, 0%, 100%);
 $black: hsl(0, 0%, 0%);
 $grey-highlight: hsl(0, 0%, 92%);
@@ -40,6 +39,11 @@ $spinner-color: $blue-highlight;
 $sidebar-menu-color: $blue-dark;
 $sidebar-menu-text-color: $white;
 $sidebar-submenu-color: $blue;
+
+//z-index
+$z-index-logo: 3000;
+$z-index-header-bar: 2000;
+$z-index-header-fixed: 2000;
 
 
 //style

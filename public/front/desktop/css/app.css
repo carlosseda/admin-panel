@@ -3,38 +3,44 @@ img {
   max-width: 100%;
 }
 
-.btn-main {
-  background-color: #1074bc;
-  border-color: #1074bc;
-  border-radius: 50%;
-  color: #1074bc;
-  height: 3em;
-  margin: 0 2%;
-}
-
-.btn-main:hover {
-  background-color: #23abe1;
-  border-color: #23abe1;
-}
-
 .hidden {
-  display: none;
+  opacity: 0;
 }
 
-.hidden-xs {
-  display: none;
+.one-column .form-group {
+  width: 100%;
 }
 
-.hidden-sm {
-  display: none;
+.two-columns {
+  display: flex;
+  justify-content: space-between;
+}
+.two-columns .form-group {
+  width: 47%;
 }
 
-.hidden-md {
-  display: none;
+.three-columns {
+  display: flex;
+  justify-content: space-between;
+}
+.three-columns .form-group {
+  width: 32%;
 }
 
-.hidden-lg {
-  display: none;
+.four-columns {
+  display: flex;
+  justify-content: space-between;
+}
+.four-columns .form-group {
+  width: 23%;
+}
+
+.five-columns {
+  display: flex;
+  justify-content: space-between;
+}
+.five-columns .form-group {
+  width: 18%;
 }
 
 /*! normalize.css v3.0.3 | MIT License | github.com/necolas/normalize.css */
@@ -451,6 +457,11 @@ th {
 ==============================================================================*/
 ol, ul {
   list-style: none;
+  padding-left: 0;
+}
+
+p, h1, h2, h3, h4, h5 {
+  margin: 0;
 }
 
 /*====================
@@ -491,40 +502,347 @@ a:hover, a:focus {
 }
 
 .wrapper {
-  background-color: #1074bc;
   width: 100%;
 }
 
 .main-content {
-  background-color: #1074bc;
   display: flex;
-  min-height: 100vh;
+  min-height: 80vh;
   justify-content: space-between;
-  margin: 0 auto;
-  width: 90%;
-}
-
-.page-section {
-  margin: 0 5%;
-  min-height: 100vh;
   width: 100%;
 }
 
-.faqs {
-  margin: 3% auto;
+.page-section {
+  min-height: 80vh;
+  width: 100%;
+}
+
+.topbar {
+  background-image: linear-gradient(to right, #253786 0%, #253786 50%, #253786 100%) !important;
+  display: flex;
+  justify-content: space-between;
+  padding: 1% 5%;
+  height: -webkit-max-content;
+  height: -moz-max-content;
+  height: max-content;
+  width: 90%;
+  z-index: 2000;
+}
+.topbar .topbar-element {
+  display: flex;
+  margin: 0 1em;
+}
+.topbar .topbar-element .topbar-element-icon {
+  margin: auto;
+  margin-right: 0.5em;
+}
+.topbar .topbar-element .topbar-element-icon svg {
+  height: 1em;
+  width: 1em;
+}
+.topbar .topbar-element .topbar-element-icon svg path {
+  fill: white;
+}
+.topbar .topbar-element .topbar-element-text {
+  margin: auto;
+}
+.topbar .topbar-element .topbar-element-text p, .topbar .topbar-element .topbar-element-text a, .topbar .topbar-element .topbar-element-text h1 {
+  color: white;
+  font-size: 0.9em;
+  font-weight: 300;
+}
+@media (min-width: 1920px) {
+  .topbar .topbar-element .topbar-element-text p {
+    font-size: 1em;
+  }
+}
+.topbar.hidden {
+  opacity: 0;
+  -webkit-animation-delay: 0;
+          animation-delay: 0;
+  -webkit-animation-duration: 1s;
+          animation-duration: 1s;
+  -webkit-animation-fill-mode: forwards;
+          animation-fill-mode: forwards;
+  -webkit-animation-name: fadeOut;
+          animation-name: fadeOut;
+}
+@-webkit-keyframes fadeOut {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+@keyframes fadeOut {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+.topbar .topbar-left, .topbar .topbar-right {
+  display: flex;
+}
+
+.header-fixed {
+  padding: 1% 5%;
+  height: -webkit-max-content;
+  height: -moz-max-content;
+  height: max-content;
+  width: 90%;
+  z-index: 2000;
+}
+.header-fixed.hidden {
+  opacity: 0;
+  -webkit-animation-delay: 0;
+          animation-delay: 0;
+  -webkit-animation-duration: 1s;
+          animation-duration: 1s;
+  -webkit-animation-fill-mode: forwards;
+          animation-fill-mode: forwards;
+  -webkit-animation-name: fadeOut;
+          animation-name: fadeOut;
+}
+@keyframes fadeOut {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+.header-fixed.blur {
+  background-color: rgba(73, 73, 73, 0.8);
+  overflow: hidden;
+}
+.header-fixed.blur h4 {
+  color: #ffffff;
+}
+
+.header-fixed .header-container {
+  display: flex;
+  justify-content: space-between;
+  height: 100%;
+}
+.header-fixed .header-container .header-logo {
+  width: -webkit-max-content;
+  width: -moz-max-content;
+  width: max-content;
+  z-index: 3000;
+}
+.header-fixed .header-container .header-menu {
+  display: flex;
+  width: -webkit-max-content;
+  width: -moz-max-content;
+  width: max-content;
+  z-index: 3000;
+}
+.header-fixed .header-container .header-menu .booking-button {
+  margin: auto;
+  margin-left: 2em;
+}
+.header-fixed .header-container .header-menu .booking-button button {
+  background-image: linear-gradient(to right, #253786 0%, #02A8B0 50%, #253786 100%);
+  background-size: 200% auto;
+  border-radius: 1.2em;
+  border: none;
+  color: white;
+  font-size: 1em;
+  font-weight: 400;
+  letter-spacing: 0;
+  line-height: 0px;
+  min-width: 20%;
+  padding: 1.2em 2em;
+  transition: 0.5s;
+  text-decoration: none;
+  width: 100%;
+}
+.header-fixed .header-container .header-menu .booking-button button:hover {
+  background-size: 100% auto;
+}
+
+.header-fixed .header-bar {
+  height: 3.5em;
+  overflow: hidden;
+  padding-top: 1em;
+  width: 100%;
+  z-index: 2000;
+}
+.header-fixed .header-bar.blur {
+  background-color: grey;
+  filter: blur(2px);
+  opacity: 0.8;
+  overflow: hidden;
+}
+
+.footer {
+  background-color: #253786;
+  height: -webkit-max-content;
+  height: -moz-max-content;
+  height: max-content;
+  margin-top: 0px;
+  padding: 5% 10%;
+  position: relative;
   width: 80%;
 }
-.faqs .faqs-title h3 {
+
+.footer:before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: 20px;
+  background-size: 40px 40px;
+  background-image: radial-gradient(circle at 20px -29px, transparent 40px, #FFF 41px);
+  transform: rotate(180deg);
+}
+
+.footer:after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: 30px;
+  background-size: 80px 40px;
+  background-image: radial-gradient(circle at 20px 52px, #FFF 40px, transparent 41px);
+  transform: rotate(180deg);
+}
+
+.footer .footer-element-title {
   color: white;
-  font-size: 2.5em;
-  font-weight: 600;
-  text-align: center;
+  margin-bottom: 1.5em;
+}
+
+.footer .booking-button {
+  margin-top: 2em;
+}
+.footer .booking-button button {
+  background-image: linear-gradient(to right, #253786 0%, #02A8B0 50%, #253786 100%);
+  background-size: 200% auto;
+  border-radius: 1.2em;
+  border: none;
+  color: white;
+  font-size: 1em;
+  font-weight: 400;
+  letter-spacing: 0;
+  line-height: 0px;
+  min-width: 20%;
+  padding: 1.2em 2em;
+  transition: 0.5s;
+  text-decoration: none;
+  width: 100%;
+}
+.footer .booking-button button:hover {
+  background-size: 100% auto;
+}
+
+.footer .footer-element-container p, .footer .footer-element-container a, .footer .footer-element-container h1, .footer .footer-element-container h2, .footer .footer-element-container h3, .footer .footer-element-container h4, .footer .footer-element-container h5 {
+  color: white;
+  font-weight: 400;
+}
+
+.footer .footer-element-icon {
+  margin-right: 0.5em;
+}
+.footer .footer-element-icon svg {
+  height: 1em;
+  width: 1em;
+}
+.footer .footer-element-icon svg path {
+  fill: white;
+}
+
+.footer .footer-socials-container {
+  display: flex;
+}
+
+.footer .footer-contact-item {
+  display: flex;
+  margin: 0.5em 0;
+}
+
+.bottombar {
+  background-image: linear-gradient(to right, #253786 0%, #253786 50%, #253786 100%) !important;
+  display: flex;
+  justify-content: space-between;
+  padding: 0 5%;
+  height: -webkit-max-content;
+  height: -moz-max-content;
+  height: max-content;
+  width: 90%;
+  z-index: 2000;
+}
+.bottombar .bottombar-element {
+  display: flex;
+  margin: 0 1em;
+}
+.bottombar .bottombar-element .bottombar-element-icon {
+  margin: auto;
+  margin-right: 0.5em;
+}
+.bottombar .bottombar-element .bottombar-element-icon svg {
+  height: 1em;
+  width: 1em;
+}
+.bottombar .bottombar-element .bottombar-element-icon svg path {
+  fill: white;
+}
+.bottombar .bottombar-element .bottombar-element-text {
+  margin: auto;
+}
+.bottombar .bottombar-element .bottombar-element-text p, .bottombar .bottombar-element .bottombar-element-text a, .bottombar .bottombar-element .bottombar-element-text h1 {
+  color: white;
+  font-size: 0.9em;
+  font-weight: 300;
+}
+@media (min-width: 1920px) {
+  .bottombar .bottombar-element .bottombar-element-text p {
+    font-size: 1em;
+  }
+}
+.bottombar.hidden {
+  opacity: 0;
+  -webkit-animation-delay: 0;
+          animation-delay: 0;
+  -webkit-animation-duration: 1s;
+          animation-duration: 1s;
+  -webkit-animation-fill-mode: forwards;
+          animation-fill-mode: forwards;
+  -webkit-animation-name: fadeOut;
+          animation-name: fadeOut;
+}
+@keyframes fadeOut {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+.bottombar .bottombar-left, .bottombar .bottombar-right {
+  display: flex;
+}
+
+.bottombar .bottombar-element p, .bottombar .bottombar-element a, .bottombar .bottombar-element h1, .bottombar .bottombar-element h2, .bottombar .bottombar-element h3, .bottombar .bottombar-element h4, .bottombar .bottombar-element h5 {
+  color: white;
+  font-size: 0.9em;
+  font-weight: 400;
+}
+
+.faqs {
+  margin: 5% auto;
+  width: 80%;
 }
 .faqs .faq {
   width: 100%;
 }
 .faqs .faq .faq-title-container {
-  border-bottom: 0.2em solid white;
+  border-bottom: 0.2em solid #253786;
   display: flex;
   height: 10vh;
   width: 100%;
@@ -535,15 +853,19 @@ a:hover, a:focus {
   }
 }
 .faqs .faq .faq-title-container .faq-title {
-  margin: 0 1em;
+  margin: 1em;
   width: 90%;
 }
 .faqs .faq .faq-title-container .faq-title h3 {
-  color: white;
+  color: #253786;
   font-weight: 400;
 }
-.faqs .faq .faq-title-container .faq-plus-button {
+.faqs .faq .faq-title-container .faq-plus {
+  width: 10%;
+}
+.faqs .faq .faq-title-container .faq-plus .faq-plus-button {
   cursor: pointer;
+  float: right;
   margin: 1em;
   box-sizing: border-box;
   transition: transform 0.3s;
@@ -552,44 +874,40 @@ a:hover, a:focus {
   transform: rotate(180deg);
   position: relative;
 }
-.faqs .faq .faq-title-container .faq-plus-button.active {
+.faqs .faq .faq-title-container .faq-plus .faq-plus-button.active {
   transform: rotate(0deg);
 }
-.faqs .faq .faq-title-container .faq-plus-button::before {
+.faqs .faq .faq-title-container .faq-plus .faq-plus-button::before {
   content: "";
   display: block;
   width: 1.5em;
   height: 0px;
-  border-bottom: solid 0.2em white;
+  border-bottom: solid 0.2em #253786;
   position: absolute;
   bottom: 0.65em;
   transform: rotate(90deg);
   transition: width 0.3s;
 }
-.faqs .faq .faq-title-container .faq-plus-button.active::before {
+.faqs .faq .faq-title-container .faq-plus .faq-plus-button.active::before {
   content: "";
   display: block;
   width: 0px;
   height: 0px;
-  border-bottom: solid 0.2em white;
+  border-bottom: solid 0.2em #253786;
   position: absolute;
   bottom: 0.65em;
   transform: rotate(90deg);
 }
-.faqs .faq .faq-title-container .faq-plus-button::after {
+.faqs .faq .faq-title-container .faq-plus .faq-plus-button::after {
   content: "";
   display: block;
   width: 1.5em;
   height: 0px;
-  border-bottom: solid 0.2em white;
+  border-bottom: solid 0.2em #253786;
   position: absolute;
   bottom: 0.65em;
 }
-.faqs .faq .faq-title-container:hover {
-  background-color: #110c40;
-}
 .faqs .faq .faq-description {
-  background-color: white;
   display: flex;
   justify-content: space-between;
   max-height: 0;
@@ -598,6 +916,9 @@ a:hover, a:focus {
   width: 100%;
 }
 .faqs .faq .faq-description .faq-description-text {
+  width: 100%;
+}
+.faqs .faq .faq-description .faq-description-text.with-image {
   width: 60%;
 }
 .faqs .faq .faq-description .faq-description-text p {
@@ -612,22 +933,53 @@ a:hover, a:focus {
 .faqs .faq .faq-description .faq-description-image {
   padding: 1em;
 }
-.faqs .faq .faq-description .faq-description-image-grid {
-  display: flex;
-  flex-wrap: wrap;
-}
-.faqs .faq .faq-description .faq-description-image-grid-item {
-  width: 20%;
-}
-.faqs .faq.active .faq-title-container {
-  background-color: #110c40;
-}
 .faqs .faq.active .faq-description {
   max-height: 70vh;
 }
+.faqs .faqs-message {
+  margin: 2em 0;
+}
+.faqs .faqs-message p {
+  font-size: 0.9em;
+  font-weight: 400;
+  text-align: center;
+}
+.faqs .faqs-contact {
+  margin: 0 auto;
+  width: 20%;
+}
+.faqs .faqs-contact button {
+  background-image: linear-gradient(to right, #253786 0%, #02A8B0 50%, #253786 100%);
+  background-size: 200% auto;
+  border-radius: 1.2em;
+  border: none;
+  color: white;
+  font-size: 1em;
+  font-weight: 400;
+  letter-spacing: 0;
+  line-height: 0px;
+  min-width: 20%;
+  padding: 1.2em 2em;
+  transition: 0.5s;
+  text-decoration: none;
+  width: 100%;
+}
+.faqs .faqs-contact button:hover {
+  background-size: 100% auto;
+}
 
 .login {
-  margin: 25vh auto;
+  width: 100%;
+}
+.login .login-form {
+  margin: 10vh auto;
+  width: -webkit-max-content;
+  width: -moz-max-content;
+  width: max-content;
+}
+.login .login-form .login-logo {
+  margin: 0 auto;
+  margin-bottom: 2em;
   width: -webkit-max-content;
   width: -moz-max-content;
   width: max-content;
@@ -655,14 +1007,14 @@ a:hover, a:focus {
   width: 100%;
 }
 .login .login-form .form-label label {
-  color: white;
+  color: black;
   font-family: "Ubuntu", sans-serif;
   font-weight: 400;
   font-size: 1em;
   transition: color 0.5s;
 }
 .login .login-form .form-label label.active {
-  color: #ff5100;
+  color: #00aab3;
 }
 .login .login-form .form-input {
   width: 100%;
@@ -670,11 +1022,12 @@ a:hover, a:focus {
 .login .login-form .form-input input,
 .login .login-form .form-input textarea,
 .login .login-form .form-input select {
-  border: 0.1em solid white;
+  border: 0.1em solid #d4d4d4;
   border-radius: 0.3em;
+  box-sizing: border-box;
   color: black;
   font-family: "Ubuntu", sans-serif;
-  padding: 0.2em 0;
+  padding: 0.4em;
   width: 100%;
 }
 .login .login-form .form-input input:focus, .login .login-form .form-input textarea:focus {
@@ -702,7 +1055,7 @@ a:hover, a:focus {
 .login .login-form .login-submit button {
   background-image: linear-gradient(to right, #253786 0%, #02A8B0 50%, #253786 100%);
   background-size: 200% auto;
-  border-radius: 1em;
+  border-radius: 1.2em;
   border: none;
   color: white;
   font-size: 1.2em;
@@ -710,7 +1063,7 @@ a:hover, a:focus {
   letter-spacing: 0;
   line-height: 0px;
   min-width: 20%;
-  padding: 1em 2em;
+  padding: 1.2em 2em;
   transition: 0.5s;
   text-decoration: none;
   width: 100%;
@@ -718,7 +1071,112 @@ a:hover, a:focus {
 .login .login-form .login-submit button:hover {
   background-size: 100% auto;
 }
+.login .login-form .login-submit button:hover {
+  background-size: 100% auto;
+}
 .login .login-form .login-submit button:focus {
+  outline: 0;
+}
+
+.register {
+  width: 100%;
+}
+.register .register-form {
+  margin: 15vh auto;
+  width: -webkit-max-content;
+  width: -moz-max-content;
+  width: max-content;
+}
+.register .register-form .form-error {
+  opacity: 0;
+  transition: opacity 0.5s;
+  width: 100%;
+}
+.register .register-form .form-error.active {
+  opacity: 1;
+}
+.register .register-form .form-error p {
+  color: red;
+}
+.register .register-form .form-container {
+  width: 100%;
+}
+.register .register-form .form-group {
+  margin-bottom: 1em;
+}
+.register .register-form .form-label {
+  margin-bottom: 0.5em;
+  width: 100%;
+}
+.register .register-form .form-label label {
+  color: black;
+  font-family: "Ubuntu", sans-serif;
+  font-weight: 400;
+  font-size: 1em;
+  transition: color 0.5s;
+}
+.register .register-form .form-label label.active {
+  color: #00aab3;
+}
+.register .register-form .form-input {
+  width: 100%;
+}
+.register .register-form .form-input input,
+.register .register-form .form-input textarea,
+.register .register-form .form-input select {
+  border: 0.1em solid #d4d4d4;
+  border-radius: 0.3em;
+  box-sizing: border-box;
+  color: black;
+  font-family: "Ubuntu", sans-serif;
+  padding: 0.4em;
+  width: 100%;
+}
+.register .register-form .form-input input:focus, .register .register-form .form-input textarea:focus {
+  outline: none;
+}
+.register .register-form .form-input .ck-editor__editable_inline {
+  min-height: 15vh;
+}
+.register .register-form .form-input textarea {
+  height: 20vh;
+}
+.register .register-form .form-footer {
+  display: flex;
+  justify-content: flex-end;
+}
+.register .register-form .form-submit {
+  margin-top: 1em;
+  width: -webkit-max-content;
+  width: -moz-max-content;
+  width: max-content;
+}
+.register .register-form .login-submit {
+  margin-top: 3em;
+}
+.register .register-form .login-submit button {
+  background-image: linear-gradient(to right, #253786 0%, #02A8B0 50%, #253786 100%);
+  background-size: 200% auto;
+  border-radius: 1.2em;
+  border: none;
+  color: white;
+  font-size: 1.2em;
+  font-weight: 400;
+  letter-spacing: 0;
+  line-height: 0px;
+  min-width: 20%;
+  padding: 1.2em 2em;
+  transition: 0.5s;
+  text-decoration: none;
+  width: 100%;
+}
+.register .register-form .login-submit button:hover {
+  background-size: 100% auto;
+}
+.register .register-form .login-submit button:hover {
+  background-size: 100% auto;
+}
+.register .register-form .login-submit button:focus {
   outline: 0;
 }
 
@@ -738,20 +1196,101 @@ a:hover, a:focus {
   padding: 0 2em;
   position: relative;
 }
-.error-container.active .close-errors-button {
-  cursor: pointer;
-  margin: auto 0;
-}
-.error-container.active .close-errors-button svg {
-  height: 2em;
-  width: 2em;
-}
-.error-container.active .close-errors-button svg path {
-  fill: white;
-}
 .error-container.active ul li {
   color: white;
   font-family: "Ubuntu", sans-serif;
   padding: 0.1em 0;
   list-style: none;
+}
+
+.menu-inline {
+  position: relative;
+  width: -webkit-max-content;
+  width: -moz-max-content;
+  width: max-content;
+  z-index: 1001;
+}
+.menu-inline li {
+  margin: 0.5em;
+  cursor: pointer;
+  display: inline-flex;
+}
+.menu-inline li.selected a h4 {
+  color: #ff7a7a;
+}
+.menu-inline li a h4 {
+  color: #253786;
+  font-size: 1em;
+}
+.menu-inline li:hover a h4 {
+  color: #00a7b0;
+}
+@media (min-width: 1920px) {
+  .menu-inline li a h4 {
+    font-size: 1.6em;
+  }
+}
+.menu-inline:hover .menu {
+  opacity: 1;
+  top: 5vh;
+  transition: all 0.7s;
+}
+
+.menu-vertical li {
+  margin: 0.5em 0;
+}
+
+.menu {
+  display: flex;
+  opacity: 0;
+  position: absolute;
+  left: 0;
+  right: 0;
+  margin-left: auto;
+  margin-right: auto;
+  transition: all 0.7s;
+  top: 0;
+}
+.menu li {
+  margin: 1em 0.5em;
+}
+
+.page-header {
+  background-color: #253786;
+  padding: 1em 0 3em 0;
+  position: relative;
+}
+
+.page-header:before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 20px;
+  background-size: 40px 40px;
+  background-image: radial-gradient(circle at 20px -29px, transparent 40px, #FFF 41px);
+}
+
+.page-header:after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 30px;
+  background-size: 80px 40px;
+  background-image: radial-gradient(circle at 20px 52px, #FFF 40px, transparent 41px);
+}
+
+.page-header .page-header-title {
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 120rem;
+  text-align: center;
+  width: calc(100% - 4rem);
+}
+.page-header .page-header-title h2 {
+  color: white;
+  font-size: 2.5em;
 }

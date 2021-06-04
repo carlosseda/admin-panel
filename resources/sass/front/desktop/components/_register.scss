@@ -1,9 +1,11 @@
-.login{
+.register{
 
-    margin: 25vh auto;
-    width: max-content;
+    width: 100%;
 
-    .login-form{
+    .register-form{
+
+        margin: 15vh auto;
+        width: max-content;
        
         .form-error{
             opacity: 0;
@@ -25,7 +27,6 @@
 
         .form-group{
             margin-bottom: 1em;
-            width: 100%;
         }
 
         .form-label{
@@ -34,7 +35,7 @@
         }
 
         .form-label label{
-            color: hsl(0, 0%, 100%);
+            color: hsl(0, 0%, 0%);
             font-family: $font-stack;
             font-weight: 400;
             font-size: 1em;
@@ -42,7 +43,7 @@
         }
 
         .form-label label.active{
-            color: hsl(19, 100%, 50%);
+            color: hsl(183, 100%, 35%);
         }
 
         .form-input{
@@ -52,11 +53,12 @@
         .form-input input, 
         .form-input textarea,
         .form-input select {
-            border: 0.1em solid hsl(0, 0%, 100%);
+            border: 0.1em solid hsl(0, 0%, 83%);
             border-radius: 0.3em;
+            box-sizing: border-box;         
             color: hsl(0, 0%, 0%);
             font-family: $font-stack;
-            padding: 0.2em 0;
+            padding: 0.4em;
             width: 100%;
         }
 
@@ -88,20 +90,7 @@
 
         .login-submit button{
 
-            background-image: linear-gradient(to right, #253786 0%, #02A8B0 50%, #253786 100%);
-            background-size: 200% auto;
-            border-radius: 1em;
-            border: none;
-            color: white;
-            font-size: 1.2em;
-            font-weight: 400;
-            letter-spacing: 0;
-            line-height: 0px;
-            min-width: 20%;
-            padding: 1em 2em;
-            transition: 0.5s;
-            text-decoration: none;
-            width: 100%;
+            @include gradientButton(#253786,#02A8B0, 1.2em);
         }
 
         .login-submit button:hover{

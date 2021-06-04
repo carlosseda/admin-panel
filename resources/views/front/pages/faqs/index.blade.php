@@ -8,8 +8,10 @@
 @section('facebook-description'){{$seo->description}} @stop
 
 @section("content")
+
     @if($agent->isDesktop())
         <div class="page-section">
+            @include("front.components.desktop.page_header", ['title' => trans('front/faqs.title')])
             @include("front.pages.faqs.desktop.faqs")
         </div>
     @endif

@@ -121,7 +121,6 @@ export let renderForm = () => {
         });
     }
  
-    renderCkeditor();
     renderTabs();
     renderLocaleTabs();
     renderUploadImage();
@@ -134,6 +133,7 @@ export let renderForm = () => {
     renderGoogleBot();
     renderSitemap();
     renderNestedSortables();
+    renderCkeditor();
     renderMenuItems();
     renderSelects();
 };

@@ -6,7 +6,6 @@ use App\Vendor\Locale\Models\LocaleLanguage;
 use App\Http\Controllers\Admin\MenuController as AdminMenuController;
 use App\Http\Controllers\Front\MenuController as FrontMenuController;
 
-
 if ( ! function_exists('slug_helper'))
 {
     function slug_helper($string)
@@ -49,11 +48,11 @@ if ( ! function_exists('remove_protocol'))
 
 if ( ! function_exists('display_menu'))
 {
-    function display_menu($menu_name)
+    function display_menu($menu_name, $type)
     {
         $menu = new FrontMenuController();
 
-        return $menu->displayMenu($menu_name);
+        return $menu->displayMenu($menu_name, $type);
     }
 }
 

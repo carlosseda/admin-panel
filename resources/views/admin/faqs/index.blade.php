@@ -162,21 +162,6 @@
                                         ])
                                     </div>
                                 </div>
-
-                                <div class="form-group">
-                                    <div class="form-label">
-                                        <label for="name" class="label-highlight">Galería</label>
-                                    </div>
-                                    <div class="form-input">
-                                        @include('admin.components.upload_image', [
-                                            'entity' => 'faqs',
-                                            'type' => 'collection', 
-                                            'content' => 'grid', 
-                                            'alias' => $localization->alias,
-                                            'files' => $faq->images_grid_preview
-                                        ])
-                                    </div>
-                                </div>
                             </div>
 
                         </div>

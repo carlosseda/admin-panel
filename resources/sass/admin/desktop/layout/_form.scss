@@ -3,6 +3,10 @@
 	background-color: rgb(255, 255, 255);
 	height: max-content;
 	width: 65%;
+
+	&.fullscreen{
+		width: 100%;
+	}
 }
 
 .form-error{

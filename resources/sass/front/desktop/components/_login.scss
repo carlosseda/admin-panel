@@ -1,0 +1,112 @@
+.login{
+
+    width: 100%;
+
+    .login-form{
+
+        margin: 10vh auto;
+        width: max-content;
+
+        .login-logo{
+            margin: 0 auto;
+            margin-bottom: 2em;
+            width: max-content;
+        }
+       
+        .form-error{
+            opacity: 0;
+            transition: opacity 0.5s;
+            width: 100%;
+        }
+
+        .form-error.active{
+            opacity: 1;
+        }
+
+        .form-error p{
+            color: hsl(0, 100%, 50%);
+        }
+
+        .form-container{
+            width: 100%;
+        }
+
+        .form-group{
+            margin-bottom: 1em;
+            width: 100%;
+        }
+
+        .form-label{
+            margin-bottom: 0.5em;
+            width: 100%;
+        }
+
+        .form-label label{
+            color: hsl(0, 0%, 0%);
+            font-family: $font-stack;
+            font-weight: 400;
+            font-size: 1em;
+            transition: color 0.5s;
+        }
+
+        .form-label label.active{
+            color: hsl(183, 100%, 35%);
+        }
+
+        .form-input{
+            width: 100%;
+        }
+
+        .form-input input, 
+        .form-input textarea,
+        .form-input select {
+            border: 0.1em solid hsl(0, 0%, 83%);
+            border-radius: 0.3em;
+            box-sizing: border-box;         
+            color: hsl(0, 0%, 0%);
+            font-family: $font-stack;
+            padding: 0.4em;
+            width: 100%;
+        }
+
+        .form-input input:focus, .form-input textarea:focus{
+            outline: none;
+        }
+
+        .form-input .ck-editor__editable_inline {
+            min-height: 15vh;
+        }
+
+        .form-input textarea{
+            height: 20vh;
+        }
+
+        .form-footer{
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        .form-submit {
+            margin-top: 1em;
+            width: max-content;
+        }
+
+        .login-submit{
+            margin-top: 3em;
+        }
+
+        .login-submit button{
+
+            @include gradientButton(#253786,#02A8B0, 1.2em);
+        }
+
+        .login-submit button:hover{
+            background-size: 100% auto;
+        }
+
+        .login-submit button:focus {
+            outline: 0;
+        }
+
+    }
+}

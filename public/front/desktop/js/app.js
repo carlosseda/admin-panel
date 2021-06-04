@@ -1995,6 +1995,39 @@ sendFingerprintRequest();
 
 /***/ }),
 
+/***/ "./resources/js/front/desktop/inputHighlight.js":
+/*!******************************************************!*\
+  !*** ./resources/js/front/desktop/inputHighlight.js ***!
+  \******************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "renderInputHighlight": () => (/* binding */ renderInputHighlight)
+/* harmony export */ });
+var renderInputHighlight = function renderInputHighlight() {
+  var labels = document.querySelectorAll('.label-highlight');
+  var inputs = document.querySelectorAll('.input-highlight');
+  inputs.forEach(function (input) {
+    input.addEventListener('focusin', function () {
+      for (var i = 0; i < labels.length; i++) {
+        if (labels[i].htmlFor == input.name) {
+          labels[i].classList.add("active");
+        }
+      }
+    });
+    input.addEventListener('blur', function () {
+      for (var i = 0; i < labels.length; i++) {
+        labels[i].classList.remove("active");
+      }
+    });
+  });
+};
+renderInputHighlight();
+
+/***/ }),
+
 /***/ "./node_modules/clientjs/dist/client.min.js":
 /*!**************************************************!*\
   !*** ./node_modules/clientjs/dist/client.min.js ***!
@@ -20352,6 +20385,8 @@ __webpack_require__(/*! ../../bootstrap */ "./resources/js/bootstrap.js");
 __webpack_require__(/*! ./faqs */ "./resources/js/front/desktop/faqs.js");
 
 __webpack_require__(/*! ./fingerprint */ "./resources/js/front/desktop/fingerprint.js");
+
+__webpack_require__(/*! ./inputHighlight */ "./resources/js/front/desktop/inputHighlight.js");
 })();
 
 /******/ })()

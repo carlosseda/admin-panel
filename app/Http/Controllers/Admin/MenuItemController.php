@@ -29,9 +29,12 @@ class MenuItemController extends Controller
         $this->locale_slug_seo = $locale_slug_seo;
     }
 
-    public function index(Request $request, $language = null)
+    public function index(Request $request, $language = null, $item = null)
     {
-        $menu_items = $this->menu_item->where('language', $language)->get();
+        $menu_items = $this->menu_item
+                ->where('language', $language)
+                ->where('menu_id', $item)
+                ->get();
 
         if(request()->ajax()) {
     

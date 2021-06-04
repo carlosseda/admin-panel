@@ -23,4 +23,10 @@ class ImageResized extends Model
     {
         return $this->belongsTo(ImageOriginal::class, 'image_original_id');
     }
+
+    public function scopeGetImages($query, $entity, $entity_id){
+        
+        return $query->where('entity_id', $entity_id)
+            ->where('entity', $entity);
+    }
 }

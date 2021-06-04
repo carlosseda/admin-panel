@@ -81,9 +81,11 @@
 
             </form>
 
-            <div id="menu-item-form-container">
-                @include('admin.menu_items.index', ['menu' => $menu])
-            </div>
+            @isset($menu->name)
+                <div id="menu-item-form-container">
+                    @include('admin.menu_items.index', ['menu' => $menu])
+                </div>
+            @endisset
 
         </div>
 

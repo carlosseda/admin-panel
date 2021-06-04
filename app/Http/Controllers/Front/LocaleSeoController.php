@@ -11,7 +11,6 @@ use App\Vendor\Locale\Models\Googlebot;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Route;
-use Debugbar;
 
 class LocaleSeoController extends Controller
 {

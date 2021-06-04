@@ -1,0 +1,77 @@
+.footer{
+	background-color: #253786;
+	height: max-content;
+	margin-top: 0px;
+	padding: 5% 10%;
+	position: relative;
+	width: 80%;
+}
+
+.footer:before{
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    height: 20px;
+    background-size: 40px 40px;
+    background-image: radial-gradient(circle at 20px -29px, transparent 40px, #FFF 41px);
+    transform: rotate(180deg);
+}
+
+.footer:after{
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    height: 30px;
+    background-size: 80px 40px;
+    background-image: radial-gradient(circle at 20px 52px, #FFF 40px, transparent 41px);
+    transform: rotate(180deg);
+}
+
+.footer .footer-element-title{
+	color: white;
+	margin-bottom: 1.5em;
+}
+
+.footer .booking-button{
+	
+	margin-top: 2em;
+	
+	button{
+		@include gradientButton(#253786,#02A8B0, 1em);
+	}
+}
+
+.footer .footer-element-container{
+
+	p,a,h1,h2,h3,h4,h5{
+		color: white;
+		font-weight: 400;
+	}
+}
+
+.footer .footer-element-icon{
+
+	margin-right: 0.5em;
+
+	svg{
+		height: 1em;
+		width: 1em;
+
+		path{
+			fill: white;
+		}
+	}
+}
+
+.footer .footer-socials-container{
+	display: flex;
+}
+
+.footer .footer-contact-item{
+	display: flex;
+	margin: 0.5em 0;
+}

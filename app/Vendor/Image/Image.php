@@ -36,10 +36,12 @@ class Image
 			$image = $this->storeOriginal($file, $entity_id, $content, $language);
 			$image->temporal_id = $temporal_id;
 
-			$this->storeResize($file, $entity_id, $content, $language, $image);
+			$images[] = $this->storeResize($file, $entity_id, $content, $language, $image);
 		}
 
 		$this->destroyTemporal();
+
+		return $images;
 	}
 
 	public function storeSeo(Request $request){
@@ -231,6 +233,8 @@ class Image
 				$image->temporal_id
 			)->onQueue('process_image');
 		}
+
+		return $image;
 	}
 
 	public function show(Request $request, $image)
@@ -241,6 +245,16 @@ class Image
 	public function showTemporal(Request $request, $image = null)
 	{		
 		return ImageResized::where('temporal_id', $request->input('image'))->first();
+	}
+
+	public function showByEntity()
+	{		
+		return ImageResized::where('entity', $this->entity)->get();
+	}
+
+	public function showPreview()
+	{		
+		return ImageResized::where('entity', $this->entity)->where('grid', 'preview')->get();
 	}
 
 	public function destroy(Request $request, $image = null)
@@ -260,5 +274,28 @@ class Image
 	public function destroyTemporal()
 	{
 		deleteTemporalImage::dispatch()->onQueue('process_image');
+	}
+
+	public function delete($entity_id)
+	{
+		if (ImageResized::getImages($this->entity, $entity_id)->count() > 0) {
+
+			$images = ImageResized::getImages($this->entity, $entity_id)->get();
+
+			foreach ($images as $image){
+				Storage::disk($image->entity)->delete($image->path);
+				$image->delete();
+			}
+		}
+
+		if (ImageOriginal::getImages($this->entity, $entity_id)->count() > 0) {
+
+			$images = ImageOriginal::getImages($this->entity, $entity_id)->get();
+
+			foreach ($images as $image){
+				Storage::disk($image->entity)->delete($image->path);
+				$image->delete();
+			}
+		}
 	}
 }

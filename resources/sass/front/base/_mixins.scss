@@ -379,3 +379,25 @@
         bottom:$width /2 - $lineWidth/2;
     }
 }
+
+@mixin gradientButton($primary, $secondary, $fontsize){
+
+    background-image: linear-gradient(to right, $primary 0%, $secondary 50%, $primary 100%);
+    background-size: 200% auto;
+    border-radius: 1.2em;
+    border: none;
+    color: white;
+    font-size: $fontsize;
+    font-weight: 400;
+    letter-spacing: 0;
+    line-height: 0px;
+    min-width: 20%;
+    padding: 1.2em 2em;
+    transition: 0.5s;
+    text-decoration: none;
+    width: 100%;
+
+    &:hover{
+        background-size: 100% auto;
+    }
+}

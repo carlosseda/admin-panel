@@ -87,15 +87,12 @@ class MenuController extends Controller
             $message = \Lang::get('admin/menus.menu-create');
         }
 
-        $sections = $this->locale_seo->where('menu', 1)->get();
-        $links = $this->locale_slug_seo->getAll();     
-
         $view = View::make('admin.menus.index')
-        ->with('menu', $menu)
-        ->with('menu_item', $this->menu_item)
-        ->with('sections', $sections)
-        ->with('links', $links)
-        ->renderSections();        
+        ->with('menu', $this->menu)
+        ->with('menus', $this->menu->where('active', 1)
+        ->orderBy('created_at', 'desc')
+        ->paginate($this->paginate))
+        ->renderSections();     
 
         return response()->json([
             'table' => $view['table'],
@@ -103,6 +100,7 @@ class MenuController extends Controller
             'id' => $menu->id,
             'message' => $message,
         ]);
+       
     }
 
     public function edit(Menu $menu)
