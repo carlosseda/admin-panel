@@ -54,7 +54,7 @@ class MenuController extends Controller
             
             if($item->locale_seo_id != null){
                 
-                $item->custom_url = $item->localeSeo->key; 
+                $item->custom_url = $item->localeSeo->url; 
             }
     
             if(!$item->children->isEmpty()){

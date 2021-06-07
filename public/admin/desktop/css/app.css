@@ -799,6 +799,10 @@ body {
   margin-top: 1em;
 }
 
+.form-input .ck-editor__editable {
+  height: 20vh;
+}
+
 .form-footer {
   display: flex;
   justify-content: flex-end;

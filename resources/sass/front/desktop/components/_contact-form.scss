@@ -1,0 +1,133 @@
+.contact-form{
+
+    width: 100%;
+
+    .form-error{
+        opacity: 0;
+        transition: opacity 0.5s;
+        width: 100%;
+    }
+
+    .form-error.active{
+        opacity: 1;
+    }
+
+    .form-error p{
+        color: hsl(0, 100%, 50%);
+    }
+
+    .form-container{
+        width: 100%;
+    }
+
+    .form-group{
+        margin-bottom: 1em;
+        width: 100%;
+    }
+
+    .form-label{
+        margin-bottom: 0.5em;
+        width: 100%;
+    }
+
+    .form-label label{
+        color: hsl(0, 0%, 0%);
+        font-family: $font-stack;
+        font-weight: 400;
+        font-size: 1em;
+        transition: color 0.5s;
+    }
+
+    .form-label label.active{
+        color: hsl(183, 100%, 35%);
+    }
+
+    .form-input{
+        width: 100%;
+    }
+
+    .form-input input, 
+    .form-input textarea,
+    .form-input select {
+        border: 0.1em solid hsl(0, 0%, 83%);
+        border-radius: 0.3em;
+        box-sizing: border-box;         
+        color: hsl(0, 0%, 0%);
+        font-family: $font-stack;
+        padding: 0.4em;
+        width: 100%;
+    }
+
+    .form-input input:focus, .form-input textarea:focus{
+        outline: none;
+    }
+
+    .form-input .ck-editor__editable_inline {
+        min-height: 15vh;
+    }
+
+    .form-input textarea{
+        height: 20vh;
+    }
+    
+    input[type="checkbox"] { 
+        display: none; 
+    }
+
+    input[type="checkbox"] + label {
+        display: block;
+        position: relative;
+        cursor: pointer;
+        padding-left: 2em;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+    }
+
+    input[type="checkbox"] + label:last-child { 
+        margin-bottom: 0; 
+    }
+
+    input[type="checkbox"] + label:before {
+        content: '';
+        display: block;
+        width: 1em;
+        height: 1em;
+        border: 0.1em solid #000;
+        position: absolute;
+        left: 0;
+        top: 0;
+        opacity: .6;
+        -webkit-transition: all .12s, border-color .08s;
+        transition: all .12s, border-color .08s;
+    }
+
+    input[type="checkbox"]:checked + label:before {
+        width: 10px;
+        top: -5px;
+        left: 5px;
+        border-radius: 0;
+        opacity: 1;
+        border: 0.2em solid green;
+        border-top-color: transparent;
+        border-left-color: transparent;
+        -webkit-transform: rotate(45deg);
+        transform: rotate(45deg);
+    }
+
+    .form-footer{
+        display: flex;
+        justify-content: flex-end;
+    }
+
+    .form-submit {
+        margin: 3em auto;
+        width: 30%;
+    }
+
+    .form-submit button{
+
+        @include gradientButton(#253786,#02A8B0, 1.2em);
+    }
+
+}

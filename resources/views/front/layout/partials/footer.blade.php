@@ -27,7 +27,7 @@
                     <h4>@lang('front/footer.socials')</h4>
                 </div>
                 <div class="footer-element-container footer-socials-container">
-                    @if(trans('front/information.facebook' != null))
+                    @if(\Lang::has('front/information.facebook'))
                         <div class="footer-element-icon">
                             <a href="{{trans('front/information.facebook')}}">
                                 <svg style="width:24px;height:24px" viewBox="0 0 24 24">
@@ -36,7 +36,7 @@
                             </a>
                         </div>
                     @endif
-                    @if(trans('front/information.twitter') != null)
+                    @if(\Lang::has('front/information.twitter'))
                         <div class="footer-element-icon">
                             <a href="{{trans('front/information.twitter')}}">
                                 <svg style="width:24px;height:24px" viewBox="0 0 24 24">
@@ -45,7 +45,7 @@
                             </a>
                         </div>
                     @endif
-                    @if(trans('front/information.instagram') != null)
+                    @if(\Lang::has('front/information.instagram'))
                         <div class="footer-element-icon">
                             <a href="{{trans('front/information.instagram')}}">
                                 <svg style="width:24px;height:24px" viewBox="0 0 24 24">
@@ -63,19 +63,19 @@
                 </div>
                 <div class="footer-element-container">
 
-                    @if(trans('front/information.adress') != null)
+                    @if(\Lang::has('front/information.adress'))
                         <div class="footer-element footer-contact-item">
                             <p>@lang('front/information.adress')</p>
                         </div>
                     @endif
                     
-                    @if(trans('front/information.postalcode') != null)
+                    @if(\Lang::has('front/information.postalcode'))
                         <div class="footer-element footer-contact-item">
                             <p>@lang('front/information.postalcode') @lang('front/information.poblation'),@lang('front/information.province')</p>
                         </div>
                     @endif
 
-                    @if(trans('front/information.telephone') != null)
+                    @if(\Lang::has('front/information.telephone'))
                         <div class="footer-element footer-contact-item">
                             <div class="footer-element-icon">
                                 <svg viewBox="0 0 24 24">
@@ -89,7 +89,7 @@
                         </div>
                     @endif
 
-                    @if(trans('front/information.email') != null)
+                    @if(\Lang::has('front/information.email'))
                         <div class="footer-element footer-contact-item">
                             <div class="footer-element-icon">
                                 <svg viewBox="0 0 24 24">

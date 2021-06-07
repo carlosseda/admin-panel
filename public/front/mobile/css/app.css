@@ -464,6 +464,11 @@ p, h1, h2, h3, h4, h5 {
   margin: 0;
 }
 
+iframe {
+  height: 100%;
+  width: 100%;
+}
+
 /*====================
 ======Typography======
 ======================*/
@@ -475,7 +480,7 @@ h5, h6 {
   font-family: "Ubuntu Condensed";
 }
 
-a, td, p, button {
+a, td, p, label, button {
   font-family: "Ubuntu", sans-serif;
 }
 

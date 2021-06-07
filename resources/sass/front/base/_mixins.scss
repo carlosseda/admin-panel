@@ -400,4 +400,8 @@
     &:hover{
         background-size: 100% auto;
     }
+    
+    &:focus {
+        outline: 0;
+    }
 }

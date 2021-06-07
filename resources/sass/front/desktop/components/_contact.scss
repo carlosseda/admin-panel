@@ -1,0 +1,85 @@
+.contact{
+    
+    margin: 5% auto;
+    width: 70%;
+}
+
+.contact .sidebar{
+
+    .contact-socials .contact-socials-title,
+    .contact-info .contact-info-title{
+
+        margin-bottom: 2em;
+
+        h3{
+            font-size: 2em;
+            color:#00a9b1;
+        }
+    }
+
+    .contact-socials .socials-icons{
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 2em;
+    }
+
+    .contact-info .contact-info-element{
+        display: flex;
+        margin-bottom: 2em;
+
+        .contact-info-text{
+            margin: auto 0;
+            margin-left: 1em;
+            text-align: left;
+        }
+    }
+
+    .contact-socials .socials-icons .social-icon,
+    .contact-info .contact-info-element .contact-info-icon{
+
+        background-color: #253786;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        height: 3em;
+        width: 3em;
+
+        svg{
+            display: block;
+            margin: 0 auto;
+            width: 70%;
+
+            path{
+                fill: white;
+            }
+        }
+    }
+}
+
+.contact .contact-map{
+
+    margin: 0.5em 0;
+
+    .contact-map-title{
+
+        h3{
+            font-size: 2em;
+            color:#00a9b1;
+        }
+    }
+
+    .contact-map-text{
+
+        margin: 0.5em 0;
+
+        p{
+            margin: 0.5em 0;
+        }
+    }
+
+    .contact-map-ubication{
+        height: 50vh;
+        margin: 2em 0;
+    }
+
+}

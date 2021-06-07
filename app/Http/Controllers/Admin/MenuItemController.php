@@ -12,7 +12,6 @@ use App\Models\DB\MenuItem;
 use App\Vendor\Locale\Models\LocaleSeo;
 use App\Vendor\Locale\Models\LocaleSlugSeo;
 use Route;
-use Debugbar;
 
 class MenuItemController extends Controller
 {

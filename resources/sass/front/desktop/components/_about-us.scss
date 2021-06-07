@@ -1,0 +1,31 @@
+.about-us{
+
+    margin: 5% auto;
+    width: 90%;
+
+    .about-us-element{
+
+        margin-bottom: 3em;
+        width: 45%;
+
+
+        .about-us-title{
+
+            margin-bottom: 2em;
+    
+            h3{
+                font-size: 2em;
+                color:#00a9b1;
+            }
+        }
+
+        .about-us-text{
+
+            p{
+                margin: 1.5em 0;
+            }
+        }
+
+    }
+    
+}

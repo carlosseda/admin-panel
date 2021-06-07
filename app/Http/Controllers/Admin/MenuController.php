@@ -134,9 +134,7 @@ class MenuController extends Controller
 
         $message = \Lang::get('admin/menus.menu-delete');    
 
-        $view = View::make('admin.menus.index')
-            ->with('crud_permissions', $this->crud_permissions)
-            ->renderSections();
+        $view = View::make('admin.menus.index')->renderSections();
         
         return response()->json([
             'table' => $view['table'],

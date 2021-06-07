@@ -24,6 +24,9 @@
                         <li class="tab-item" data-tab="logo">
                             Logo
                         </li>
+                        <li class="tab-item" data-tab="presentation">
+                            Presentación
+                        </li>  
                         <li class="tab-item" data-tab="socials">
                             Redes
                         </li>       
@@ -48,7 +51,7 @@
                             <div class="two-columns">
                                 <div class="form-group">
                                     <div class="form-label">
-                                        <label for="category_id" class="label-highlight">
+                                        <label for="business" class="label-highlight">
                                             Teléfono 
                                         </label>
                                     </div>
@@ -59,7 +62,7 @@
                     
                                 <div class="form-group">
                                     <div class="form-label">
-                                        <label for="category_id" class="label-highlight">
+                                        <label for="business" class="label-highlight">
                                             Email 
                                         </label>
                                     </div>
@@ -72,7 +75,7 @@
                             <div class="two-columns">
                                 <div class="form-group">
                                     <div class="form-label">
-                                        <label for="category_id" class="label-highlight">
+                                        <label for="business" class="label-highlight">
                                             Provincia 
                                         </label>
                                     </div>
@@ -83,7 +86,7 @@
             
                                 <div class="form-group">
                                     <div class="form-label">
-                                        <label for="category_id" class="label-highlight">
+                                        <label for="business" class="label-highlight">
                                             Población 
                                         </label>
                                     </div>
@@ -96,7 +99,7 @@
                             <div class="two-columns">
                                 <div class="form-group">
                                     <div class="form-label">
-                                        <label for="category_id" class="label-highlight">
+                                        <label for="business" class="label-highlight">
                                             Código Postal 
                                         </label>
                                     </div>
@@ -107,7 +110,7 @@
             
                                 <div class="form-group">
                                     <div class="form-label">
-                                        <label for="category_id" class="label-highlight">
+                                        <label for="business" class="label-highlight">
                                             Dirección 
                                         </label>
                                     </div>
@@ -118,15 +121,12 @@
                             </div>
                             
                             <div class="two-columns">
-
-                       
-
                                 <div class="form-group">
                                     <div class="form-label">
-                                        <label for="name" class="label-highlight">Eslogan</label>
+                                        <label for="business" class="label-highlight">Horario</label>
                                     </div>
                                     <div class="form-input">
-                                        <input type="text" name="business[slogan.{{$localization->alias}}]" value="{{isset($business["slogan.$localization->alias"]) ? $business["slogan.$localization->alias"] : ''}}" class="input-highlight">
+                                        <input type="text" name="business[schedule.{{$localization->alias}}]" value="{{isset($business["schedule.$localization->alias"]) ? $business["schedule.$localization->alias"] : ''}}" class="input-highlight">
                                     </div>
                                 </div>
                             </div>
@@ -197,10 +197,10 @@
 
                         <div class="locale-tab-panel {{ $loop->first ? 'locale-tab-active':'' }}" data-tab="socials" data-localetab="{{$localization->alias}}">
 
-                            <div class="three-columns">
+                            <div class="four-columns">
                                 <div class="form-group">
                                     <div class="form-label">
-                                        <label for="category_id" class="label-highlight">
+                                        <label for="business" class="label-highlight">
                                             Instagram
                                         </label>
                                     </div>
@@ -211,7 +211,7 @@
 
                                 <div class="form-group">
                                     <div class="form-label">
-                                        <label for="category_id" class="label-highlight">
+                                        <label for="business" class="label-highlight">
                                             Facebook 
                                         </label>
                                     </div>
@@ -222,12 +222,23 @@
 
                                 <div class="form-group">
                                     <div class="form-label">
-                                        <label for="category_id" class="label-highlight">
+                                        <label for="business" class="label-highlight">
                                             Twitter 
                                         </label>
                                     </div>
                                     <div class="form-input">
                                         <input type="text" name="business[twitter.{{$localization->alias}}]" value="{{isset($business["twitter.$localization->alias"]) ? $business["twitter.$localization->alias"] : ''}}"  class="input-highlight"  />              
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="form-label">
+                                        <label for="business" class="label-highlight">
+                                            Whatsapp
+                                        </label>
+                                    </div>
+                                    <div class="form-input">
+                                        <input type="text" name="business[whatsapp.{{$localization->alias}}]" value="{{isset($business["whatsapp.$localization->alias"]) ? $business["whatsapp.$localization->alias"] : ''}}"  class="input-highlight"  />              
                                     </div>
                                 </div>
                             </div>
@@ -239,6 +250,83 @@
                 @endcomponent
 
             </div>
+
+            <div class="tab-panel" data-tab="presentation">
+
+                @component('admin.components.locale', ['tab' => 'presentation'])
+
+                    @foreach ($localizations as $localization)
+
+                        <div class="locale-tab-panel {{ $loop->first ? 'locale-tab-active':'' }}" data-tab="presentation" data-localetab="{{$localization->alias}}">
+
+                            <div class="one-column">
+                                <div class="form-group">
+                                    <div class="form-label">
+                                        <label for="business" class="label-highlight">Eslogan</label>
+                                    </div>
+                                    <div class="form-input">
+                                        <input type="text" name="business[slogan.{{$localization->alias}}]" value="{{isset($business["slogan.$localization->alias"]) ? $business["slogan.$localization->alias"] : ''}}" class="input-highlight">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="two-columns">
+                                <div class="form-group">
+                                    <div class="form-label">
+                                        <label for="business" class="label-highlight">
+                                            Nuestra compañía
+                                        </label>
+                                    </div>
+                                    <div class="form-input">
+                                        <textarea class="ckeditor input-highlight" name="business[ourbusiness.{{$localization->alias}}]">{{isset($business["ourbusiness.$localization->alias"]) ? $business["ourbusiness.$localization->alias"] : ''}}</textarea>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="form-input">
+                                        @include('admin.components.upload_image', [
+                                            'entity' => 'business-information',
+                                            'type' => 'single', 
+                                            'content' => 'ourbusiness', 
+                                            'alias' => $localization->alias,
+                                            'files' => $business->images_our_business_preview
+                                        ])
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="two-columns">
+                                <div class="form-group">
+                                    <div class="form-input">
+                                        @include('admin.components.upload_image', [
+                                            'entity' => 'business-information',
+                                            'type' => 'single', 
+                                            'content' => 'ourfleet', 
+                                            'alias' => $localization->alias,
+                                            'files' => $business->images_our_fleet_preview
+                                        ])
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="form-label">
+                                        <label for="business" class="label-highlight">
+                                            Nuestra flota
+                                        </label>
+                                    </div>
+                                    <div class="form-input">
+                                        <textarea class="ckeditor input-highlight" name="business[ourfleet.{{$localization->alias}}]">{{isset($business["ourfleet.$localization->alias"]) ? $business["ourfleet.$localization->alias"] : ''}}</textarea>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    @endforeach
+            
+                @endcomponent
+
+            </div>
+
 
         </form>
 

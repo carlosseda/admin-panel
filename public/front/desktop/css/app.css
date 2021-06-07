@@ -464,6 +464,11 @@ p, h1, h2, h3, h4, h5 {
   margin: 0;
 }
 
+iframe {
+  height: 100%;
+  width: 100%;
+}
+
 /*====================
 ======Typography======
 ======================*/
@@ -475,7 +480,7 @@ h5, h6 {
   font-family: "Ubuntu Condensed";
 }
 
-a, td, p, button {
+a, td, p, label, button {
   font-family: "Ubuntu", sans-serif;
 }
 
@@ -663,6 +668,9 @@ a:hover, a:focus {
 .header-fixed .header-container .header-menu .booking-button button:hover {
   background-size: 100% auto;
 }
+.header-fixed .header-container .header-menu .booking-button button:focus {
+  outline: 0;
+}
 
 .header-fixed .header-bar {
   height: 3.5em;
@@ -739,6 +747,9 @@ a:hover, a:focus {
 }
 .footer .booking-button button:hover {
   background-size: 100% auto;
+}
+.footer .booking-button button:focus {
+  outline: 0;
 }
 
 .footer .footer-element-container p, .footer .footer-element-container a, .footer .footer-element-container h1, .footer .footer-element-container h2, .footer .footer-element-container h3, .footer .footer-element-container h4, .footer .footer-element-container h5 {
@@ -967,6 +978,9 @@ a:hover, a:focus {
 .faqs .faqs-contact button:hover {
   background-size: 100% auto;
 }
+.faqs .faqs-contact button:focus {
+  outline: 0;
+}
 
 .login {
   width: 100%;
@@ -1071,9 +1085,6 @@ a:hover, a:focus {
 .login .login-form .login-submit button:hover {
   background-size: 100% auto;
 }
-.login .login-form .login-submit button:hover {
-  background-size: 100% auto;
-}
 .login .login-form .login-submit button:focus {
   outline: 0;
 }
@@ -1169,9 +1180,6 @@ a:hover, a:focus {
   transition: 0.5s;
   text-decoration: none;
   width: 100%;
-}
-.register .register-form .login-submit button:hover {
-  background-size: 100% auto;
 }
 .register .register-form .login-submit button:hover {
   background-size: 100% auto;
@@ -1293,4 +1301,216 @@ a:hover, a:focus {
 .page-header .page-header-title h2 {
   color: white;
   font-size: 2.5em;
+}
+
+.contact {
+  margin: 5% auto;
+  width: 70%;
+}
+
+.contact .sidebar .contact-socials .contact-socials-title,
+.contact .sidebar .contact-info .contact-info-title {
+  margin-bottom: 2em;
+}
+.contact .sidebar .contact-socials .contact-socials-title h3,
+.contact .sidebar .contact-info .contact-info-title h3 {
+  font-size: 2em;
+  color: #00a9b1;
+}
+.contact .sidebar .contact-socials .socials-icons {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 2em;
+}
+.contact .sidebar .contact-info .contact-info-element {
+  display: flex;
+  margin-bottom: 2em;
+}
+.contact .sidebar .contact-info .contact-info-element .contact-info-text {
+  margin: auto 0;
+  margin-left: 1em;
+  text-align: left;
+}
+.contact .sidebar .contact-socials .socials-icons .social-icon,
+.contact .sidebar .contact-info .contact-info-element .contact-info-icon {
+  background-color: #253786;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  height: 3em;
+  width: 3em;
+}
+.contact .sidebar .contact-socials .socials-icons .social-icon svg,
+.contact .sidebar .contact-info .contact-info-element .contact-info-icon svg {
+  display: block;
+  margin: 0 auto;
+  width: 70%;
+}
+.contact .sidebar .contact-socials .socials-icons .social-icon svg path,
+.contact .sidebar .contact-info .contact-info-element .contact-info-icon svg path {
+  fill: white;
+}
+
+.contact .contact-map {
+  margin: 0.5em 0;
+}
+.contact .contact-map .contact-map-title h3 {
+  font-size: 2em;
+  color: #00a9b1;
+}
+.contact .contact-map .contact-map-text {
+  margin: 0.5em 0;
+}
+.contact .contact-map .contact-map-text p {
+  margin: 0.5em 0;
+}
+.contact .contact-map .contact-map-ubication {
+  height: 50vh;
+  margin: 2em 0;
+}
+
+.contact-form {
+  width: 100%;
+}
+.contact-form .form-error {
+  opacity: 0;
+  transition: opacity 0.5s;
+  width: 100%;
+}
+.contact-form .form-error.active {
+  opacity: 1;
+}
+.contact-form .form-error p {
+  color: red;
+}
+.contact-form .form-container {
+  width: 100%;
+}
+.contact-form .form-group {
+  margin-bottom: 1em;
+  width: 100%;
+}
+.contact-form .form-label {
+  margin-bottom: 0.5em;
+  width: 100%;
+}
+.contact-form .form-label label {
+  color: black;
+  font-family: "Ubuntu", sans-serif;
+  font-weight: 400;
+  font-size: 1em;
+  transition: color 0.5s;
+}
+.contact-form .form-label label.active {
+  color: #00aab3;
+}
+.contact-form .form-input {
+  width: 100%;
+}
+.contact-form .form-input input,
+.contact-form .form-input textarea,
+.contact-form .form-input select {
+  border: 0.1em solid #d4d4d4;
+  border-radius: 0.3em;
+  box-sizing: border-box;
+  color: black;
+  font-family: "Ubuntu", sans-serif;
+  padding: 0.4em;
+  width: 100%;
+}
+.contact-form .form-input input:focus, .contact-form .form-input textarea:focus {
+  outline: none;
+}
+.contact-form .form-input .ck-editor__editable_inline {
+  min-height: 15vh;
+}
+.contact-form .form-input textarea {
+  height: 20vh;
+}
+.contact-form input[type=checkbox] {
+  display: none;
+}
+.contact-form input[type=checkbox] + label {
+  display: block;
+  position: relative;
+  cursor: pointer;
+  padding-left: 2em;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+}
+.contact-form input[type=checkbox] + label:last-child {
+  margin-bottom: 0;
+}
+.contact-form input[type=checkbox] + label:before {
+  content: "";
+  display: block;
+  width: 1em;
+  height: 1em;
+  border: 0.1em solid #000;
+  position: absolute;
+  left: 0;
+  top: 0;
+  opacity: 0.6;
+  transition: all 0.12s, border-color 0.08s;
+}
+.contact-form input[type=checkbox]:checked + label:before {
+  width: 10px;
+  top: -5px;
+  left: 5px;
+  border-radius: 0;
+  opacity: 1;
+  border: 0.2em solid green;
+  border-top-color: transparent;
+  border-left-color: transparent;
+  transform: rotate(45deg);
+}
+.contact-form .form-footer {
+  display: flex;
+  justify-content: flex-end;
+}
+.contact-form .form-submit {
+  margin: 3em auto;
+  width: 30%;
+}
+.contact-form .form-submit button {
+  background-image: linear-gradient(to right, #253786 0%, #02A8B0 50%, #253786 100%);
+  background-size: 200% auto;
+  border-radius: 1.2em;
+  border: none;
+  color: white;
+  font-size: 1.2em;
+  font-weight: 400;
+  letter-spacing: 0;
+  line-height: 0px;
+  min-width: 20%;
+  padding: 1.2em 2em;
+  transition: 0.5s;
+  text-decoration: none;
+  width: 100%;
+}
+.contact-form .form-submit button:hover {
+  background-size: 100% auto;
+}
+.contact-form .form-submit button:focus {
+  outline: 0;
+}
+
+.about-us {
+  margin: 5% auto;
+  width: 90%;
+}
+.about-us .about-us-element {
+  margin-bottom: 3em;
+  width: 45%;
+}
+.about-us .about-us-element .about-us-title {
+  margin-bottom: 2em;
+}
+.about-us .about-us-element .about-us-title h3 {
+  font-size: 2em;
+  color: #00a9b1;
+}
+.about-us .about-us-element .about-us-text p {
+  margin: 1.5em 0;
 }

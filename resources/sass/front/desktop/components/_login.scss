@@ -99,14 +99,5 @@
 
             @include gradientButton(#253786,#02A8B0, 1.2em);
         }
-
-        .login-submit button:hover{
-            background-size: 100% auto;
-        }
-
-        .login-submit button:focus {
-            outline: 0;
-        }
-
     }
 }

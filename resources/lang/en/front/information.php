@@ -11,4 +11,8 @@ return array (
   'instagram' => 'https://www.instagram.com/alizeboats/',
   'facebook' => 'https://www.facebook.com/alizeboats/',
   'twitter' => 'https://twitter.com/AlizeBoats',
+  'whatsapp' => '+34648492783',
+  'schedule' => '10:00 – 18:00',
+  'ourbusiness' => NULL,
+  'ourfleet' => NULL,
 );

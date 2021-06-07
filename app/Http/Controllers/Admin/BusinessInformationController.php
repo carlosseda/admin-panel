@@ -11,8 +11,6 @@ use App\Vendor\Image\Image;
 use App\Vendor\Locale\Models\LocaleTag;
 use App\Models\DB\BusinessInformation; 
 
-use Debugbar;
-
 class BusinessInformationController extends Controller 
 {
     protected $manager;
@@ -85,6 +83,8 @@ class BusinessInformationController extends Controller
             $images = $this->image->store(request('images'), 1);
         }
 
+        $business = $this->business->first();
+
         $informations = $this->locale_tag
         ->select('group', 'key')
         ->groupBy('group', 'key')
@@ -95,9 +95,7 @@ class BusinessInformationController extends Controller
             $key = $information->key . '.' . $information->language;
             $business[$key] = $information->value;
         }
-
-        $business['images'] = $this->image->showPreview();
-
+        
         $message = \Lang::get('admin/business-information.business-information-update');
 
         $view = View::make('admin.business_information.index')
