@@ -157,6 +157,7 @@ Route::group(['prefix' => $localizationseo->setLocale(),
               'middleware' => [ 'localize' ]
             ], function () use ($localizationseo) {
 
+    Route::get($localizationseo->transRoute('routes.front_home'), 'App\Http\Controllers\Front\HomeController@index')->name('front_home');
     Route::get($localizationseo->transRoute('routes.front_faqs'), 'App\Http\Controllers\Front\FaqController@index')->name('front_faqs');
     Route::get($localizationseo->transRoute('routes.front_faq'), 'App\Http\Controllers\Front\FaqController@show')->name('front_faq');
     Route::get($localizationseo->transRoute('routes.front_contact'), 'App\Http\Controllers\Front\ContactController@index')->name('front_contact');
