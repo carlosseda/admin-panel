@@ -3,6 +3,7 @@
 return array (
   'title' => 'Contact us',
   'send' => 'SEND',
+  'success' => 'Thanks you. We will answer you as soon as we read your message.',
   'contact-socials-title' => 'Social Networks',
   'contact-info-title' => 'Information',
   'contact-map-title' => 'Where to find us',

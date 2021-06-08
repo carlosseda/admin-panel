@@ -1,4 +1,8 @@
 /*Contents*/
+.partial.partial-blur {
+  filter: blur(0.1em);
+}
+
 img {
   max-width: 100%;
 }
@@ -528,9 +532,10 @@ a:hover, a:focus {
   display: flex;
   justify-content: space-between;
   padding: 1em 1.5em 0.5em 1.5em;
+  opacity: 0;
   position: fixed;
-  z-index: 4000;
   width: 100%;
+  z-index: 4000;
 }
 .header-menu-mobile.transparent {
   background-color: transparent;
@@ -778,6 +783,127 @@ a:hover, a:focus {
   }
 }
 
+.overlay {
+  background-color: #000000;
+  display: none;
+  position: fixed;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 2000;
+}
+.overlay.overlay-active {
+  cursor: pointer;
+  display: block;
+  opacity: 0.5;
+}
+
+.spinner {
+  display: none;
+}
+.spinner.spinner-active {
+  display: block;
+  left: 0;
+  margin-left: auto;
+  margin-right: auto;
+  right: 0;
+  position: fixed;
+  top: 45vh;
+  width: 20%;
+  z-index: 3001;
+}
+.spinner.spinner-active svg {
+  -webkit-animation: rotator 1.4s linear infinite;
+          animation: rotator 1.4s linear infinite;
+  height: 4em;
+  width: 4em;
+}
+.spinner.spinner-active svg .path {
+  stroke-dasharray: 187;
+  stroke-dashoffset: 0;
+  transform-origin: center;
+  -webkit-animation: dash 1.4s ease-in-out infinite, colors 5.6s ease-in-out infinite;
+          animation: dash 1.4s ease-in-out infinite, colors 5.6s ease-in-out infinite;
+}
+
+@-webkit-keyframes rotator {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(270deg);
+  }
+}
+
+@keyframes rotator {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(270deg);
+  }
+}
+@-webkit-keyframes colors {
+  0% {
+    stroke: #23abe1;
+  }
+  25% {
+    stroke: #23abe1;
+  }
+  50% {
+    stroke: #23abe1;
+  }
+  75% {
+    stroke: #23abe1;
+  }
+  100% {
+    stroke: #23abe1;
+  }
+}
+@keyframes colors {
+  0% {
+    stroke: #23abe1;
+  }
+  25% {
+    stroke: #23abe1;
+  }
+  50% {
+    stroke: #23abe1;
+  }
+  75% {
+    stroke: #23abe1;
+  }
+  100% {
+    stroke: #23abe1;
+  }
+}
+@-webkit-keyframes dash {
+  0% {
+    stroke-dashoffset: 187;
+  }
+  50% {
+    stroke-dashoffset: 46.75;
+    transform: rotate(135deg);
+  }
+  100% {
+    stroke-dashoffset: 187;
+    transform: rotate(450deg);
+  }
+}
+@keyframes dash {
+  0% {
+    stroke-dashoffset: 187;
+  }
+  50% {
+    stroke-dashoffset: 46.75;
+    transform: rotate(135deg);
+  }
+  100% {
+    stroke-dashoffset: 187;
+    transform: rotate(450deg);
+  }
+}
 .faqs {
   margin: 0 auto;
   width: 100%;

@@ -2,7 +2,7 @@
 
 return array (
   'title' => 'Contacta con nosotros',
-  'send' => 'ENVIAR',
+  'success' => 'Gracias. Le contestaremos en cuanto leamos su mensaje.',
   'contact-socials-title' => 'Redes sociales',
   'contact-info-title' => 'Información',
   'contact-map-title' => 'Donde encontrarnos',

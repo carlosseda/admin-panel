@@ -1,4 +1,4 @@
-<header class="header-fixed fixed">
+<header class="partial header-fixed fixed">
 
     <div class="header-container">
         <div class="header-logo">

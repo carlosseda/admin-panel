@@ -115,7 +115,7 @@ return [
         'production' => [
             'supervisor-1' => [
                 'connection' => 'redis',
-                'queue' => ['process_image', 'delete_image'],
+                'queue' => ['process_image', 'delete_image', 'email'],
                 'balance' => 'simple',
                 'processes' => 10,
                 'tries' => 3,
@@ -125,7 +125,7 @@ return [
         'local' => [
             'supervisor-1' => [
                 'connection' => 'redis',
-                'queue' => ['process_image', 'delete_image'],
+                'queue' => ['process_image', 'delete_image', 'email'],
                 'balance' => 'simple',
                 'processes' => 6,
                 'tries' => 3,

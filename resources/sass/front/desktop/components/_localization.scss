@@ -1,0 +1,10 @@
+.localization{
+    cursor: pointer;
+    position: relative;
+    width: 1.5em;
+
+    &:hover{
+        box-shadow: 0px 7px 10px rgba(223, 238, 243, 0.3);
+    }
+}
+

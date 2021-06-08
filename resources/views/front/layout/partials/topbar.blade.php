@@ -1,4 +1,4 @@
-<div class="topbar">
+<div class="partial topbar">
     <div class="topbar-left">
         <div class="topbar-element topbar-slogan">
             <div class="topbar-element-text">
@@ -33,7 +33,7 @@
         </div>
         
         <div class="topbar-element topbar-localization">
-
+            @include('front.components.desktop.localization')
         </div>
     </div>
 </div>

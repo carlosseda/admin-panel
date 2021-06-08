@@ -48,6 +48,15 @@ class LocaleSlugSeo extends Model
             ->where('key', $key);
     }
 
+    public function scopeGetLanguageByKey($query, $language, $key){ 
+        return $query->where('language', $language)
+            ->where('key', $key);
+    }
+
+    public function scopeGetKeyBySlug($query, $slug){ 
+        return $query->where('slug', $slug);
+    }
+
     public function scopeGetSectionsParameters($query, $rel_parent, $language){
 
         return $query->where('language', $language)

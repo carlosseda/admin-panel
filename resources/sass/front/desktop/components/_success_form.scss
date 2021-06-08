@@ -1,0 +1,24 @@
+.success-container{
+    display:none;
+    opacity: 0;
+    transition: opacity 1s;
+}
+
+.success-container.active{
+
+    background-color: rgb(33, 136, 33);
+    border-radius: 0.2em;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 2em;
+    opacity: 1;
+    padding: 0.5em 2em;
+    position: relative;
+
+    p{
+        color: $white;
+        font-family: $font-stack;
+        padding: 0.1em 0;
+        list-style: none;
+    }
+}

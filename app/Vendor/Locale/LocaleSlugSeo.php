@@ -104,8 +104,16 @@ class LocaleSlugSeo
         return  DBLocaleSlugSeo::getIdByKey($rel_parent, $language, $key)->first()->id;
     }
 
+    public function getLanguageByKey($key){ 
+        return  DBLocaleSlugSeo::getLanguageByKey($this->language, $key)->first();
+    }
+
     public function getByKey($key){ 
         return  DBLocaleSeo::getByKey($this->language, $key)->first();
+    }
+
+    public function getKeyBySlug($slug){ 
+        return  DBLocaleSlugSeo::getKeyBySlug($slug)->first()->key;
     }
 }
     

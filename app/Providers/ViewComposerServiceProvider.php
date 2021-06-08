@@ -36,7 +36,9 @@ class ViewComposerServiceProvider extends ServiceProvider
         );
 
         view()->composer([
-            'admin.*'], 
+            'admin.*',
+            'front.components.desktop.localization',
+            'front.layout.partials.modal_localization'], 
             'App\Http\ViewComposers\Admin\LocaleLanguage'
         );
 

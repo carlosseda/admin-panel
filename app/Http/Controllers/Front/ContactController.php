@@ -5,15 +5,17 @@ namespace App\Http\Controllers\Front;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
+use App\Http\Requests\Front\ContactRequest;
 use App\Http\Controllers\Controller;
 use Jenssegers\Agent\Agent;
 use App\Vendor\Locale\LocaleSlugSeo;
 use App\Models\DB\ContactLog;
+use App\Jobs\ContactEmail;
 
 class ContactController extends Controller
 {
     protected $agent;
-    protected $contact;
+    protected $contact_log;
     protected $locale_slug_seo;
 
     function __construct(Agent $agent, ContactLog $contact_log, LocaleSlugSeo $locale_slug_seo)
@@ -35,4 +37,21 @@ class ContactController extends Controller
         return $view;
     }
 
+    public function store(ContactRequest $request)
+    {        
+        $contact_log = $this->contact_log->create([
+            'fingerprint' => $request->cookie('fp') ? $request->cookie('fp') : '',
+            'name' => request('name'),
+            'email' => request('email'),
+            'message' => request('message'),
+        ]);
+
+        dispatch(new ContactEmail($contact_log))->onQueue('email');
+
+        $message = \Lang::get('front/contact.success');
+
+        return response()->json([
+            'message' => $message
+        ]);
+    }
 }

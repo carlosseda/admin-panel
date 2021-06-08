@@ -72,7 +72,7 @@ class MenuItemController extends Controller
             'locale_slug_seo_id' => request('locale_slug_seo_id'),
             'name' => request('name'),
             'description' => request('description'),
-            'custom_url' => remove_protocol(request('custom_url')),
+            'custom_url' => request('custom_url') ? remove_protocol(request('custom_url')) : '',
             'menu_id' => request('menu_id'),
         ]);
 

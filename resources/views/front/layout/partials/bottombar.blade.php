@@ -1,4 +1,4 @@
-<div class="bottombar">
+<div class="partial bottombar">
     <div class="bottombar-left">
         
     </div>

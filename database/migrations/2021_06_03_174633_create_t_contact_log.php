@@ -18,7 +18,6 @@ class CreateTContactLog extends Migration
             $table->string('fingerprint')->nullable();
             $table->string('name');
             $table->string('email');
-            $table->string('telephone')->nullable();
             $table->text('message');
             $table->timestamps();
         });

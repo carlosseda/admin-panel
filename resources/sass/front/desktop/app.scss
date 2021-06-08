@@ -5,7 +5,9 @@
 @import "../base/contents";
 @import "../base/normalize";
 @import "../base/typography";
+@import "layout/wait";
 @import "layout/master";
+@import "layout/modal_localization";
 @import "layout/topbar";
 @import "layout/header";
 @import "layout/footer";
@@ -13,8 +15,10 @@
 @import "components/faqs";
 @import "components/login";
 @import "components/register";
-@import "components/errors";
+@import "components/errors_form";
+@import "components/success_form";
 @import "components/menu";
+@import "components/localization";
 @import "components/page-header";
 @import "components/contact";
 @import "components/contact-form";

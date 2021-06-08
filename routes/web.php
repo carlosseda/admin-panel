@@ -150,7 +150,8 @@ Route::get('/', 'App\Http\Controllers\Front\HomeController@index')->name('home_f
 Route::get('/sitemap', 'App\Http\Controllers\Front\LocaleSeoController@getSitemaps')->name('sitemap');
 Route::post('/fingerprint', 'App\Http\Controllers\Front\FingerprintController@store')->name('front_fingerprint');
 
-Route::post('/contacto', 'App\Http\Controllers\Front\ContactController@send')->name('front_contact_form');
+Route::post('/contacto', 'App\Http\Controllers\Front\ContactController@store')->name('front_contact_form');
+Route::get('/traduccion/{language}/{parent}/{slug?}', 'App\Http\Controllers\Front\LocalizationController@show')->name('front_localization');
 
 Route::group(['prefix' => $localizationseo->setLocale(),
               'middleware' => [ 'localize' ]

@@ -1,4 +1,8 @@
 /*Contents*/
+.partial.partial-blur {
+  filter: blur(0.1em);
+}
+
 img {
   max-width: 100%;
 }
@@ -506,6 +510,128 @@ a:hover, a:focus {
   outline-offset: 0;
 }
 
+.overlay {
+  background-color: #000000;
+  display: none;
+  position: fixed;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 2000;
+}
+.overlay.overlay-active {
+  cursor: pointer;
+  display: block;
+  filter: blur(4px);
+  opacity: 0.5;
+}
+
+.spinner {
+  display: none;
+}
+.spinner.spinner-active {
+  display: block;
+  left: 0;
+  margin-left: auto;
+  margin-right: auto;
+  right: 0;
+  position: fixed;
+  top: 45vh;
+  width: 5%;
+  z-index: 3001;
+}
+.spinner.spinner-active svg {
+  -webkit-animation: rotator 1.4s linear infinite;
+          animation: rotator 1.4s linear infinite;
+  height: 4em;
+  width: 4em;
+}
+.spinner.spinner-active svg .path {
+  stroke-dasharray: 187;
+  stroke-dashoffset: 0;
+  transform-origin: center;
+  -webkit-animation: dash 1.4s ease-in-out infinite, colors 5.6s ease-in-out infinite;
+          animation: dash 1.4s ease-in-out infinite, colors 5.6s ease-in-out infinite;
+}
+
+@-webkit-keyframes rotator {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(270deg);
+  }
+}
+
+@keyframes rotator {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(270deg);
+  }
+}
+@-webkit-keyframes colors {
+  0% {
+    stroke: #23abe1;
+  }
+  25% {
+    stroke: #23abe1;
+  }
+  50% {
+    stroke: #23abe1;
+  }
+  75% {
+    stroke: #23abe1;
+  }
+  100% {
+    stroke: #23abe1;
+  }
+}
+@keyframes colors {
+  0% {
+    stroke: #23abe1;
+  }
+  25% {
+    stroke: #23abe1;
+  }
+  50% {
+    stroke: #23abe1;
+  }
+  75% {
+    stroke: #23abe1;
+  }
+  100% {
+    stroke: #23abe1;
+  }
+}
+@-webkit-keyframes dash {
+  0% {
+    stroke-dashoffset: 187;
+  }
+  50% {
+    stroke-dashoffset: 46.75;
+    transform: rotate(135deg);
+  }
+  100% {
+    stroke-dashoffset: 187;
+    transform: rotate(450deg);
+  }
+}
+@keyframes dash {
+  0% {
+    stroke-dashoffset: 187;
+  }
+  50% {
+    stroke-dashoffset: 46.75;
+    transform: rotate(135deg);
+  }
+  100% {
+    stroke-dashoffset: 187;
+    transform: rotate(450deg);
+  }
+}
 .wrapper {
   width: 100%;
 }
@@ -520,6 +646,38 @@ a:hover, a:focus {
 .page-section {
   min-height: 80vh;
   width: 100%;
+}
+
+.modal-localization {
+  display: flex;
+  left: 0;
+  margin: auto;
+  opacity: 0;
+  position: fixed;
+  right: 0;
+  top: -40vh;
+  transition: opacity 0.5s;
+  width: -webkit-max-content;
+  width: -moz-max-content;
+  width: max-content;
+  z-index: 5000;
+}
+.modal-localization.modal-active {
+  opacity: 1;
+  top: 40vh;
+}
+.modal-localization .localization-option {
+  cursor: pointer;
+  margin: 1em;
+  width: -webkit-max-content;
+  width: -moz-max-content;
+  width: max-content;
+}
+.modal-localization .localization-option:hover {
+  box-shadow: 0px 7px 10px rgba(223, 238, 243, 0.3);
+}
+.modal-localization .localization-option svg {
+  width: 10em;
 }
 
 .topbar {
@@ -1211,6 +1369,29 @@ a:hover, a:focus {
   list-style: none;
 }
 
+.success-container {
+  display: none;
+  opacity: 0;
+  transition: opacity 1s;
+}
+
+.success-container.active {
+  background-color: #218821;
+  border-radius: 0.2em;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 2em;
+  opacity: 1;
+  padding: 0.5em 2em;
+  position: relative;
+}
+.success-container.active p {
+  color: white;
+  font-family: "Ubuntu", sans-serif;
+  padding: 0.1em 0;
+  list-style: none;
+}
+
 .menu-inline {
   position: relative;
   width: -webkit-max-content;
@@ -1261,6 +1442,15 @@ a:hover, a:focus {
 }
 .menu li {
   margin: 1em 0.5em;
+}
+
+.localization {
+  cursor: pointer;
+  position: relative;
+  width: 1.5em;
+}
+.localization:hover {
+  box-shadow: 0px 7px 10px rgba(223, 238, 243, 0.3);
 }
 
 .page-header {
@@ -1349,6 +1539,10 @@ a:hover, a:focus {
 .contact .sidebar .contact-socials .socials-icons .social-icon svg path,
 .contact .sidebar .contact-info .contact-info-element .contact-info-icon svg path {
   fill: white;
+}
+.contact .sidebar .contact-socials .socials-icons .social-icon:hover {
+  background-color: #00a9b1;
+  cursor: pointer;
 }
 
 .contact .contact-map {
