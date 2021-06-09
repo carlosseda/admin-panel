@@ -33,6 +33,15 @@ class AboutUsController extends Controller
         $view = View::make('front.pages.about_us.index')
             ->with('seo', $seo )
             ->with('business', $this->business->first());
+
+        if(request()->ajax()) {
+
+            $sections = $view->renderSections(); 
+    
+            return response()->json([
+                'view' => $sections['content'],
+            ]); 
+        }
         
         return $view;
     }

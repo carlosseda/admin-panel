@@ -3,6 +3,11 @@
     margin: 5% auto;
     width: 90%;
 
+    @include respond-to('lg'){
+        margin: 2% auto;
+        width: 35%;
+    }
+
     .about-us-element{
 
         margin-bottom: 3em;

@@ -1,37 +1,41 @@
-const plusButtons = document.querySelectorAll('.faq-plus-button');
-const faqElements = document.querySelectorAll(".faq");
+export let renderFaqs = () => {
 
-plusButtons.forEach(plusButton => { 
+    let plusButtons = document.querySelectorAll('.faq-plus-button');
+    let faqElements = document.querySelectorAll(".faq");
 
-    plusButton.addEventListener("click", () => {
+    plusButtons.forEach(plusButton => { 
 
-        let activeElements = document.querySelectorAll(".active");
+        plusButton.addEventListener("click", () => {
 
-        if(plusButton.classList.contains("active")){
+            let activeElements = document.querySelectorAll(".active");
 
-            plusButton.classList.remove("active");
+            if(plusButton.classList.contains("active")){
 
-            activeElements.forEach(activeElement => {
-                activeElement.classList.remove("active");
-            });
+                plusButton.classList.remove("active");
 
-        }else{
+                activeElements.forEach(activeElement => {
+                    activeElement.classList.remove("active");
+                });
 
-            activeElements.forEach(activeElement => {
-                activeElement.classList.remove("active");
-            });
-            
-            plusButton.classList.add("active");
+            }else{
 
-            faqElements.forEach(faqElement => {
+                activeElements.forEach(activeElement => {
+                    activeElement.classList.remove("active");
+                });
+                
+                plusButton.classList.add("active");
 
-                if(faqElement.dataset.content == plusButton.dataset.button){
-                    faqElement.classList.add("active"); 
-                }else{
-                }
-            });
-        }
+                faqElements.forEach(faqElement => {
+
+                    if(faqElement.dataset.content == plusButton.dataset.button){
+                        faqElement.classList.add("active"); 
+                    }else{
+                    }
+                });
+            }
+        });
+        
     });
-    
-});
+}
 
+renderFaqs();

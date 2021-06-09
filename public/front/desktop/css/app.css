@@ -1007,6 +1007,12 @@ a:hover, a:focus {
   margin: 5% auto;
   width: 80%;
 }
+@media (min-width: 1920px) {
+  .faqs {
+    margin: 2% auto;
+    width: 50%;
+  }
+}
 .faqs .faq {
   width: 100%;
 }
@@ -1404,18 +1410,21 @@ a:hover, a:focus {
   cursor: pointer;
   display: inline-flex;
 }
-.menu-inline li.selected a h4 {
-  color: #ff7a7a;
+.menu-inline li .menu-item.selected h4,
+.menu-inline li .menu-item.selected a h4 {
+  color: #00a7b0;
 }
+.menu-inline li span h4,
 .menu-inline li a h4 {
   color: #253786;
   font-size: 1em;
 }
-.menu-inline li:hover a h4 {
+.menu-inline li:hover a h4, .menu-inline li:hover span h4 {
   color: #00a7b0;
 }
 @media (min-width: 1920px) {
-  .menu-inline li a h4 {
+  .menu-inline li span h4,
+.menu-inline li a h4 {
     font-size: 1.6em;
   }
 }
@@ -1496,6 +1505,12 @@ a:hover, a:focus {
 .contact {
   margin: 5% auto;
   width: 70%;
+}
+@media (min-width: 1920px) {
+  .contact {
+    margin: 2% auto;
+    width: 35%;
+  }
 }
 
 .contact .sidebar .contact-socials .contact-socials-title,
@@ -1693,6 +1708,12 @@ a:hover, a:focus {
 .about-us {
   margin: 5% auto;
   width: 90%;
+}
+@media (min-width: 1920px) {
+  .about-us {
+    margin: 2% auto;
+    width: 35%;
+  }
 }
 .about-us .about-us-element {
   margin-bottom: 3em;

@@ -33,6 +33,15 @@ class ContactController extends Controller
         $seo = $this->locale_slug_seo->getByKey(Route::currentRouteName());
 
         $view = View::make('front.pages.contact.index')->with('seo', $seo );
+
+        if(request()->ajax()) {
+    
+            $sections = $view->renderSections(); 
+    
+            return response()->json([
+                'view' => $sections['content'],
+            ]); 
+        }
         
         return $view;
     }

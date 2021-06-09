@@ -26,6 +26,8 @@ export let renderForm = () => {
                             document.getElementById("success-container").classList.add('active');
                             document.getElementById("success-message").innerHTML = response.data.message;
                             form.reset();
+
+                            window.history.pushState('', '', url);
                         });
                         
                     } catch (error) {

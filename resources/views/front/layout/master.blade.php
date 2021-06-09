@@ -28,7 +28,7 @@
         @include("front.layout.partials.header_fixed")
    
         <div class="wrapper" id="app">
-            <div class="main-content partial">
+            <div class="partial main-content" id="main-content">
                 @yield('content')
             </div>
         </div>

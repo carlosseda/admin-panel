@@ -3,6 +3,11 @@
     margin: 5% auto;
     width: 80%;
 
+    @include respond-to('lg'){
+        margin: 2% auto;
+        width: 50%;
+    }
+
     .faq{
 
         width: 100%;

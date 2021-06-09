@@ -2,7 +2,6 @@ const spinner = document.getElementById('spinner');
 const overlay = document.getElementById('overlay');
 const partials = document.querySelectorAll('.partial');
 
-
 export let startWait = () => {
     spinner.classList.add('spinner-active');
     overlay.classList.add('overlay-active');

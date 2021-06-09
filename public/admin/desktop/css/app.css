@@ -518,6 +518,11 @@ body {
   -webkit-overflow-scrolling: touch;
   -ms-overflow-style: -ms-autohiding-scrollbar;
 }
+@media (min-width: 1920px) {
+  .main-content {
+    top: 15vh;
+  }
+}
 .main-content::-webkit-scrollbar {
   display: none;
 }

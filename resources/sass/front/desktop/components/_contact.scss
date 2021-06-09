@@ -2,6 +2,11 @@
     
     margin: 5% auto;
     width: 70%;
+
+    @include respond-to('lg'){
+        margin: 2% auto;
+        width: 35%;
+    }
 }
 
 .contact .sidebar{

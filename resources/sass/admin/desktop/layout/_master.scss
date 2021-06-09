@@ -20,6 +20,10 @@ body{
     -webkit-overflow-scrolling: touch;
     -ms-overflow-style: -ms-autohiding-scrollbar;
 
+    @include respond-to('lg'){
+        top: 15vh;
+    }
+
     &::-webkit-scrollbar {
         display: none; 
     }
