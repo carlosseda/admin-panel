@@ -6,5 +6,3 @@ require('./fingerprint');
 require('./inputHighlight');
 require('./menu');
 
-
-

@@ -1410,8 +1410,8 @@ a:hover, a:focus {
   cursor: pointer;
   display: inline-flex;
 }
-.menu-inline li .menu-item.selected h4,
-.menu-inline li .menu-item.selected a h4 {
+.menu-inline li .menu-item.menu-item-selected h4,
+.menu-inline li .menu-item.menu-item-selected a h4 {
   color: #00a7b0;
 }
 .menu-inline li span h4,

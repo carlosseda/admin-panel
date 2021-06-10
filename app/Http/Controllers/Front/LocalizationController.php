@@ -6,21 +6,22 @@ use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Vendor\Locale\LocalizationSeo;
 use App\Vendor\Locale\LocaleSlugSeo;
 use App;
+use Debugbar;
 
 class LocalizationController extends Controller
 {
     protected $locale_slug_seo;
 
-    function __construct(LocalizationSeo $locale_seo, LocaleSlugSeo $locale_slug_seo)
+    function __construct(LocaleSlugSeo $locale_slug_seo)
     {
         $this->locale_slug_seo = $locale_slug_seo;     
     }
 
     public function show($language, $parent, $slug = null)
     {
+        
         $this->locale_slug_seo->setLanguage($language); 
 
         $locale_slug_seo = $this->locale_slug_seo->getByKey($parent);

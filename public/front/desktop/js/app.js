@@ -2250,15 +2250,15 @@ var renderMenu = function renderMenu() {
   var menuItems = document.querySelectorAll('.menu-item');
   menuItems.forEach(function (menuItem) {
     menuItem.addEventListener("click", function () {
-      var activeElements = document.querySelectorAll(".selected");
+      var activeElements = document.querySelectorAll(".menu-item-selected");
       var url = menuItem.dataset.route;
       var mainContent = document.getElementById('main-content');
 
-      if (!menuItem.classList.contains("active")) {
+      if (!menuItem.classList.contains("menu-item-selected")) {
         activeElements.forEach(function (activeElement) {
-          activeElement.classList.remove("selected");
+          activeElement.classList.remove("menu-item-selected");
         });
-        menuItem.classList.add("selected");
+        menuItem.classList.add("menu-item-selected");
 
         var sendPageRequest = /*#__PURE__*/function () {
           var _ref = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
@@ -2268,9 +2268,9 @@ var renderMenu = function renderMenu() {
                   case 0:
                     try {
                       axios.get(url).then(function (response) {
+                        window.history.pushState('', '', url);
                         mainContent.innerHTML = response.data.view;
                         (0,_components__WEBPACK_IMPORTED_MODULE_1__.renderComponents)();
-                        window.history.pushState('', '', url);
                       });
                     } catch (error) {}
 
@@ -2294,6 +2294,14 @@ var renderMenu = function renderMenu() {
   window.addEventListener('popstate', function (event) {
     var mainContent = document.getElementById('main-content');
     var url = event.state;
+    var menuItems = document.querySelectorAll(".menu-item");
+    menuItems.forEach(function (menuItem) {
+      menuItem.classList.remove("menu-item-selected");
+
+      if (window.location.href == new URL(menuItem.dataset.route, window.location.origin)) {
+        menuItem.classList.add("menu-item-selected");
+      }
+    });
 
     var sendPageRequest = /*#__PURE__*/function () {
       var _ref2 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2() {
@@ -2305,7 +2313,6 @@ var renderMenu = function renderMenu() {
                   axios.get(url).then(function (response) {
                     mainContent.innerHTML = response.data.view;
                     (0,_components__WEBPACK_IMPORTED_MODULE_1__.renderComponents)();
-                    window.history.pushState(url, 'url', url);
                   });
                 } catch (error) {}
 
