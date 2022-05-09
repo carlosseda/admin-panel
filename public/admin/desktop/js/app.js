@@ -2034,8 +2034,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
 
 
-var table = document.getElementById("table");
-var form = document.getElementById("form");
+var tableContainer = document.getElementById("table");
+var formContainer = document.getElementById("form");
 var renderForm = function renderForm() {
   var forms = document.querySelectorAll(".admin-form");
   var storeButton = document.getElementById("store-button");
@@ -2106,53 +2106,64 @@ var renderForm = function renderForm() {
 
         var sendPostRequest = /*#__PURE__*/function () {
           var _ref4 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2() {
-            var errors, errorMessage;
+            var response;
             return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee2$(_context2) {
               while (1) {
                 switch (_context2.prev = _context2.next) {
                   case 0:
                     (0,_wait__WEBPACK_IMPORTED_MODULE_2__.startWait)();
-                    _context2.prev = 1;
-                    _context2.next = 4;
-                    return axios.post(url, data).then(function (response) {
-                      if (response.data.id) {
-                        form.id.value = response.data.id;
+                    _context2.next = 3;
+                    return fetch(url, {
+                      headers: {
+                        'Accept': 'application/json',
+                        'X-CSRF-TOKEN': document.head.querySelector('meta[name="csrf-token"]').content
+                      },
+                      method: 'POST',
+                      body: data
+                    }).then(function (response) {
+                      if (!response.ok) throw response;
+                      return response.json();
+                    }).then(function (json) {
+                      if (json.id) {
+                        form.id.value = json.id;
                       }
 
-                      table.innerHTML = response.data.table;
-                      form.innerHTML = response.data.form;
+                      tableContainer.innerHTML = json.table;
+                      formContainer.innerHTML = json.form;
                       (0,_wait__WEBPACK_IMPORTED_MODULE_2__.stopWait)();
-                      (0,_messages__WEBPACK_IMPORTED_MODULE_3__.showMessage)('success', response.data.message);
+                      (0,_messages__WEBPACK_IMPORTED_MODULE_3__.showMessage)('success', json.message);
                       renderTable();
                       renderForm();
+                    })["catch"](function (error) {
+                      (0,_wait__WEBPACK_IMPORTED_MODULE_2__.stopWait)();
+
+                      if (error.status == '422') {
+                        error.json().then(function (jsonError) {
+                          var errors = jsonError.errors;
+                          var errorMessage = '';
+                          Object.keys(errors).forEach(function (key) {
+                            errorMessage += '<li>' + errors[key] + '</li>';
+                          });
+                          (0,_messages__WEBPACK_IMPORTED_MODULE_3__.showMessage)('validation', errorMessage);
+                        });
+                      }
+
+                      if (error.status == '500') {
+                        console.log(error);
+                      }
+
+                      ;
                     });
 
+                  case 3:
+                    response = _context2.sent;
+
                   case 4:
-                    _context2.next = 11;
-                    break;
-
-                  case 6:
-                    _context2.prev = 6;
-                    _context2.t0 = _context2["catch"](1);
-                    (0,_wait__WEBPACK_IMPORTED_MODULE_2__.stopWait)();
-
-                    if (_context2.t0.response.status == '422') {
-                      errors = _context2.t0.response.data.errors;
-                      errorMessage = '';
-                      Object.keys(errors).forEach(function (key) {
-                        errorMessage += '<li>' + errors[key] + '</li>';
-                      });
-                      (0,_messages__WEBPACK_IMPORTED_MODULE_3__.showMessage)('validation', errorMessage);
-                    }
-
-                    if (_context2.t0.response.status == '500') {}
-
-                  case 11:
                   case "end":
                     return _context2.stop();
                 }
               }
-            }, _callee2, null, [[1, 6]]);
+            }, _callee2);
           }));
 
           return function sendPostRequest() {
@@ -2195,38 +2206,55 @@ var renderTable = function renderTable() {
 
         var sendEditRequest = /*#__PURE__*/function () {
           var _ref5 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee3() {
+            var response;
             return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee3$(_context3) {
               while (1) {
                 switch (_context3.prev = _context3.next) {
                   case 0:
-                    _context3.prev = 0;
+                    (0,_wait__WEBPACK_IMPORTED_MODULE_2__.startWait)();
                     _context3.next = 3;
-                    return axios.get(url).then(function (response) {
-                      form.innerHTML = response.data.form;
+                    return fetch(url).then(function (response) {
+                      if (!response.ok) throw response;
+                      return response.json();
+                    }).then(function (json) {
+                      console.log(json);
+                      formContainer.innerHTML = json.form;
                       renderForm();
+                    })["catch"](function (error) {
+                      (0,_wait__WEBPACK_IMPORTED_MODULE_2__.stopWait)();
+
+                      if (error.status == '500') {
+                        console.log(error);
+                      }
+
+                      ;
                     });
 
                   case 3:
-                    _context3.next = 8;
-                    break;
+                    response = _context3.sent;
 
-                  case 5:
-                    _context3.prev = 5;
-                    _context3.t0 = _context3["catch"](0);
-                    console.error(_context3.t0);
-
-                  case 8:
+                  case 4:
                   case "end":
                     return _context3.stop();
                 }
               }
-            }, _callee3, null, [[0, 5]]);
+            }, _callee3);
           }));
 
           return function sendEditRequest() {
             return _ref5.apply(this, arguments);
           };
-        }();
+        }(); // let sendEditRequest = async () => {
+        //     try {
+        //         await axios.get(url).then(response => {
+        //             form.innerHTML = response.data.form;
+        //             renderForm();
+        //         });
+        //     } catch (error) {
+        //         console.error(error);
+        //     }
+        // };
+
 
         sendEditRequest();
       });

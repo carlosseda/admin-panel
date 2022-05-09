@@ -1,5 +1,3 @@
-import { forEach } from "lodash";
-
 export let renderInputCounter = () => {
 
     let inputCounters = document.querySelectorAll('.input-counter');

@@ -1905,7 +1905,6 @@ body {
 
 .table-pagination {
   position: absolute;
-  bottom: 5vh;
 }
 .table-pagination .table-pagination-info {
   display: flex;

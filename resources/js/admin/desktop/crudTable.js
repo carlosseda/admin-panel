@@ -17,8 +17,8 @@ import {renderNestedSortables} from './sortable';
 import {renderMenuItems} from './menuItems';
 import {renderSelects} from './selects';
 
-const table = document.getElementById("table");
-const form = document.getElementById("form");
+const tableContainer = document.getElementById("table");
+const formContainer = document.getElementById("form");
 
 export let renderForm = () => {
 
@@ -77,43 +77,58 @@ export let renderForm = () => {
                 let sendPostRequest = async () => {
     
                     startWait();
-        
-                    try {
-                        await axios.post(url, data).then(response => {
-    
-                            if(response.data.id){
-                                form.id.value = response.data.id;
-                            }
-                            
-                            table.innerHTML = response.data.table;
-                            form.innerHTML = response.data.form;
-    
-                            stopWait();
-                            showMessage('success', response.data.message);
-                            renderTable();
-                            renderForm();
-                        });
+                    
+                    let response = await fetch(url, {
+                        headers: {
+                            'Accept': 'application/json',
+                            'X-CSRF-TOKEN': document.head.querySelector('meta[name="csrf-token"]').content
+                        },
+                        method: 'POST',
+                        body: data
+                    })
+                    .then(response => {
+                    
+                        if (!response.ok) throw response;
+
+                        return response.json();
+                    })
+                    .then(json => {
+
+                        if(json.id){
+                            form.id.value = json.id;
+                        }
                         
-                    } catch (error) {
-        
+                        tableContainer.innerHTML = json.table;
+                        formContainer.innerHTML = json.form;
+
+                        stopWait();
+                        showMessage('success', json.message);
+                        renderTable();
+                        renderForm();
+                    })
+                    .catch ( error =>  {
+    
                         stopWait();
     
-                        if(error.response.status == '422'){
+                        if(error.status == '422'){
         
-                            let errors = error.response.data.errors;      
-                            let errorMessage = '';
-        
-                            Object.keys(errors).forEach(function(key) {
-                                errorMessage += '<li>' + errors[key] + '</li>';
-                            })
+                            error.json().then(jsonError => {
+
+                                let errors = jsonError.errors;      
+                                let errorMessage = '';
             
-                            showMessage('validation', errorMessage);
+                                Object.keys(errors).forEach(function(key) {
+                                    errorMessage += '<li>' + errors[key] + '</li>';
+                                })
+                
+                                showMessage('validation', errorMessage);
+                            })   
                         }
     
-                        if(error.response.status == '500'){
-                        
-                        }
-                    }
+                        if(error.status == '500'){
+                            console.log(error);
+                        };
+                    });
                 };
         
                 sendPostRequest();
@@ -153,19 +168,45 @@ export let renderTable = () => {
             editButton.addEventListener("click", () => {
     
                 let url = editButton.dataset.url;
-    
+
                 let sendEditRequest = async () => {
     
-                    try {
-                        await axios.get(url).then(response => {
-                            form.innerHTML = response.data.form;
-                            renderForm();
-                        });
-                        
-                    } catch (error) {
-                        console.error(error);
-                    }
+                    startWait();
+                    
+                    let response = await fetch(url)
+                    .then(response => {
+                                  
+                        if (!response.ok) throw response;
+
+                        return response.json();
+                    })
+                    .then(json => {
+                        console.log(json);
+                        formContainer.innerHTML = json.form;
+                        renderForm();
+                    })
+                    .catch(error =>  {
+    
+                        stopWait();
+    
+                        if(error.status == '500'){
+                            console.log(error);
+                        };
+                    });
                 };
+            
+                // let sendEditRequest = async () => {
+    
+                //     try {
+                //         await axios.get(url).then(response => {
+                //             form.innerHTML = response.data.form;
+                //             renderForm();
+                //         });
+                        
+                //     } catch (error) {
+                //         console.error(error);
+                //     }
+                // };
     
                 sendEditRequest();
             });
