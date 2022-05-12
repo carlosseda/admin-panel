@@ -3,6 +3,10 @@ require('@ckeditor/ckeditor5-build-classic/build/translations/es.js');
 
 export let renderCkeditor = () => {
 
+    document.addEventListener("renderFormModules",( event =>{
+        renderCkeditor();
+    }));
+
     window.ckeditors = [];
 
     document.querySelectorAll('.ckeditor').forEach(ckeditor => {

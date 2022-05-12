@@ -1,10 +1,10 @@
-import {renderTable} from './crudTable';
-import {showMessage} from './messages';
-
 export let renderLocaleTags = () => {
 
-    let table = document.getElementById("table");
     let importTags = document.getElementById('import-tags');
+
+    document.addEventListener("renderFormModules",( event =>{
+        renderLocaleTags();
+    }));
 
     if(importTags){
 
@@ -13,17 +13,42 @@ export let renderLocaleTags = () => {
             let url = importTags.dataset.url;
         
             let sendImportTagsRequest = async () => {
-    
-                try {
-                    await axios.get(url).then(response => {
-                        table.innerHTML = response.data.table;
-                        renderTable();
-                        showMessage('success', response.data.message);
-                    });
-                    
-                } catch (error) {
-                    console.error(error);
-                }
+
+                let response = await fetch(url, {
+                    headers: {
+                        'Accept': 'application/json',
+                    },
+                    method: 'GET',
+                })
+                .then(response => {
+                
+                    if (!response.ok) throw response;
+
+                    return response.json();
+                })
+                .then(json => {
+
+                    document.dispatchEvent(new CustomEvent('loadTable', {
+                        detail: {
+                            table: json.table,
+                        }
+                    }));
+
+                    document.dispatchEvent(new CustomEvent('renderTableModules'));
+
+                    document.dispatchEvent(new CustomEvent('message', {
+                        detail: {
+                            message: json.message,
+                            type: 'success'
+                        }
+                    }));
+                })
+                .catch ( error =>  {
+
+                    if(error.status == '500'){
+                        console.log(error);
+                    };
+                });
             };
     
             sendImportTagsRequest();

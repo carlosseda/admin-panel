@@ -1,8 +1,8 @@
-import {renderTable} from './crudTable';
-import {showMessage} from './messages';
-import {startWait, stopWait} from './wait';
-
 export let renderGoogleBot = () => {
+
+    document.addEventListener("renderFormModules",( event =>{
+        renderGoogleBot();
+    }));
 
     let table = document.getElementById("table");
     let pingGoogle = document.getElementById('ping-google');
@@ -15,14 +15,31 @@ export let renderGoogleBot = () => {
         
             let sendEditRequest = async () => {
     
-                try {
-                    await axios.get(url).then(response => {
-                        showMessage('success', response.data.message);
-                    });
-                    
-                } catch (error) {
-                    console.error(error);
-                }
+                let response = await fetch(url, {
+                    headers: {
+                        'X-Requested-With': 'XMLHttpRequest',
+                    },
+                    method: 'GET', 
+                }) .then(response => {
+                                
+                    if (!response.ok) throw response;
+
+                    return response.json();
+                })
+                .then(json => {
+                    document.dispatchEvent(new CustomEvent('message', {
+                        detail: {
+                            message: json.message,
+                            type: 'success'
+                        }
+                    }));
+                })
+                .catch(error =>  {
+    
+                    if(error.status == '500'){
+                        console.log(error);
+                    };
+                });
             };
     
             sendEditRequest();

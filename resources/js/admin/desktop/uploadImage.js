@@ -2,6 +2,10 @@ import {openModal, updateImageModal} from './modalImage';
 
 export let renderUploadImage = () => {
 
+    document.addEventListener("renderFormModules",( event =>{
+        renderUploadImage();
+    }));
+
     let inputElements = document.querySelectorAll(".upload-image-input");
     let uploadImages = document.querySelectorAll(".upload-image");
 

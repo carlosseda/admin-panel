@@ -1,6 +1,10 @@
 
 export let renderBlockParameters = () => {
 
+    document.addEventListener("renderFormModules",( event =>{
+        renderBlockParameters();
+    }));
+
     let blockParameters = document.querySelectorAll('.block-parameters');
 
     if(blockParameters){

@@ -1,8 +1,10 @@
 import {openModal, renderMenuItemForm} from './modalMenuItem';
-import {startOverlay} from './wait';
-import {renderSelects} from './selects';
 
 export let renderMenuItems = () => {
+
+    document.addEventListener("renderFormModules",( event =>{
+        renderMenuItems();
+    }));
 
     let createButtons = document.querySelectorAll('.menu-item-create');
     let editButtons = document.querySelectorAll('.menu-item-edit');
@@ -23,27 +25,38 @@ export let renderMenuItems = () => {
 
                 let sendMenuItemRequest = async () => {
 
-                    try {
-                        axios.get(url, {
-                            params: {
-                              'language': language
-                            }
-                        }).then(response => {
-                                
-                            modalContainer.innerHTML = response.data.form;
-                            document.getElementById('menu-item-language').value = language;
-                            document.getElementById('menu-id').value = menu;
-                            renderSelects();
-                            renderMenuItemForm();
+                    let response = await fetch(url.searchParams.append(language, language), {
+                        headers: {
+                            'X-Requested-With': 'XMLHttpRequest',
+                        },
+                        method: 'GET', 
+                    })
+                    .then(response => {
+                                  
+                        if (!response.ok) throw response;
+    
+                        return response.json();
+                    })
+                    .then(json => {
+    
+                        modalContainer.innerHTML = json.form;
+                        document.getElementById('menu-item-language').value = language;
+                        document.getElementById('menu-id').value = menu;
+                        document.dispatchEvent(new CustomEvent('renderFormModules'));
+                        renderMenuItemForm();
 
-                            setTimeout(function(){ 
-                                openModal()}
-                            , 200);
-                        });
-                        
-                    } catch (error) {
-            
-                    }
+                        setTimeout(function(){ 
+                            openModal()}
+                        , 200);
+
+                    })
+                    .catch(error =>  {
+        
+                        if(error.status == '500'){
+                            console.log(error);
+                        };
+                    });
+
                 };
         
                 sendMenuItemRequest();
@@ -63,20 +76,34 @@ export let renderMenuItems = () => {
     
                 let sendEditRequest = async () => {
     
-                    try {
-                        await axios.get(url).then(response => {
-                            modalContainer.innerHTML = response.data.form;
-                            renderSelects();
-                            renderMenuItemForm();
-                            
-                            setTimeout(function(){ 
-                                openModal()}
-                            , 200);
-                        });
-                        
-                    } catch (error) {
-                        console.error(error);
-                    }
+                    let response = await fetch(url, {
+                        headers: {
+                            'X-Requested-With': 'XMLHttpRequest',
+                        },
+                        method: 'GET', 
+                    })
+                    .then(response => {
+                                  
+                        if (!response.ok) throw response;
+    
+                        return response.json();
+                    })
+                    .then(json => {
+    
+                        modalContainer.innerHTML = response.data.form;
+                        document.dispatchEvent(new CustomEvent('renderFormModules'));
+                        renderMenuItemForm();
+
+                        setTimeout(function(){ 
+                            openModal()}
+                        , 200);
+                    })
+                    .catch(error =>  {
+        
+                        if(error.status == '500'){
+                            console.log(error);
+                        };
+                    });
                 };
     
                 sendEditRequest();
@@ -93,7 +120,7 @@ export let renderMenuItems = () => {
                 let url = deleteButton.dataset.route + '/' + deleteButton.dataset.id;
                 deleteConfirm.dataset.url = url;
                 modalDelete.classList.add('modal-active');
-                startOverlay();
+                document.dispatchEvent(new CustomEvent('startOverlay'));
             });
         });
     }

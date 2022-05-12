@@ -1,19 +1,25 @@
-const spinner = document.getElementById('spinner');
-const overlay = document.getElementById('overlay');
+export let renderWait = () => {
 
-export let startWait = () => {
-    spinner.classList.add('spinner-active');
-    overlay.classList.add('overlay-active');
-}
+    let spinner = document.getElementById('spinner');
+    let overlay = document.getElementById('overlay');
 
-export let stopWait = () => {
-    spinner.classList.remove('spinner-active');
-    overlay.classList.remove('overlay-active');
-}
+    document.addEventListener("startWait",( event =>{
+        spinner.classList.add('spinner-active');
+        overlay.classList.add('overlay-active');
+    }));
 
-export let startOverlay = () => {
-    
-    overlay.classList.add('overlay-active');
+    document.addEventListener("stoptWait",( event =>{
+        spinner.classList.remove('spinner-active');
+        overlay.classList.remove('overlay-active');
+    }));
+
+    document.addEventListener("startOverlay",( event =>{
+        overlay.classList.add('overlay-active');
+    }));
+
+    document.addEventListener("stopOverlay",( event =>{
+        overlay.classList.remove('overlay-active');
+    }));
 
     overlay.addEventListener("click", (e) => {
         
@@ -26,10 +32,5 @@ export let startOverlay = () => {
         }); 
 
         overlay.classList.remove('overlay-active');
-
     })
-}
-
-export let stopOverlay = () => {
-    overlay.classList.remove('overlay-active');
 }

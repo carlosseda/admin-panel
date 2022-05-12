@@ -1,6 +1,8 @@
-import {renderTable} from './crudTable';
-
 export let renderPagination = () => {
+
+    document.addEventListener("renderTableModules",( event =>{
+        renderPagination();
+    }));
 
     let paginationButtons = document.querySelectorAll('.table-pagination-button');
 
@@ -12,15 +14,34 @@ export let renderPagination = () => {
 
             let sendPaginationRequest = async () => {
 
-                try {
-                    await axios.get(url).then(response => {
-                        table.innerHTML = response.data.table;
-                        renderTable();
-                    });
-                    
-                } catch (error) {
-                    console.error(error);
-                }
+                let response = await fetch(url, {
+                    headers: {
+                        'Accept': 'application/json',
+                    },
+                    method: 'GET',
+                })
+                .then(response => {
+                
+                    if (!response.ok) throw response;
+
+                    return response.json();
+                })
+                .then(json => {
+
+                    document.dispatchEvent(new CustomEvent('loadTable', {
+                        detail: {
+                            table: json.table,
+                        }
+                    }));
+
+                    document.dispatchEvent(new CustomEvent('renderTableModules'));
+                })
+                .catch ( error =>  {
+
+                    if(error.status == '500'){
+                        console.log(error);
+                    };
+                });
             };
 
             sendPaginationRequest();

@@ -2,6 +2,10 @@ import NestedSort from 'nested-sort';
 import {renderMenuItems} from './menuItems';
 
 export let renderNestedSortables = () => {
+    
+    document.addEventListener("renderFormModules",( event =>{
+        renderNestedSortables();
+    }));
 
     let nestedContainers = document.querySelectorAll('.nested-sort-wrap');
 

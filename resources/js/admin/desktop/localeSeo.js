@@ -1,10 +1,10 @@
-import {renderTable} from './crudTable';
-import {showMessage} from './messages';
-
 export let renderLocaleSeo = () => {
 
-    let table = document.getElementById("table");
     let importSeo = document.getElementById('import-seo');
+
+    document.addEventListener("renderFormModules",( event =>{
+        renderLocaleSeo();
+    }));
 
     if(importSeo){
 
@@ -13,18 +13,43 @@ export let renderLocaleSeo = () => {
             let url = importSeo.dataset.url;
         
             let sendEditRequest = async () => {
-    
-                try {
-                    await axios.get(url).then(response => {
-                        table.innerHTML = response.data.table;
-                        renderTable();
-                        showMessage('success', response.data.message);
-                        stopWait();
-                    });
-                    
-                } catch (error) {
-                    console.error(error);
-                }
+
+                let response = await fetch(url, {
+                    headers: {
+                        'Accept': 'application/json',
+                    },
+                    method: 'GET',
+                })
+                .then(response => {
+                
+                    if (!response.ok) throw response;
+
+                    return response.json();
+                })
+                .then(json => {
+
+                    document.dispatchEvent(new CustomEvent('loadTable', {
+                        detail: {
+                            table: json.table,
+                        }
+                    }));
+
+                    document.dispatchEvent(new CustomEvent('renderTableModules'));
+                    document.dispatchEvent(new CustomEvent('stopWait'));
+
+                    document.dispatchEvent(new CustomEvent('message', {
+                        detail: {
+                            message: json.message,
+                            type: 'success'
+                        }
+                    }));
+                })
+                .catch ( error =>  {
+
+                    if(error.status == '500'){
+                        console.log(error);
+                    };
+                });
             };
     
             sendEditRequest();

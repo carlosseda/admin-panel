@@ -1,5 +1,9 @@
 export let renderInputCounter = () => {
 
+    document.addEventListener("renderFormModules",( event =>{
+        renderInputCounter();
+    }));
+
     let inputCounters = document.querySelectorAll('.input-counter');
     
     inputCounters.forEach(inputCounter => {

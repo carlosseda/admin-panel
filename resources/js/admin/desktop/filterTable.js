@@ -1,8 +1,5 @@
-import {renderTable} from './crudTable';
-
 export let renderFilterTable = () => {
 
-    let table = document.getElementById("table");
     let tableFilter = document.getElementById("table-filter");
     let filterForm = document.getElementById("filter-form");
 
@@ -19,6 +16,7 @@ export let renderFilterTable = () => {
         
         applyFilter.addEventListener( 'click', () => {     
             
+            let url = filterForm.action;
             let data = new FormData(filterForm);
             let filters = {};
             
@@ -27,33 +25,51 @@ export let renderFilterTable = () => {
             });
             
             let json = JSON.stringify(filters);
-
-            let url = filterForm.action;
     
             let sendFilterRequest = async () => {
     
-                try {
-                    axios.get(url, {
-                        params: {
-                          filters: json
-                        }
-                    }).then(response => {
-                        table.classList.add('table-hide');
-                        table.innerHTML = response.data.table;
-                        renderTable();
+                document.dispatchEvent(new CustomEvent('loadForm', {
+                    detail: {
+                        form: json.form,
+                    }
+                }));
 
-                        setTimeout(function(){
-                            table.classList.remove('table-hide');
-                        }, 500)
-                        
-                        tableFilter.classList.remove('filter-active')
-                        applyFilter.classList.remove('button-active');
-                        openFilter.classList.add('button-active');
-                    });
+                let response = await fetch(url.searchParams.append(filters, json), {
+                    headers: {
+                        'X-Requested-With': 'XMLHttpRequest',
+                    },
+                    method: 'GET', 
+                })
+                .then(response => {
+                              
+                    if (!response.ok) throw response;
+
+                    return response.json();
+                })
+                .then(json => {
+
+                    renderTable();
+
+                    document.dispatchEvent(new CustomEvent('loadTable', {
+                        detail: {
+                            table: json.table,
+                        }
+                    }));
+
+                    document.dispatchEvent(new CustomEvent('renderTableModules'));
                     
-                } catch (error) {
-    
-                }
+                    tableFilter.classList.remove('filter-active')
+                    applyFilter.classList.remove('button-active');
+                    openFilter.classList.add('button-active');
+                })
+                .catch(error =>  {
+
+                    document.dispatchEvent(new CustomEvent('stopWait'));
+
+                    if(error.status == '500'){
+                        console.log(error);
+                    };
+                });
             };
     
             sendFilterRequest();

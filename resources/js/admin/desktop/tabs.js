@@ -1,5 +1,9 @@
 export let renderTabs = () => {
 
+    document.addEventListener("renderFormModules",( event =>{
+        renderTabs();
+    }));
+
     let tabsItems = document.querySelectorAll('.tab-item');
     let tabPanels = document.querySelectorAll(".tab-panel");
 

@@ -1,18 +1,4 @@
-import {renderMenuItems} from './menuItems';
-import {renderForm} from './crudTable';
-import {startOverlay, stopWait} from './wait';
-import {showMessage} from './messages';
-
-
-export let openModal = () => {
-
-    let modal = document.getElementById('menu-item-modal');
-    modal.classList.add('modal-active');
-    
-    startOverlay();
-}
-
-export let renderMenuItemForm = () => {
+export let renderModalMenuItem = () => {
 
     let menuItemStoreButton = document.getElementById('modal-menu-item-store-button');
 
@@ -28,27 +14,86 @@ export let renderMenuItemForm = () => {
             let id = document.getElementById('modal-image-id');
         
             let sendItemMenuPostRequest = async () => {
+
+                let response = await fetch(url, {
+                    headers: {
+                        'Accept': 'application/json',
+                        'X-CSRF-TOKEN': document.head.querySelector('meta[name="csrf-token"]').content
+                    },
+                    method: 'POST',
+                    body: data
+                })
+                .then(response => {
+                
+                    if (!response.ok) throw response;
+
+                    return response.json();
+                })
+                .then(json => {
+
+                    menuItemFormContainer.innerHTML = json.form;
+                    modal.classList.remove('modal-active');
+                    id.value = "";
+                    itemMenuForm.reset();
+
+                    document.dispatchEvent(new CustomEvent('loadTable', {
+                        detail: {
+                            table: json.table,
+                        }
+                    }));
+
+                    document.dispatchEvent(new CustomEvent('renderFormModules'));
+                    document.dispatchEvent(new CustomEvent('stopWait'));
+
+                    document.dispatchEvent(new CustomEvent('message', {
+                        detail: {
+                            message: json.message,
+                            type: 'success'
+                        }
+                    }));
+                })
+                .catch ( error =>  {
+
+                    document.dispatchEvent(new CustomEvent('stopWait'));
+
+                    if(error.status == '422'){
+    
+                        error.json().then(jsonError => {
+
+                            let errors = jsonError.errors;      
+                            let errorMessage = '';
         
-                try {
-                    axios.post(url, data).then(response => {
-        
-                        menuItemFormContainer.innerHTML = response.data.form;
-                        modal.classList.remove('modal-active');
-                        id.value = "";
-                        itemMenuForm.reset();
-                        renderMenuItems();
-                        renderForm();
-                        stopWait();
-                        showMessage('success', response.data.message);
-                    });
-                    
-                } catch (error) {
-        
-                }
+                            Object.keys(errors).forEach(function(key) {
+                                errorMessage += '<li>' + errors[key] + '</li>';
+                            })
+            
+                            document.dispatchEvent(new CustomEvent('message', {
+                                detail: {
+                                    message: errorMessage,
+                                    type: 'success'
+                                }
+                            }));
+                        })   
+                    }
+
+                    if(error.status == '500'){
+                        console.log(error);
+                    };
+                });
             };
         
             sendItemMenuPostRequest();
         });    
     }
+
 }
+
+export let openModal = () => {
+
+    let modal = document.getElementById('menu-item-modal');
+    modal.classList.add('modal-active');
+    
+    document.dispatchEvent(new CustomEvent('startOverlay'));
+}
+
 
