@@ -72,7 +72,7 @@ modalImageStoreButton.addEventListener("click", (e) => {
                         message: json.message,
                         type: 'success'
                     }
-                }));
+                }));              
             });
             
         } catch (error) {

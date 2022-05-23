@@ -1,123 +1,80 @@
-import {startOverlay, stopWait} from './wait';
-import {showMessage} from './messages';
-import {deleteThumbnail} from './uploadImage';
+export let renderModalDelete = () => {
 
-let modalImageStoreButton = document.getElementById('modal-image-store-button');
-let modalImageDeleteButton = document.getElementById('modal-image-delete-button');
+    let modalDelete = document.getElementById('modal-delete');
+    let deleteConfirm = document.getElementById('delete-confirm');
+    let deleteCancel = document.getElementById('delete-cancel');
 
-export let openModal = () => {
-
-    let modal = document.getElementById('upload-image-modal');
-
-    modal.classList.add('modal-active');
-    startOverlay();
-}
-
-export let updateImageModal = (image) => {
-
-    let imageContainer = document.getElementById('modal-image-original');
-    let imageForm = document.getElementById('image-form');
-
-    imageForm.reset();
-
-    if(image.path){
-
-        if(image.entity_id){
-            image.imageId = image.id; 
-            imageContainer.src = '../storage/' + image.path;
-        }else{
-            imageContainer.src = image.path;
-        }
-
-    }else{
-
-        imageContainer.src = image.dataset.path;
-        image = image.dataset;
-    }
- 
-    for (var [key, val] of Object.entries(image)) {
-
-        let input = imageForm.elements[key];
+    document.addEventListener("openModalDelete",( event =>{
         
-        if(input){
+        deleteConfirm.dataset.url = event.detail.url;
+        modalDelete.classList.add('modal-active');
+    }));
 
-            switch(input.type) {
-                case 'checkbox': input.checked = !!val; break;
-                default:         input.value = val;     break;
-            }
-        }
-    }
-}
+    deleteCancel.addEventListener("click", () => {
+        modalDelete.classList.remove('modal-active');
+        document.dispatchEvent(new CustomEvent('stopWait'));
+    });
 
-modalImageStoreButton.addEventListener("click", (e) => {
-         
-    let modal = document.getElementById('upload-image-modal');
-    let imageForm = document.getElementById('image-form');
-    let url = imageForm.action;
-    let data = new FormData(imageForm);
-    let temporalId = document.getElementById('modal-image-temporal-id');
-    let id = document.getElementById('modal-image-id');
+    deleteConfirm.addEventListener("click", () => {
 
-    let sendImagePostRequest = async () => {
+        let url = deleteConfirm.dataset.url;
 
-        try {
-            axios.post(url, data).then(response => {
+        console.log(url);
+    
+        let sendDeleteRequest = async () => {
 
-                modal.classList.remove('modal-active');
-                temporalId.value = "";
-                id.value = "";
-                imageForm.reset();
-                stopWait();
-                showMessage('success', response.data.message);
-              
-            });
-            
-        } catch (error) {
+            let response = await fetch(url, {
+                headers: {
+                    'X-Requested-With': 'XMLHttpRequest',
+                    'X-CSRF-TOKEN': document.head.querySelector('meta[name="csrf-token"]').content
+                },
+                method: 'DELETE', 
+            })
+            .then(response => {
+                          
+                if (!response.ok) throw response;
 
-        }
-    };
+                return response.json();
+            })
+            .then(json => {
 
-    sendImagePostRequest();
-});
+                if(json.table){
+                    document.dispatchEvent(new CustomEvent('loadTable', {
+                        detail: {
+                            table: json.table,
+                        }
+                    }));
+                }
 
-modalImageDeleteButton.addEventListener("click", (e) => {
-         
-    let url = modalImageDeleteButton.dataset.route;
-    let modal = document.getElementById('upload-image-modal');
-    let imageForm = document.getElementById('image-form');
-    let temporalId = document.getElementById('modal-image-temporal-id');
-    let id = document.getElementById('modal-image-id');
-
-    if(id.value){
-
-        let sendImageDeleteRequest = async () => {
-
-            try {
-                
-                axios.get(url, {
-                    params: {
-                      'image': id.value
+                document.dispatchEvent(new CustomEvent('loadForm', {
+                    detail: {
+                        form: json.form,
                     }
-                }).then(response => {
-                    deleteThumbnail(response.data.imageId);
-                    showMessage('success', response.data.message);
-                });
-                
-            } catch (error) {
-    
-            }
+                }));
+
+                modalDelete.classList.remove('modal-active');
+
+                document.dispatchEvent(new CustomEvent('renderFormModules'));
+                document.dispatchEvent(new CustomEvent('renderTableModules'));
+
+                document.dispatchEvent(new CustomEvent('stopWait'));
+                document.dispatchEvent(new CustomEvent('message', {
+                    detail: {
+                        message: json.message,
+                        type: 'success'
+                    }
+                }));
+            })
+            .catch(error =>  {
+
+                document.dispatchEvent(new CustomEvent('stopWait'));
+
+                if(error.status == '500'){
+                    console.log(error);
+                };
+            });
         };
-    
-        sendImageDeleteRequest();
 
-    }else{
-
-        deleteThumbnail(temporalId.value);
-    }
-
-    temporalId.value = "";
-    id.value = "";
-    imageForm.reset();
-    modal.classList.remove('modal-active');
-    stopWait();
-});
+        sendDeleteRequest();
+    });   
+}

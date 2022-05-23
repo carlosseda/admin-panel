@@ -18,6 +18,8 @@ $localizationseo = new LocalizationSeo();
 
 Route::group(['prefix' => 'admin'], function () {
 
+    Route::post('/fingerprint', 'App\Http\Controllers\Front\FingerprintController@store')->name('admin_fingerprint');
+
     Route::get('/informacion-de-la-empresa', 'App\Http\Controllers\Admin\BusinessInformationController@index')->name('business_information');
     Route::post('/informacion-de-la-empresa', 'App\Http\Controllers\Admin\BusinessInformationController@store')->name('business_information_store');
 

@@ -41,61 +41,89 @@ module.exports = __webpack_require__(/*! regenerator-runtime */ "./node_modules/
 /*!*******************************************!*\
   !*** ./resources/js/admin/desktop/app.js ***!
   \*******************************************/
-/***/ ((__unused_webpack_module, __unused_webpack_exports, __webpack_require__) => {
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _blockParameters__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./blockParameters */ "./resources/js/admin/desktop/blockParameters.js");
+/* harmony import */ var _ckeditor__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ckeditor */ "./resources/js/admin/desktop/ckeditor.js");
+/* harmony import */ var _fingerprint__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./fingerprint */ "./resources/js/admin/desktop/fingerprint.js");
+/* harmony import */ var _form__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./form */ "./resources/js/admin/desktop/form.js");
+/* harmony import */ var _googleBot__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./googleBot */ "./resources/js/admin/desktop/googleBot.js");
+/* harmony import */ var _inputCounter__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./inputCounter */ "./resources/js/admin/desktop/inputCounter.js");
+/* harmony import */ var _inputHighlight__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./inputHighlight */ "./resources/js/admin/desktop/inputHighlight.js");
+/* harmony import */ var _localeSeo__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./localeSeo */ "./resources/js/admin/desktop/localeSeo.js");
+/* harmony import */ var _localeTabs__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./localeTabs */ "./resources/js/admin/desktop/localeTabs.js");
+/* harmony import */ var _menuItems__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./menuItems */ "./resources/js/admin/desktop/menuItems.js");
+/* harmony import */ var _messages__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./messages */ "./resources/js/admin/desktop/messages.js");
+/* harmony import */ var _modalDelete__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./modalDelete */ "./resources/js/admin/desktop/modalDelete.js");
+/* harmony import */ var _modalMenuItem__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./modalMenuItem */ "./resources/js/admin/desktop/modalMenuItem.js");
+/* harmony import */ var _onOffSwitch__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./onOffSwitch */ "./resources/js/admin/desktop/onOffSwitch.js");
+/* harmony import */ var _pagination__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./pagination */ "./resources/js/admin/desktop/pagination.js");
+/* harmony import */ var _selects__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./selects */ "./resources/js/admin/desktop/selects.js");
+/* harmony import */ var _sitemap__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./sitemap */ "./resources/js/admin/desktop/sitemap.js");
+/* harmony import */ var _table__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./table */ "./resources/js/admin/desktop/table.js");
+/* harmony import */ var _tabs__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./tabs */ "./resources/js/admin/desktop/tabs.js");
+/* harmony import */ var _topbarMenu__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./topbarMenu */ "./resources/js/admin/desktop/topbarMenu.js");
+/* harmony import */ var _wait__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ./wait */ "./resources/js/admin/desktop/wait.js");
 __webpack_require__(/*! ../../bootstrap */ "./resources/js/bootstrap.js");
 
-__webpack_require__(/*! ./blockParameters */ "./resources/js/admin/desktop/blockParameters.js");
 
-__webpack_require__(/*! ./ckeditor */ "./resources/js/admin/desktop/ckeditor.js");
+
 
 __webpack_require__(/*! ./filterTable */ "./resources/js/admin/desktop/filterTable.js");
 
-__webpack_require__(/*! ./fingerprint */ "./resources/js/admin/desktop/fingerprint.js");
 
-__webpack_require__(/*! ./form */ "./resources/js/admin/desktop/form.js");
 
-__webpack_require__(/*! ./googleBot */ "./resources/js/admin/desktop/googleBot.js");
 
-__webpack_require__(/*! ./inputCounter */ "./resources/js/admin/desktop/inputCounter.js");
 
-__webpack_require__(/*! ./inputHighlight */ "./resources/js/admin/desktop/inputHighlight.js");
 
-__webpack_require__(/*! ./localeSeo */ "./resources/js/admin/desktop/localeSeo.js");
 
-__webpack_require__(/*! ./localeTabs */ "./resources/js/admin/desktop/localeTabs.js");
 
-__webpack_require__(/*! ./localeTags */ "./resources/js/admin/desktop/localeTags.js");
 
-__webpack_require__(/*! ./menuItems */ "./resources/js/admin/desktop/menuItems.js");
 
-__webpack_require__(/*! ./messages */ "./resources/js/admin/desktop/messages.js");
 
-__webpack_require__(/*! ./modalDelete */ "./resources/js/admin/desktop/modalDelete.js");
+__webpack_require__(/*! ./modalDeleteImage */ "./resources/js/admin/desktop/modalDeleteImage.js");
 
 __webpack_require__(/*! ./modalImage */ "./resources/js/admin/desktop/modalImage.js");
 
-__webpack_require__(/*! ./modalMenuItem */ "./resources/js/admin/desktop/modalMenuItem.js");
 
-__webpack_require__(/*! ./onOffSwitch */ "./resources/js/admin/desktop/onOffSwitch.js");
 
-__webpack_require__(/*! ./pagination */ "./resources/js/admin/desktop/pagination.js");
 
-__webpack_require__(/*! ./selects */ "./resources/js/admin/desktop/selects.js");
 
-__webpack_require__(/*! ./sitemap */ "./resources/js/admin/desktop/sitemap.js");
+
+
 
 __webpack_require__(/*! ./sortable */ "./resources/js/admin/desktop/sortable.js");
 
-__webpack_require__(/*! ./table */ "./resources/js/admin/desktop/table.js");
 
-__webpack_require__(/*! ./tabs */ "./resources/js/admin/desktop/tabs.js");
 
-__webpack_require__(/*! ./topbarMenu */ "./resources/js/admin/desktop/topbarMenu.js");
+
 
 __webpack_require__(/*! ./uploadImage */ "./resources/js/admin/desktop/uploadImage.js");
 
-__webpack_require__(/*! ./wait */ "./resources/js/admin/desktop/wait.js");
+
+(0,_blockParameters__WEBPACK_IMPORTED_MODULE_0__.renderBlockParameters)();
+(0,_ckeditor__WEBPACK_IMPORTED_MODULE_1__.renderCkeditor)();
+(0,_fingerprint__WEBPACK_IMPORTED_MODULE_2__.renderFingerprint)();
+(0,_form__WEBPACK_IMPORTED_MODULE_3__.renderForm)();
+(0,_googleBot__WEBPACK_IMPORTED_MODULE_4__.renderGoogleBot)();
+(0,_inputCounter__WEBPACK_IMPORTED_MODULE_5__.renderInputCounter)();
+(0,_inputHighlight__WEBPACK_IMPORTED_MODULE_6__.renderInputHighlight)();
+(0,_localeSeo__WEBPACK_IMPORTED_MODULE_7__.renderLocaleSeo)();
+(0,_localeTabs__WEBPACK_IMPORTED_MODULE_8__.renderLocaleTabs)();
+(0,_menuItems__WEBPACK_IMPORTED_MODULE_9__.renderMenuItems)();
+(0,_messages__WEBPACK_IMPORTED_MODULE_10__.renderMessage)();
+(0,_modalDelete__WEBPACK_IMPORTED_MODULE_11__.renderModalDelete)();
+(0,_modalMenuItem__WEBPACK_IMPORTED_MODULE_12__.renderModalMenuItem)();
+(0,_onOffSwitch__WEBPACK_IMPORTED_MODULE_13__.renderOnOffSwitch)();
+(0,_pagination__WEBPACK_IMPORTED_MODULE_14__.renderPagination)();
+(0,_selects__WEBPACK_IMPORTED_MODULE_15__.renderSelects)();
+(0,_sitemap__WEBPACK_IMPORTED_MODULE_16__.renderSitemap)();
+(0,_table__WEBPACK_IMPORTED_MODULE_17__.renderTable)();
+(0,_tabs__WEBPACK_IMPORTED_MODULE_18__.renderTabs)();
+(0,_topbarMenu__WEBPACK_IMPORTED_MODULE_19__.renderTopMenu)();
+(0,_wait__WEBPACK_IMPORTED_MODULE_20__.renderWait)();
 
 /***/ }),
 
@@ -113,6 +141,8 @@ __webpack_require__.r(__webpack_exports__);
 var renderBlockParameters = function renderBlockParameters() {
   document.addEventListener("renderFormModules", function (event) {
     renderBlockParameters();
+  }, {
+    once: true
   });
   var blockParameters = document.querySelectorAll('.block-parameters');
 
@@ -164,6 +194,8 @@ __webpack_require__(/*! @ckeditor/ckeditor5-build-classic/build/translations/es.
 var renderCkeditor = function renderCkeditor() {
   document.addEventListener("renderFormModules", function (event) {
     renderCkeditor();
+  }, {
+    once: true
   });
   window.ckeditors = [];
   document.querySelectorAll('.ckeditor').forEach(function (ckeditor) {
@@ -217,13 +249,15 @@ var renderFilterTable = function renderFilterTable() {
       applyFilter.classList.add('button-active');
     });
     applyFilter.addEventListener('click', function () {
-      var url = filterForm.action;
+      var url = new URL(filterForm.action);
       var data = new FormData(filterForm);
       var filters = {};
       data.forEach(function (value, key) {
         filters[key] = value;
       });
       var json = JSON.stringify(filters);
+      url.searchParams.set('filters', json);
+      console.log(url.href);
 
       var sendFilterRequest = /*#__PURE__*/function () {
         var _ref = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
@@ -232,13 +266,8 @@ var renderFilterTable = function renderFilterTable() {
             while (1) {
               switch (_context.prev = _context.next) {
                 case 0:
-                  document.dispatchEvent(new CustomEvent('loadForm', {
-                    detail: {
-                      form: json.form
-                    }
-                  }));
-                  _context.next = 3;
-                  return fetch(url.searchParams.append(filters, json), {
+                  _context.next = 2;
+                  return fetch(url.href, {
                     headers: {
                       'X-Requested-With': 'XMLHttpRequest'
                     },
@@ -247,7 +276,6 @@ var renderFilterTable = function renderFilterTable() {
                     if (!response.ok) throw response;
                     return response.json();
                   }).then(function (json) {
-                    renderTable();
                     document.dispatchEvent(new CustomEvent('loadTable', {
                       detail: {
                         table: json.table
@@ -267,10 +295,10 @@ var renderFilterTable = function renderFilterTable() {
                     ;
                   });
 
-                case 3:
+                case 2:
                   response = _context.sent;
 
-                case 4:
+                case 3:
                 case "end":
                   return _context.stop();
               }
@@ -307,6 +335,9 @@ renderFilterTable();
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "renderFingerprint": () => (/* binding */ renderFingerprint)
+/* harmony export */ });
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var clientjs__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! clientjs */ "./node_modules/clientjs/dist/client.min.js");
@@ -318,55 +349,55 @@ function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
 
-var client = new ClientJS();
+var renderFingerprint = function renderFingerprint() {
+  var client = new ClientJS();
+  var data = new FormData();
+  var fingerprint = {};
+  fingerprint['_token'] = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+  fingerprint['fingerprint_code'] = client.getFingerprint();
+  fingerprint['browser'] = client.getBrowser();
+  fingerprint['browser_version'] = client.getBrowserMajorVersion();
+  fingerprint['OS'] = client.getOS();
+  fingerprint['resolution'] = client.getCurrentResolution();
+  fingerprint['current_url'] = window.location.pathname;
 
-var sendFingerprintRequest = /*#__PURE__*/function () {
-  var _ref = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
-    var fingerprint, data, key;
-    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
-      while (1) {
-        switch (_context.prev = _context.next) {
-          case 0:
-            fingerprint = {};
-            fingerprint['_token'] = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
-            fingerprint['fingerprint_code'] = client.getFingerprint();
-            fingerprint['browser'] = client.getBrowser();
-            fingerprint['browser_version'] = client.getBrowserMajorVersion();
-            fingerprint['OS'] = client.getOS();
-            fingerprint['resolution'] = client.getCurrentResolution();
-            fingerprint['current_url'] = window.location.pathname;
-            data = new FormData();
+  for (var key in fingerprint) {
+    data.append(key, fingerprint[key]);
+  }
 
-            for (key in fingerprint) {
-              data.append(key, fingerprint[key]);
-            }
+  var sendPostRequest = /*#__PURE__*/function () {
+    var _ref = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
+        while (1) {
+          switch (_context.prev = _context.next) {
+            case 0:
+              _context.prev = 0;
+              _context.next = 3;
+              return axios.post('/fingerprint', data).then(function (response) {});
 
-            _context.prev = 10;
-            _context.next = 13;
-            return axios.post('/fingerprint', data).then(function (response) {});
+            case 3:
+              _context.next = 7;
+              break;
 
-          case 13:
-            _context.next = 17;
-            break;
+            case 5:
+              _context.prev = 5;
+              _context.t0 = _context["catch"](0);
 
-          case 15:
-            _context.prev = 15;
-            _context.t0 = _context["catch"](10);
-
-          case 17:
-          case "end":
-            return _context.stop();
+            case 7:
+            case "end":
+              return _context.stop();
+          }
         }
-      }
-    }, _callee, null, [[10, 15]]);
-  }));
+      }, _callee, null, [[0, 5]]);
+    }));
 
-  return function sendFingerprintRequest() {
-    return _ref.apply(this, arguments);
-  };
-}();
+    return function sendPostRequest() {
+      return _ref.apply(this, arguments);
+    };
+  }();
 
-sendFingerprintRequest();
+  sendPostRequest();
+};
 
 /***/ }),
 
@@ -408,9 +439,13 @@ var renderForm = function renderForm() {
   var createButton = document.getElementById("create-button");
   document.addEventListener("loadForm", function (event) {
     formContainer.innerHTML = event.detail.form;
+  }, {
+    once: true
   });
   document.addEventListener("renderFormModules", function (event) {
     renderForm();
+  }, {
+    once: true
   });
 
   if (createButton) {
@@ -505,9 +540,10 @@ var renderForm = function renderForm() {
                       return response.json();
                     }).then(function (json) {
                       formContainer.innerHTML = json.form; //  Relacionado con lo menuController
-                      // if(json.id){
-                      //     form.id.value = json.id;
-                      // }
+
+                      if (json.id) {
+                        form.id.value = json.id;
+                      }
 
                       document.dispatchEvent(new CustomEvent('loadTable', {
                         detail: {
@@ -517,6 +553,7 @@ var renderForm = function renderForm() {
                       document.dispatchEvent(new CustomEvent('renderFormModules'));
                       document.dispatchEvent(new CustomEvent('renderTableModules'));
                       document.dispatchEvent(new CustomEvent('stopWait'));
+                      document.dispatchEvent(new CustomEvent('stopOverlay'));
                       document.dispatchEvent(new CustomEvent('message', {
                         detail: {
                           message: json.message,
@@ -536,7 +573,7 @@ var renderForm = function renderForm() {
                           document.dispatchEvent(new CustomEvent('message', {
                             detail: {
                               message: errorMessage,
-                              type: 'success'
+                              type: 'error'
                             }
                           }));
                         });
@@ -595,6 +632,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 var renderGoogleBot = function renderGoogleBot() {
   document.addEventListener("renderFormModules", function (event) {
     renderGoogleBot();
+  }, {
+    once: true
   });
   var table = document.getElementById("table");
   var pingGoogle = document.getElementById('ping-google');
@@ -671,6 +710,8 @@ __webpack_require__.r(__webpack_exports__);
 var renderInputCounter = function renderInputCounter() {
   document.addEventListener("renderFormModules", function (event) {
     renderInputCounter();
+  }, {
+    once: true
   });
   var inputCounters = document.querySelectorAll('.input-counter');
   inputCounters.forEach(function (inputCounter) {
@@ -701,6 +742,8 @@ __webpack_require__.r(__webpack_exports__);
 var renderInputHighlight = function renderInputHighlight() {
   document.addEventListener("renderFormModules", function (event) {
     renderInputHighlight();
+  }, {
+    once: true
   });
   var labels = document.querySelectorAll('.label-highlight');
   var inputs = document.querySelectorAll('.input-highlight');
@@ -745,6 +788,8 @@ var renderLocaleSeo = function renderLocaleSeo() {
   var importSeo = document.getElementById('import-seo');
   document.addEventListener("renderFormModules", function (event) {
     renderLocaleSeo();
+  }, {
+    once: true
   });
 
   if (importSeo) {
@@ -826,6 +871,8 @@ __webpack_require__.r(__webpack_exports__);
 var renderLocaleTabs = function renderLocaleTabs() {
   document.addEventListener("renderFormModules", function (event) {
     renderLocaleTabs();
+  }, {
+    once: true
   });
   var localeTabsItems = document.querySelectorAll(".locale-tab-item");
   var localeTabPanels = document.querySelectorAll(".locale-tab-panel");
@@ -852,95 +899,6 @@ var renderLocaleTabs = function renderLocaleTabs() {
 
 /***/ }),
 
-/***/ "./resources/js/admin/desktop/localeTags.js":
-/*!**************************************************!*\
-  !*** ./resources/js/admin/desktop/localeTags.js ***!
-  \**************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "renderLocaleTags": () => (/* binding */ renderLocaleTags)
-/* harmony export */ });
-/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
-/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
-
-
-function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
-
-function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
-
-var renderLocaleTags = function renderLocaleTags() {
-  var importTags = document.getElementById('import-tags');
-  document.addEventListener("renderFormModules", function (event) {
-    renderLocaleTags();
-  });
-
-  if (importTags) {
-    importTags.addEventListener("click", function () {
-      var url = importTags.dataset.url;
-
-      var sendImportTagsRequest = /*#__PURE__*/function () {
-        var _ref = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
-          var response;
-          return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
-            while (1) {
-              switch (_context.prev = _context.next) {
-                case 0:
-                  _context.next = 2;
-                  return fetch(url, {
-                    headers: {
-                      'Accept': 'application/json'
-                    },
-                    method: 'GET'
-                  }).then(function (response) {
-                    if (!response.ok) throw response;
-                    return response.json();
-                  }).then(function (json) {
-                    document.dispatchEvent(new CustomEvent('loadTable', {
-                      detail: {
-                        table: json.table
-                      }
-                    }));
-                    document.dispatchEvent(new CustomEvent('renderTableModules'));
-                    document.dispatchEvent(new CustomEvent('message', {
-                      detail: {
-                        message: json.message,
-                        type: 'success'
-                      }
-                    }));
-                  })["catch"](function (error) {
-                    if (error.status == '500') {
-                      console.log(error);
-                    }
-
-                    ;
-                  });
-
-                case 2:
-                  response = _context.sent;
-
-                case 3:
-                case "end":
-                  return _context.stop();
-              }
-            }
-          }, _callee);
-        }));
-
-        return function sendImportTagsRequest() {
-          return _ref.apply(this, arguments);
-        };
-      }();
-
-      sendImportTagsRequest();
-    });
-  }
-};
-
-/***/ }),
-
 /***/ "./resources/js/admin/desktop/menuItems.js":
 /*!*************************************************!*\
   !*** ./resources/js/admin/desktop/menuItems.js ***!
@@ -954,17 +912,17 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _modalMenuItem__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./modalMenuItem */ "./resources/js/admin/desktop/modalMenuItem.js");
 
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
-
 var renderMenuItems = function renderMenuItems() {
   document.addEventListener("renderFormModules", function (event) {
     renderMenuItems();
+  }, {
+    once: true
   });
   var createButtons = document.querySelectorAll('.menu-item-create');
   var editButtons = document.querySelectorAll('.menu-item-edit');
@@ -1001,9 +959,9 @@ var renderMenuItems = function renderMenuItems() {
                       document.getElementById('menu-item-language').value = language;
                       document.getElementById('menu-id').value = menu;
                       document.dispatchEvent(new CustomEvent('renderFormModules'));
-                      (0,_modalMenuItem__WEBPACK_IMPORTED_MODULE_1__.renderMenuItemForm)();
+                      document.dispatchEvent(new CustomEvent('renderModalMenuItem'));
                       setTimeout(function () {
-                        (0,_modalMenuItem__WEBPACK_IMPORTED_MODULE_1__.openModal)();
+                        document.dispatchEvent(new CustomEvent('openModalMenu'));
                       }, 200);
                     })["catch"](function (error) {
                       if (error.status == '500') {
@@ -1059,9 +1017,9 @@ var renderMenuItems = function renderMenuItems() {
                     }).then(function (json) {
                       modalContainer.innerHTML = response.data.form;
                       document.dispatchEvent(new CustomEvent('renderFormModules'));
-                      (0,_modalMenuItem__WEBPACK_IMPORTED_MODULE_1__.renderMenuItemForm)();
+                      document.dispatchEvent(new CustomEvent('renderModalMenuItem'));
                       setTimeout(function () {
-                        (0,_modalMenuItem__WEBPACK_IMPORTED_MODULE_1__.openModal)();
+                        document.dispatchEvent(new CustomEvent('openModalMenu'));
                       }, 200);
                     })["catch"](function (error) {
                       if (error.status == '500') {
@@ -1115,16 +1073,16 @@ var renderMenuItems = function renderMenuItems() {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "showMessage": () => (/* binding */ showMessage)
+/* harmony export */   "renderMessage": () => (/* binding */ renderMessage)
 /* harmony export */ });
-var showMessage = function showMessage(state, messageText) {
+var renderMessage = function renderMessage() {
   var closeButtons = document.querySelectorAll('.message-close');
   var messagesContainer = document.getElementById('messages-container');
   document.addEventListener("message", function (event) {
     var messages = document.querySelectorAll('.message');
     messages.forEach(function (message) {
-      if (message.classList.contains(event.detail.state)) {
-        var successMessage = document.getElementById('message-description-' + event.detail.state);
+      if (message.classList.contains(event.detail.type)) {
+        var successMessage = document.getElementById('message-description-' + event.detail.type);
         messagesContainer.classList.add('show');
         message.classList.add('message-active');
         successMessage.innerHTML = event.detail.message;
@@ -1136,6 +1094,8 @@ var showMessage = function showMessage(state, messageText) {
 
       ;
     });
+  }, {
+    once: true
   });
   closeButtons.forEach(function (closeButton) {
     closeButton.addEventListener("click", function () {
@@ -1144,6 +1104,8 @@ var showMessage = function showMessage(state, messageText) {
       messagesActives.forEach(function (messageActive) {
         messageActive.classList.remove('message-active');
       });
+    }, {
+      once: true
     });
   });
 };
@@ -1159,14 +1121,120 @@ var showMessage = function showMessage(state, messageText) {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "renderModalDelete": () => (/* binding */ renderModalDelete)
+/* harmony export */ });
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+var renderModalDelete = function renderModalDelete() {
+  var modalDelete = document.getElementById('modal-delete');
+  var deleteConfirm = document.getElementById('delete-confirm');
+  var deleteCancel = document.getElementById('delete-cancel');
+  document.addEventListener("openModalDelete", function (event) {
+    deleteConfirm.dataset.url = event.detail.url;
+    modalDelete.classList.add('modal-active');
+  });
+  deleteCancel.addEventListener("click", function () {
+    modalDelete.classList.remove('modal-active');
+    document.dispatchEvent(new CustomEvent('stopWait'));
+  });
+  deleteConfirm.addEventListener("click", function () {
+    var url = deleteConfirm.dataset.url;
+    console.log(url);
+
+    var sendDeleteRequest = /*#__PURE__*/function () {
+      var _ref = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
+        var response;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                _context.next = 2;
+                return fetch(url, {
+                  headers: {
+                    'X-Requested-With': 'XMLHttpRequest',
+                    'X-CSRF-TOKEN': document.head.querySelector('meta[name="csrf-token"]').content
+                  },
+                  method: 'DELETE'
+                }).then(function (response) {
+                  if (!response.ok) throw response;
+                  return response.json();
+                }).then(function (json) {
+                  if (json.table) {
+                    document.dispatchEvent(new CustomEvent('loadTable', {
+                      detail: {
+                        table: json.table
+                      }
+                    }));
+                  }
+
+                  document.dispatchEvent(new CustomEvent('loadForm', {
+                    detail: {
+                      form: json.form
+                    }
+                  }));
+                  modalDelete.classList.remove('modal-active');
+                  document.dispatchEvent(new CustomEvent('renderFormModules'));
+                  document.dispatchEvent(new CustomEvent('renderTableModules'));
+                  document.dispatchEvent(new CustomEvent('stopWait'));
+                  document.dispatchEvent(new CustomEvent('message', {
+                    detail: {
+                      message: json.message,
+                      type: 'success'
+                    }
+                  }));
+                })["catch"](function (error) {
+                  document.dispatchEvent(new CustomEvent('stopWait'));
+
+                  if (error.status == '500') {
+                    console.log(error);
+                  }
+
+                  ;
+                });
+
+              case 2:
+                response = _context.sent;
+
+              case 3:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee);
+      }));
+
+      return function sendDeleteRequest() {
+        return _ref.apply(this, arguments);
+      };
+    }();
+
+    sendDeleteRequest();
+  });
+};
+
+/***/ }),
+
+/***/ "./resources/js/admin/desktop/modalDeleteImage.js":
+/*!********************************************************!*\
+  !*** ./resources/js/admin/desktop/modalDeleteImage.js ***!
+  \********************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "openModal": () => (/* binding */ openModal),
 /* harmony export */   "updateImageModal": () => (/* binding */ updateImageModal)
 /* harmony export */ });
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _wait__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./wait */ "./resources/js/admin/desktop/wait.js");
-/* harmony import */ var _messages__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./messages */ "./resources/js/admin/desktop/messages.js");
-/* harmony import */ var _uploadImage__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./uploadImage */ "./resources/js/admin/desktop/uploadImage.js");
+/* harmony import */ var _uploadImage__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./uploadImage */ "./resources/js/admin/desktop/uploadImage.js");
 
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
@@ -1186,14 +1254,12 @@ function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
-
-
 var modalImageStoreButton = document.getElementById('modal-image-store-button');
 var modalImageDeleteButton = document.getElementById('modal-image-delete-button');
 var openModal = function openModal() {
   var modal = document.getElementById('upload-image-modal');
   modal.classList.add('modal-active');
-  (0,_wait__WEBPACK_IMPORTED_MODULE_1__.startOverlay)();
+  document.dispatchEvent(new CustomEvent('startOverlay'));
 };
 var updateImageModal = function updateImageModal(image) {
   var imageContainer = document.getElementById('modal-image-original');
@@ -1252,8 +1318,13 @@ modalImageStoreButton.addEventListener("click", function (e) {
                   temporalId.value = "";
                   id.value = "";
                   imageForm.reset();
-                  (0,_wait__WEBPACK_IMPORTED_MODULE_1__.stopWait)();
-                  (0,_messages__WEBPACK_IMPORTED_MODULE_2__.showMessage)('success', response.data.message);
+                  document.dispatchEvent(new CustomEvent('stopWait'));
+                  document.dispatchEvent(new CustomEvent('message', {
+                    detail: {
+                      message: json.message,
+                      type: 'success'
+                    }
+                  }));
                 });
               } catch (error) {}
 
@@ -1292,8 +1363,13 @@ modalImageDeleteButton.addEventListener("click", function (e) {
                       'image': id.value
                     }
                   }).then(function (response) {
-                    (0,_uploadImage__WEBPACK_IMPORTED_MODULE_3__.deleteThumbnail)(response.data.imageId);
-                    (0,_messages__WEBPACK_IMPORTED_MODULE_2__.showMessage)('success', response.data.message);
+                    (0,_uploadImage__WEBPACK_IMPORTED_MODULE_1__.deleteThumbnail)(response.data.imageId);
+                    document.dispatchEvent(new CustomEvent('message', {
+                      detail: {
+                        message: json.message,
+                        type: 'success'
+                      }
+                    }));
                   });
                 } catch (error) {}
 
@@ -1312,14 +1388,14 @@ modalImageDeleteButton.addEventListener("click", function (e) {
 
     sendImageDeleteRequest();
   } else {
-    (0,_uploadImage__WEBPACK_IMPORTED_MODULE_3__.deleteThumbnail)(temporalId.value);
+    (0,_uploadImage__WEBPACK_IMPORTED_MODULE_1__.deleteThumbnail)(temporalId.value);
   }
 
   temporalId.value = "";
   id.value = "";
   imageForm.reset();
   modal.classList.remove('modal-active');
-  (0,_wait__WEBPACK_IMPORTED_MODULE_1__.stopWait)();
+  document.dispatchEvent(new CustomEvent('stopWait'));
 });
 
 /***/ }),
@@ -1338,9 +1414,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _wait__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./wait */ "./resources/js/admin/desktop/wait.js");
-/* harmony import */ var _messages__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./messages */ "./resources/js/admin/desktop/messages.js");
-/* harmony import */ var _uploadImage__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./uploadImage */ "./resources/js/admin/desktop/uploadImage.js");
+/* harmony import */ var _uploadImage__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./uploadImage */ "./resources/js/admin/desktop/uploadImage.js");
 
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
@@ -1360,14 +1434,12 @@ function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
-
-
 var modalImageStoreButton = document.getElementById('modal-image-store-button');
 var modalImageDeleteButton = document.getElementById('modal-image-delete-button');
 var openModal = function openModal() {
   var modal = document.getElementById('upload-image-modal');
   modal.classList.add('modal-active');
-  (0,_wait__WEBPACK_IMPORTED_MODULE_1__.startOverlay)();
+  document.dispatchEvent(new CustomEvent('startOverlay'));
 };
 var updateImageModal = function updateImageModal(image) {
   var imageContainer = document.getElementById('modal-image-original');
@@ -1426,8 +1498,13 @@ modalImageStoreButton.addEventListener("click", function (e) {
                   temporalId.value = "";
                   id.value = "";
                   imageForm.reset();
-                  (0,_wait__WEBPACK_IMPORTED_MODULE_1__.stopWait)();
-                  (0,_messages__WEBPACK_IMPORTED_MODULE_2__.showMessage)('success', response.data.message);
+                  document.dispatchEvent(new CustomEvent('stopWait'));
+                  document.dispatchEvent(new CustomEvent('message', {
+                    detail: {
+                      message: json.message,
+                      type: 'success'
+                    }
+                  }));
                 });
               } catch (error) {}
 
@@ -1466,8 +1543,13 @@ modalImageDeleteButton.addEventListener("click", function (e) {
                       'image': id.value
                     }
                   }).then(function (response) {
-                    (0,_uploadImage__WEBPACK_IMPORTED_MODULE_3__.deleteThumbnail)(response.data.imageId);
-                    (0,_messages__WEBPACK_IMPORTED_MODULE_2__.showMessage)('success', response.data.message);
+                    (0,_uploadImage__WEBPACK_IMPORTED_MODULE_1__.deleteThumbnail)(response.data.imageId);
+                    document.dispatchEvent(new CustomEvent('message', {
+                      detail: {
+                        message: json.message,
+                        type: 'success'
+                      }
+                    }));
                   });
                 } catch (error) {}
 
@@ -1486,14 +1568,14 @@ modalImageDeleteButton.addEventListener("click", function (e) {
 
     sendImageDeleteRequest();
   } else {
-    (0,_uploadImage__WEBPACK_IMPORTED_MODULE_3__.deleteThumbnail)(temporalId.value);
+    (0,_uploadImage__WEBPACK_IMPORTED_MODULE_1__.deleteThumbnail)(temporalId.value);
   }
 
   temporalId.value = "";
   id.value = "";
   imageForm.reset();
   modal.classList.remove('modal-active');
-  (0,_wait__WEBPACK_IMPORTED_MODULE_1__.stopWait)();
+  document.dispatchEvent(new CustomEvent('stopWait'));
 });
 
 /***/ }),
@@ -1507,8 +1589,7 @@ modalImageDeleteButton.addEventListener("click", function (e) {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "renderModalMenuItem": () => (/* binding */ renderModalMenuItem),
-/* harmony export */   "openModal": () => (/* binding */ openModal)
+/* harmony export */   "renderModalMenuItem": () => (/* binding */ renderModalMenuItem)
 /* harmony export */ });
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
@@ -1520,6 +1601,16 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
 var renderModalMenuItem = function renderModalMenuItem() {
   var menuItemStoreButton = document.getElementById('modal-menu-item-store-button');
+  var modal = document.getElementById('menu-item-modal');
+  document.addEventListener("renderModalMenuItem", function (event) {
+    renderModalMenuItem();
+  }, {
+    once: true
+  });
+  document.addEventListener("openModalMenu", function (event) {
+    modal.classList.add('modal-active');
+    document.dispatchEvent(new CustomEvent('startOverlay'));
+  });
 
   if (menuItemStoreButton) {
     menuItemStoreButton.addEventListener("click", function (e) {
@@ -1612,11 +1703,6 @@ var renderModalMenuItem = function renderModalMenuItem() {
     });
   }
 };
-var openModal = function openModal() {
-  var modal = document.getElementById('menu-item-modal');
-  modal.classList.add('modal-active');
-  document.dispatchEvent(new CustomEvent('startOverlay'));
-};
 
 /***/ }),
 
@@ -1634,6 +1720,8 @@ __webpack_require__.r(__webpack_exports__);
 var renderOnOffSwitch = function renderOnOffSwitch() {
   document.addEventListener("renderFormModules", function (event) {
     renderOnOffSwitch();
+  }, {
+    once: true
   });
   var onOffSwitch = document.getElementById('onoffswitch');
 
@@ -1672,6 +1760,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 var renderPagination = function renderPagination() {
   document.addEventListener("renderTableModules", function (event) {
     renderPagination();
+  }, {
+    once: true
   });
   var paginationButtons = document.querySelectorAll('.table-pagination-button');
   paginationButtons.forEach(function (paginationButton) {
@@ -1746,6 +1836,8 @@ __webpack_require__.r(__webpack_exports__);
 var renderSelects = function renderSelects() {
   document.addEventListener("renderFormModules", function (event) {
     renderSelects();
+  }, {
+    once: true
   });
   var selectsRelated = document.querySelectorAll('.primary-select-related');
   var selectsDisplay = document.querySelectorAll('.select-display');
@@ -1793,17 +1885,17 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _wait__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./wait */ "./resources/js/admin/desktop/wait.js");
 
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
-
 var renderSitemap = function renderSitemap() {
   document.addEventListener("renderFormModules", function (event) {
     renderSitemap();
+  }, {
+    once: true
   });
   var createSitemap = document.getElementById('create-sitemap');
   var sitemap = document.getElementById('sitemap');
@@ -1880,6 +1972,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 var renderNestedSortables = function renderNestedSortables() {
   document.addEventListener("renderFormModules", function (event) {
     renderNestedSortables();
+  }, {
+    once: true
   });
   var nestedContainers = document.querySelectorAll('.nested-sort-wrap');
   nestedContainers.forEach(function (nestedContainer) {
@@ -1995,9 +2089,6 @@ var renderTable = function renderTable() {
   var tableContainer = document.getElementById("table");
   var editButtons = document.querySelectorAll(".edit-button");
   var deleteButtons = document.querySelectorAll(".delete-button");
-  var modalDelete = document.getElementById('modal-delete');
-  var deleteConfirm = document.getElementById('delete-confirm');
-  var deleteCancel = document.getElementById('delete-cancel');
   document.addEventListener("loadTable", function (event) {
     tableContainer.classList.add('table-hide');
     tableContainer.innerHTML = event.detail.table;
@@ -2007,6 +2098,8 @@ var renderTable = function renderTable() {
   });
   document.addEventListener("renderTableModules", function (event) {
     renderTable();
+  }, {
+    once: true
   });
 
   if (editButtons) {
@@ -2073,82 +2166,13 @@ var renderTable = function renderTable() {
   if (deleteButtons) {
     deleteButtons.forEach(function (deleteButton) {
       deleteButton.addEventListener("click", function () {
-        var url = deleteButton.dataset.url;
-        deleteConfirm.dataset.url = url;
-        modalDelete.classList.add('modal-active');
+        document.dispatchEvent(new CustomEvent('openModalDelete', {
+          detail: {
+            url: deleteButton.dataset.url
+          }
+        }));
         document.dispatchEvent(new CustomEvent('startOverlay'));
       });
-    });
-    deleteCancel.addEventListener("click", function () {
-      modalDelete.classList.remove('modal-active');
-      document.dispatchEvent(new CustomEvent('stopWait'));
-    });
-    deleteConfirm.addEventListener("click", function () {
-      var url = deleteConfirm.dataset.url;
-
-      var sendDeleteRequest = /*#__PURE__*/function () {
-        var _ref2 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2() {
-          var response;
-          return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee2$(_context2) {
-            while (1) {
-              switch (_context2.prev = _context2.next) {
-                case 0:
-                  _context2.next = 2;
-                  return fetch(url, {
-                    headers: {
-                      'X-Requested-With': 'XMLHttpRequest'
-                    },
-                    method: 'GET'
-                  }).then(function (response) {
-                    if (!response.ok) throw response;
-                    return response.json();
-                  }).then(function (json) {
-                    if (json.table) {
-                      tableContainer.innerHTML = json.table;
-                    }
-
-                    document.dispatchEvent(new CustomEvent('loadForm', {
-                      detail: {
-                        form: json.form
-                      }
-                    }));
-                    modalDelete.classList.remove('modal-active');
-                    document.dispatchEvent(new CustomEvent('renderFormModules'));
-                    document.dispatchEvent(new CustomEvent('renderTableModules'));
-                    document.dispatchEvent(new CustomEvent('stopWait'));
-                    document.dispatchEvent(new CustomEvent('message', {
-                      detail: {
-                        message: json.message,
-                        type: 'success'
-                      }
-                    }));
-                  })["catch"](function (error) {
-                    document.dispatchEvent(new CustomEvent('stopWait'));
-
-                    if (error.status == '500') {
-                      console.log(error);
-                    }
-
-                    ;
-                  });
-
-                case 2:
-                  response = _context2.sent;
-
-                case 3:
-                case "end":
-                  return _context2.stop();
-              }
-            }
-          }, _callee2);
-        }));
-
-        return function sendDeleteRequest() {
-          return _ref2.apply(this, arguments);
-        };
-      }();
-
-      sendDeleteRequest();
     });
   }
 };
@@ -2169,6 +2193,8 @@ __webpack_require__.r(__webpack_exports__);
 var renderTabs = function renderTabs() {
   document.addEventListener("renderFormModules", function (event) {
     renderTabs();
+  }, {
+    once: true
   });
   var tabsItems = document.querySelectorAll('.tab-item');
   var tabPanels = document.querySelectorAll(".tab-panel");
@@ -2531,7 +2557,7 @@ var renderWait = function renderWait() {
     spinner.classList.add('spinner-active');
     overlay.classList.add('overlay-active');
   });
-  document.addEventListener("stoptWait", function (event) {
+  document.addEventListener("stopWait", function (event) {
     spinner.classList.remove('spinner-active');
     overlay.classList.remove('overlay-active');
   });

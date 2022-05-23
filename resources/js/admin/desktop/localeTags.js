@@ -4,7 +4,7 @@ export let renderLocaleTags = () => {
 
     document.addEventListener("renderFormModules",( event =>{
         renderLocaleTags();
-    }));
+    }), {once: true});
 
     if(importTags){
 

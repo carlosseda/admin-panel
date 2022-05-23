@@ -2,7 +2,7 @@ export let renderLocaleTabs = () => {
 
     document.addEventListener("renderFormModules",( event =>{
         renderLocaleTabs();
-    }));
+    }), {once: true});
 
     let localeTabsItems = document.querySelectorAll(".locale-tab-item");
     let localeTabPanels = document.querySelectorAll(".locale-tab-panel");

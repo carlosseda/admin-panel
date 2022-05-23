@@ -16,7 +16,7 @@ export let renderFilterTable = () => {
         
         applyFilter.addEventListener( 'click', () => {     
             
-            let url = filterForm.action;
+            let url = new URL(filterForm.action);
             let data = new FormData(filterForm);
             let filters = {};
             
@@ -25,16 +25,13 @@ export let renderFilterTable = () => {
             });
             
             let json = JSON.stringify(filters);
-    
-            let sendFilterRequest = async () => {
-    
-                document.dispatchEvent(new CustomEvent('loadForm', {
-                    detail: {
-                        form: json.form,
-                    }
-                }));
+            url.searchParams.set('filters', json);
 
-                let response = await fetch(url.searchParams.append(filters, json), {
+            console.log(url.href);
+
+            let sendFilterRequest = async () => {
+
+                let response = await fetch(url.href, {
                     headers: {
                         'X-Requested-With': 'XMLHttpRequest',
                     },
@@ -47,8 +44,6 @@ export let renderFilterTable = () => {
                     return response.json();
                 })
                 .then(json => {
-
-                    renderTable();
 
                     document.dispatchEvent(new CustomEvent('loadTable', {
                         detail: {

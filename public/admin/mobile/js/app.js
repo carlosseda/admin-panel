@@ -50,8 +50,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "showTable": () => (/* binding */ showTable)
 /* harmony export */ });
 /* harmony import */ var _filterTable__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./filterTable */ "./resources/js/admin/mobile/filterTable.js");
-/* harmony import */ var _crudTable__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./crudTable */ "./resources/js/admin/mobile/crudTable.js");
-
 
 var bottombarItems = document.querySelectorAll('.bottombar-item');
 var table = document.getElementById("table");

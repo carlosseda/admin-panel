@@ -1,4 +1,4 @@
-export let showMessage = (state, messageText) => {
+export let renderMessage = () => {
 
     let closeButtons = document.querySelectorAll('.message-close');
     let messagesContainer = document.getElementById('messages-container');
@@ -9,9 +9,9 @@ export let showMessage = (state, messageText) => {
 
         messages.forEach(message => {
     
-            if(message.classList.contains(event.detail.state)){
+            if(message.classList.contains(event.detail.type)){
     
-                let successMessage = document.getElementById('message-description-'+ event.detail.state);
+                let successMessage = document.getElementById('message-description-'+ event.detail.type);
     
                 messagesContainer.classList.add('show');
                 message.classList.add('message-active');
@@ -23,8 +23,7 @@ export let showMessage = (state, messageText) => {
                 }, 7000);
             };
         });
-    
-    }));
+    }), {once: true});
 
 
     closeButtons.forEach(closeButton => {
@@ -38,7 +37,7 @@ export let showMessage = (state, messageText) => {
             messagesActives.forEach(messageActive => {
                 messageActive.classList.remove('message-active');
             });
-        });
+        }, {once: true});
     });
 }
 

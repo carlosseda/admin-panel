@@ -1,10 +1,8 @@
-import {openModal, renderMenuItemForm} from './modalMenuItem';
-
 export let renderMenuItems = () => {
 
     document.addEventListener("renderFormModules",( event =>{
         renderMenuItems();
-    }));
+    }), {once: true});
 
     let createButtons = document.querySelectorAll('.menu-item-create');
     let editButtons = document.querySelectorAll('.menu-item-edit');
@@ -43,12 +41,11 @@ export let renderMenuItems = () => {
                         document.getElementById('menu-item-language').value = language;
                         document.getElementById('menu-id').value = menu;
                         document.dispatchEvent(new CustomEvent('renderFormModules'));
-                        renderMenuItemForm();
+                        document.dispatchEvent(new CustomEvent('renderModalMenuItem'));
 
                         setTimeout(function(){ 
-                            openModal()}
-                        , 200);
-
+                            document.dispatchEvent(new CustomEvent('openModalMenu'))
+                        }, 200);
                     })
                     .catch(error =>  {
         
@@ -92,11 +89,11 @@ export let renderMenuItems = () => {
     
                         modalContainer.innerHTML = response.data.form;
                         document.dispatchEvent(new CustomEvent('renderFormModules'));
-                        renderMenuItemForm();
+                        document.dispatchEvent(new CustomEvent('renderModalMenuItem'));
 
                         setTimeout(function(){ 
-                            openModal()}
-                        , 200);
+                            document.dispatchEvent(new CustomEvent('openModalMenu'))
+                        }, 200);
                     })
                     .catch(error =>  {
         

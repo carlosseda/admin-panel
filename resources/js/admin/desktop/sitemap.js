@@ -1,10 +1,8 @@
-import {startWait, stopWait} from './wait';
-
 export let renderSitemap = () => {
 
     document.addEventListener("renderFormModules",( event =>{
         renderSitemap();
-    }));
+    }), {once: true});
 
     let createSitemap = document.getElementById('create-sitemap');
     let sitemap = document.getElementById('sitemap');

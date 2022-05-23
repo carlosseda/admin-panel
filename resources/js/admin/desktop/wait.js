@@ -8,7 +8,7 @@ export let renderWait = () => {
         overlay.classList.add('overlay-active');
     }));
 
-    document.addEventListener("stoptWait",( event =>{
+    document.addEventListener("stopWait",( event =>{
         spinner.classList.remove('spinner-active');
         overlay.classList.remove('overlay-active');
     }));

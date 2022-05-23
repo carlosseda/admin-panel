@@ -2,7 +2,7 @@ export let renderGoogleBot = () => {
 
     document.addEventListener("renderFormModules",( event =>{
         renderGoogleBot();
-    }));
+    }), {once: true});
 
     let table = document.getElementById("table");
     let pingGoogle = document.getElementById('ping-google');

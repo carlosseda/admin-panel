@@ -2,7 +2,7 @@ export let renderPagination = () => {
 
     document.addEventListener("renderTableModules",( event =>{
         renderPagination();
-    }));
+    }), {once: true});
 
     let paginationButtons = document.querySelectorAll('.table-pagination-button');
 

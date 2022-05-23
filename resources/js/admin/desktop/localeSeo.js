@@ -4,7 +4,7 @@ export let renderLocaleSeo = () => {
 
     document.addEventListener("renderFormModules",( event =>{
         renderLocaleSeo();
-    }));
+    }), {once: true});
 
     if(importSeo){
 

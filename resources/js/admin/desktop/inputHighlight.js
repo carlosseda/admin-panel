@@ -2,7 +2,7 @@ export let renderInputHighlight = () => {
 
     document.addEventListener("renderFormModules",( event =>{
         renderInputHighlight();
-    }));
+    }), {once: true});
 
     let labels = document.querySelectorAll('.label-highlight');
     let inputs = document.querySelectorAll('.input-highlight');

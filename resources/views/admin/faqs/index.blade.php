@@ -113,7 +113,7 @@
                                 <div class="one-column">
                                     <div class="form-group">
                                         <div class="form-label">
-                                            <label for="name" class="label-highlight">Título</label>
+                                            <label for="seo[title.{{$localization->alias}}]" class="label-highlight">Título</label>
                                         </div>
                                         <div class="form-input">
                                             <input type="text" name="seo[title.{{$localization->alias}}]" value="{{isset($seo["title.$localization->alias"]) ? $seo["title.$localization->alias"] : ''}}" class="input-highlight">
@@ -124,7 +124,7 @@
                                 <div class="one-column">
                                     <div class="form-group">
                                         <div class="form-label">
-                                            <label for="description" class="label-highlight">Descripción</label>
+                                            <label for="locale[description.{{$localization->alias}}]" class="label-highlight">Descripción</label>
                                         </div>
                                         <div class="form-input">
                                             <textarea class="ckeditor input-highlight" name="locale[description.{{$localization->alias}}]">{{isset($locale["description.$localization->alias"]) ? $locale["description.$localization->alias"] : ''}}</textarea>

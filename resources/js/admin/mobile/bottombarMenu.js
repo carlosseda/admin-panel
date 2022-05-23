@@ -1,5 +1,4 @@
 import {showFilterTable, hideFilterTable} from './filterTable';
-import {renderTable} from './crudTable';
 
 const bottombarItems = document.querySelectorAll('.bottombar-item');
 const table = document.getElementById("table");

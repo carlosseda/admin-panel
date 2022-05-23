@@ -1,6 +1,16 @@
 export let renderModalMenuItem = () => {
 
     let menuItemStoreButton = document.getElementById('modal-menu-item-store-button');
+    let modal = document.getElementById('menu-item-modal');
+    
+    document.addEventListener("renderModalMenuItem",( event =>{
+        renderModalMenuItem();
+    }), {once: true});
+
+    document.addEventListener("openModalMenu",( event =>{
+        modal.classList.add('modal-active');
+        document.dispatchEvent(new CustomEvent('startOverlay'));
+    }));
 
     if(menuItemStoreButton){
 
@@ -87,13 +97,4 @@ export let renderModalMenuItem = () => {
     }
 
 }
-
-export let openModal = () => {
-
-    let modal = document.getElementById('menu-item-modal');
-    modal.classList.add('modal-active');
-    
-    document.dispatchEvent(new CustomEvent('startOverlay'));
-}
-
 

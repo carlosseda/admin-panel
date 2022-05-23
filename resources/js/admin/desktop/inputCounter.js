@@ -2,7 +2,7 @@ export let renderInputCounter = () => {
 
     document.addEventListener("renderFormModules",( event =>{
         renderInputCounter();
-    }));
+    }), {once: true});
 
     let inputCounters = document.querySelectorAll('.input-counter');
     

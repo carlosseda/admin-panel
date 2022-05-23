@@ -2,7 +2,7 @@ export let renderOnOffSwitch = () => {
 
     document.addEventListener("renderFormModules",( event =>{
         renderOnOffSwitch();
-    }));
+    }), {once: true});
 
     let onOffSwitch = document.getElementById('onoffswitch');
 

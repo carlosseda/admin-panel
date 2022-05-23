@@ -5,7 +5,7 @@ export let renderNestedSortables = () => {
     
     document.addEventListener("renderFormModules",( event =>{
         renderNestedSortables();
-    }));
+    }), {once: true});
 
     let nestedContainers = document.querySelectorAll('.nested-sort-wrap');
 

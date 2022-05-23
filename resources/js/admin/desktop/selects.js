@@ -2,7 +2,7 @@ export let renderSelects = () =>{
 
     document.addEventListener("renderFormModules",( event =>{
         renderSelects();
-    }));
+    }), {once: true});
 
     let selectsRelated = document.querySelectorAll('.primary-select-related');
     let selectsDisplay = document.querySelectorAll('.select-display');

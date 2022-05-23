@@ -7,11 +7,11 @@ export let renderForm = () => {
 
     document.addEventListener("loadForm",( event =>{
         formContainer.innerHTML = event.detail.form;
-    }));
+    }), {once: true});
 
     document.addEventListener("renderFormModules",( event =>{
         renderForm();
-    }));
+    }), {once: true});
 
     if(createButton){
 
@@ -94,9 +94,9 @@ export let renderForm = () => {
                         formContainer.innerHTML = json.form;
 
                         //  Relacionado con lo menuController
-                        // if(json.id){
-                        //     form.id.value = json.id;
-                        // }
+                        if(json.id){
+                            form.id.value = json.id;
+                        }
 
                         document.dispatchEvent(new CustomEvent('loadTable', {
                             detail: {
@@ -107,6 +107,7 @@ export let renderForm = () => {
                         document.dispatchEvent(new CustomEvent('renderFormModules'));
                         document.dispatchEvent(new CustomEvent('renderTableModules'));
                         document.dispatchEvent(new CustomEvent('stopWait'));
+                        document.dispatchEvent(new CustomEvent('stopOverlay'));
 
                         document.dispatchEvent(new CustomEvent('message', {
                             detail: {
@@ -133,7 +134,7 @@ export let renderForm = () => {
                                 document.dispatchEvent(new CustomEvent('message', {
                                     detail: {
                                         message: errorMessage,
-                                        type: 'success'
+                                        type: 'error'
                                     }
                                 }));
                             })   
